@@ -1,0 +1,68 @@
+object HTMLProp: THTMLProp
+  Left = 378
+  Height = 436
+  Top = 175
+  Width = 394
+  Caption = 'HTMLプロパティエディタ'
+  ClientHeight = 436
+  ClientWidth = 394
+  OnCreate = FormCreate
+  LCLVersion = '1.6.0.4'
+  object Panel1: TPanel
+    Left = 0
+    Height = 50
+    Top = 0
+    Width = 394
+    Align = alTop
+    ClientHeight = 50
+    ClientWidth = 394
+    TabOrder = 0
+    object Button1: TButton
+      Left = 16
+      Height = 25
+      Top = 13
+      Width = 75
+      Caption = '値の代入'
+      OnClick = Button1Click
+      TabOrder = 0
+    end
+    object Button2: TButton
+      Left = 99
+      Height = 25
+      Top = 13
+      Width = 75
+      Caption = 'プレビュー'
+      OnClick = Button2Click
+      TabOrder = 1
+    end
+    object BitBtn1: TBitBtn
+      Left = 280
+      Height = 30
+      Top = 13
+      Width = 75
+      DefaultCaption = True
+      Kind = bkClose
+      ModalResult = 11
+      TabOrder = 2
+    end
+    object Button3: TButton
+      Left = 184
+      Height = 25
+      Top = 13
+      Width = 75
+      Caption = 'HTML挿入'
+      OnClick = Button3Click
+      TabOrder = 3
+    end
+  end
+  object ScrollBox1: TScrollBox
+    Left = 0
+    Height = 386
+    Top = 50
+    Width = 394
+    HorzScrollBar.Page = 1
+    VertScrollBar.Page = 1
+    Align = alClient
+    TabOrder = 1
+  end
+end

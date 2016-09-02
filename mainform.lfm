@@ -1,0 +1,595 @@
+object Main: TMain
+  Left = 419
+  Height = 223
+  Top = 222
+  Width = 543
+  AllowDropFiles = True
+  Caption = 'Main'
+  ClientHeight = 202
+  ClientWidth = 543
+  Menu = MainMenu1
+  OnCloseQuery = FormCloseQuery
+  OnCreate = FormCreate
+  OnDropFiles = FormDropFiles
+  OnShow = FormShow
+  LCLVersion = '1.6.0.4'
+  object Panel1: TPanel
+    Left = 0
+    Height = 30
+    Top = 172
+    Width = 543
+    Align = alBottom
+    TabOrder = 0
+  end
+  object Panel2: TPanel
+    Left = 0
+    Height = 172
+    Top = 0
+    Width = 543
+    Align = alClient
+    ClientHeight = 172
+    ClientWidth = 543
+    TabOrder = 1
+    object PageControl1: TPageControl
+      Left = 1
+      Height = 137
+      Top = 34
+      Width = 541
+      Align = alClient
+      TabOrder = 0
+      OnChange = PageControl1Change
+      OnChanging = PageControl1Changing
+    end
+    object toolpanel: TPanel
+      Left = 1
+      Height = 33
+      Top = 1
+      Width = 541
+      Align = alTop
+      TabOrder = 1
+    end
+  end
+  object MainMenu1: TMainMenu
+    ParentBidiMode = False
+    left = 72
+    top = 75
+    object Menu_RootFile: TMenuItem
+      Caption = 'ファイル'
+      object Menu_New: TMenuItem
+        Caption = '新規'
+        OnClick = Menu_NewClick
+      end
+      object MenuItem3: TMenuItem
+        Caption = '-'
+      end
+      object Menu_Open: TMenuItem
+        Caption = '開く'
+        OnClick = Menu_OpenClick
+      end
+      object MenuItem5: TMenuItem
+        Caption = '最近扱ったファイルを開く'
+      end
+      object Menu_ReOpen: TMenuItem
+        Caption = '開き直す'
+        OnClick = Menu_ReOpenClick
+      end
+      object MenuItem81: TMenuItem
+        Caption = '-'
+      end
+      object menu_save: TMenuItem
+        Caption = '保存 ...'
+        OnClick = menu_saveClick
+      end
+      object Menu_SaveAs: TMenuItem
+        Caption = '名前を付けて保存'
+        OnClick = Menu_SaveAsClick
+      end
+      object MenuItem91: TMenuItem
+        Caption = '-'
+      end
+      object Menu_All_Save: TMenuItem
+        Caption = '全て上書き保存'
+        OnClick = Menu_All_SaveClick
+      end
+      object Menu_AllSaveAs: TMenuItem
+        Caption = '全て名前を付けて保存'
+        OnClick = Menu_AllSaveAsClick
+      end
+      object MenuItem87: TMenuItem
+        Caption = '-'
+      end
+      object Menu_Ansi: TMenuItem
+        Caption = 'Ansi'
+        OnClick = Menu_AnsiClick
+      end
+      object Menu_UTF8: TMenuItem
+        Caption = 'UTF8'
+        OnClick = Menu_UTF8Click
+      end
+      object Menu_Utf16: TMenuItem
+        Caption = 'UTF16'
+        OnClick = Menu_Utf16Click
+      end
+      object MenuItem86: TMenuItem
+        Caption = '-'
+      end
+      object Menu_Close: TMenuItem
+        Caption = '閉じる(&C)'
+        OnClick = Menu_CloseClick
+      end
+      object Menu_AllClose: TMenuItem
+        Caption = '全て閉じる'
+        OnClick = Menu_AllCloseClick
+      end
+      object MenuItem9: TMenuItem
+        Caption = '-'
+      end
+      object Menu_Exit: TMenuItem
+        Caption = '終了'
+        OnClick = Menu_ExitClick
+      end
+    end
+    object Menu_RootEdit: TMenuItem
+      Caption = '編集'
+      object undo: TMenuItem
+        Caption = '元に戻す'
+        OnClick = undoClick
+      end
+      object redo: TMenuItem
+        Caption = 'やり直し'
+        OnClick = redoClick
+      end
+      object MenuItem14: TMenuItem
+        Caption = '-'
+      end
+      object cut: TMenuItem
+        Caption = '切り取り'
+        OnClick = cutClick
+      end
+      object cpy: TMenuItem
+        Caption = 'コピー'
+        OnClick = cpyClick
+      end
+      object peast: TMenuItem
+        Caption = '貼り付け'
+        OnClick = peastClick
+      end
+      object selctall: TMenuItem
+        Caption = '全て選択'
+        OnClick = selctallClick
+      end
+      object Delete: TMenuItem
+        Caption = '削除'
+        OnClick = DeleteClick
+      end
+      object MenuItem18: TMenuItem
+        Caption = '-'
+      end
+      object MenuItem10: TMenuItem
+        Caption = 'JSONFormEdit'
+        Visible = False
+        OnClick = MenuItem10Click
+      end
+      object MenuItem8: TMenuItem
+        Caption = 'SQLTable Builder'
+        OnClick = MenuItem8Click
+      end
+      object MenuItem28: TMenuItem
+        Caption = 'HtmlEdit'
+        OnClick = MenuItem28Click
+      end
+      object MenuItem11: TMenuItem
+        Caption = '-'
+      end
+      object Menu_Insert_Day: TMenuItem
+        Caption = '日付挿入'
+        OnClick = Menu_Insert_DayClick
+      end
+      object Menu_Insert_Time: TMenuItem
+        Caption = '現在時刻挿入'
+        OnClick = Menu_Insert_TimeClick
+      end
+      object Menu_Insert_Calac: TMenuItem
+        Caption = '電卓'
+        OnClick = Menu_Insert_CalacClick
+      end
+    end
+    object Menu_RootSupport: TMenuItem
+      Caption = '検索機能'
+      object Menu_FInds: TMenuItem
+        Caption = '検索/置換'
+        OnClick = Menu_FIndsClick
+      end
+      object Menu_repraceMcro: TMenuItem
+        Caption = '文字列操作関数'
+        OnClick = Menu_repraceMcroClick
+      end
+      object MenuItem2: TMenuItem
+        Caption = '-'
+      end
+      object mnu_SelectORline: TMenuItem
+        Caption = '範囲選択モード'
+        OnClick = mnu_SelectORlineClick
+      end
+      object Menu_URL: TMenuItem
+        Caption = 'URL参照'
+        OnClick = Menu_URLClick
+      end
+      object Menu_helpgoogle1: TMenuItem
+        Caption = '単語検索'
+        OnClick = Menu_helpgoogle1Click
+      end
+      object MenuItem1: TMenuItem
+        Caption = '-'
+      end
+      object Menu_code_support: TMenuItem
+        Caption = 'コード保管機能'
+      end
+      object Menu_CodeInsert: TMenuItem
+        Caption = '制御文代入'
+      end
+      object Menu_TemplatCode: TMenuItem
+        Caption = '定型文入力'
+      end
+    end
+    object Menu_RootHeightLight: TMenuItem
+      Caption = 'Edit設定'
+      object Menu_C: TMenuItem
+        Caption = 'C'
+        GroupIndex = 1
+        OnClick = Menu_CClick
+      end
+      object Menu_Delphi: TMenuItem
+        Caption = 'Delphi'
+        GroupIndex = 1
+        OnClick = Menu_DelphiClick
+      end
+      object Menu_lazarus: TMenuItem
+        Caption = 'Lazarus'
+        OnClick = Menu_lazarusClick
+      end
+      object Menu_Pascal: TMenuItem
+        Caption = 'Pascal'
+        GroupIndex = 1
+        OnClick = Menu_PascalClick
+      end
+      object Menu_Java: TMenuItem
+        Caption = 'Java'
+        GroupIndex = 1
+        OnClick = Menu_JavaClick
+      end
+      object Menu_SQL: TMenuItem
+        Caption = 'SQL'
+        GroupIndex = 1
+        OnClick = Menu_SQLClick
+      end
+      object Menu_XML: TMenuItem
+        Caption = 'XML'
+        GroupIndex = 1
+        OnClick = Menu_XMLClick
+      end
+      object Menu_jsn: TMenuItem
+        Caption = 'JSON'
+        OnClick = Menu_jsnClick
+      end
+      object Menu_HTML: TMenuItem
+        Caption = 'HTML'
+        GroupIndex = 1
+        OnClick = Menu_HTMLClick
+      end
+      object Menu_Css: TMenuItem
+        Caption = 'Css'
+        GroupIndex = 1
+        OnClick = Menu_CssClick
+      end
+      object Menu_Perl: TMenuItem
+        Caption = 'Perl'
+        GroupIndex = 1
+        OnClick = Menu_PerlClick
+      end
+      object Menu_PHP: TMenuItem
+        Caption = 'PHP'
+        GroupIndex = 1
+        OnClick = Menu_PHPClick
+      end
+      object Menu_pyhton: TMenuItem
+        Caption = 'Python'
+        GroupIndex = 1
+        OnClick = Menu_pyhtonClick
+      end
+      object MenuI_UnixShell: TMenuItem
+        Caption = 'UNIX Shell Script'
+        GroupIndex = 1
+        OnClick = MenuI_UnixShellClick
+      end
+      object Menu_VBScript: TMenuItem
+        Caption = 'VBA'
+        GroupIndex = 1
+        OnClick = Menu_VBScriptClick
+      end
+      object Menu_JS: TMenuItem
+        Caption = 'JavaScript'
+        OnClick = Menu_JSClick
+      end
+      object Menu_BAT: TMenuItem
+        Caption = 'Bat'
+        GroupIndex = 1
+        OnClick = Menu_BATClick
+      end
+      object Menu_INI: TMenuItem
+        Caption = 'INI'
+        GroupIndex = 1
+        OnClick = Menu_INIClick
+      end
+      object MenuItem38: TMenuItem
+        Caption = 'Diff'
+        GroupIndex = 1
+        Visible = False
+      end
+      object MenuItem42: TMenuItem
+        Caption = 'LMF'
+        GroupIndex = 1
+        Visible = False
+      end
+      object MenuItem20: TMenuItem
+        Caption = 'TeX'
+        GroupIndex = 1
+        Visible = False
+      end
+      object MenuItem12: TMenuItem
+        Caption = 'Po'
+        GroupIndex = 1
+        Visible = False
+      end
+      object Menu_FreeHeightLight: TMenuItem
+        Caption = '自由設定'
+        GroupIndex = 1
+        OnClick = Menu_FreeHeightLightClick
+      end
+      object MenuItem54: TMenuItem
+        Caption = '-'
+      end
+      object Menu_LibOpen: TMenuItem
+        Caption = '補完ライブラリ指定'
+      end
+    end
+    object Menu_RootOption: TMenuItem
+      Caption = 'オプション'
+      object Menu_TEMP_Save: TMenuItem
+        Caption = '一時保存ファイル作成'
+        OnClick = Menu_TEMP_SaveClick
+      end
+      object Menu_TEMP_Load: TMenuItem
+        Caption = '一時保存ファイル呼び出し'
+        OnClick = Menu_TEMP_LoadClick
+      end
+      object Menu_OLD_Load: TMenuItem
+        Caption = '終了時復元'
+        OnClick = Menu_OLD_LoadClick
+      end
+      object MenuItem32: TMenuItem
+        Caption = '-'
+      end
+      object Menu_SetFont: TMenuItem
+        Caption = 'フォント設定'
+        OnClick = Menu_SetFontClick
+      end
+      object Menu_EditColor: TMenuItem
+        Caption = 'エディタカラー設定'
+        OnClick = Menu_EditColorClick
+      end
+      object Menu_HilightColor: TMenuItem
+        Caption = 'ハイライトカラー設定'
+        OnClick = Menu_HilightColorClick
+      end
+      object Menu_Option: TMenuItem
+        Caption = '各種設定'
+        OnClick = Menu_OptionClick
+      end
+      object Menu_ToolButtonSet: TMenuItem
+        Caption = 'ツールバーボタン追加'
+        OnClick = Menu_ToolButtonSetClick
+      end
+      object Menu_SetMnu: TMenuItem
+        Caption = 'メニューの設定'
+      end
+      object MenuItem102: TMenuItem
+        Caption = '-'
+      end
+      object Menu_ToolBarTAB: TMenuItem
+        Caption = 'ツールバーのタブ化'
+        OnClick = Menu_ToolBarTABClick
+      end
+      object barleft: TMenuItem
+        Caption = 'バーを右寄'
+        OnClick = barleftClick
+      end
+      object barright: TMenuItem
+        Caption = 'バーを左寄'
+        OnClick = barrightClick
+      end
+      object bartop: TMenuItem
+        Caption = 'バーを上寄'
+        OnClick = bartopClick
+      end
+      object barbottom: TMenuItem
+        Caption = 'バーを下寄'
+        OnClick = barbottomClick
+      end
+    end
+    object Menu_RootTAB: TMenuItem
+      Caption = 'タブ'
+      object MenuItem17: TMenuItem
+        Caption = 'ツールバー切り替え'
+        OnClick = MenuItem17Click
+      end
+      object MenuItem26: TMenuItem
+        Caption = '-'
+      end
+      object Menu_TabCheng: TMenuItem
+        Caption = 'タブ切り替え'
+        OnClick = Menu_TabChengClick
+      end
+      object MenuItem27: TMenuItem
+        Caption = '-'
+      end
+      object MenuItem19: TMenuItem
+        Caption = '一括タブ反転'
+        OnClick = MenuItem19Click
+      end
+      object MenuItem21: TMenuItem
+        Caption = '一括タブ収納'
+        OnClick = MenuItem21Click
+      end
+      object MenuItem25: TMenuItem
+        Caption = '一括タブ分離'
+        OnClick = MenuItem25Click
+      end
+    end
+    object Menu_RootWindow: TMenuItem
+      Caption = 'ウインドウ'
+      object Menu_MultWindow: TMenuItem
+        Caption = 'ウインドウ化'
+      end
+      object MenuItem30: TMenuItem
+        Caption = '-'
+      end
+      object Menu_WindowLock: TMenuItem
+        Caption = 'ウインドウ追従'
+        OnClick = Menu_WindowLockClick
+      end
+      object MenuItem79: TMenuItem
+        Caption = '-'
+      end
+      object Menu_WindowAllMin: TMenuItem
+        Caption = '全て最少化'
+        OnClick = Menu_WindowAllMinClick
+      end
+      object Menu_WindowAllMax: TMenuItem
+        Caption = '全て最大化'
+        OnClick = Menu_WindowAllMaxClick
+      end
+      object Menu_WIndow_AllNomalSize: TMenuItem
+        Caption = '全てウインドウ化'
+        OnClick = Menu_WIndow_AllNomalSizeClick
+      end
+      object MenuItem50: TMenuItem
+        Caption = '-'
+      end
+      object Menu_WindowMin: TMenuItem
+        Caption = '最小化'
+        OnClick = Menu_WindowMinClick
+      end
+      object Menu_WindowMax: TMenuItem
+        Caption = '最大化'
+        OnClick = Menu_WindowMaxClick
+      end
+      object Menu_WIndowNomalSize: TMenuItem
+        Caption = 'ウインドウ化'
+        OnClick = Menu_WIndowNomalSizeClick
+      end
+      object MenuItem67: TMenuItem
+        Caption = '-'
+      end
+      object Menu_WindowLeft: TMenuItem
+        Caption = '右に寄せる'
+        OnClick = Menu_WindowLeftClick
+      end
+      object Menu_WindowRight: TMenuItem
+        Caption = '左に寄せる'
+        OnClick = Menu_WindowRightClick
+      end
+      object MenuWindowTop: TMenuItem
+        Caption = '上に寄せる'
+        OnClick = MenuWindowTopClick
+      end
+      object Menu_WindowBottom: TMenuItem
+        Caption = '下に寄せる'
+        OnClick = Menu_WindowBottomClick
+      end
+    end
+    object Menu_RootMacro: TMenuItem
+      Caption = 'RUN'
+      object MenuItem90: TMenuItem
+        Caption = 'runcommand'
+        Visible = False
+        OnClick = MenuItem90Click
+      end
+      object MenuC_chackmnu: TMenuItem
+        Caption = 'Chack_mnu'
+        Visible = False
+        OnClick = MenuC_chackmnuClick
+      end
+      object Menu_MacroSetUp: TMenuItem
+        Caption = 'コマンド追加'
+        OnClick = Menu_MacroSetUpClick
+      end
+      object Menu_MacroElse: TMenuItem
+        Caption = 'コマンド削除'
+        OnClick = Menu_MacroElseClick
+      end
+      object MenuItem88: TMenuItem
+        Caption = '-'
+        object MenuItem6: TMenuItem
+          Caption = 'New Item126'
+          Visible = False
+        end
+      end
+      object MenuItem13: TMenuItem
+        Caption = 'MySQL接続'
+        OnClick = MenuItem13Click
+      end
+      object MenuItem15: TMenuItem
+        Caption = 'MySQL実行'
+        OnClick = MenuItem15Click
+      end
+      object MenuItem16: TMenuItem
+        Caption = '-'
+      end
+      object MenuItem4: TMenuItem
+        Caption = 'マクロ言語指定'
+        OnClick = MenuItem4Click
+      end
+      object MenuItem7: TMenuItem
+        Caption = 'マクロ記号挿入'
+        OnClick = MenuItem7Click
+      end
+      object Menu_Macro_codeRun: TMenuItem
+        Caption = 'マクロ実行'
+        OnClick = Menu_Macro_codeRunClick
+      end
+      object Menu_MacroRun: TMenuItem
+        Caption = '実行'
+        OnClick = Menu_MacroRunClick
+      end
+      object MenuItem95: TMenuItem
+        Caption = '-'
+      end
+    end
+    object Menu_Custom: TMenuItem
+      Caption = '拡張'
+    end
+    object Menu_RootHelp: TMenuItem
+      Caption = 'ヘルプ'
+      object MenuItem22: TMenuItem
+        Caption = '目次'
+      end
+      object MenuItem23: TMenuItem
+        Caption = 'チュートリアル'
+      end
+      object MenuItem24: TMenuItem
+        Caption = '-'
+      end
+      object Menu_Vershon: TMenuItem
+        Caption = '紹介'
+        OnClick = Menu_VershonClick
+      end
+    end
+  end
+  object ApplicationProperties1: TApplicationProperties
+    OnActivate = ApplicationProperties1Activate
+    OnDropFiles = ApplicationProperties1DropFiles
+    left = 232
+    top = 75
+  end
+end
