@@ -7,7 +7,7 @@ interface
 uses
   LCLIntf, LCLType, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
   StdCtrls, FileUtil,
-  Menus, ComCtrls, unit_edit, mainform, tool_window;
+  Menus, ComCtrls, Grids, unit_edit, mainform, tool_window;
 
 type
   TeditList = class(TList)
@@ -231,6 +231,8 @@ type
 
     function bunkatu(st,st2:TStringList):ThreadFunc;
     function bunkatu2(st,st2:TStringList):ThreadFunc;
+    function set_SQLtoStringGrid(dbname,s: string;sg:TStringGrid):ThreadFunc;
+
     function replace_space(st:TStringList):boolean;
 
     function EnumFileFromDir(Dir: string;st:TstringList):ThreadFunc;
@@ -257,7 +259,7 @@ implementation
 
 uses interfaceunit, find_unit, comp, colordlg, macrow, filetype_form
   {$IFDEF WIN32}
-    ,windowsunit ,windows
+    ,windowsunit, SQLiteWrap ,windows
   {$ENDIF}
   {$IFDEF LINUX}
     ,linuxunit
@@ -6053,13 +6055,14 @@ begin
 end;
 
 function Tfunction_unit.setdialog:boolean;
+var
+  s:string;
 begin
-  datamodule1.OpenDialog1.Filter:=
-  'AllFile|*.*|Text|*.txt|CSV|*.csv|JavaScript|*.js|HTML|*.html;*.htm|Css|*.css|Json|*.json|XML|*.xml|Java|*.java|C|*.c|C++|*.cpp|C hedder|*.h|C++ hedder|*.hpp|Pascal/Delphi|*.pas|PHP|*.php|UnixShell|*.sh|Bat|*.bat|INI|*.ini';
-  datamodule1.SaveDialog1.Filter:=
-  'AllFile|*.*|Text|*.txt|CSV|*.csv|JavaScript|*.js|HTML|*.html;*.htm|Css|*.css|Json|*.json|XML|*.xml|Java|*.java|C|*.c|C++|*.cpp|C hedder|*.h|C++ hedder|*.hpp|Pascal/Delphi|*.pas|PHP|*.php|UnixShell|*.sh|Bat|*.bat|INI|*.ini';
-  macro_form.OpenDialog1.Filter:=
-  'AllFile|*.*|Text|*.txt|CSV|*.csv|JavaScript|*.js|HTML|*.html;*.htm|Css|*.css|Json|*.json|XML|*.xml|Java|*.java|C|*.c|C++|*.cpp|C hedder|*.h|C++ hedder|*.hpp|Pascal/Delphi|*.pas|PHP|*.php|UnixShell|*.sh|Bat|*.bat|INI|*.ini';
+  s :=
+  'AllFile|*.*|Text|*.txt|CSV|*.csv|JavaScript|*.js|HTML|*.html;*.htm|Css|*.css|Json|*.json|XML|*.xml|Java|*.java|C|*.c|C++|*.cpp|C hedder|*.h|C++ hedder|*.hpp|Pascal/Delphi|*.pas|PHP|*.php|UnixShell|*.sh|Bat|*.bat|INI|*.ini|Sqlite|*.db3';
+  datamodule1.OpenDialog1.Filter:= s;
+  datamodule1.SaveDialog1.Filter:= s;
+  macro_form.OpenDialog1.Filter:= s;
 end;
 
 
@@ -6189,6 +6192,60 @@ begin
   end else begin
     st.Add(Dir);
   end
+end;
+
+function Tfunction_unit.set_SQLtoStringGrid(dbname,s: string;sg:TStringGrid):ThreadFunc;
+var
+    database: TSqliteDatabase;
+    tab: TSqliteTable;
+    s1,s2: string;
+    i,j:integer;
+begin
+    try
+      database := TSqliteDatabase.Create(dbname+'.db3');
+      tab := database.GetTable(s);
+      try
+        sg.Clear;
+        s1 := '';
+        s2 := char(13);
+        i :=0;
+        j:=0;
+        sg.ColCount := tab.ColCount;
+        sg.RowCount:= 2;
+        sg.FixedCols:=1;
+        sg.FixedRows:=1;
+        while i < tab.ColCount -1 do begin
+          //s1 := s1 + '['+tab.Columns[i]+ ']';
+          s2 := s2 + tab.Columns[i]+ char(13);
+          inc(i);
+        end;
+        sg.Rows[j].Text:= s2;
+        s1 := s1 + char(13);
+        i := 0;
+        j:=1;
+        s2 := char(13);
+        while not tab.EOF do begin
+          i :=0;
+          s2 := char(13);
+          while i < tab.ColCount -1 do begin
+            //s1 := s1 +  '['+tab.FieldAsString(i)+']';
+            s2 := s2 + tab.FieldAsString(i) + char(13);
+            inc(i);
+          end;
+          sg.Rows[j].Text:= s2;
+          s1 := s1 +char(13);
+          sg.RowCount:= j+2;
+          inc(j);
+          tab.next;
+        end;
+      finally
+        //showmessage(s1);
+        //showmessage(inttostr(j));
+        tab.free;
+      end;
+    finally
+          database.free;
+    end;
 end;
 
 

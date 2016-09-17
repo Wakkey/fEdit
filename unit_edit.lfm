@@ -1,7 +1,7 @@
 object Editform: TEditform
-  Left = 414
+  Left = 394
   Height = 359
-  Top = 195
+  Top = 267
   Width = 520
   AllowDropFiles = True
   Caption = 'Editform'
@@ -546,11 +546,11 @@ object Editform: TEditform
     end
     object TabSheet2: TTabSheet
       Caption = 'MemoMode'
-      ClientHeight = 328
+      ClientHeight = 331
       ClientWidth = 512
       object Memo1: TMemo
         Left = 0
-        Height = 328
+        Height = 331
         Top = 0
         Width = 512
         Align = alClient
@@ -563,196 +563,174 @@ object Editform: TEditform
     end
     object TabSheet3: TTabSheet
       Caption = 'ViewMode'
-      ClientHeight = 328
+      ClientHeight = 331
       ClientWidth = 512
       object TreeView1: TTreeView
         Left = 0
-        Height = 328
+        Height = 331
         Top = 0
         Width = 512
         Align = alClient
-        DefaultItemHeight = 14
+        DefaultItemHeight = 18
         TabOrder = 0
       end
       object Panel1: TPanel
         Left = 0
-        Height = 328
+        Height = 331
         Top = 0
         Width = 512
         Align = alClient
         Caption = 'Panel1'
-        ClientHeight = 328
+        ClientHeight = 331
         ClientWidth = 512
         TabOrder = 1
         Visible = False
-        object DBGrid1: TDBGrid
-          Left = 1
-          Height = 206
-          Top = 121
-          Width = 510
-          Align = alClient
-          Color = clWindow
-          Columns = <>
-          DataSource = DataSource1
-          TabOrder = 0
-        end
         object Panel2: TPanel
           Left = 1
-          Height = 120
+          Height = 104
           Top = 1
           Width = 510
           Align = alTop
-          ClientHeight = 120
+          ClientHeight = 104
           ClientWidth = 510
-          TabOrder = 1
-          object Label1: TLabel
-            Left = 18
-            Height = 12
-            Top = 8
-            Width = 48
-            Caption = '接続先名'
-            ParentColor = False
-          end
-          object host1: TEdit
-            Left = 80
-            Height = 26
-            Top = 8
-            Width = 153
-            TabOrder = 0
-          end
-          object user1: TEdit
-            Left = 80
-            Height = 26
-            Top = 40
-            Width = 153
-            TabOrder = 1
-          end
-          object Label2: TLabel
-            Left = 18
-            Height = 12
-            Top = 40
-            Width = 48
-            Caption = 'ユーザ名'
-            ParentColor = False
-          end
-          object pass1: TEdit
-            Left = 80
-            Height = 26
-            Top = 72
-            Width = 153
-            TabOrder = 2
-          end
-          object Label3: TLabel
-            Left = 18
-            Height = 12
-            Top = 72
-            Width = 54
-            Caption = 'パスワード'
-            ParentColor = False
-          end
-          object ComboBox2: TComboBox
-            Left = 360
-            Height = 23
-            Top = 56
-            Width = 100
-            ItemHeight = 15
-            TabOrder = 3
-          end
-          object ComboBox1: TComboBox
-            Left = 256
-            Height = 23
-            Top = 56
-            Width = 100
-            ItemHeight = 15
-            TabOrder = 4
-          end
+          TabOrder = 0
           object Button1: TButton
-            Left = 248
+            Left = 416
             Height = 25
-            Top = 88
+            Top = 8
             Width = 75
             Caption = '接続'
             OnClick = Button1Click
-            TabOrder = 5
+            TabOrder = 0
           end
           object Button2: TButton
-            Left = 328
+            Left = 416
             Height = 25
-            Top = 88
-            Width = 83
+            Top = 40
+            Width = 75
             Caption = 'DataBase接続'
             OnClick = Button2Click
-            TabOrder = 6
+            TabOrder = 1
           end
           object Button3: TButton
             Left = 416
             Height = 25
-            Top = 88
+            Top = 72
             Width = 75
             Caption = 'Table接続'
             OnClick = Button3Click
-            TabOrder = 7
-          end
-          object Label4: TLabel
-            Left = 272
-            Height = 12
-            Top = 39
-            Width = 72
-            Caption = 'Database一覧'
-            ParentColor = False
-          end
-          object Label5: TLabel
-            Left = 368
-            Height = 12
-            Top = 38
-            Width = 52
-            Caption = 'Table一覧'
-            ParentColor = False
-          end
-          object SQLType: TComboBox
-            Left = 256
-            Height = 23
-            Top = 8
-            Width = 100
-            ItemHeight = 15
-            Items.Strings = (
-              'SQLLite'
-              'ODBC'
-              'SQLServer'
-              'PostgrSQL'
-              'MySQL4.0'
-              'MySQL4.1'
-              'MySQL5.0'
-              'MySQL5.1'
-              'MySQL5.5'
-              'MySQL5.6'
-            )
-            Style = csDropDownList
-            TabOrder = 8
+            TabOrder = 2
           end
           object Label6: TLabel
             Left = 18
-            Height = 12
+            Height = 15
             Top = 104
-            Width = 45
+            Width = 46
             Caption = 'Port番号'
             ParentColor = False
           end
           object Edit1: TEdit
             Left = 80
-            Height = 26
+            Height = 23
             Top = 103
             Width = 152
-            TabOrder = 9
+            TabOrder = 3
             Text = '3306'
           end
+          object Panel4: TPanel
+            Left = 1
+            Height = 102
+            Top = 1
+            Width = 399
+            Align = alLeft
+            Caption = 'Panel4'
+            ClientHeight = 102
+            ClientWidth = 399
+            TabOrder = 4
+            object Panel5: TPanel
+              Left = 208
+              Height = 100
+              Top = 1
+              Width = 190
+              Align = alRight
+              ClientHeight = 100
+              ClientWidth = 190
+              TabOrder = 0
+              object DirectoryEdit1: TDirectoryEdit
+                Left = 1
+                Height = 33
+                Top = 66
+                Width = 188
+                ShowHidden = False
+                ButtonWidth = 23
+                NumGlyphs = 1
+                Align = alClient
+                MaxLength = 0
+                TabOrder = 0
+                OnChange = DirectoryEdit1Change
+              end
+              object Button4: TButton
+                Left = 1
+                Height = 65
+                Top = 1
+                Width = 188
+                Align = alTop
+                Caption = 'ホームフォルダに移動'
+                OnClick = Button4Click
+                TabOrder = 1
+              end
+            end
+            object Panel3: TPanel
+              Left = 1
+              Height = 100
+              Top = 1
+              Width = 207
+              Align = alClient
+              Caption = 'Panel3'
+              ClientHeight = 100
+              ClientWidth = 207
+              TabOrder = 1
+              object FileListBox1: TFileListBox
+                Left = 1
+                Height = 75
+                Top = 24
+                Width = 205
+                Align = alClient
+                Directory = 'C:\lazarus'
+                ItemHeight = 0
+                Mask = '*.db3'
+                OnChange = FileListBox1Change
+                OnDblClick = Button3Click
+                TabOrder = 0
+              end
+              object Edit2: TEdit
+                Left = 1
+                Height = 23
+                Top = 1
+                Width = 205
+                Align = alTop
+                OnChange = Edit2Change
+                TabOrder = 1
+              end
+            end
+          end
+        end
+        object StringGrid1: TStringGrid
+          Left = 1
+          Height = 225
+          Top = 105
+          Width = 510
+          Align = alClient
+          ColCount = 1
+          RowCount = 1
+          TabOrder = 1
         end
       end
     end
   end
   object PopupMenu1: TPopupMenu
-    left = 208
-    top = 64
+    left = 176
+    top = 128
     object MenuItem22: TMenuItem
       Caption = '元に戻す'
       OnClick = MenuItem22Click
@@ -789,127 +767,16 @@ object Editform: TEditform
     end
   end
   object OpenDialog1: TOpenDialog
-    left = 21
-    top = 39
+    left = 32
+    top = 128
   end
   object SaveDialog1: TSaveDialog
-    left = 64
-    top = 72
+    left = 80
+    top = 128
   end
   object ApplicationProperties1: TApplicationProperties
     OnDropFiles = ApplicationProperties1DropFiles
-    left = 127
-    top = 48
-  end
-  object MySQL40Connection1: TMySQL40Connection
-    Connected = False
-    LoginPrompt = False
-    KeepConnection = False
-    CharSet = 'utf8'
-    Options = []
-    left = 50
-    top = 112
-  end
-  object ODBCConnection1: TODBCConnection
-    Connected = False
-    LoginPrompt = False
-    KeepConnection = False
-    CharSet = 'utf8'
-    Options = []
-    left = 21
-    top = 112
-  end
-  object MySQL41Connection1: TMySQL41Connection
-    Connected = False
-    LoginPrompt = False
-    KeepConnection = False
-    CharSet = 'utf8'
-    Options = []
-    left = 79
-    top = 112
-  end
-  object MySQL50Connection1: TMySQL50Connection
-    Connected = False
-    LoginPrompt = False
-    KeepConnection = False
-    CharSet = 'utf8'
-    Options = []
-    left = 108
-    top = 112
-  end
-  object MySQL51Connection1: TMySQL51Connection
-    Connected = False
-    LoginPrompt = False
-    KeepConnection = False
-    CharSet = 'utf8'
-    Options = []
-    left = 137
-    top = 112
-  end
-  object MySQL55Connection1: TMySQL55Connection
-    Connected = False
-    LoginPrompt = False
-    KeepConnection = False
-    CharSet = 'utf8'
-    Options = []
-    left = 166
-    top = 112
-  end
-  object SQLConnection: TMySQL56Connection
-    Connected = False
-    LoginPrompt = False
-    KeepConnection = False
-    Transaction = SQLTransaction1
-    CharSet = 'utf8'
-    Options = []
-    left = 195
-    top = 112
-  end
-  object SQLite3Connection1: TSQLite3Connection
-    Connected = False
-    LoginPrompt = False
-    KeepConnection = False
-    CharSet = 'utf8'
-    Options = []
-    left = 224
-    top = 112
-  end
-  object MSSQLConnection1: TMSSQLConnection
-    Connected = False
-    LoginPrompt = False
-    KeepConnection = False
-    CharSet = 'utf8'
-    Options = []
-    left = 253
-    top = 112
-  end
-  object SQLTransaction1: TSQLTransaction
-    Active = False
-    Database = SQLConnection
-    Options = []
-    left = 21
-    top = 160
-  end
-  object SQLQuery1: TSQLQuery
-    FieldDefs = <>
-    Database = SQLConnection
-    Transaction = SQLTransaction1
-    Options = []
-    Params = <>
-    left = 120
-    top = 160
-  end
-  object DataSource1: TDataSource
-    DataSet = SQLQuery1
-    left = 72
-    top = 160
-  end
-  object PQConnection1: TPQConnection
-    Connected = False
-    LoginPrompt = False
-    KeepConnection = False
-    Options = []
-    left = 280
-    top = 112
+    left = 128
+    top = 128
   end
 end

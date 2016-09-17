@@ -8,7 +8,7 @@ uses
   Classes, SysUtils, db, sqldb, pqconnection, mssqlconn, sqlite3conn, odbcconn,
   mysql55conn, mysql56conn, mysql40conn, mysql41conn, mysql50conn, mysql51conn,
   FileUtil, SynEdit, SynMemo, IpHtml, Forms, Controls, Graphics, Dialogs, Menus,
-  ComCtrls, StdCtrls, DBGrids, ExtCtrls;
+  ComCtrls, StdCtrls, DBGrids, ExtCtrls, FileCtrl, EditBtn, Grids;
 
 type
   TUndo = class
@@ -34,17 +34,11 @@ type
     Button1: TButton;
     Button2: TButton;
     Button3: TButton;
-    ComboBox1: TComboBox;
-    ComboBox2: TComboBox;
-    DataSource1: TDataSource;
-    DBGrid1: TDBGrid;
+    Button4: TButton;
+    DirectoryEdit1: TDirectoryEdit;
     Edit1: TEdit;
-    host1: TEdit;
-    Label1: TLabel;
-    Label2: TLabel;
-    Label3: TLabel;
-    Label4: TLabel;
-    Label5: TLabel;
+    Edit2: TEdit;
+    FileListBox1: TFileListBox;
     Label6: TLabel;
     Memo1: TMemo;
     MenuItem22: TMenuItem;
@@ -56,37 +50,30 @@ type
     MenuItem28: TMenuItem;
     MenuItem29: TMenuItem;
     MenuItem30: TMenuItem;
-    MSSQLConnection1: TMSSQLConnection;
-    MySQL40Connection1: TMySQL40Connection;
-    MySQL41Connection1: TMySQL41Connection;
-    MySQL50Connection1: TMySQL50Connection;
-    MySQL51Connection1: TMySQL51Connection;
-    MySQL55Connection1: TMySQL55Connection;
-    ODBCConnection1: TODBCConnection;
     OpenDialog1: TOpenDialog;
     PageControl1: TPageControl;
     Panel1: TPanel;
     Panel2: TPanel;
-    pass1: TEdit;
+    Panel3: TPanel;
+    Panel4: TPanel;
+    Panel5: TPanel;
     PopupMenu1: TPopupMenu;
-    PQConnection1: TPQConnection;
     SaveDialog1: TSaveDialog;
-    SQLConnection: TMySQL56Connection;
-    SQLite3Connection1: TSQLite3Connection;
-    SQLQuery1: TSQLQuery;
-    SQLTransaction1: TSQLTransaction;
-    SQLType: TComboBox;
+    StringGrid1: TStringGrid;
     SynEdit1: TSynEdit;
     TabSheet1: TTabSheet;
     TabSheet2: TTabSheet;
     TabSheet3: TTabSheet;
     TreeView1: TTreeView;
-    user1: TEdit;
     procedure ApplicationProperties1DropFiles(Sender: TObject;
       const FileNames: array of String);
     procedure Button1Click(Sender: TObject);
     procedure Button2Click(Sender: TObject);
     procedure Button3Click(Sender: TObject);
+    procedure Button4Click(Sender: TObject);
+    procedure DirectoryEdit1Change(Sender: TObject);
+    procedure Edit2Change(Sender: TObject);
+    procedure FileListBox1Change(Sender: TObject);
     procedure FormActivate(Sender: TObject);
     procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
     procedure FormCreate(Sender: TObject);
@@ -139,6 +126,7 @@ type
     isDockOut:boolean;
     dock_sw,dockmode:boolean;
     Edit:Tmemo;
+    sqlset,sql:string;
     filename_path:string;
     save_complate:boolean;
     nameing_complate:boolean;
@@ -161,7 +149,8 @@ var
 
 implementation
 
-uses mainform,interfaceunit, supportcodeinput, MySQL, repraceMacro, windowsunit;
+uses mainform, interfaceunit, supportcodeinput, MySQL, repraceMacro,
+  windowsunit, functionunit;
 
 {$R *.lfm}
 
@@ -326,17 +315,61 @@ end;
 
 procedure TEditform.Button1Click(Sender: TObject);
 begin
-  interface_unit.databaseOpen;
+   function_unit.Run(function_unit.set_SQLtoStringGrid(sql,SynEdit1.Lines.Text,StringGrid1));
+  //interface_unit.sqlOpen;//databaseOpen;
 end;
 
 procedure TEditform.Button2Click(Sender: TObject);
 begin
-  interface_unit.dattableOpen;
+  SynEdit1.Lines.Text:= 'SELECT * FROM ' + sql;
+  sqlset := 'SELECT * FROM ';
+  Button1Click(sender);
 end;
 
 procedure TEditform.Button3Click(Sender: TObject);
 begin
-  interface_unit.sqlOpen;
+  SynEdit1.Lines.Text:= 'SELECT * FROM ' + sql;
+  sqlset := 'SELECT * FROM ';
+  Button1Click(sender);
+end;
+
+procedure TEditform.Button4Click(Sender: TObject);
+begin
+  FileListBox1.Directory:= extractfilepath(paramstr(0));
+end;
+
+procedure TEditform.DirectoryEdit1Change(Sender: TObject);
+begin
+  FileListBox1.Directory:= DirectoryEdit1.Directory;
+end;
+
+procedure TEditform.Edit2Change(Sender: TObject);
+var
+  s:string;
+  i:integer;
+begin
+  sqlset := edit2.Text;
+  s := '';
+  for i := 1 to length(sqlset) -4 do begin;
+    s := s + sqlset[i];
+  end;
+  sqlset := s;
+end;
+
+procedure TEditform.FileListBox1Change(Sender: TObject);
+var
+  i:integer;
+  s:string;
+begin
+  sqlset := extractfilename(FileListBox1.FileName);
+  edit2.Text := sqlset;
+  s := '';
+  for i := 1 to length(sqlset) -4 do begin;
+    s := s + sqlset[i];
+  end;
+  sqlset := s;
+  SynEdit1.Lines.Text:= sql + sqlset;
+
 end;
 
 procedure TEditform.FormActivate(Sender: TObject);

@@ -1,7 +1,7 @@
 object interface_unit: Tinterface_unit
-  Left = 290
+  Left = 299
   Height = 238
-  Top = 296
+  Top = 292
   Width = 318
   Caption = 'interface_unit'
   OnCreate = FormCreate

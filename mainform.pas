@@ -660,7 +660,7 @@ end;
 
 procedure TMain.MenuItem15Click(Sender: TObject);
 begin
-  interface_unit.opensql(main.PageControl1.pageIndex);
+
 end;
 
 procedure TMain.MenuItem17Click(Sender: TObject);

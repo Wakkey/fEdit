@@ -112,7 +112,7 @@ uses functionunit, mainform, comp,windowsunit,
 
   {$ENDIF}
   find_unit, colordlg,
-  tool_window, TableBuilder, MySQL;
+  tool_window, TableBuilder, MySQL, sqlpropedit;
 
 {$R *.lfm}
 
@@ -135,676 +135,26 @@ begin
 end;
 
 function Tinterface_unit.databaseOpen():boolean;
-var
-  i:integer;
+
 begin
-  i := main.PageControl1.PageIndex;
-  with function_unit.editlist.Items[i] do begin
-  case sqltype.Text of
-    'SQLLite':begin
-      SQLite3Connection1.Transaction := SQLTransaction1;
-      SQLTransaction1.DataBase := SQLite3Connection1;
-      SQLQuery1.DataBase := SQLite3Connection1;
 
-      SQLite3Connection1.HostName := host1.Text;
-      SQLite3Connection1.UserName := user1.Text;
-      SQLite3Connection1.Password := pass1.Text;
-
-      function_unit.editlist.Items[i].host:=host1.Text;
-      function_unit.editlist.Items[i].user:=user1.Text;
-      function_unit.editlist.Items[i].pass:=pass1.Text;
-      SQLite3Connection1.Open;
-        // First lets get a list of available databases.
-        if SQLite3Connection1.Connected then begin
-          //Showmessage('Connected to server: ' + HostEdit.Text);
-          Showmessage('Retrieving list of available databases.');
-          SQLQuery1.SQL.Text := 'show databases';
-          SQLQuery1.Open;
-          while not SQLQuery1.EOF do begin
-            ComboBox1.Items.Add(SQLQuery1.Fields[0].AsString);
-            SQLQuery1.Next;
-          end;
-          SQLQuery1.Close;
-          Showmessage('List of databases received!');
-        end;
-    end;
-    'ODBC':begin
-      ODBCConnection1.Transaction := SQLTransaction1;
-      SQLTransaction1.DataBase := ODBCConnection1;
-      SQLQuery1.DataBase := ODBCConnection1;
-
-      ODBCConnection1.HostName := host1.Text;
-      ODBCConnection1.UserName := user1.Text;
-      ODBCConnection1.Password := pass1.Text;
-      function_unit.editlist.Items[i].host:=host1.Text;
-      function_unit.editlist.Items[i].user:=user1.Text;
-      function_unit.editlist.Items[i].pass:=pass1.Text;
-      ODBCConnection1.Open;
-        // First lets get a list of available databases.
-        if ODBCConnection1.Connected then begin
-          //Showmessage('Connected to server: ' + HostEdit.Text);
-          Showmessage('Retrieving list of available databases.');
-          SQLQuery1.SQL.Text := 'show databases';
-          SQLQuery1.Open;
-          while not SQLQuery1.EOF do begin
-            ComboBox1.Items.Add(SQLQuery1.Fields[0].AsString);
-            SQLQuery1.Next;
-          end;
-          SQLQuery1.Close;
-          Showmessage('List of databases received!');
-        end;
-    end;
-    'SQLServer':begin
-      MSSQLConnection1.Transaction := SQLTransaction1;
-      SQLTransaction1.DataBase := MSSQLConnection1;
-      SQLQuery1.DataBase := MSSQLConnection1;
-
-      MSSQLConnection1.HostName := host1.Text;
-      MSSQLConnection1.UserName := user1.Text;
-      MSSQLConnection1.Password := pass1.Text;
-      function_unit.editlist.Items[i].host:=host1.Text;
-      function_unit.editlist.Items[i].user:=user1.Text;
-      function_unit.editlist.Items[i].pass:=pass1.Text;
-      MSSQLConnection1.Open;
-        // First lets get a list of available databases.
-        if MSSQLConnection1.Connected then begin
-          //Showmessage('Connected to server: ' + HostEdit.Text);
-          Showmessage('Retrieving list of available databases.');
-          SQLQuery1.SQL.Text := 'show databases';
-          SQLQuery1.Open;
-          while not SQLQuery1.EOF do begin
-            ComboBox1.Items.Add(SQLQuery1.Fields[0].AsString);
-            SQLQuery1.Next;
-          end;
-          SQLQuery1.Close;
-          Showmessage('List of databases received!');
-        end;
-    end;
-
-    'PostgrSQL':begin
-        PQConnection1.Transaction := SQLTransaction1;
-        SQLTransaction1.DataBase := PQConnection1;
-        SQLQuery1.DataBase := PQConnection1;
-
-         PQConnection1.HostName := host1.Text;
-        PQConnection1.UserName := user1.Text;
-        PQConnection1.Password := pass1.Text;
-        function_unit.editlist.Items[i].host:=host1.Text;
-        function_unit.editlist.Items[i].user:=user1.Text;
-        function_unit.editlist.Items[i].pass:=pass1.Text;
-         PQConnection1.Open;
-          // First lets get a list of available databases.
-          if PQConnection1.Connected then begin
-            //Showmessage('Connected to server: ' + HostEdit.Text);
-            Showmessage('Retrieving list of available databases.');
-            SQLQuery1.SQL.Text := 'show databases';
-            SQLQuery1.Open;
-            while not SQLQuery1.EOF do begin
-              ComboBox1.Items.Add(SQLQuery1.Fields[0].AsString);
-              SQLQuery1.Next;
-            end;
-            SQLQuery1.Close;
-            Showmessage('List of databases received!');
-          end;
-    end;
-
-    'MySQL4.0':begin
-        MySQL40Connection1.Transaction := SQLTransaction1;
-        SQLTransaction1.DataBase := MySQL40Connection1;
-        SQLQuery1.DataBase := MySQL40Connection1;
-
-         MySQL40Connection1.HostName := host1.Text;
-        MySQL40Connection1.UserName := user1.Text;
-        MySQL40Connection1.Password := pass1.Text;
-        MySQL40Connection1.Port:= strtoint(edit1.Text);
-        function_unit.editlist.Items[i].host:=host1.Text;
-        function_unit.editlist.Items[i].user:=user1.Text;
-        function_unit.editlist.Items[i].pass:=pass1.Text;
-         MySQL40Connection1.Open;
-          // First lets get a list of available databases.
-          if MySQL40Connection1.Connected then begin
-            //Showmessage('Connected to server: ' + HostEdit.Text);
-            Showmessage('Retrieving list of available databases.');
-            SQLQuery1.SQL.Text := 'show databases';
-            SQLQuery1.Open;
-            while not SQLQuery1.EOF do begin
-              ComboBox1.Items.Add(SQLQuery1.Fields[0].AsString);
-              SQLQuery1.Next;
-            end;
-            SQLQuery1.Close;
-            Showmessage('List of databases received!');
-          end;
-    end;
-    'MySQL4.1':begin
-      MySQL41Connection1.Transaction := SQLTransaction1;
-      SQLTransaction1.DataBase := MySQL41Connection1;
-      SQLQuery1.DataBase := MySQL41Connection1;
-
-      MySQL41Connection1.HostName := host1.Text;
-      MySQL41Connection1.UserName := user1.Text;
-      MySQL41Connection1.Password := pass1.Text;
-      MySQL41Connection1.Port:= strtoint(edit1.Text);
-      function_unit.editlist.Items[i].host:=host1.Text;
-      function_unit.editlist.Items[i].user:=user1.Text;
-      function_unit.editlist.Items[i].pass:=pass1.Text;
-      MySQL41Connection1.Open;
-        // First lets get a list of available databases.
-        if MySQL41Connection1.Connected then begin
-          //Showmessage('Connected to server: ' + HostEdit.Text);
-          Showmessage('Retrieving list of available databases.');
-          SQLQuery1.SQL.Text := 'show databases';
-          SQLQuery1.Open;
-          while not SQLQuery1.EOF do begin
-            ComboBox1.Items.Add(SQLQuery1.Fields[0].AsString);
-            SQLQuery1.Next;
-          end;
-          SQLQuery1.Close;
-          Showmessage('List of databases received!');
-        end;
-    end;
-    'MySQL5.0':begin
-      MySQL50Connection1.Transaction := SQLTransaction1;
-      SQLTransaction1.DataBase := MySQL50Connection1;
-      SQLQuery1.DataBase := MySQL50Connection1;
-
-      MySQL50Connection1.HostName := host1.Text;
-      MySQL50Connection1.UserName := user1.Text;
-      MySQL50Connection1.Password := pass1.Text;
-      MySQL50Connection1.Port:= strtoint(edit1.Text);
-      function_unit.editlist.Items[i].host:=host1.Text;
-      function_unit.editlist.Items[i].user:=user1.Text;
-      function_unit.editlist.Items[i].pass:=pass1.Text;
-      MySQL50Connection1.Open;
-        // First lets get a list of available databases.
-        if MySQL50Connection1.Connected then begin
-          //Showmessage('Connected to server: ' + HostEdit.Text);
-          Showmessage('Retrieving list of available databases.');
-          SQLQuery1.SQL.Text := 'show databases';
-          SQLQuery1.Open;
-          while not SQLQuery1.EOF do begin
-            ComboBox1.Items.Add(SQLQuery1.Fields[0].AsString);
-            SQLQuery1.Next;
-          end;
-          SQLQuery1.Close;
-          Showmessage('List of databases received!');
-        end;
-    end;
-    'MySQL5.1':begin
-      MySQL51Connection1.Transaction := SQLTransaction1;
-      SQLTransaction1.DataBase := MySQL51Connection1;
-      SQLQuery1.DataBase := MySQL51Connection1;
-
-      MySQL51Connection1.HostName := host1.Text;
-      MySQL51Connection1.UserName := user1.Text;
-      MySQL51Connection1.Password := pass1.Text;
-      MySQL51Connection1.Port:= strtoint(edit1.Text);
-      function_unit.editlist.Items[i].host:=host1.Text;
-      function_unit.editlist.Items[i].user:=user1.Text;
-      function_unit.editlist.Items[i].pass:=pass1.Text;
-      MySQL51Connection1.Open;
-        // First lets get a list of available databases.
-        if MySQL51Connection1.Connected then begin
-          //Showmessage('Connected to server: ' + HostEdit.Text);
-          Showmessage('Retrieving list of available databases.');
-          SQLQuery1.SQL.Text := 'show databases';
-          SQLQuery1.Open;
-          while not SQLQuery1.EOF do begin
-            ComboBox1.Items.Add(SQLQuery1.Fields[0].AsString);
-            SQLQuery1.Next;
-          end;
-          SQLQuery1.Close;
-          Showmessage('List of databases received!');
-        end;
-    end;
-    'MySQL5.5':begin
-      MySQL55Connection1.Transaction := SQLTransaction1;
-      SQLTransaction1.DataBase := MySQL55Connection1;
-      SQLQuery1.DataBase := MySQL55Connection1;
-
-      MySQL55Connection1.HostName := host1.Text;
-      MySQL55Connection1.UserName := user1.Text;
-      MySQL55Connection1.Password := pass1.Text;
-      MySQL55Connection1.Port:= strtoint(edit1.Text);
-      function_unit.editlist.Items[i].host:=host1.Text;
-      function_unit.editlist.Items[i].user:=user1.Text;
-      function_unit.editlist.Items[i].pass:=pass1.Text;
-      MySQL55Connection1.Open;
-        // First lets get a list of available databases.
-        if MySQL55Connection1.Connected then begin
-          //Showmessage('Connected to server: ' + HostEdit.Text);
-          Showmessage('Retrieving list of available databases.');
-          SQLQuery1.SQL.Text := 'show databases';
-          SQLQuery1.Open;
-          while not SQLQuery1.EOF do begin
-            ComboBox1.Items.Add(SQLQuery1.Fields[0].AsString);
-            SQLQuery1.Next;
-          end;
-          SQLQuery1.Close;
-          Showmessage('List of databases received!');
-        end;
-    end;
-    'MySQL5.6':begin
-        SQLConnection.Transaction := SQLTransaction1;
-        SQLTransaction1.DataBase := SQLConnection;
-        SQLQuery1.DataBase := SQLConnection;
-
-        SQLConnection.HostName := host1.Text;
-        SQLConnection.UserName := user1.Text;
-        SQLConnection.Password := pass1.Text;
-        SQLConnection.Port:= strtoint(edit1.Text);
-        function_unit.editlist.Items[i].host:=host1.Text;
-        function_unit.editlist.Items[i].user:=user1.Text;
-        function_unit.editlist.Items[i].pass:=pass1.Text;
-        SQLConnection.Open;
-          // First lets get a list of available databases.
-          if SQLConnection.Connected then begin
-            //Showmessage('Connected to server: ' + HostEdit.Text);
-            Showmessage('Retrieving list of available databases.');
-            SQLQuery1.SQL.Text := 'show databases';
-            SQLQuery1.Open;
-            while not SQLQuery1.EOF do begin
-              ComboBox1.Items.Add(SQLQuery1.Fields[0].AsString);
-              SQLQuery1.Next;
-            end;
-            SQLQuery1.Close;
-            Showmessage('List of databases received!');
-          end;
-    end;
-  end;
-  end;
 end;
 
 function Tinterface_unit.dattableOpen():boolean;
-var
-  i:integer;
 begin
-  i := main.PageControl1.PageIndex;
-  with function_unit.editlist.Items[i] do begin
-    case sqltype.Text of
-      'SQLLite':begin
-            if ComboBox1.ItemIndex <> -1 then begin
-                    with ComboBox1 do
-                      SQLite3Connection1.DatabaseName := Items[ItemIndex];
-                    function_unit.editlist.Items[i].database:=SQLite3Connection1.DatabaseName;
-                    Showmessage('Retreiving list of tables');
-                    SQLQuery1.SQL.Text := 'show tables';
-                    SQLQuery1.Open;
-                    while not SQLQuery1.EOF do begin
-                      ComboBox2.Items.Add(SQLQuery1.Fields[0].AsString);
-                      SQLQuery1.Next;
-                    end;
-                    SQLQuery1.Close;
-                    Showmessage('List of tables received');
-                    sqlset1 := form1.SynEdit1.Lines.Text;
-                  end;
-      end;
-      'ODBC':begin
-          if ComboBox1.ItemIndex <> -1 then begin
-                 with ComboBox1 do
-                   ODBCConnection1.DatabaseName := Items[ItemIndex];
-                 function_unit.editlist.Items[i].database:=ODBCConnection1.DatabaseName;
-                 Showmessage('Retreiving list of tables');
-                 SQLQuery1.SQL.Text := 'show tables';
-                 SQLQuery1.Open;
-                 while not SQLQuery1.EOF do begin
-                   ComboBox2.Items.Add(SQLQuery1.Fields[0].AsString);
-                   SQLQuery1.Next;
-                 end;
-                 SQLQuery1.Close;
-                 Showmessage('List of tables received');
-                 sqlset1 := form1.SynEdit1.Lines.Text;
-               end;
-      end;
-      'SQLServer':begin
-        if ComboBox1.ItemIndex <> -1 then begin
-               with ComboBox1 do
-                 MSSQLConnection1.DatabaseName := Items[ItemIndex];
-               function_unit.editlist.Items[i].database:=MSSQLConnection1.DatabaseName;
-               Showmessage('Retreiving list of tables');
-               SQLQuery1.SQL.Text := 'show tables';
-               SQLQuery1.Open;
-               while not SQLQuery1.EOF do begin
-                 ComboBox2.Items.Add(SQLQuery1.Fields[0].AsString);
-                 SQLQuery1.Next;
-               end;
-               SQLQuery1.Close;
-               Showmessage('List of tables received');
-               sqlset1 := form1.SynEdit1.Lines.Text;
-             end;
-      end;
-      'MySQL4.0':begin
-          if ComboBox1.ItemIndex <> -1 then begin
-               with ComboBox1 do
-                 MySQL40Connection1.DatabaseName := Items[ItemIndex];
-               function_unit.editlist.Items[i].database:=MySQL40Connection1.DatabaseName;
-               Showmessage('Retreiving list of tables');
-               SQLQuery1.SQL.Text := 'show tables';
-               SQLQuery1.Open;
-               while not SQLQuery1.EOF do begin
-                 ComboBox2.Items.Add(SQLQuery1.Fields[0].AsString);
-                 SQLQuery1.Next;
-               end;
-               SQLQuery1.Close;
-               Showmessage('List of tables received');
-               sqlset1 := form1.SynEdit1.Lines.Text;
-             end;
-      end;
-      'MySQL4.1':begin
-            if ComboBox1.ItemIndex <> -1 then begin
-                 with ComboBox1 do
-                   MySQL41Connection1.DatabaseName := Items[ItemIndex];
-                 function_unit.editlist.Items[i].database:=MySQL41Connection1.DatabaseName;
-                 Showmessage('Retreiving list of tables');
-                 SQLQuery1.SQL.Text := 'show tables';
-                 SQLQuery1.Open;
-                 while not SQLQuery1.EOF do begin
-                   ComboBox2.Items.Add(SQLQuery1.Fields[0].AsString);
-                   SQLQuery1.Next;
-                 end;
-                 SQLQuery1.Close;
-                 Showmessage('List of tables received');
-                 sqlset1 := form1.SynEdit1.Lines.Text;
-               end;
-      end;
-      'MySQL5.0':begin
-          if ComboBox1.ItemIndex <> -1 then begin
-               with ComboBox1 do
-                 MySQL50Connection1.DatabaseName := Items[ItemIndex];
-               function_unit.editlist.Items[i].database:=MySQL50Connection1.DatabaseName;
-               Showmessage('Retreiving list of tables');
-               SQLQuery1.SQL.Text := 'show tables';
-               SQLQuery1.Open;
-               while not SQLQuery1.EOF do begin
-                 ComboBox2.Items.Add(SQLQuery1.Fields[0].AsString);
-                 SQLQuery1.Next;
-               end;
-               SQLQuery1.Close;
-               Showmessage('List of tables received');
-               sqlset1 := form1.SynEdit1.Lines.Text;
-             end;
-      end;
-      'MySQL5.1':begin
-          if ComboBox1.ItemIndex <> -1 then begin
-               with ComboBox1 do
-                 MySQL51Connection1.DatabaseName := Items[ItemIndex];
-               function_unit.editlist.Items[i].database:=MySQL51Connection1.DatabaseName;
-               Showmessage('Retreiving list of tables');
-               SQLQuery1.SQL.Text := 'show tables';
-               SQLQuery1.Open;
-               while not SQLQuery1.EOF do begin
-                 ComboBox2.Items.Add(SQLQuery1.Fields[0].AsString);
-                 SQLQuery1.Next;
-               end;
-               SQLQuery1.Close;
-               Showmessage('List of tables received');
-               sqlset1 := form1.SynEdit1.Lines.Text;
-             end;
-      end;
-      'MySQL5.5':begin
-          if ComboBox1.ItemIndex <> -1 then begin
-               with ComboBox1 do
-                 MySQL55Connection1.DatabaseName := Items[ItemIndex];
-               function_unit.editlist.Items[i].database:=MySQL55Connection1.DatabaseName;
-               Showmessage('Retreiving list of tables');
-               SQLQuery1.SQL.Text := 'show tables';
-               SQLQuery1.Open;
-               while not SQLQuery1.EOF do begin
-                 ComboBox2.Items.Add(SQLQuery1.Fields[0].AsString);
-                 SQLQuery1.Next;
-               end;
-               SQLQuery1.Close;
-               Showmessage('List of tables received');
-               sqlset1 := form1.SynEdit1.Lines.Text;
-             end;
-      end;
-      'MySQL5.6':begin
-          if ComboBox1.ItemIndex <> -1 then begin
-              with ComboBox1 do
-                SQLConnection.DatabaseName := Items[ItemIndex];
-              function_unit.editlist.Items[i].database:=SQLConnection.DatabaseName;
-              Showmessage('Retreiving list of tables');
-              SQLQuery1.SQL.Text := 'show tables';
-              SQLQuery1.Open;
-              while not SQLQuery1.EOF do begin
-                ComboBox2.Items.Add(SQLQuery1.Fields[0].AsString);
-                SQLQuery1.Next;
-              end;
-              SQLQuery1.Close;
-              Showmessage('List of tables received');
-              sqlset1 := form1.SynEdit1.Lines.Text;
-            end;
-      end;
-    end;
-  end;
+
 end;
 
 function Tinterface_unit.sqlOpen():boolean;
-var
-  i:integer;
 begin
-  i := main.PageControl1.PageIndex;
-  with function_unit.editlist.Items[i] do begin
-    SQLQuery1.Close;
-    SQLQuery1.SQL.Text := form1.SynEdit1.Lines.Text;
-    SQLQuery1.Open;
-  end;
+
 end;
 
 function Tinterface_unit.opensql(I:INTEGER):boolean;
 begin
   with function_unit.editlist.Items[i] do begin
-   case sqltype.Text of
-    '':begin
-      form1.Show;
-    end;
-    'SQLLite':begin
-      SQLite3Connection1.Transaction := SQLTransaction1;
-      SQLTransaction1.DataBase := SQLite3Connection1;
-      SQLQuery1.DataBase := SQLite3Connection1;
 
-           SQLQuery1.Close;
-             host := inputbox('HOST名を入力','',host);
-             user := inputbox('ユーザ名を入力','',user);
-             pass := inputbox('paswordを入力','',pass);
-             database := inputbox('接続するデータベース名','',database);
-           SQLite3Connection1.HostName := Host;
-           SQLite3Connection1.UserName := User;
-           SQLite3Connection1.Password := Pass;
-           SQLite3Connection1.DatabaseName := database;
-           SQLite3Connection1.Open;
-           if SQLite3Connection1.Connected then begin
-            SQLQuery1.SQL.Text:= synedit1.Lines.Text;
-            SQLQuery1.Open;
-            function_unit.editlist.Items[i].PageControl1.PageIndex := 2;
-            function_unit.editlist.Items[i].TreeView1.Visible := false;
-            function_unit.editlist.Items[i].Panel1.Visible := true;
-           end;
-    end;
-    'ODBC':begin
-      ODBCConnection1.Transaction := SQLTransaction1;
-      SQLTransaction1.DataBase := ODBCConnection1;
-      SQLQuery1.DataBase := ODBCConnection1;
 
-      SQLQuery1.Close;
-             host := inputbox('HOST名を入力','',host);
-             user := inputbox('ユーザ名を入力','',user);
-             pass := inputbox('paswordを入力','',pass);
-             database := inputbox('接続するデータベース名','',database);
-           ODBCConnection1.HostName := Host;
-           ODBCConnection1.UserName := User;
-           ODBCConnection1.Password := Pass;
-           ODBCConnection1.DatabaseName := database;
-           ODBCConnection1.Open;
-           if ODBCConnection1.Connected then begin
-            SQLQuery1.SQL.Text:= function_unit.editlist.Items[i].synedit1.Lines.Text;
-            SQLQuery1.Open;
-            function_unit.editlist.Items[i].PageControl1.PageIndex := 2;
-            function_unit.editlist.Items[i].TreeView1.Visible := false;
-            function_unit.editlist.Items[i].Panel1.Visible := true;
-           end;
-    end;
-    'SQLServer':begin
-      MSSQLConnection1.Transaction := SQLTransaction1;
-      SQLTransaction1.DataBase := MSSQLConnection1;
-      SQLQuery1.DataBase := MSSQLConnection1;
-
-      SQLQuery1.Close;
-             host := inputbox('HOST名を入力','',host);
-             user := inputbox('ユーザ名を入力','',user);
-             pass := inputbox('paswordを入力','',pass);
-             database := inputbox('接続するデータベース名','',database);
-           MSSQLConnection1.HostName := Host;
-           MSSQLConnection1.UserName := User;
-           MSSQLConnection1.Password := Pass;
-           MSSQLConnection1.DatabaseName := database;
-           MSSQLConnection1.Open;
-           if MSSQLConnection1.Connected then begin
-            SQLQuery1.SQL.Text:= function_unit.editlist.Items[i].synedit1.Lines.Text;
-            SQLQuery1.Open;
-            function_unit.editlist.Items[i].PageControl1.PageIndex := 2;
-            function_unit.editlist.Items[i].TreeView1.Visible := false;
-            function_unit.editlist.Items[i].Panel1.Visible := true;
-           end;
-    end;
-    'MySQL4.0':begin
-        MySQL40Connection1.Transaction := SQLTransaction1;
-        SQLTransaction1.DataBase := MySQL40Connection1;
-        SQLQuery1.DataBase := MySQL40Connection1;
-
-        SQLQuery1.Close;
-             host := inputbox('HOST名を入力','',host);
-             user := inputbox('ユーザ名を入力','',user);
-             pass := inputbox('paswordを入力','',pass);
-             database := inputbox('接続するデータベース名','',database);
-           MySQL40Connection1.HostName := Host;
-           MySQL40Connection1.UserName := User;
-           MySQL40Connection1.Password := Pass;
-           MySQL40Connection1.DatabaseName := database;
-           MySQL40Connection1.Open;
-           if MySQL40Connection1.Connected then begin
-            SQLQuery1.SQL.Text:= function_unit.editlist.Items[i].synedit1.Lines.Text;
-            SQLQuery1.Open;
-            function_unit.editlist.Items[i].PageControl1.PageIndex := 2;
-            function_unit.editlist.Items[i].TreeView1.Visible := false;
-            function_unit.editlist.Items[i].Panel1.Visible := true;
-           end;
-    end;
-    'MySQL4.1':begin
-      MySQL41Connection1.Transaction := SQLTransaction1;
-      SQLTransaction1.DataBase := MySQL41Connection1;
-      SQLQuery1.DataBase := MySQL41Connection1;
-
-      SQLQuery1.Close;
-             host := inputbox('HOST名を入力','',host);
-             user := inputbox('ユーザ名を入力','',user);
-             pass := inputbox('paswordを入力','',pass);
-             database := inputbox('接続するデータベース名','',database);
-           MySQL41Connection1.HostName := Host;
-           MySQL41Connection1.UserName := User;
-           MySQL41Connection1.Password := Pass;
-           MySQL41Connection1.DatabaseName := database;
-           MySQL41Connection1.Open;
-           if MySQL41Connection1.Connected then begin
-            SQLQuery1.SQL.Text:= function_unit.editlist.Items[i].synedit1.Lines.Text;
-            SQLQuery1.Open;
-            function_unit.editlist.Items[i].PageControl1.PageIndex := 2;
-            function_unit.editlist.Items[i].TreeView1.Visible := false;
-            function_unit.editlist.Items[i].Panel1.Visible := true;
-           end;
-    end;
-    'MySQL5.0':begin
-      MySQL50Connection1.Transaction := SQLTransaction1;
-      SQLTransaction1.DataBase := MySQL50Connection1;
-      SQLQuery1.DataBase := MySQL50Connection1;
-
-      SQLQuery1.Close;
-             host := inputbox('HOST名を入力','',host);
-             user := inputbox('ユーザ名を入力','',user);
-             pass := inputbox('paswordを入力','',pass);
-             database := inputbox('接続するデータベース名','',database);
-           MySQL50Connection1.HostName := Host;
-           MySQL50Connection1.UserName := User;
-           MySQL50Connection1.Password := Pass;
-           MySQL50Connection1.DatabaseName := database;
-           MySQL50Connection1.Open;
-           if MySQL50Connection1.Connected then begin
-            SQLQuery1.SQL.Text:= function_unit.editlist.Items[i].synedit1.Lines.Text;
-            SQLQuery1.Open;
-            function_unit.editlist.Items[i].PageControl1.PageIndex := 2;
-            function_unit.editlist.Items[i].TreeView1.Visible := false;
-            function_unit.editlist.Items[i].Panel1.Visible := true;
-           end;
-    end;
-    'MySQL5.1':begin
-      MySQL51Connection1.Transaction := SQLTransaction1;
-      SQLTransaction1.DataBase := MySQL51Connection1;
-      SQLQuery1.DataBase := MySQL51Connection1;
-
-      SQLQuery1.Close;
-             host := inputbox('HOST名を入力','',host);
-             user := inputbox('ユーザ名を入力','',user);
-             pass := inputbox('paswordを入力','',pass);
-             database := inputbox('接続するデータベース名','',database);
-           MySQL51Connection1.HostName := Host;
-           MySQL51Connection1.UserName := User;
-           MySQL51Connection1.Password := Pass;
-           MySQL51Connection1.DatabaseName := database;
-           MySQL51Connection1.Open;
-           if MySQL51Connection1.Connected then begin
-            SQLQuery1.SQL.Text:= function_unit.editlist.Items[i].synedit1.Lines.Text;
-            SQLQuery1.Open;
-            function_unit.editlist.Items[i].PageControl1.PageIndex := 2;
-            function_unit.editlist.Items[i].TreeView1.Visible := false;
-            function_unit.editlist.Items[i].Panel1.Visible := true;
-           end;
-    end;
-    'MySQL5.5':begin
-      MySQL55Connection1.Transaction := SQLTransaction1;
-      SQLTransaction1.DataBase := MySQL55Connection1;
-      SQLQuery1.DataBase := MySQL55Connection1;
-
-      SQLQuery1.Close;
-             host := inputbox('HOST名を入力','',host);
-             user := inputbox('ユーザ名を入力','',user);
-             pass := inputbox('paswordを入力','',pass);
-             database := inputbox('接続するデータベース名','',database);
-           MySQL55Connection1.HostName := Host;
-           MySQL55Connection1.UserName := User;
-           MySQL55Connection1.Password := Pass;
-           MySQL55Connection1.DatabaseName := database;
-           MySQL55Connection1.Open;
-           if MySQL55Connection1.Connected then begin
-            SQLQuery1.SQL.Text:= function_unit.editlist.Items[i].synedit1.Lines.Text;
-            SQLQuery1.Open;
-            function_unit.editlist.Items[i].PageControl1.PageIndex := 2;
-            function_unit.editlist.Items[i].TreeView1.Visible := false;
-            function_unit.editlist.Items[i].Panel1.Visible := true;
-           end;
-    end;
-    'MySQL5.6':begin
-        SQLConnection.Transaction := SQLTransaction1;
-        SQLTransaction1.DataBase := SQLConnection;
-        SQLQuery1.DataBase := SQLConnection;
-
-       SQLQuery1.Close;
-             host := inputbox('HOST名を入力','',host);
-             user := inputbox('ユーザ名を入力','',user);
-             pass := inputbox('paswordを入力','',pass);
-             database := inputbox('接続するデータベース名','',database);
-           SQLConnection.HostName := Host;
-           SQLConnection.UserName := User;
-           SQLConnection.Password := Pass;
-           SQLConnection.DatabaseName := database;
-           SQLConnection.Open;
-           if SQLConnection.Connected then begin
-            SQLQuery1.SQL.Text:= function_unit.editlist.Items[i].synedit1.Lines.Text;
-            SQLQuery1.Open;
-            function_unit.editlist.Items[i].PageControl1.PageIndex := 2;
-            function_unit.editlist.Items[i].TreeView1.Visible := false;
-            function_unit.editlist.Items[i].Panel1.Visible := true;
-           end;
-        end;
-    end;
   end;
 end;
 
@@ -814,11 +164,22 @@ begin
 end;
 
 function Tinterface_unit.openSQLBuilder(i:integer):boolean;
+var
+  i1:integer;
 begin
   form2.Showmodal;
-  function_unit.editlist.Items[i].SynEdit1.Lines.Text:=
-  function_unit.editlist.Items[i].SynEdit1.Lines.Text +
-  form2.Memo1.Lines.Text;
+  //function_unit.editlist.Items[i].SynEdit1.Lines.Text:=
+  //function_unit.editlist.Items[i].SynEdit1.Lines.Text +
+  //form2.Memo1.Lines.Text;
+  if not form2.cancel_sw then begin
+    form2.form3 := Tsqlprop.Create(owner);
+    form2.Set_Coomp(form2.sql_title,form2.sql_word[0],form2.sql_word[2],form2.form3.ScrollBox1);
+    form2.form3.ShowModal;
+    form2.form3.Free;
+     for i1 := 0 to 3 do begin
+       form2.sql_word[i1].Clear;
+     end;
+   end;
 end;
 
 function Tinterface_unit.memoload(i:integer;s:widestring):boolean;
@@ -887,6 +248,7 @@ begin
     function_unit.newwindow(i);
     function_unit.window_off(i);
     interface_unit.addnew_tab(true);
+    function_unit.editlist.Items[i].PageControl1.PageIndex:=0;
     function_unit.LoadHighLightColorPriSet(function_unit.HighlintColorIndex);
     if function_unit.editlist.Count -1 <> 0 then begin
       function_unit.editlist.Items[i].AllowDropFiles := true;
@@ -910,8 +272,9 @@ var
 
   function opfiles(i,i1:integer):boolean;
   var
-    s:string;
+    s,s1,s2:string;
     st,st2:Tstringlist;
+    i3:integer;
     function loadSorce:ThreadFunc;
     begin
       st:=TStringlist.Create;
@@ -931,6 +294,7 @@ var
       );
 
       s := extractfileext(DataModule1.OpenDialog1.Files[i1]);
+      s1 := extractfilename(DataModule1.OpenDialog1.Files[i1]);
       //showmessage(s);
       case s of
         '.txt':;
@@ -952,8 +316,22 @@ var
         '.ini':Main.Menu_INIClick(Main.Menu_INI);
         '.java':Main.Menu_JavaClick(Main.Menu_Java);
         '.sh':Main.MenuI_UnixShellClick(Main.MenuI_UnixShell);
+        '.db3':begin
+            s2 := '';
+            for i3 := 1 to length(s1) -4 do begin;
+                s2 := s2 + s1[i3];
+            end;
+            function_unit.Run(function_unit.set_SQLtoStringGrid(s2,'SELECT * FROM '+S2,function_unit.editlist.Items[i].StringGrid1));
+            function_unit.editlist.Items[i].SynEdit1.Lines.Text:= 'SELECT * FROM '+S2;
+            function_unit.editlist.Items[i].PageControl1.ActivePageIndex:=2;
+            function_unit.editlist.Items[i].Panel1.Visible:=TRUE;
+         end;
       end;
+    finally
 
+
+      if s <> '.db3' then begin
+      try
       interface_unit.memoload(i,function_unit.editlist.Items[i].filename_path);
 
       function_unit.Run(loadSorce);
@@ -972,6 +350,7 @@ var
           Memo1.Lines.Text:= edit.Text;
         end;
       end;
+
     except
       showmessage('ファイル 「' +
         function_unit.editlist.Items[i].filename_path +
@@ -979,7 +358,11 @@ var
       );
       open := false;
     end;
+    end;
   end;
+
+  end;
+
 begin
   if FileNames = '' then begin
     open := false;

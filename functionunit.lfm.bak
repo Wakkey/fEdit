@@ -1,9 +1,0 @@
-object function_unit: Tfunction_unit
-  Left = 430
-  Height = 238
-  Top = 255
-  Width = 318
-  Caption = 'function_unit'
-  OnCreate = FormCreate
-  LCLVersion = '1.6.0.4'
-end

@@ -1,11 +1,11 @@
 object color_form: Tcolor_form
-  Left = 180
-  Height = 356
-  Top = 235
+  Left = 528
+  Height = 568
+  Top = 260
   Width = 500
   BorderStyle = bsDialog
   Caption = '設定ダイアログ'
-  ClientHeight = 356
+  ClientHeight = 568
   ClientWidth = 500
   FormStyle = fsStayOnTop
   OnActivate = FormActivate

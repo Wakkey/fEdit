@@ -1,9 +1,0 @@
-object windows_unit: Twindows_unit
-  Left = 469
-  Height = 140
-  Top = 269
-  Width = 318
-  Caption = 'windows_unit'
-  OnCreate = FormCreate
-  LCLVersion = '1.6.0.4'
-end

@@ -1,11 +1,11 @@
 object Main: TMain
-  Left = 419
+  Left = 670
   Height = 223
-  Top = 222
+  Top = 422
   Width = 543
   AllowDropFiles = True
   Caption = 'Main'
-  ClientHeight = 202
+  ClientHeight = 203
   ClientWidth = 543
   Menu = MainMenu1
   OnCloseQuery = FormCloseQuery
@@ -16,23 +16,23 @@ object Main: TMain
   object Panel1: TPanel
     Left = 0
     Height = 30
-    Top = 172
+    Top = 173
     Width = 543
     Align = alBottom
     TabOrder = 0
   end
   object Panel2: TPanel
     Left = 0
-    Height = 172
+    Height = 173
     Top = 0
     Width = 543
     Align = alClient
-    ClientHeight = 172
+    ClientHeight = 173
     ClientWidth = 543
     TabOrder = 1
     object PageControl1: TPageControl
       Left = 1
-      Height = 137
+      Height = 138
       Top = 34
       Width = 541
       Align = alClient
