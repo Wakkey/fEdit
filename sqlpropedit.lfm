@@ -1,7 +1,7 @@
 object SQLProp: TSQLProp
   Left = 377
   Height = 436
-  Top = 392
+  Top = 332
   Width = 586
   Caption = 'SQL項目エディタ'
   ClientHeight = 436

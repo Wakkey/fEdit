@@ -13,6 +13,9 @@ type
   { Tcolor_form }
 
   Tcolor_form = class(TForm)
+    Bevel1: TBevel;
+    Bevel2: TBevel;
+    Bevel3: TBevel;
     BitBtn1: TBitBtn;
     BitBtn2: TBitBtn;
     BTN_SetMnu1: TButton;
@@ -21,10 +24,9 @@ type
     Button3: TButton;
     Button4: TButton;
     Button5: TButton;
-    BTN_SetMnu: TButton;
-    Button6: TButton;
     Button7: TButton;
     Button8: TButton;
+    Button9: TButton;
     CheckBox1: TCheckBox;
     CheckBox2: TCheckBox;
     CheckBox3: TCheckBox;
@@ -34,46 +36,28 @@ type
     ColorListBox3: TColorListBox;
     ColorListBox4: TColorListBox;
     ColorListBox5: TColorListBox;
-    ComboBox1: TComboBox;
     ComboBox2: TComboBox;
     ComboBox3: TComboBox;
-    ComboBox4: TComboBox;
     ComboBox5: TComboBox;
     ComboBox6: TComboBox;
     ComboBox7: TComboBox;
-    Edit1: TEdit;
-    Edit2: TEdit;
-    Edit_RootMnu: TEdit;
     Edit_SubMnu: TEdit;
     GroupBox1: TGroupBox;
     GroupBox2: TGroupBox;
     GroupBox3: TGroupBox;
-    GroupBox4: TGroupBox;
     GroupBox5: TGroupBox;
     GroupBox6: TGroupBox;
     Label1: TLabel;
     Label10: TLabel;
-    Label11: TLabel;
-    Label12: TLabel;
-    Label13: TLabel;
-    Label14: TLabel;
-    Label15: TLabel;
-    Label16: TLabel;
-    Label17: TLabel;
-    Label18: TLabel;
     Label19: TLabel;
     Label2: TLabel;
     Label20: TLabel;
     Label3: TLabel;
     Label4: TLabel;
     Label5: TLabel;
-    Label6: TLabel;
-    Label7: TLabel;
-    Label8: TLabel;
     Label9: TLabel;
     ListBox1: TListBox;
     ListBox2: TListBox;
-    List_RootMnu: TListBox;
     List_SubMnu: TListBox;
     MenuItem1: TMenuItem;
     PageControl1: TPageControl;
@@ -84,6 +68,7 @@ type
     TabSheet3: TTabSheet;
     TabSheet4: TTabSheet;
     TabSheet5: TTabSheet;
+    procedure Bevel1ChangeBounds(Sender: TObject);
     procedure BitBtn1Click(Sender: TObject);
     procedure BitBtn2Click(Sender: TObject);
     procedure Button1Click(Sender: TObject);
@@ -92,6 +77,7 @@ type
     procedure Button4Click(Sender: TObject);
     procedure Button5Click(Sender: TObject);
     procedure Button8Click(Sender: TObject);
+    procedure Button9Click(Sender: TObject);
     procedure CheckBox3Change(Sender: TObject);
     procedure CheckBox3Click(Sender: TObject);
     procedure CheckBox4Change(Sender: TObject);
@@ -146,6 +132,11 @@ uses
 procedure Tcolor_form.BitBtn1Click(Sender: TObject);
 begin
   close;
+end;
+
+procedure Tcolor_form.Bevel1ChangeBounds(Sender: TObject);
+begin
+
 end;
 
 procedure Tcolor_form.BitBtn2Click(Sender: TObject);
@@ -227,9 +218,42 @@ procedure Tcolor_form.Button8Click(Sender: TObject);
 var
   setfile,setfile2,setfile3:string;
 begin
-  setfile := inttostr(listbox1.ItemIndex)+'.ini';
-  setfile2 := inttostr(listbox1.ItemIndex)+'t.ini';
-  setfile3 := inttostr(listbox1.ItemIndex)+'tt.ini';
+  setfile := inttostr(ComboBox6.ItemIndex+1)+'.ini';
+  setfile2 := inttostr(ComboBox6.ItemIndex+1)+'t.ini';
+  setfile3 := inttostr(ComboBox6.ItemIndex+1)+'tt.ini';
+  if not checkbox3.Checked then begin
+    function_unit.toolbarbuttoncount.Insert(0,inttostr(listbox1.Count-1));
+    function_unit.toolbarbuttoncount.Insert(0,'toolbarbutton');
+    function_unit.toolbarbuttoncount.SaveToFile(
+         systoutf8(utf8tosys( ExtractFilePath( (Paramstr(0)) ) + setfile ))
+    );
+  end else begin
+    function_unit.toolbarbuttoncount2.Insert(0,inttostr(listbox1.Count-1));
+    function_unit.toolbarbuttoncount2.Insert(0,'toolbarbutton2');
+    function_unit.toolbarbuttoncount2.SaveToFile(
+         systoutf8(utf8tosys( ExtractFilePath( (Paramstr(0)) ) + setfile2 ))
+    );
+    function_unit.toolbarbuttoncount2.Insert(0,inttostr(TabControl1.Tabs.Count-1));
+    function_unit.toolbarbuttoncount2.Insert(0,'toolpage');
+    function_unit.toolbarbuttonparnt2.SaveToFile(
+         systoutf8(utf8tosys( ExtractFilePath( (Paramstr(0)) ) + setfile3 ))
+    );
+  end;
+
+end;
+
+procedure Tcolor_form.Button9Click(Sender: TObject);
+var
+setfile,setfile2,setfile3:string;
+begin
+  color_form.ComboBox6.Items.Add(
+    inttostr(color_form.ComboBox6.Items.Count)
+  );
+  color_form.ComboBox6.ItemIndex := color_form.ComboBox6.Items.Count -1;
+
+  setfile := inttostr(ComboBox6.ItemIndex+1)+'.ini';
+  setfile2 := inttostr(ComboBox6.ItemIndex+1)+'t.ini';
+  setfile3 := inttostr(ComboBox6.ItemIndex+1)+'tt.ini';
   if not checkbox3.Checked then begin
     function_unit.toolbarbuttoncount.SaveToFile(
          systoutf8(utf8tosys( ExtractFilePath( (Paramstr(0)) ) + setfile ))
@@ -242,7 +266,6 @@ begin
          systoutf8(utf8tosys( ExtractFilePath( (Paramstr(0)) ) + setfile3 ))
     );
   end;
-
 end;
 
 
@@ -425,7 +448,7 @@ begin
     'VK_F12'    : function_unit.listvkkey := 14;
   end;}
   //function_unit.vkkey := char(color_form.ComboBox1.Text);
-  color_form.Label6.Caption := color_form.ComboBox1.Text;
+  //color_form.Label6.Caption := color_form.ComboBox1.Text;
 end;
 
 procedure Tcolor_form.ComboBox3Change(Sender: TObject);
@@ -454,7 +477,7 @@ begin
     'VK_F12'    : function_unit.listvkkey2 := 14;
   end;}
   //function_unit.vkkey := char(color_form.ComboBox1.Text);
-  color_form.Label9.Caption := color_form.ComboBox4.Text;
+  //color_form.Label9.Caption := color_form.ComboBox4.Text;
 end;
 
 procedure Tcolor_form.ComboBox5Change(Sender: TObject);
@@ -549,7 +572,7 @@ end;
 procedure Tcolor_form.Edit1KeyUp(Sender: TObject; var Key: Word; Shift: TShiftState);
 begin
   //function_unit.popupkey:= key;
-  color_form.Label7.Caption:= inttostr(key);
+  //color_form.Label7.Caption:= inttostr(key);
 end;
 
 procedure Tcolor_form.Edit2KeyUp(Sender: TObject; var Key: Word; Shift: TShiftState);

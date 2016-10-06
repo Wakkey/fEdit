@@ -43,6 +43,7 @@ object HTMLProp: THTMLProp
       DefaultCaption = True
       Kind = bkClose
       ModalResult = 11
+      OnClick = BitBtn1Click
       TabOrder = 2
     end
     object Button3: TButton

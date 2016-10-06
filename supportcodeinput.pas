@@ -63,7 +63,7 @@ procedure Tcode_auto_support.FormShow(Sender: TObject);
 begin
   //function_unit.selstartset:= 0;
   try
-    listbox1.Items.Text := function_unit.editlist.Items[main.PageControl1.PageIndex].code_suport.Text;
+    //listbox1.Items.Text := function_unit.editlist.Items[main.PageControl1.PageIndex].code_suport.Text;
     //function_unit.findcode.Text:= function_unit.backupcodelist.Text;
     //function_unit.backupcodelist.Text:= listbox1.Items.Text;
   except
@@ -76,14 +76,31 @@ begin
 end;
 
 procedure Tcode_auto_support.ListBox1DblClick(Sender: TObject);
+var
+  M:TMemo;
+  t:string;
 begin
-  try
-    //function_unit.codelistkeypless3(char(13),function_unit.edit_carety,code_auto_support.ListBox1.Items[code_auto_support.ListBox1.ItemIndex]);
-  except
+  function_unit.editlist.Items[main.PageControl1.PageIndex].SynEdit1.selstart :=
+  function_unit.editlist.Items[main.PageControl1.PageIndex].SynEdit1.selstart -
+  length(function_unit.editlist.Items[main.PageControl1.PageIndex].code_temp);
 
-  end;
-  //MainForm.keycount:= '';
-  //function_unit.sw_mainform_window:= true;
+  function_unit.editlist.Items[main.PageControl1.PageIndex].SynEdit1.selend :=
+  function_unit.editlist.Items[main.PageControl1.PageIndex].SynEdit1.selstart +
+  length(function_unit.editlist.Items[main.PageControl1.PageIndex].code_temp);
+  m:=TMemo.Create(owner);
+  m.Parent:=main;
+  m.PasteFromClipboard;
+  t := m.Lines.Text;
+  m.Lines.Text:= listbox1.Items[listbox1.ItemIndex];
+  m.SelectAll;
+  m.CopyToClipboard;
+
+  function_unit.editlist.Items[main.PageControl1.PageIndex].SynEdit1.SelText:=m.Lines[0];
+  m.Lines.Text:= t;
+  m.SelectAll;
+  m.CopyToClipboard;
+  m.Free;
+  close;
 end;
 
 procedure Tcode_auto_support.ListBox1KeyDown(Sender: TObject; var Key: Word;
@@ -97,7 +114,7 @@ begin
       //windows.SetActiveWindow(MainForm.Handle);
   end;
 
-    if
+   { if
       (word(chr(37)) = key) or
       (word(chr(38)) = key) or
       (word(chr(39)) = key) or
@@ -111,7 +128,7 @@ begin
           if (word(chr(13))= key) then
             code_auto_support.Visible := false;
       end;
-    end else begin
+    end else} begin
      { if not function_unit.findcodeset(mainform.keycount) then
               exit
             else begin
@@ -174,8 +191,53 @@ end;
 
 procedure Tcode_auto_support.ListBox1KeyUp(Sender: TObject; var Key: Word;
   Shift: TShiftState);
+var
+  s,s1,s2:string;
+  i,i1,i2,i3:integer;
 begin
+  if key = word(13) then begin
+  {function_unit.editlist.Items[main.PageControl1.PageIndex].SynEdit1.selstart :=
+  function_unit.editlist.Items[main.PageControl1.PageIndex].SynEdit1.selstart -
+  length(function_unit.editlist.Items[main.PageControl1.PageIndex].code_temp);
 
+  function_unit.editlist.Items[main.PageControl1.PageIndex].SynEdit1.selend :=
+  function_unit.editlist.Items[main.PageControl1.PageIndex].SynEdit1.selstart +
+  length(function_unit.editlist.Items[main.PageControl1.PageIndex].code_temp);
+  }
+  s := function_unit.editlist.Items[main.PageControl1.PageIndex].SynEdit1.Lines[
+    function_unit.editlist.Items[main.PageControl1.PageIndex].editCaretY -1
+  ];
+
+  s1:='';s2:='';
+  i1 := function_unit.editlist.Items[main.PageControl1.PageIndex].editCaretX;
+  i2 := length(s);
+  i3 := length(function_unit.editlist.Items[main.PageControl1.PageIndex].code_temp);
+  for i := 1 to i1 - i3 -1 do begin
+    s1 := s1 + s[i];
+  end;
+  for i := i1 to i2 do begin
+    s2 := s2 + s[i];
+  end;
+
+  function_unit.editlist.Items[main.PageControl1.PageIndex].SynEdit1.Lines[
+    function_unit.editlist.Items[main.PageControl1.PageIndex].editCaretY -1
+  ] := s1 + listbox1.Items[listbox1.ItemIndex] + s2;
+
+  {m:=TMemo.Create(owner);
+  m.Parent:=main;
+  m.PasteFromClipboard;
+  t := m.Lines.Text;
+  m.Lines.Text:= listbox1.Items[listbox1.ItemIndex];
+  m.SelectAll;
+  m.CopyToClipboard;
+
+  function_unit.editlist.Items[main.PageControl1.PageIndex].SynEdit1.SelText:=m.Lines[0];
+  m.Lines.Text:= t;
+  m.SelectAll;
+  m.CopyToClipboard;
+  m.Free;}
+  close;
+  end;
 end;
 
 procedure Tcode_auto_support.ListBox1SelectionChange(Sender: TObject; User: boolean);
@@ -192,7 +254,7 @@ end;
 procedure Tcode_auto_support.FormClose(Sender: TObject; var CloseAction: TCloseAction);
 begin
   try
-      code_auto_support.listbox1.Items.LoadFromFile(ExtractFilePath(Paramstr(0)) + 'codelist.txt');
+      //code_auto_support.listbox1.Items.LoadFromFile(ExtractFilePath(Paramstr(0)) + 'codelist.txt');
   except
 
   end;

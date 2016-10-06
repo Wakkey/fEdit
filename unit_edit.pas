@@ -141,6 +141,7 @@ type
     temp_codeset:TStringList;
     editCaretY,editCaretX:integer;
     host,user,pass,database:string;
+    code_temp:string;
   end;
 
 var
@@ -252,9 +253,10 @@ var
   c:char;
 begin
   c := char(key);
-  windows_unit.popupwin(c,synedit1);
+
   editCaretY := synEdit1.BlockBegin.y;
   editCaretX := synEdit1.BlockBegin.x;
+  windows_unit.popupwin(c,synedit1);
 end;
 
 procedure TEditform.SynEdit1KeyPress(Sender: TObject; var Key: char);

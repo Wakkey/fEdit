@@ -772,7 +772,7 @@ end;
 constructor TSQLiteTable.Create(const DB: TSQLiteDatabase; const SQL: String; PrepareOnly: Boolean = false);
 var
   NextSQLStatement: PAnsiChar;
-  i: integer;
+  i,anser: integer;
 begin
   inherited create;
   self.fDB := db;
@@ -780,7 +780,9 @@ begin
   self.fRow := 0;
   self.fColCount := 0;
   self.fSQL := SQL;
-  if Sqlite3_Prepare_v2(DB.fDB, PAnsiChar(UTF8String(SQL)), -1, fStmt, NextSQLStatement) <> SQLITE_OK then
+  NextSQLStatement := nil;
+  anser := Sqlite3_Prepare_v2(DB.fDB, PAnsiChar(UTF8String(SQL)), -1, fStmt, NextSQLStatement);
+  if anser <> SQLITE_OK then
     DB.RaiseError(c_errorsql, SQL);
   if (fStmt = nil) then
     DB.RaiseError(c_errorprepare, SQL);

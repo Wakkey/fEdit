@@ -19,6 +19,7 @@ type
     Button3: TButton;
     Panel1: TPanel;
     ScrollBox1: TScrollBox;
+    procedure BitBtn1Click(Sender: TObject);
     procedure Button1Click(Sender: TObject);
     procedure Button2Click(Sender: TObject);
     procedure Button3Click(Sender: TObject);
@@ -47,6 +48,11 @@ uses functionunit, interfaceunit;
 procedure THTMLProp.Button1Click(Sender: TObject);
 begin
   HtmlPropthy.Text := function_unit.RepraceHTMLPropathy(SetHtmlCodeParts,function_unit.Edit_arry);
+end;
+
+procedure THTMLProp.BitBtn1Click(Sender: TObject);
+begin
+
 end;
 
 procedure THTMLProp.Button2Click(Sender: TObject);
