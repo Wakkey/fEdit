@@ -1,0 +1,1144 @@
+unit colordlg;
+
+{$mode objfpc}{$H+}
+
+interface
+
+uses
+  Classes, SysUtils, FileUtil, Forms, Controls, Graphics, Dialogs, StdCtrls,
+  ColorBox, Buttons, ExtCtrls, ComCtrls, Menus, types;
+
+type
+
+  { Tcolor_form }
+
+  Tcolor_form = class(TForm)
+    Bevel1: TBevel;
+    Bevel2: TBevel;
+    BitBtn1: TBitBtn;
+    BitBtn2: TBitBtn;
+    BTN_SetMnu2: TButton;
+    Button1: TButton;
+    Button10: TButton;
+    Button11: TButton;
+    Button14: TButton;
+    Button2: TButton;
+    Button3: TButton;
+    Button4: TButton;
+    Button5: TButton;
+    Button7: TButton;
+    Button8: TButton;
+    Button9: TButton;
+    CheckBox1: TCheckBox;
+    CheckBox2: TCheckBox;
+    CheckBox3: TCheckBox;
+    CheckBox4: TCheckBox;
+    CheckCTRL: TCheckBox;
+    CheckSheft: TCheckBox;
+    ColorListBox1: TColorListBox;
+    ColorListBox2: TColorListBox;
+    ColorListBox3: TColorListBox;
+    ColorListBox4: TColorListBox;
+    ColorListBox5: TColorListBox;
+    ComboBox2: TComboBox;
+    ComboBox3: TComboBox;
+    ComboBox5: TComboBox;
+    ComboBox6: TComboBox;
+    ComboBox7: TComboBox;
+    Edit_SubMnu: TEdit;
+    Edit_SubMnu1: TEdit;
+    Edit_SubMnu2: TEdit;
+    GroupBox1: TGroupBox;
+    GroupBox2: TGroupBox;
+    GroupBox3: TGroupBox;
+    GroupBox5: TGroupBox;
+    GroupBox6: TGroupBox;
+    Label1: TLabel;
+    Label10: TLabel;
+    Label19: TLabel;
+    Label2: TLabel;
+    Label20: TLabel;
+    Label21: TLabel;
+    Label22: TLabel;
+    Label3: TLabel;
+    Label4: TLabel;
+    Label5: TLabel;
+    Label9: TLabel;
+    ListBox1: TListBox;
+    ListBox2: TListBox;
+    List_SubMnu: TListBox;
+    List_SubMnu1: TListBox;
+    List_SubMnu2: TListBox;
+    MenuItem1: TMenuItem;
+    PageControl1: TPageControl;
+    PopupMenu1: TPopupMenu;
+    TabControl1: TTabControl;
+    TabSheet1: TTabSheet;
+    TabSheet2: TTabSheet;
+    TabSheet3: TTabSheet;
+    TabSheet4: TTabSheet;
+    TabSheet5: TTabSheet;
+    procedure Bevel1ChangeBounds(Sender: TObject);
+    procedure BitBtn1Click(Sender: TObject);
+    procedure BitBtn2Click(Sender: TObject);
+    procedure BTN_SetMnu1Click(Sender: TObject);
+    procedure BTN_SetMnu2Click(Sender: TObject);
+    procedure Button10Click(Sender: TObject);
+    procedure Button11Click(Sender: TObject);
+    procedure Button14Click(Sender: TObject);
+    procedure Button1Click(Sender: TObject);
+    procedure Button2Click(Sender: TObject);
+    procedure Button3Click(Sender: TObject);
+    procedure Button4Click(Sender: TObject);
+    procedure Button5Click(Sender: TObject);
+    procedure Button6Click(Sender: TObject);
+    procedure Button7Click(Sender: TObject);
+    procedure Button8Click(Sender: TObject);
+    procedure Button9Click(Sender: TObject);
+    procedure CheckBox3Change(Sender: TObject);
+    procedure CheckBox3Click(Sender: TObject);
+    procedure CheckBox4Change(Sender: TObject);
+    procedure CheckBox4Click(Sender: TObject);
+    procedure ColorListBox1Click(Sender: TObject);
+    procedure ColorListBox2Click(Sender: TObject);
+    procedure ColorListBox3Click(Sender: TObject);
+    procedure ColorListBox4Click(Sender: TObject);
+    procedure ColorListBox5Click(Sender: TObject);
+    procedure ComboBox1Change(Sender: TObject);
+    procedure ComboBox3Change(Sender: TObject);
+    procedure ComboBox4Change(Sender: TObject);
+    procedure ComboBox5Change(Sender: TObject);
+    procedure ComboBox6Change(Sender: TObject);
+    procedure ComboBox6DropDown(Sender: TObject);
+    procedure ComboBox7Change(Sender: TObject);
+    procedure ComboBox7DropDown(Sender: TObject);
+    procedure Edit1Change(Sender: TObject);
+    procedure Edit1KeyPress(Sender: TObject; var Key: char);
+    procedure Edit1KeyUp(Sender: TObject; var Key: Word; Shift: TShiftState);
+    procedure Edit2KeyUp(Sender: TObject; var Key: Word; Shift: TShiftState);
+    procedure Edit_SubMnu2KeyDown(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
+    procedure Edit_SubMnu2KeyPress(Sender: TObject; var Key: char);
+    procedure Edit_SubMnu2KeyUp(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
+    procedure FormActivate(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    procedure FormShow(Sender: TObject);
+    procedure GroupBox4Click(Sender: TObject);
+    procedure List_SubMnu1Click(Sender: TObject);
+    procedure List_SubMnu2Click(Sender: TObject);
+    procedure List_SubMnuClick(Sender: TObject);
+    procedure MenuItem1Click(Sender: TObject);
+    procedure PageControl1Change(Sender: TObject);
+    procedure TabControl1Change(Sender: TObject);
+    procedure TabControl1Changing(Sender: TObject; var AllowChange: Boolean);
+    procedure TabControl1MouseDown(Sender: TObject; Button: TMouseButton;
+      Shift: TShiftState; X, Y: Integer);
+    procedure TabSheet1ContextPopup(Sender: TObject; MousePos: TPoint;
+      var Handled: Boolean);
+  private
+    { private declarations }
+    shortcut_key:word;
+
+  public
+    { public declarations }
+  end;
+
+var
+  color_form: Tcolor_form;
+
+implementation
+
+uses
+  function_unit, main, tool_window;
+{$R *.lfm}
+
+{ Tcolor_form }
+
+procedure Tcolor_form.BitBtn1Click(Sender: TObject);
+begin
+  close;
+end;
+
+procedure Tcolor_form.Bevel1ChangeBounds(Sender: TObject);
+begin
+
+end;
+
+procedure Tcolor_form.BitBtn2Click(Sender: TObject);
+begin
+  close;
+end;
+
+procedure Tcolor_form.BTN_SetMnu1Click(Sender: TObject);
+begin
+
+end;
+
+procedure Tcolor_form.BTN_SetMnu2Click(Sender: TObject);
+var
+  st,st1,st2:TStringList;
+begin
+  st:=TStringList.Create;
+  st1:=TStringList.Create;
+  st2:=TStringList.Create;
+  st.Clear;
+  st1.Clear;
+  st2.Clear;
+  functionunit.mnu_custum(st,st1,st2);
+  try
+    st.SaveToFile(extractfilepath(paramstr(0))+'mnu_title.txt');
+    st1.SaveToFile(extractfilepath(paramstr(0))+'mnu_caption.txt');
+    st2.SaveToFile(extractfilepath(paramstr(0))+'mnu_shortcut.txt');
+  except
+  end;
+  try
+    st.LoadFromFile(extractfilepath(paramstr(0))+'mnu_shortcut.txt');
+    color_form.List_SubMnu2.Items.Text:= st.Text;
+    st.LoadFromFile(extractfilepath(paramstr(0))+'mnu_title.txt');
+    color_form.List_SubMnu1.Items.Text:= st.Text;
+    st.LoadFromFile(extractfilepath(paramstr(0))+'mnu_caption.txt');
+    color_form.List_SubMnu.Items.Text:= st.Text;
+  except
+  end;
+  st.Free;
+  st2.free;
+end;
+
+procedure Tcolor_form.Button10Click(Sender: TObject);
+var
+  st:TstringList;
+begin
+  st := TStringList.Create;
+  st.Clear;
+  with color_form.List_SubMnu1 do begin
+    items[ItemIndex] := Edit_SubMnu1.Text;
+    st.Text := items.Text;
+    st.SaveToFile(extractfilepath(paramstr(0))+'mnu_title.txt');
+  end;
+end;
+
+procedure Tcolor_form.Button11Click(Sender: TObject);
+var
+  st,st1,st2:TStringList;
+begin
+  st:=TStringList.Create;
+  st1:=TStringList.Create;
+  st2:=TStringList.Create;
+  try
+  {$IFDEF win}
+  st.LoadFromFile(extractfilepath(paramstr(0))+'ini\mnu_title.txt');
+  st1.LoadFromFile(extractfilepath(paramstr(0))+'ini\mnu_caption.txt');
+  st2.LoadFromFile(extractfilepath(paramstr(0))+'ini\mnu_shortcut.txt');
+  {$ENDIF}
+  {$IFDEF Linux}
+  st.LoadFromFile(extractfilepath(paramstr(0))+'ini\mnu_title.txt');
+  st1.LoadFromFile(extractfilepath(paramstr(0))+'ini\mnu_caption.txt');
+  st2.LoadFromFile(extractfilepath(paramstr(0))+'ini\mnu_shortcut.txt');
+  {$ENDIF}
+  {$IFDEF Darwin}
+  st.LoadFromFile(extractfilepath(paramstr(0))+'ini/mnu_title.txt');
+  st1.LoadFromFile(extractfilepath(paramstr(0))+'ini/mnu_caption.txt');
+  st2.LoadFromFile(extractfilepath(paramstr(0))+'ini/mnu_shortcut.txt');
+  {$ENDIF}
+
+  finally
+  functionunit.mnu_custum_set(st,st1,st2);
+  end;
+  st.Free;
+  st2.free;
+end;
+
+procedure Tcolor_form.Button14Click(Sender: TObject);
+var
+  st:TstringList;
+begin
+  with color_form.List_SubMnu2 do begin
+    if ItemIndex = -1 then
+      exit;
+    st := TStringList.Create;
+    st.Clear;
+    items[ItemIndex] := Edit_SubMnu2.Text;
+    st.Text := items.Text;
+    st.SaveToFile(extractfilepath(paramstr(0))+'mnu_shortcut.txt');
+    st.Free;
+  end;
+end;
+
+procedure Tcolor_form.Button1Click(Sender: TObject);
+begin
+  color_form.TabControl1.Tabs[color_form.TabControl1.TabIndex] := color_form.ComboBox5.Text;
+end;
+
+procedure Tcolor_form.Button2Click(Sender: TObject);
+begin
+  if color_form.ComboBox5.Text = '' then
+    color_form.TabControl1.Tabs.Add('Menu' + inttostr(color_form.TabControl1.Tabs.Count-1))
+  else
+    color_form.TabControl1.Tabs.Add(color_form.ComboBox5.Text);
+  functionunit.pagenew(color_form.TabControl1.Tabs.Count-1,color_form.ComboBox5.Text);
+  functionunit.pageout;
+end;
+
+procedure Tcolor_form.Button3Click(Sender: TObject);
+begin
+
+ functionunit.pagedelete(color_form.ComboBox5.ItemIndex);
+ color_form.TabControl1.Tabs.Delete(color_form.ComboBox5.ItemIndex);
+ color_form.ComboBox5.Text:= '';
+end;
+
+procedure Tcolor_form.Button4Click(Sender: TObject);
+begin
+  if listbox2.ItemIndex = -1 then
+    showmessage('追加するボタンを選択してください');
+  if '-' = listbox2.Items[listbox2.ItemIndex] then
+    exit;
+  if -1 = listbox1.Items.IndexOf(listbox2.Items[listbox2.ItemIndex]) then begin
+    if not color_form.CheckBox3.Checked then begin
+      try
+        functionunit.toolbarbuttoncount.Add(inttostr(ListBox2.ItemIndex));
+        functionunit.toolbuttonset(functionunit.toolbarbuttoncount.Count, ListBox2.ItemIndex);
+      except
+
+      end;
+    end else begin
+      try
+        functionunit.toolbarbuttoncount2.Add(inttostr(ListBox2.ItemIndex));
+        functionunit.toolbuttonset2(functionunit.toolbarbuttoncount2.Count ,
+                                     ListBox2.ItemIndex,color_form.TabControl1.TabIndex
+                                     );
+      except
+
+      end;
+    end;
+    color_form.ActiveControl := listbox1;
+    if listbox1.Items.Count <> 0 then
+      listbox1.ItemIndex:= listbox1.Items.Count -1;
+  end;
+end;
+
+procedure Tcolor_form.Button5Click(Sender: TObject);
+var
+  i:integer;
+begin
+  if listbox1.ItemIndex = -1 then
+    exit;
+  i := listbox1.ItemIndex;
+  if not color_form.CheckBox3.Checked then begin
+    functionunit.deletebutton;
+  end else begin
+    functionunit.deletebutton2;
+  end;
+  color_form.ActiveControl := listbox1;
+  if listbox1.Items.Count <> 0 then
+    listbox1.ItemIndex:= i-1;
+end;
+
+procedure Tcolor_form.Button6Click(Sender: TObject);
+begin
+
+end;
+
+procedure Tcolor_form.Button7Click(Sender: TObject);
+var
+  st:TstringList;
+begin
+  st := TStringList.Create;
+  st.Clear;
+  with color_form.List_SubMnu do begin
+    items[ItemIndex] := Edit_SubMnu.Text;
+    st.Text := items.Text;
+    st.SaveToFile(extractfilepath(paramstr(0))+'mnu_caption.txt');
+  end;
+end;
+
+procedure Tcolor_form.Button8Click(Sender: TObject);
+var
+  setfile,setfile2,setfile3:string;
+  aList:TStringList;
+  i1,i2,i3:integer;
+begin
+  aList := TstringList.Create;
+  alist.Clear;
+  setfile := inttostr(ComboBox6.ItemIndex+1)+'.ini';
+  setfile2 := inttostr(ComboBox6.ItemIndex+1)+'t.ini';
+  setfile3 := inttostr(ComboBox6.ItemIndex+1)+'tt.ini';
+  if not checkbox3.Checked then begin
+    functionunit.toolbarbuttoncount.Insert(0,inttostr(listbox1.Count-1));
+    functionunit.toolbarbuttoncount.Insert(0,'toolbarbutton');
+    functionunit.toolbarbuttoncount.SaveToFile(
+         systoutf8(utf8tosys( ExtractFilePath( (Paramstr(0)) ) + setfile ))
+    );
+  end else begin
+    {functionunit.toolbarbuttoncount2.Insert(0,inttostr(listbox1.Count-1));
+    functionunit.toolbarbuttoncount2.Insert(0,'toolbarbutton2');
+    functionunit.toolbarbuttoncount2.SaveToFile(
+         systoutf8(utf8tosys( ExtractFilePath( (Paramstr(0)) ) + setfile2 ))
+    );
+    functionunit.toolbarbuttoncount2.Insert(0,inttostr(TabControl1.Tabs.Count-1));
+    functionunit.toolbarbuttoncount2.Insert(0,'toolpage');
+    functionunit.toolbarbuttonparnt2.SaveToFile(
+         systoutf8(utf8tosys( ExtractFilePath( (Paramstr(0)) ) + setfile3 ))
+    );
+    }
+    //alist.Add(inttostr(functionunit.toolbarbuttoncount2.Count));
+    alist.Add('toolbarbutton2');
+    alist.Add(inttostr(functionunit.toolbarbuttoncount2.Count));
+    //showmessage(functionunit.toolbarbuttoncount2.Text);
+    //showmessage(functionunit.toolbarbuttonparnt2.Text);
+    i2 := functionunit.toolbarbuttoncount2.Count;
+    i3 := functionunit.toolbarbuttonparnt2.Count;
+    if functionunit.toolbarbuttoncount2.Count >= 0 then begin
+      for i1 := 0 to functionunit.toolbarbuttoncount2.Count -1 do begin
+        alist.Add(functionunit.toolbarbuttoncount2[i1]);
+        //設定読み込みからの起動後、終了前、toolbarbuttonparnt2の値が空白になる
+        alist.Add(functionunit.toolbarbuttonparnt2[i1]);
+      end;
+    end;
+    alist.SaveToFile(
+         systoutf8(utf8tosys( ExtractFilePath( (Paramstr(0)) ) + setfile2 ))
+    );
+    alist.Clear;
+    alist.Add('toolpage');
+    alist.Add(inttostr(toolwindow.PageControl1.PageCount));
+    for i1 := 0 to toolwindow.PageControl1.PageCount -1 do begin
+      alist.Add(toolwindow.PageControl1.Pages[i1].Caption);
+    end;
+    alist.SaveToFile(
+         systoutf8(utf8tosys( ExtractFilePath( (Paramstr(0)) ) + setfile3 ))
+    );
+  end;
+
+end;
+
+procedure Tcolor_form.Button9Click(Sender: TObject);
+var
+setfile,setfile2,setfile3:string;
+begin
+  color_form.ComboBox6.Items.Add(
+    inttostr(color_form.ComboBox6.Items.Count)
+  );
+  color_form.ComboBox6.ItemIndex := color_form.ComboBox6.Items.Count -1;
+  {$IFDEF Win}
+  setfile := 'ini\'+ inttostr(ComboBox6.ItemIndex+1)+'.ini';
+  setfile2 := 'ini\'+ inttostr(ComboBox6.ItemIndex+1)+'t.ini';
+  setfile3 := 'ini\'+ inttostr(ComboBox6.ItemIndex+1)+'tt.ini';
+  {$ENDIF}
+  {$IFDEF Linux}
+  setfile := 'ini/'+ inttostr(ComboBox6.ItemIndex+1)+'.ini';
+  setfile2 := 'ini/'+ inttostr(ComboBox6.ItemIndex+1)+'t.ini';
+  setfile3 := 'ini/'+ inttostr(ComboBox6.ItemIndex+1)+'tt.ini';
+  {$ENDIF}
+  {$IFDEF Darwin}
+  setfile := 'ini/'+ inttostr(ComboBox6.ItemIndex+1)+'.ini';
+  setfile2 := 'ini/'+ inttostr(ComboBox6.ItemIndex+1)+'t.ini';
+  setfile3 := 'ini/'+ inttostr(ComboBox6.ItemIndex+1)+'tt.ini';
+  {$ENDIF}
+  if not checkbox3.Checked then begin
+    functionunit.toolbarbuttoncount.SaveToFile(
+         systoutf8(utf8tosys( ExtractFilePath( (Paramstr(0)) ) + setfile ))
+    );
+  end else begin
+    functionunit.toolbarbuttoncount2.SaveToFile(
+         systoutf8(utf8tosys( ExtractFilePath( (Paramstr(0)) ) + setfile2 ))
+    );
+    functionunit.toolbarbuttonparnt2.SaveToFile(
+         systoutf8(utf8tosys( ExtractFilePath( (Paramstr(0)) ) + setfile3 ))
+    );
+  end;
+end;
+
+
+
+procedure Tcolor_form.CheckBox3Change(Sender: TObject);
+begin
+
+  if mainform.Menu_MultWindow.Checked then begin
+    if not color_form.CheckBox3.Checked then begin
+      combobox6.ItemIndex:= 0;
+      //mainform.winmodeheight:= mainform.toolbar2.Height + mainform.PageControl1.Height;
+      //mainform.Height := mainform.winmodeheight;
+      toolwindow.PageControl1.Visible := not true;
+      mainform.Menu_ToolBarTAB.Checked := not true;
+      color_form.PageControl1.Visible:= true;
+    end else begin
+      combobox6.ItemIndex:= 0;
+      //mainform.winmodeheight:= mainform.toolbar2.Height + mainform.PageControl1.Height + 30;
+      //mainform.Height := mainform.winmodeheight;
+      toolwindow.PageControl1.Visible := true;
+      mainform.Menu_ToolBarTAB.Checked := true;
+      color_form.PageControl1.Visible:= not true;
+    end;
+  end;
+  functionunit.tabseting1;
+  functionunit.tabseting2;
+  functionunit.pageout;
+  functionunit.resizedocwindow(mainform.PageControl1.ActivePageIndex);
+end;
+
+procedure Tcolor_form.CheckBox3Click(Sender: TObject);
+begin
+
+
+end;
+
+procedure Tcolor_form.CheckBox4Change(Sender: TObject);
+begin
+
+end;
+
+procedure Tcolor_form.CheckBox4Click(Sender: TObject);
+begin
+  if checkbox4.Checked then begin
+    toolwindow.ToolBar2.Visible:= false;
+    toolwindow.PageControl1.Visible:= false;
+    mainform.toolpanel.Visible:=false;
+  end else begin
+    mainform.toolpanel.Visible:= not false;
+    if checkbox3.Checked then begin
+      toolwindow.ToolBar2.Visible:= false;
+      toolwindow.PageControl1.Visible:= true;
+    end else begin
+      toolwindow.ToolBar2.Visible:= true;
+      toolwindow.PageControl1.Visible:= false;
+    end;
+  end;
+  mainform.Height := mainform.Height -1;
+  mainform.Height := mainform.Height +1;
+end;
+
+procedure Tcolor_form.ColorListBox1Click(Sender: TObject);
+var
+  i,i1:integer;
+  c,c1:integer;
+begin
+  i := color_form.ColorListBox1.ItemIndex;
+  c := color_form.ColorListBox1.Colors[i];
+  i1 := color_form.ColorListBox2.ItemIndex;
+  c1 := color_form.ColorListBox2.Colors[i1];
+
+  //functionunit.editcolor(c1,c);
+
+  //functionunit.editbcolor(c1,c);
+  {
+  i2 := color_form.ColorListBox3.ItemIndex;
+  c2 := color_form.ColorListBox3.Colors[i];
+  i3 := color_form.ColorListBox4.ItemIndex;
+  c3 := color_form.ColorListBox4.Colors[i];
+  i4 := color_form.ColorListBox5.ItemIndex;
+  c4 := color_form.ColorListBox5.Colors[i];
+
+  functionunit.highlitercolorset(c2,c3,c3);
+  }
+
+end;
+
+procedure Tcolor_form.ColorListBox2Click(Sender: TObject);
+var
+  i,i1:integer;
+  c,c1:integer;
+begin
+  if sender = color_form.ColorListBox1 then begin
+    i := color_form.ColorListBox1.ItemIndex;
+    c := color_form.ColorListBox1.Colors[i];
+    c1 := -1;
+  end;
+  if sender = color_form.ColorListBox2 then begin
+    i1 := color_form.ColorListBox2.ItemIndex;
+    c1 := color_form.ColorListBox2.Colors[i1];
+    c := -1;
+  end;
+
+  //functionunit.editfcolor(c1,c);
+
+  //functionunit.editcolor(c1,c);
+  {
+  i2 := color_form.ColorListBox3.ItemIndex;
+  c2 := color_form.ColorListBox3.Colors[i];
+  i3 := color_form.ColorListBox4.ItemIndex;
+  c3 := color_form.ColorListBox4.Colors[i];
+  i4 := color_form.ColorListBox5.ItemIndex;
+  c4 := color_form.ColorListBox5.Colors[i];
+
+  functionunit.highlitercolorset(c2,c3,c3);
+  }
+
+end;
+
+procedure Tcolor_form.ColorListBox3Click(Sender: TObject);
+var
+  i,i1,i2,i3,i4:integer;
+  c,c1,c2,c3,c4:integer;
+begin
+  i := color_form.ColorListBox1.ItemIndex;
+  c := color_form.ColorListBox1.Colors[i];
+  i1 := color_form.ColorListBox2.ItemIndex;
+  c1 := color_form.ColorListBox2.Colors[i];
+
+  functionunit.editcolor(c,c1);
+
+  if sender = color_form.ColorListBox3 then begin
+    i2 := color_form.ColorListBox3.ItemIndex;
+    c2 := color_form.ColorListBox3.Colors[i2];
+    c3 := -1;
+    c4 := -1;
+  end;
+  if sender = color_form.ColorListBox4 then begin
+    i3 := color_form.ColorListBox4.ItemIndex;
+    c3 := color_form.ColorListBox4.Colors[i3];
+    c2 := -1;
+    c4 := -1;
+  end;
+  if sender = color_form.ColorListBox5 then begin
+    i4 := color_form.ColorListBox5.ItemIndex;
+    c4 := color_form.ColorListBox5.Colors[i4];
+    c2 := -1;
+    c3 := -1;
+  end;
+
+  functionunit.highlitercolorset(c2,c3,c4,color_form.ComboBox2.Text);
+
+end;
+
+procedure Tcolor_form.ColorListBox4Click(Sender: TObject);
+begin
+  color_form.ColorListBox3Click(Sender);
+end;
+
+procedure Tcolor_form.ColorListBox5Click(Sender: TObject);
+begin
+  color_form.ColorListBox3Click(Sender);
+end;
+
+procedure Tcolor_form.ComboBox1Change(Sender: TObject);
+begin
+  {case color_form.ComboBox1.Text of
+    'VK_LCONTROL' : functionunit.listvkkey := 0;
+    'VK_RCONTROL' : functionunit.listvkkey := 1;
+    'VK_CONTROL'  : functionunit.listvkkey := 2;
+    'VK_F1'    : functionunit.listvkkey := 3;
+    'VK_F2'    : functionunit.listvkkey := 4;
+    'VK_F3'    : functionunit.listvkkey := 5;
+    'VK_F4'    : functionunit.listvkkey := 6;
+    'VK_F5'    : functionunit.listvkkey := 7;
+    'VK_F6'    : functionunit.listvkkey := 8;
+    'VK_F7'    : functionunit.listvkkey := 9;
+    'VK_F8'    : functionunit.listvkkey := 10;
+    'VK_F9'    : functionunit.listvkkey := 11;
+    'VK_F10'    : functionunit.listvkkey := 12;
+    'VK_F11'    : functionunit.listvkkey := 13;
+    'VK_F12'    : functionunit.listvkkey := 14;
+  end;}
+  //functionunit.vkkey := char(color_form.ComboBox1.Text);
+  //color_form.Label6.Caption := color_form.ComboBox1.Text;
+end;
+
+procedure Tcolor_form.ComboBox3Change(Sender: TObject);
+begin
+  color_form.ComboBox2.Clear;
+  color_form.FormShow(sender);
+end;
+
+procedure Tcolor_form.ComboBox4Change(Sender: TObject);
+begin
+  {case color_form.ComboBox4.Text of
+    'VK_LCONTROL' : functionunit.listvkkey2 := 0;
+    'VK_RCONTROL' : functionunit.listvkkey2 := 1;
+    'VK_CONTROL'  : functionunit.listvkkey2 := 2;
+    'VK_F1'    : functionunit.listvkkey2 := 3;
+    'VK_F2'    : functionunit.listvkkey2 := 4;
+    'VK_F3'    : functionunit.listvkkey2 := 5;
+    'VK_F4'    : functionunit.listvkkey2 := 6;
+    'VK_F5'    : functionunit.listvkkey2 := 7;
+    'VK_F6'    : functionunit.listvkkey2 := 8;
+    'VK_F7'    : functionunit.listvkkey2 := 9;
+    'VK_F8'    : functionunit.listvkkey2 := 10;
+    'VK_F9'    : functionunit.listvkkey2 := 11;
+    'VK_F10'    : functionunit.listvkkey2 := 12;
+    'VK_F11'    : functionunit.listvkkey2 := 13;
+    'VK_F12'    : functionunit.listvkkey2 := 14;
+  end;}
+  //functionunit.vkkey := char(color_form.ComboBox1.Text);
+  //color_form.Label9.Caption := color_form.ComboBox4.Text;
+end;
+
+procedure Tcolor_form.ComboBox5Change(Sender: TObject);
+begin
+
+end;
+
+procedure Tcolor_form.ComboBox6Change(Sender: TObject);
+var
+  i:integer;
+  function resetbutton:boolean;
+  var count:integer;
+  begin
+    listbox1.ItemIndex:= listbox1.Items.Count -1;
+    for count := 0 to listbox1.Items.Count -1 do begin
+      Button5Click(Sender);
+    end;
+  end;
+begin
+  if combobox6.ItemIndex > combobox6.Items.count-1 then begin
+    combobox6.ItemIndex:= combobox6.Items.Count-1;
+  end;
+  if not checkbox3.Checked then begin
+    resetbutton;
+    functionunit.toolbarbuttoncount.Clear;
+    functionunit.SelectToolBarPreSet(ComboBox6.ItemIndex + 1);
+  end else begin
+    resetbutton;
+    for i := 0 to color_form.TabControl1.Tabs.Count *2 do begin
+      try
+        color_form.TabControl1.TabIndex := i;
+        functionunit.pagedelete(i);
+        color_form.TabControl1.Tabs.Delete(color_form.TabControl1.TabIndex);
+      except
+      end;
+    end;
+    functionunit.toolbarbuttoncount2.Clear;
+    functionunit.toolbarcount.Clear;
+    functionunit.toolbarbuttonparnt.Clear;
+    try
+      functionunit.SelectToolBarPreSet2(ComboBox6.ItemIndex + 1);
+    except
+    end;
+    //showmessage(functionunit.toolbarbuttonparnt2.Text);
+    //functionunit.toolbarbuttonparnt2 := functionunit.toolbarbuttonparnt;
+  end;
+end;
+
+procedure Tcolor_form.ComboBox6DropDown(Sender: TObject);
+var
+  i,i1:integer;
+begin
+  if not color_form.CheckBox3.Checked then begin
+    i1 := functionunit.SelectToolBarPreSet(0);
+      color_form.ComboBox6.Items.Clear;
+    for i := 1 to i1 do begin
+      color_form.ComboBox6.Items.Add('プリセット設定' + inttostr(i));
+    end;
+  end else begin
+     i1 := functionunit.SelectToolBarPreSet2(0);
+      color_form.ComboBox6.Items.Clear;
+    for i := 1 to i1 do begin
+      color_form.ComboBox6.Items.Add('プリセット設定' + inttostr(i));
+    end;
+  end;
+end;
+
+procedure Tcolor_form.ComboBox7Change(Sender: TObject);
+begin
+    functionunit.LoadHighLightColorPriSet(ComboBox7.ItemIndex + 1);
+    functionunit.LoadColorPriset := ComboBox7.ItemIndex + 1;
+end;
+
+procedure Tcolor_form.ComboBox7DropDown(Sender: TObject);
+var
+  i,i1:integer;
+begin
+  i1 := functionunit.LoadHighLightColorPriSet(0);
+    color_form.ComboBox7.Items.Clear;
+  for i := 1 to i1 do begin
+    color_form.ComboBox7.Items.Add('プリセット設定' + inttostr(i));
+  end;
+end;
+
+procedure Tcolor_form.Edit1Change(Sender: TObject);
+begin
+
+end;
+
+procedure Tcolor_form.Edit1KeyPress(Sender: TObject; var Key: char);
+begin
+
+end;
+
+procedure Tcolor_form.Edit1KeyUp(Sender: TObject; var Key: Word; Shift: TShiftState);
+begin
+  //functionunit.popupkey:= key;
+  //color_form.Label7.Caption:= inttostr(key);
+end;
+
+procedure Tcolor_form.Edit2KeyUp(Sender: TObject; var Key: Word; Shift: TShiftState);
+begin
+  //functionunit.popupkey2:= key;
+  color_form.Label9.Caption:= inttostr(key);
+end;
+
+procedure Tcolor_form.Edit_SubMnu2KeyDown(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
+begin
+  //if shortcut_key = 0 then
+    //shortcut_key := key;
+  showmessage(inttostr(key));
+end;
+
+procedure Tcolor_form.Edit_SubMnu2KeyPress(Sender: TObject; var Key: char);
+begin
+
+end;
+
+procedure Tcolor_form.Edit_SubMnu2KeyUp(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
+var
+  c:string;//Low(Word)..High(Word);
+  control:string;
+begin
+  //showmessage(inttostr(key));
+  if CHeckSHeft.Checked then
+    control := '1';
+  if CheckCTRL.Checked then
+    control := '2';
+  if (CheckSheft.Checked) and (CheckCTRL.Checked) then
+    control := '3';
+  color_form.Edit_SubMnu2.Text := '';
+  c := inttostr(key) + ',' + control;//floattostr(shortcut_key);
+  color_form.Edit_SubMnu2.Text:= (c);
+  //shortcut_key := 0;
+end;
+
+procedure Tcolor_form.FormActivate(Sender: TObject);
+begin
+  //functionunit.mainactive;
+end;
+
+procedure Tcolor_form.FormCreate(Sender: TObject);
+begin
+
+
+end;
+
+procedure Tcolor_form.FormShow(Sender: TObject);
+begin
+ color_form.ComboBox2.Clear;
+
+    //Delphi
+    if (combobox3.Text = 'FreePascal') or (combobox3.Text = 'Delphi') then  begin
+      color_form.ComboBox2.Items.Text:=
+      'CommentAttri' + char(13)+
+    'DirectiveAttri' + char(13)+
+    'IDEDirectiveAttri' + char(13)+
+    'IdentifierAttri' + char(13)+
+    'KeyAttri' + char(13)+
+    'SpaceAttri' + char(13)+
+    'StringAttri' + char(13)+
+    'NumberAttri' + char(13) +
+      'SymbolAttri' + char(13)+
+      'CaseLabelAttri' + char(13) +
+      'AsmAttri' + char(13);
+    end;
+    //C++
+    if (combobox3.Text = 'C++') then begin
+      color_form.ComboBox2.Items.Text:= color_form.ComboBox2.Items.Text +
+      'CommentAttri' + char(13)+
+    'DirectiveAttri' + char(13)+
+    'IDEDirectiveAttri' + char(13)+
+    'IdentifierAttri' + char(13)+
+    'KeyAttri' + char(13)+
+    'SpaceAttri' + char(13)+
+    'StringAttri' + char(13)+
+    'NumberAttri' + char(13) +
+      'DirecAttri' + char(13) +
+      'AsmAttri' + char(13);
+    end;
+
+    //Java
+    if (combobox3.Text = 'Java') then begin
+      color_form.ComboBox2.Items.Text:= color_form.ComboBox2.Items.Text +
+      'CommentAttri' + char(13)+
+    'DirectiveAttri' + char(13)+
+    'IDEDirectiveAttri' + char(13)+
+    'IdentifierAttri' + char(13)+
+    'KeyAttri' + char(13)+
+    'SpaceAttri' + char(13)+
+    'StringAttri' + char(13)+
+    'NumberAttri' + char(13) +
+      'DocumentAttri' + char(13) +
+      'InvalidAttri' + char(13);
+    end;
+
+    if (combobox3.Text = 'SQL') then begin
+      color_form.ComboBox2.Items.Text:= color_form.ComboBox2.Items.Text +
+      'CommentAttri' + char(13)+
+    'DirectiveAttri' + char(13)+
+    'IDEDirectiveAttri' + char(13)+
+    'IdentifierAttri' + char(13)+
+    'KeyAttri' + char(13)+
+    'SpaceAttri' + char(13)+
+    'StringAttri' + char(13)+
+    'NumberAttri' + char(13) +
+      'DefaultPackageAttri' + char(13) +
+      'FunctionAttri' + char(13) +
+      'PLSQLAttri' + char(13) +
+      'SQLPlusAttri' + char(13) +
+      'TableNameAttri' + char(13) +
+      'VariableAttri' + char(13);
+    end;
+
+    if (combobox3.Text = 'XML') then begin
+      color_form.ComboBox2.Items.Text:= color_form.ComboBox2.Items.Text +
+      'CommentAttri' + char(13)+
+    'DirectiveAttri' + char(13)+
+    'IDEDirectiveAttri' + char(13)+
+    'IdentifierAttri' + char(13)+
+    'KeyAttri' + char(13)+
+    'SpaceAttri' + char(13)+
+    'StringAttri' + char(13)+
+    'NumberAttri' + char(13) +
+      'AttributeValueAttri' + char(13) +
+      'DocTypeAttri' + char(13) +
+      'NamespaceAttributeAttri' + char(13) +
+      'NamespaceAttributeValueAttri' + char(13) +
+      'ElementAttri' + char(13) +
+      'TextAttri' + char(13);
+    end;
+
+    if (combobox3.Text = 'HTML') then begin
+      color_form.ComboBox2.Items.Text:= color_form.ComboBox2.Items.Text +
+      'CommentAttri' + char(13)+
+    'DirectiveAttri' + char(13)+
+    'IDEDirectiveAttri' + char(13)+
+    'IdentifierAttri' + char(13)+
+    'KeyAttri' + char(13)+
+    'SpaceAttri' + char(13)+
+    'StringAttri' + char(13)+
+    'NumberAttri' + char(13) +
+      'AndAttri' + char(13) +
+      'ASPAttri' + char(13) +
+      'UndefKeyAttri' + char(13) +
+      'ValueAttri' + char(13) +
+      'TextAttri' + char(13);
+    end;
+
+    if (combobox3.Text = 'CSS') then begin
+      color_form.ComboBox2.Items.Text:= color_form.ComboBox2.Items.Text +
+      'CommentAttri' + char(13) +
+      'IdentifierAttri' + char(13) +
+      'SpaceAttri' + char(13) +
+      'NumberAttri' + char(13) +
+      'KeyAttri' + char(13) +
+      'StringAttri' + char(13) +
+      'SymbolAttri' + char(13);
+    end;
+
+    if (combobox3.Text = 'Linux Command') then begin
+      color_form.ComboBox2.Items.Text:= color_form.ComboBox2.Items.Text +
+      'CommentAttri' + char(13) +
+      'SpaceAttri' + char(13) +
+      'NumberAttri' + char(13) +
+      'KeyAttri' + char(13) +
+      'SymbolAttri' + char(13) +
+      'StringAttri' + char(13) +
+      'IdentifierAttri' + char(13) +
+      'SecondKeyAttri' + char(13) +
+      'VarAttri' + char(13);
+    end;
+
+    if (combobox3.Text = 'Bat') then begin
+      color_form.ComboBox2.Items.Text:= color_form.ComboBox2.Items.Text +
+      'CommentAttri' + char(13) +
+      'IdentifierAttri' + char(13) +
+      'SpaceAttri' + char(13) +
+      'NumberAttri' + char(13) +
+      'KeyAttri' + char(13) +
+      'VariableAttri' + char(13);
+    end;
+
+    if (combobox3.Text = 'INI') then begin
+      color_form.ComboBox2.Items.Text:= color_form.ComboBox2.Items.Text +
+      'CommentAttri' + char(13) +
+      'SpaceAttri' + char(13) +
+      'NumberAttri' + char(13) +
+      'KeyAttri' + char(13) +
+      'SectionAttri' + char(13) +
+      'TextAttri' + char(13);
+    end;
+
+    if (combobox3.Text = 'VBScript') then begin
+      color_form.ComboBox2.Items.Text:= color_form.ComboBox2.Items.Text +
+      'CommentAttri' + char(13) +
+      'IdentifierAttri' + char(13) +
+      'SpaceAttri' + char(13) +
+      'NumberAttri' + char(13) +
+      'KeyAttri' + char(13) +
+      'StringAttri' + char(13) +
+      'SymbolAttri' + char(13);
+    end;
+
+    if (combobox3.Text = '自由設定') then begin
+      color_form.ComboBox2.Items.Text:= color_form.ComboBox2.Items.Text +
+      'CommentAttri' + char(13) +
+      'SpaceAttri' + char(13) +
+      'NumberAttri' + char(13) +
+      'KeyAttri' + char(13) +
+      'VariableAttri' + char(13) +
+      'SymbolAttri' + char(13) +
+      'StringAttri' + char(13) +
+      'ConstantAttri' + char(13) +
+      'IdentifierAttri' + char(13) +
+      'ObjectAttri' + char(13);
+    end;
+
+     if (combobox3.Text = 'PHP') then begin
+      color_form.ComboBox2.Items.Text:= color_form.ComboBox2.Items.Text +
+      'CommentAttri' + char(13) +
+      'IdentifierAttri' + char(13) +
+      'KeyAttri' + char(13) +
+      'SpaceAttri' + char(13) +
+      'StringAttri' + char(13) +
+      'SymbolAttri' + char(13) +
+      'NumberAttri' + char(13) +
+      'InvalidSymbolAttri' + char(13) +
+      'VariableAttri' + char(13);
+    end;
+
+    if (combobox3.Text = 'Perl') then begin
+      color_form.ComboBox2.Items.Text:= color_form.ComboBox2.Items.Text +
+      'CommentAttri' + char(13) +
+      'IdentifierAttri' + char(13) +
+      'KeyAttri' + char(13) +
+      'SpaceAttri' + char(13) +
+      'StringAttri' + char(13) +
+      'SymbolAttri' + char(13) +
+      'NumberAttri' + char(13) +
+      'VariableAttri' + char(13) +
+      'InvalidAttri' + char(13) +
+      'OperatorAttri' + char(13) +
+      'PragmaAttri' + char(13);
+    end;
+
+    if (combobox3.Text = 'All') then begin
+        color_form.ComboBox2.Items.Text:=
+        'CaseLabelAttri' + char(13) +
+        'DirecAttri' + char(13) +
+        'AsmAttri' + char(13) +
+        'DocumentAttri' + char(13) +
+        'InvalidAttri' + char(13) +
+        'DefaultPackageAttri' + char(13) +
+        'FunctionAttri' + char(13) +
+        'PLSQLAttri' + char(13) +
+        'SQLPlusAttri' + char(13) +
+        'TableNameAttri' + char(13) +
+        'CommentAttri' + char(13)+
+        'AttributeValueAttri' + char(13) +
+        'DocTypeAttri' + char(13) +
+        'NamespaceAttributeAttri' + char(13) +
+        'NamespaceAttributeValueAttri' + char(13) +
+        'ElementAttri' + char(13) +
+        'DirectiveAttri' + char(13)+
+        'IDEDirectiveAttri' + char(13)+
+        'IdentifierAttri' + char(13)+
+        'SpaceAttri' + char(13)+
+        'StringAttri' + char(13)+
+        'NumberAttri' + char(13) +
+        'AndAttri' + char(13) +
+        'ASPAttri' + char(13) +
+        'UndefKeyAttri' + char(13) +
+        'ValueAttri' + char(13) +
+        'CommentAttri' + char(13) +
+        'IdentifierAttri' + char(13) +
+        'SpaceAttri' + char(13) +
+        'KeyAttri' + char(13) +
+        'SymbolAttri' + char(13) +
+        'SecondKeyAttri' + char(13) +
+        'VarAttri' + char(13) +
+        'VariableAttri' + char(13) +
+        'SectionAttri' + char(13) +
+        'TextAttri' + char(13) +
+        'ConstantAttri' + char(13) +
+        'ObjectAttri' + char(13) +
+        'InvalidSymbolAttri' + char(13) +
+        'StringAttri' + char(13) +
+        'SymbolAttri' + char(13) +
+        'VariableAttri' + char(13) +
+        'InvalidAttri' + char(13) +
+        'OperatorAttri' + char(13) +
+        'PragmaAttri' + char(13);
+    end;
+end;
+
+procedure Tcolor_form.GroupBox4Click(Sender: TObject);
+begin
+
+end;
+
+procedure Tcolor_form.List_SubMnu1Click(Sender: TObject);
+begin
+  with color_form.List_SubMnu1 do begin
+    Edit_SubMnu1.Text := Items[ItemIndex];
+  end;
+end;
+
+procedure Tcolor_form.List_SubMnu2Click(Sender: TObject);
+begin
+ try
+  with color_form.List_SubMnu2 do begin
+    //Edit_SubMnu.Text := Items[ItemIndex];
+    color_form.List_SubMnu.ItemIndex:=ItemIndex;
+  end;
+ except
+ end;
+end;
+
+procedure Tcolor_form.List_SubMnuClick(Sender: TObject);
+begin
+ try
+  with color_form.List_SubMnu do begin
+    Edit_SubMnu.Text := Items[ItemIndex];
+    color_form.List_SubMnu2.ItemIndex:=ItemIndex;
+  end;
+ except
+ end;
+end;
+
+procedure Tcolor_form.MenuItem1Click(Sender: TObject);
+begin
+
+end;
+
+procedure Tcolor_form.PageControl1Change(Sender: TObject);
+var
+  st:TStringList;
+begin
+  if color_form.PageControl1.ActivePageIndex=4 then begin
+    st := TStringList.Create;
+    try
+    st.LoadFromFile(extractfilepath(paramstr(0))+'mnu_shortcut.txt');
+    color_form.List_SubMnu2.Items.Text:= st.Text;
+    st.LoadFromFile(extractfilepath(paramstr(0))+'mnu_title.txt');
+    color_form.List_SubMnu1.Items.Text:= st.Text;
+    st.LoadFromFile(extractfilepath(paramstr(0))+'mnu_caption.txt');
+    color_form.List_SubMnu.Items.Text:= st.Text;
+    except
+    end;
+    st.Free;
+  end;
+end;
+
+procedure Tcolor_form.TabControl1Change(Sender: TObject);
+begin
+  toolwindow.PageControl1.ActivePageIndex := color_form.TabControl1.TabIndex;
+end;
+
+procedure Tcolor_form.TabControl1Changing(Sender: TObject;
+  var AllowChange: Boolean);
+begin
+
+end;
+
+procedure Tcolor_form.TabControl1MouseDown(Sender: TObject; Button: TMouseButton;
+  Shift: TShiftState; X, Y: Integer);
+begin
+
+end;
+
+procedure Tcolor_form.TabSheet1ContextPopup(Sender: TObject; MousePos: TPoint;
+  var Handled: Boolean);
+begin
+
+end;
+
+end.
+

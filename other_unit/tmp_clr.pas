@@ -1,0 +1,73 @@
+unit tmp_clr;
+
+{$mode objfpc}{$H+}
+
+interface
+
+uses
+  Classes, SysUtils, FileUtil, Forms, Controls, Graphics, Dialogs, StdCtrls,
+  Buttons;
+
+type
+
+  { TtmpClr }
+
+  TtmpClr = class(TForm)
+    BitBtn1: TBitBtn;
+    Button1: TButton;
+    Button2: TButton;
+    Button3: TButton;
+    Button4: TButton;
+    procedure Button1Click(Sender: TObject);
+    procedure Button2Click(Sender: TObject);
+    procedure Button3Click(Sender: TObject);
+    procedure Button4Click(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+  private
+    { private declarations }
+  public
+    { public declarations }
+  end;
+
+var
+  tmpClr: TtmpClr;
+
+implementation
+
+uses
+  function_unit;
+
+{$R *.lfm}
+
+{ TtmpClr }
+
+procedure TtmpClr.FormCreate(Sender: TObject);
+begin
+
+end;
+
+procedure TtmpClr.Button1Click(Sender: TObject);
+begin
+  functionunit.TempFIle_Clear1('.ba1');
+  functionunit.TempFIle_Clear2('temp1.txt');
+end;
+
+procedure TtmpClr.Button2Click(Sender: TObject);
+begin
+  functionunit.TempFIle_Clear1('.ba2');
+  functionunit.TempFIle_Clear2('temp2.txt');
+end;
+
+procedure TtmpClr.Button3Click(Sender: TObject);
+begin
+  functionunit.TempFIle_Clear1('.ba');
+  functionunit.TempFIle_Clear2('temp3.txt');
+end;
+
+procedure TtmpClr.Button4Click(Sender: TObject);
+begin
+  functionunit.TempFIle_Clear2('test.*');
+end;
+
+end.
+

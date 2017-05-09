@@ -1,0 +1,58 @@
+object tmpClr: TtmpClr
+  Left = 682
+  Height = 259
+  Top = 218
+  Width = 194
+  Caption = 'tmpClr'
+  ClientHeight = 0
+  ClientWidth = 0
+  OnCreate = FormCreate
+  Position = poScreenCenter
+  LCLVersion = '1.6.0.4'
+  object Button1: TButton
+    Left = 16
+    Height = 25
+    Top = 18
+    Width = 163
+    Caption = '一時保存ファイル１削除'
+    OnClick = Button1Click
+    TabOrder = 0
+  end
+  object Button2: TButton
+    Left = 16
+    Height = 25
+    Top = 56
+    Width = 163
+    Caption = '一時保存ファイル２削除'
+    OnClick = Button2Click
+    TabOrder = 1
+  end
+  object Button3: TButton
+    Left = 16
+    Height = 25
+    Top = 96
+    Width = 163
+    Caption = '終了時復元バックアップ削除'
+    OnClick = Button3Click
+    TabOrder = 2
+  end
+  object BitBtn1: TBitBtn
+    Left = 56
+    Height = 30
+    Top = 192
+    Width = 75
+    DefaultCaption = True
+    Kind = bkClose
+    ModalResult = 11
+    TabOrder = 3
+  end
+  object Button4: TButton
+    Left = 16
+    Height = 25
+    Top = 139
+    Width = 163
+    Caption = 'その他一時ファイル削除'
+    OnClick = Button4Click
+    TabOrder = 4
+  end
+end

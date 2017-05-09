@@ -1,0 +1,290 @@
+object DataModule1: TDataModule1
+  Left = 776
+  Height = 240
+  Top = 260
+  Width = 320
+  Caption = 'datamodule1'
+  LCLVersion = '1.6.0.4'
+  object SynExporterHTML1: TSynExporterHTML
+    Color = clWindow
+    DefaultFilter = 'HTML Document (*.htm,*.html)|*.htm;*.html'
+    Font.Color = clBlack
+    Font.Height = -10
+    Font.Name = 'Courier New'
+    HTMLFontSize = fs03
+    Title = 'Untitled'
+    UseBackground = False
+    left = 17
+    top = 18
+  end
+  object SynPluginSyncroEdit1: TSynPluginSyncroEdit
+    KeystrokesSelecting = <    
+      item
+        Command = ecSynPSyncroEdStart
+        ShortCut = 16458
+      end>
+    Keystrokes = <    
+      item
+        Command = ecSynPSyncroEdNextCell
+        ShortCut = 16423
+      end    
+      item
+        Command = ecSynPSyncroEdNextCellSel
+        ShortCut = 9
+      end    
+      item
+        Command = ecSynPSyncroEdPrevCell
+        ShortCut = 16421
+      end    
+      item
+        Command = ecSynPSyncroEdPrevCellSel
+        ShortCut = 8201
+      end    
+      item
+        Command = ecSynPSyncroEdCellHome
+        ShortCut = 36
+      end    
+      item
+        Command = ecSynPSyncroEdCellEnd
+        ShortCut = 35
+      end    
+      item
+        Command = ecSynPSyncroEdCellSelect
+        ShortCut = 16449
+      end    
+      item
+        Command = ecSynPSyncroEdEscape
+        ShortCut = 27
+      end>
+    KeystrokesOffCell = <    
+      item
+        Command = ecSynPSyncroEdNextCell
+        ShortCut = 16423
+      end    
+      item
+        Command = ecSynPSyncroEdNextCellSel
+        ShortCut = 9
+      end    
+      item
+        Command = ecSynPSyncroEdPrevCell
+        ShortCut = 16421
+      end    
+      item
+        Command = ecSynPSyncroEdPrevCellSel
+        ShortCut = 8201
+      end    
+      item
+        Command = ecSynPSyncroEdEscape
+        ShortCut = 27
+      end>
+    Enabled = True
+    MarkupInfo.Background = clNone
+    MarkupInfo.Foreground = clNone
+    MarkupInfo.FrameColor = 10007704
+    MarkupInfoCurrent.Background = clNone
+    MarkupInfoCurrent.Foreground = clNone
+    MarkupInfoCurrent.FrameColor = clAqua
+    MarkupInfoSync.Background = clNone
+    MarkupInfoSync.Foreground = clNone
+    MarkupInfoSync.FrameColor = clFuchsia
+    MarkupInfoArea.Background = clMoneyGreen
+    MarkupInfoArea.Foreground = clNone
+    left = 48
+    top = 18
+  end
+  object SynPasSyn1: TSynPasSyn
+    Enabled = False
+    CompilerMode = pcmDelphi
+    NestedComments = False
+    left = 104
+    top = 18
+  end
+  object SynFreePascalSyn1: TSynFreePascalSyn
+    Enabled = False
+    CompilerMode = pcmObjFPC
+    NestedComments = True
+    left = 133
+    top = 18
+  end
+  object SynCppSyn1: TSynCppSyn
+    DefaultFilter = 'C++ Files (*.c,*.cpp,*.h,*.hpp,*.hh)|*.c;*.cpp;*.h;*.hpp;*.hh'
+    Enabled = False
+    left = 162
+    top = 18
+  end
+  object SynJavaSyn1: TSynJavaSyn
+    DefaultFilter = 'Java Files (*.java)|*.java'
+    Enabled = False
+    left = 191
+    top = 18
+  end
+  object SynJScriptSyn1: TSynJScriptSyn
+    Enabled = False
+    left = 220
+    top = 18
+  end
+  object SynPerlSyn1: TSynPerlSyn
+    DefaultFilter = 'Perl Files (*.pl,*.pm,*.cgi)|*.pl;*.pm;*.cgi'
+    Enabled = False
+    left = 249
+    top = 18
+  end
+  object SynHTMLSyn1: TSynHTMLSyn
+    DefaultFilter = 'HTML Document (*.htm,*.html)|*.htm;*.html'
+    Enabled = False
+    left = 278
+    top = 18
+  end
+  object SynXMLSyn1: TSynXMLSyn
+    DefaultFilter = 'XML Document (*.xml,*.xsd,*.xsl,*.xslt,*.dtd)|*.xml;*.xsd;*.xsl;*.xslt;*.dtd'
+    Enabled = False
+    WantBracesParsed = False
+    left = 17
+    top = 47
+  end
+  object SynLFMSyn1: TSynLFMSyn
+    DefaultFilter = 'Lazarus Form Files (*.lfm)|*.lfm'
+    Enabled = False
+    left = 46
+    top = 47
+  end
+  object SynDiffSyn1: TSynDiffSyn
+    Enabled = False
+    left = 75
+    top = 47
+  end
+  object SynUNIXShellScriptSyn1: TSynUNIXShellScriptSyn
+    DefaultFilter = 'UNIX Shell Scripts (*.sh)|*.sh'
+    Enabled = False
+    left = 104
+    top = 47
+  end
+  object SynCssSyn1: TSynCssSyn
+    DefaultFilter = 'Cascading Stylesheets (*.css)|*.css'
+    Enabled = False
+    left = 133
+    top = 47
+  end
+  object SynPHPSyn1: TSynPHPSyn
+    DefaultFilter = 'PHP Files (*.php,*.php3,*.phtml,*.inc)|*.php;*.php3;*.phtml;*.inc'
+    Enabled = False
+    left = 162
+    top = 47
+  end
+  object SynTeXSyn1: TSynTeXSyn
+    DefaultFilter = 'TeX Files (*.tex)|*.tex'
+    Enabled = False
+    left = 191
+    top = 47
+  end
+  object SynSQLSyn1: TSynSQLSyn
+    DefaultFilter = 'SQL Files (*.sql)|*.sql'
+    Enabled = False
+    SQLDialect = sqlSybase
+    left = 220
+    top = 47
+  end
+  object SynPythonSyn1: TSynPythonSyn
+    DefaultFilter = 'Python Files (*.py)|*.py'
+    Enabled = False
+    left = 249
+    top = 47
+  end
+  object SynVBSyn1: TSynVBSyn
+    Enabled = False
+    left = 278
+    top = 47
+  end
+  object SynAnySyn1: TSynAnySyn
+    Enabled = False
+    Comments = []
+    DetectPreprocessor = False
+    IdentifierChars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz'
+    Markup = False
+    Entity = False
+    DollarVariables = False
+    ActiveDot = False
+    left = 17
+    top = 76
+  end
+  object SynMultiSyn1: TSynMultiSyn
+    Enabled = False
+    Schemes = <>
+    left = 46
+    top = 76
+  end
+  object SynBatSyn1: TSynBatSyn
+    DefaultFilter = 'MS-DOS Batch Files (*.bat;*.cmd)|*.bat;*.cmd'
+    Enabled = False
+    left = 75
+    top = 76
+  end
+  object SynIniSyn1: TSynIniSyn
+    DefaultFilter = 'INI Files (*.ini)|*.ini'
+    Enabled = False
+    left = 104
+    top = 76
+  end
+  object SynPoSyn1: TSynPoSyn
+    DefaultFilter = 'Po Files (*.po)|*.po'
+    Enabled = False
+    left = 133
+    top = 76
+  end
+  object OpenDialog1: TOpenDialog
+    Options = [ofAllowMultiSelect, ofEnableSizing, ofViewDetail]
+    left = 162
+    top = 76
+  end
+  object SaveDialog1: TSaveDialog
+    left = 191
+    top = 76
+  end
+  object FontDialog1: TFontDialog
+    MinFontSize = 0
+    MaxFontSize = 0
+    left = 220
+    top = 76
+  end
+  object FindDialog1: TFindDialog
+    left = 249
+    top = 76
+  end
+  object ReplaceDialog1: TReplaceDialog
+    Options = [frDown, frReplace, frReplaceAll, frHidePromptOnReplace]
+    left = 278
+    top = 76
+  end
+  object CalculatorDialog1: TCalculatorDialog
+    Value = 0
+    ColorBtnDigits = clBlack
+    ColorBtnMemory = clNavy
+    ColorBtnOk = clGreen
+    ColorBtnCancel = clMaroon
+    ColorBtnClear = clRed
+    ColorBtnOthers = clBlack
+    ColorDisplayText = clBlack
+    ColorDisplayBack = clWhite
+    left = 17
+    top = 105
+  end
+  object PrinterSetupDialog1: TPrinterSetupDialog
+    left = 46
+    top = 105
+  end
+  object PrintDialog1: TPrintDialog
+    left = 75
+    top = 105
+  end
+  object PageSetupDialog1: TPageSetupDialog
+    left = 104
+    top = 105
+  end
+  object CalendarDialog1: TCalendarDialog
+    Date = 42699
+    OKCaption = 'OK(&O)'
+    CancelCaption = 'キャンセル'
+    left = 136
+    top = 105
+  end
+end

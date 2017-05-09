@@ -1,0 +1,259 @@
+object Form2: TForm2
+  Left = 311
+  Height = 234
+  Top = 130
+  Width = 689
+  BorderStyle = bsDialog
+  Caption = 'SQL Lite Table Maker　Ver１.00'
+  ClientHeight = 234
+  ClientWidth = 689
+  Color = clBtnFace
+  Font.CharSet = SHIFTJIS_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -12
+  Font.Name = 'ＭＳ Ｐゴシック'
+  OnCloseQuery = FormCloseQuery
+  OnCreate = FormCreate
+  OnShow = FormShow
+  LCLVersion = '1.6.0.4'
+  object Panel1: TPanel
+    Left = 0
+    Height = 234
+    Top = 0
+    Width = 689
+    Align = alClient
+    BevelOuter = bvLowered
+    ClientHeight = 234
+    ClientWidth = 689
+    TabOrder = 0
+    OnClick = Panel1Click
+    object Label9: TLabel
+      Left = 470
+      Height = 15
+      Top = 14
+      Width = 36
+      Caption = 'ＳＱＬ文'
+      ParentColor = False
+    end
+    object GroupBox1: TGroupBox
+      Left = 14
+      Height = 218
+      Top = 6
+      Width = 441
+      Caption = 'テーブル作成'
+      ClientHeight = 197
+      ClientWidth = 433
+      TabOrder = 0
+      object Label3: TLabel
+        Left = 230
+        Height = 15
+        Top = 10
+        Width = 165
+        Caption = 'テーブルネーム名を入力　※必須'
+        ParentColor = False
+      end
+      object Label5: TLabel
+        Left = 14
+        Height = 15
+        Top = 120
+        Width = 46
+        Caption = 'キー設定'
+        ParentColor = False
+      end
+      object Bevel1: TBevel
+        Left = 6
+        Height = 105
+        Top = 2
+        Width = 417
+      end
+      object Bevel3: TBevel
+        Left = 6
+        Height = 33
+        Top = 112
+        Width = 417
+      end
+      object Bevel4: TBevel
+        Left = 6
+        Height = 34
+        Top = 152
+        Width = 417
+      end
+      object Label6: TLabel
+        Left = 14
+        Height = 15
+        Top = 42
+        Width = 132
+        Caption = 'フィールド名を入力※必須'
+        ParentColor = False
+      end
+      object Label7: TLabel
+        Left = 264
+        Height = 15
+        Top = 42
+        Width = 121
+        Caption = '型を入力を入力　※必須'
+        ParentColor = False
+      end
+      object Button2: TButton
+        Left = 14
+        Height = 17
+        Top = 10
+        Width = 75
+        Caption = '新規作成'
+        Enabled = False
+        OnClick = Button2Click
+        TabOrder = 0
+      end
+      object Edit2: TEdit
+        Left = 96
+        Height = 22
+        Top = 10
+        Width = 121
+        OnChange = Edit2Change
+        TabOrder = 1
+      end
+      object ComboBox2: TComboBox
+        Left = 78
+        Height = 21
+        Top = 120
+        Width = 121
+        Enabled = False
+        ItemHeight = 0
+        TabOrder = 2
+      end
+      object Button4: TButton
+        Left = 206
+        Height = 17
+        Top = 120
+        Width = 75
+        Caption = 'キー追加'
+        Enabled = False
+        OnClick = Button4Click
+        TabOrder = 3
+      end
+      object Button5: TButton
+        Left = 336
+        Height = 17
+        Top = 160
+        Width = 75
+        Caption = '完了'
+        Enabled = False
+        OnClick = Button5Click
+        TabOrder = 4
+      end
+      object Edit3: TEdit
+        Left = 14
+        Height = 22
+        Top = 58
+        Width = 234
+        Enabled = False
+        OnChange = Edit3Change
+        TabOrder = 5
+      end
+      object ComboBox3: TComboBox
+        Left = 264
+        Height = 23
+        Top = 58
+        Width = 145
+        Enabled = False
+        ItemHeight = 0
+        Items.Strings = (
+          'NULL'
+          'INTEGER'
+          'REAL'
+          'TEXT'
+          'BLOB'
+        )
+        OnChange = ComboBox3Change
+        OnClick = ComboBox3Click
+        Style = csDropDownList
+        TabOrder = 7
+      end
+      object Button6: TButton
+        Left = 238
+        Height = 17
+        Top = 84
+        Width = 90
+        Caption = 'フィールドの追加'
+        OnClick = Button6Click
+        TabOrder = 6
+      end
+      object Button7: TButton
+        Left = 334
+        Height = 17
+        Top = 120
+        Width = 75
+        Caption = 'コマンド完了'
+        Enabled = False
+        OnClick = Button7Click
+        TabOrder = 8
+      end
+      object Button3: TButton
+        Left = 334
+        Height = 17
+        Top = 84
+        Width = 75
+        Caption = 'フィールド完了'
+        Enabled = False
+        OnClick = Button3Click
+        TabOrder = 9
+      end
+      object BitBtn1: TBitBtn
+        Left = 240
+        Height = 17
+        Top = 160
+        Width = 83
+        Cancel = True
+        DefaultCaption = True
+        Kind = bkCancel
+        ModalResult = 2
+        OnClick = BitBtn1Click
+        TabOrder = 10
+      end
+      object Edit1: TEdit
+        Left = 49
+        Height = 22
+        Top = 158
+        Width = 80
+        OnChange = Edit1Change
+        OnClick = Edit1Click
+        TabOrder = 11
+        Text = 'Edit1'
+        Visible = False
+      end
+    end
+    object Memo1: TMemo
+      Left = 464
+      Height = 192
+      Top = 32
+      Width = 217
+      ScrollBars = ssVertical
+      TabOrder = 1
+    end
+  end
+  object SQLTransaction1: TSQLTransaction
+    Active = False
+    Database = SQLite3Connection1
+    Options = []
+    left = 184
+    top = 101
+  end
+  object SQLite3Connection1: TSQLite3Connection
+    Connected = False
+    LoginPrompt = False
+    KeepConnection = False
+    Transaction = SQLTransaction1
+    Options = []
+    left = 155
+    top = 101
+  end
+  object SQLQuery1: TSQLQuery
+    FieldDefs = <>
+    Database = SQLite3Connection1
+    Transaction = SQLTransaction1
+    Options = []
+    Params = <>
+    left = 124
+    top = 101
+  end
+end
