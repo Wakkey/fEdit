@@ -9,9 +9,15 @@
 ///////////////////////////////
 ===============================
 
-開発環境
-　ＯＳ：Windows Vista,７，８
-　言語：Lazalus１．６（Pascal）
+ＯＳ：Windows Vista、７、８、１０、Linux（Ubuntu）、MacOS
+言語：Lazalus１．６（FreePascal）
+
+動作環境
+fEdit.exe：WindowsVista以上
+fEdit.app：MacOS
+fEdit：Linux(Ubuntu 64Bit)
+
+
 UTF-8/UTF-16/Ansi対応のスクリプト/テキスト編集用エディターです。
 
 最大で２５５個のファイルを開く事が出来ます。
