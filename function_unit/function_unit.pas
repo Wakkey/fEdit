@@ -315,6 +315,7 @@ var
   functionunit: Tfunctionunit;
   {$IFDEF WIN32}
      function load_text(st:pchar):pchar; stdcall; external 'utf.dll';
+     function load_text2(st:pchar):pchar; stdcall; external 'utf.dll';
      function save_text(st:pchar):pchar; stdcall; external 'utf.dll';
      function encod_unicode(s:pchar):integer; stdcall; external 'utf.dll';
      function decoed_unicode(s:pchar):integer; stdcall; external 'utf.dll';
@@ -357,12 +358,29 @@ var
   i,i1,i2,i3,count:integer;
   LIst:TStringList;
   s,s1,s2,s3:string;
+  function ReadSorce(filenamess:string;st:TStringlist):boolean;
+    var
+      tf : TextFile;
+    begin
+      ReadSorce := false;
+      try
+        AssignFile(tf, filenamess);
+        Reset(tf);
+        while not Eof(tf) do begin
+          Readln(tf, filenamess);
+          st.Add(filenamess);
+        end;
+      finally
+        CloseFile(tf);
+        ReadSorce := true;
+      end
+  end;
 begin
   List := TStringList.Create;
   List.Clear;
   try
-    {$IFDEF Win}
-    List.LoadFromFile(utf8tosys(systoutf8( ExtractFilePath( (Paramstr(0)) ) + 'Backupfile\' + setfile )));
+    {$IFDEF Windows}
+      List.LoadFromFile(utf8tosys(systoutf8( ExtractFilePath( (Paramstr(0)) ) + 'Backupfile\' + setfile )));
     {$ENDIF}
     {$IFDEF Linux}
     List.LoadFromFile(utf8tosys(systoutf8( ExtractFilePath( (Paramstr(0)) ) + 'Backupfile\' + setfile )));
@@ -390,9 +408,14 @@ begin
           end;
           //showmessage(utf8tosys(ExtractFilePath( systoutf8(Paramstr(0)) ) +
             //( IntToStr(i) + setname2)));
-          {$IFDEF Win}
-          functionunit.editlist.Items[i].Edit.LoadFromFile(utf8tosys(ExtractFilePath( systoutf8(Paramstr(0)) ) +
-            ( IntToStr(i) + 'Backupfile\' + setname2)));
+          {$IFDEF Windows}
+           try
+             ReadSorce(utf8tosys(ExtractFilePath( systoutf8(Paramstr(0)) ) +  'Backupfile\' + ( IntToStr(i) + setname2)),
+             functionunit.editlist.Items[i].Edit );
+           except
+
+           end;
+          //functionunit.editlist.Items[i].Edit.LoadFromFile(utf8tosys(ExtractFilePath( systoutf8(Paramstr(0)) ) + ( IntToStr(i) + 'Backupfile\' + setname2)));
           {$ENDIF}
           {$IFDEF Linux}
           functionunit.editlist.Items[i].Edit.LoadFromFile(utf8tosys(ExtractFilePath( systoutf8(Paramstr(0)) ) +
@@ -421,7 +444,7 @@ begin
           s := extractfileext(functionunit.editlist.Items[i].filename_path);
           s1 := extractfilename(functionunit.editlist.Items[i].filename_path);
       //showmessage(s);
-      case s of
+        case s of
         '.txt':;
         '.html':mainform.Menu_HTMLClick(mainform.Menu_HTML);
         '.htm':mainform.Menu_HTMLClick(mainform.Menu_HTML);
@@ -451,8 +474,8 @@ begin
             functionunit.editlist.Items[i].PageControl1.ActivePageIndex:=2;
             functionunit.editlist.Items[i].Panel1.Visible:=TRUE;
          end;
-      end;
         end;
+      end;
 
       end;
 
@@ -1456,6 +1479,7 @@ begin
      {for i1 := 1 to ParamCount do begin
        functionunit.fileopen(ansitoutf8(Paramstr(i1)));
      end;}
+  color_form.Button11Click(mainform);
   functionunit.true_boot := true;
   st:= TStringlist.Create;
   st.Clear;
@@ -6419,7 +6443,7 @@ var
   c1,c2:pchar;
   sw:boolean;
 begin
-        {$IFDEF WIN32}
+        {$IFDEF Windows}
             functionunit.winload(i,s);
         {$ENDIF}
         {$IFDEF LINUX}
@@ -6439,7 +6463,7 @@ var
 begin
         //s1 := extractfilepath(paramstr(0))+ 'tmp0.txt';
         //CopyFile(s,s1);
-        {$IFDEF WIN32}
+        {$IFDEF Windows}
              //functionunit.Run(functionunit.memosave(i,s,memo));
              functionunit.winsave(i,s,memo);
         {$ENDIF}
@@ -6498,10 +6522,21 @@ var
     st,st2:Tstringlist;
     i3:integer;
     function loadSorce:boolean;
+    var
+     strmFile: TFileStream;
     begin
       Application.ProcessMessages;
       st:=TStringlist.Create;
-      st.LoadFromFile(functionunit.editlist.Items[i].filename_path);
+      strmFile := TFileStream.Create(FileNames, fmOpenRead);
+      try
+        strmFile.Seek(0, soFromBeginning);//ポインタをファイルの先頭に戻す
+        strmFile.Read(st,1000);
+        //st.LoadFromStream(strmFile)
+      finally
+        strmFile.Free;
+      end;
+      showmessage(st.Text);
+      //st.LoadFromFile(functionunit.editlist.Items[i].filename_path);
       st2:=TStringlist.Create;
       st2.Clear;
       //functionunit.Run(functionunit.bunkatu2(st,st2));
@@ -6567,7 +6602,7 @@ var
       functionunit.memoload(i,functionunit.editlist.Items[i].filename_path);
 
       //functionunit.Run(loadSorce);
-      loadSorce;
+      //loadSorce;
       //st2:=TStringlist.Create;
       //st2.Clear;
       //functionunit.Run(functionunit.bunkatu2(st,st2));
@@ -6819,6 +6854,23 @@ end;
 function Tfunctionunit.winload(i:integer;s:string):boolean;
 var
   edt:Tmemo;
+  function ReadSorce(s:string;st:TStringlist):boolean;
+  var
+    tf : TextFile;
+  begin
+    ReadSorce := false;
+    try
+      AssignFile(tf, s);
+      Reset(tf);
+      while not Eof(tf) do begin
+        Readln(tf, s);
+        st.Add(s);
+      end;
+    finally
+      CloseFile(tf);
+      ReadSorce := true;
+    end
+  end;
   function encode_charset(i:integer;s:string;memo:TMemo):boolean;
   var
     s1:ansistring;
@@ -6893,11 +6945,14 @@ var
       //load_text(st3,st2);
       //functionunit.editlist.Items[i].Edit.Text := ((st3.Text));
        st.Text := memo.Lines.Text;
-       for i1 := 0 to st.Count -1 do begin
+       //st2.Text := load_text(pchar(st.Text));
+       load_text2(pchar(s));
+       ReadSorce(ExtractFilePath( Paramstr( 0 ) ) + 'tmp.txt' ,functionunit.editlist.Items[i].Edit);
+       {for i1 := 0 to st.Count -1 do begin
          st2.Add(string(load_text(pchar(st[i1]))));
-       end;
+       end;}
        //st.LoadFromFile(extractfilepath(paramstr(0))+'tmp.txt');
-      functionunit.editlist.Items[i].Edit.Text := ((st2.Text));
+      //functionunit.editlist.Items[i].Edit.Text := ((st2.Text));
       st2.Free;
       {s := st[0];
       for i1 := 4 to length(s)-1 do begin
@@ -6911,19 +6966,32 @@ var
       encode_charset := true;
     end else if MainForm.Menu_UTF8.Checked then begin
        //memo.LoadFromFile(((s)));
-       functionunit.editlist.Items[i].Edit.Text := (memo.Text);
+       ReadSorce(s, functionunit.editlist.Items[i].Edit);
+       //functionunit.editlist.Items[i].Edit.Text := (memo.Text);
        encode_charset := true;
     end;
     functionunit.editlist.Items[i].save_complate := true;
   end;
+var
+  st:TStringlist;
 begin
     try
+      st := TStringlist.Create;
+      st.Clear;
+      {if not ReadSorce(s,st) then begin
+        showmessage('読み込みに失敗しました');
+        exit;
+      end;}
       edt := TMemo.Create(owner);
       edt.Parent := functionunit;
       edt.Enabled:= true;
-      edt.Lines.LoadFromFile(s);
+      //edt.Lines.Text:= st.Text;
+      //showmessage(st.Text);
+      //edt.Lines.LoadFromFile(s);
+      //functionunit.editlist.Items[mainform.PageControl1.PageIndex].SynEdit1.Text:= st.Text;
       encode_charset(i,s,edt);
       edt.Free;
+      st.Free;
     finally
 
     end;
@@ -8042,7 +8110,7 @@ begin
   url1 := utf8toansi(word);
   if functionunit.editlist.Items[mainform.PageControl1.ActivePageIndex].PageControl1.PageIndex = 1 then
     url3 := '';
-  {$IFDEF WIN32}
+  {$IFDEF Windows}
      ShellExecute(Handle, 'OPEN', pchar(url1 + url2 + ' ' + url3 + url4), '', '', SW_SHOW);
   {$ENDIF}
   {$IFDEF LINUX}
@@ -8059,7 +8127,7 @@ var
   filename:string;
 begin
   i := 0;
-  {$IFDEF Win}
+  {$IFDEF Windows}
   filename := extractfilepath(paramstr(0)) + 'Backupfile\' + inttostr(i) + s;
   {$ENDIF}
   {$IFDEF Linux}

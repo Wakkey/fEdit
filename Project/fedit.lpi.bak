@@ -44,7 +44,7 @@
         <PackageName Value="LCL"/>
       </Item5>
     </RequiredPackages>
-    <Units Count="21">
+    <Units Count="22">
       <Unit0>
         <Filename Value="fedit.lpr"/>
         <IsPartOfProject Value="True"/>
@@ -190,6 +190,13 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
       </Unit20>
+      <Unit21>
+        <Filename Value="../code_suport/supportcodeinput.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="code_auto_support"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+      </Unit21>
     </Units>
   </ProjectOptions>
   <CompilerOptions>
@@ -199,7 +206,7 @@
     </Target>
     <SearchPaths>
       <IncludeFiles Value="$(ProjOutDir)"/>
-      <OtherUnitFiles Value="../comp_unit;../edit_unit;../find_unit;../SQL_unit;../function_unit;../html_unit;../JSON_unit;../macro_unit;../main_unit;../other_unit;../verjon_unit;../option_unit"/>
+      <OtherUnitFiles Value="../comp_unit;../edit_unit;../find_unit;../SQL_unit;../function_unit;../html_unit;../JSON_unit;../macro_unit;../main_unit;../other_unit;../verjon_unit;../option_unit;../code_suport"/>
       <UnitOutputDirectory Value="lib/$(TargetCPU)-$(TargetOS)"/>
     </SearchPaths>
     <Linking>

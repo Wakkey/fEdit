@@ -212,6 +212,7 @@ type
     procedure Menu_JSClick(Sender: TObject);
     procedure Menu_jsnClick(Sender: TObject);
     procedure Menu_lazarusClick(Sender: TObject);
+    procedure Menu_LibOpenClick(Sender: TObject);
     procedure Menu_MacroElseClick(Sender: TObject);
     procedure Menu_MacroRunClick(Sender: TObject);
     procedure Menu_MacroSetUpClick(Sender: TObject);
@@ -703,6 +704,13 @@ begin
   functionunit.synHL_No := 20;
   functionunit.heighligthcheck(functionunit.synhl_No,true);
   functionunit.synchang(functionunit.synhl_No);
+end;
+
+procedure Tmainform.Menu_LibOpenClick(Sender: TObject);
+begin
+  if not datamodule1.OpenDialog1.Execute then
+    exit;
+  functionunit.read_sorce( mainform.PageControl1.ActivePageIndex, datamodule1.OpenDialog1.FileName );
 end;
 
 procedure Tmainform.Menu_MacroElseClick(Sender: TObject);

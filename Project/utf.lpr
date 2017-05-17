@@ -22,6 +22,32 @@ begin
   end;
 end;
 
+function load_text2(st:pchar):pchar; stdcall;
+var
+  tf : TextFile;
+  s:string;
+  st2:TStringList;
+begin
+  try
+    try
+      st2:= TStringList.create;
+      st2.Clear;
+      AssignFile(tf, string(st));
+      Reset(tf);
+      while not Eof(tf) do begin
+        Readln(tf, s);
+        st2.Add(ansitoutf8(s));
+      end;
+    finally
+      CloseFile(tf);
+      st2.SaveToFile( ExtractFilePath( Paramstr( 0 ) ) + 'tmp.txt' );
+      st2.Free;
+    end
+  except
+  end;
+
+end;
+
 function encod_unicode(s:pchar):integer; stdcall;
 var
  st,st1:TstringList;
@@ -111,7 +137,7 @@ begin
 end;
 
 exports
-  load_text, save_text, encod_unicode, decoed_unicode;
+  load_text,load_text2, save_text, encod_unicode, decoed_unicode;
 
 begin
 end.
