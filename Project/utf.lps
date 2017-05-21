@@ -4,46 +4,86 @@
     <PathDelim Value="\"/>
     <Version Value="9"/>
     <BuildModes Active="Default"/>
-    <Units Count="1">
+    <Units Count="2">
       <Unit0>
         <Filename Value="utf.lpr"/>
         <IsPartOfProject Value="True"/>
         <IsVisibleTab Value="True"/>
-        <TopLine Value="22"/>
-        <CursorPos X="30" Y="39"/>
-        <UsageCount Value="21"/>
+        <TopLine Value="43"/>
+        <CursorPos X="15" Y="53"/>
+        <UsageCount Value="22"/>
         <Loaded Value="True"/>
       </Unit0>
+      <Unit1>
+        <Filename Value="C:\lazarus14\fpc\2.6.4\source\rtl\objpas\objpas.pp"/>
+        <EditorIndex Value="1"/>
+        <TopLine Value="47"/>
+        <CursorPos X="16" Y="75"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit1>
     </Units>
-    <JumpHistory Count="7" HistoryIndex="6">
+    <JumpHistory Count="15" HistoryIndex="14">
       <Position1>
         <Filename Value="utf.lpr"/>
-        <Caret Line="133" Column="24" TopLine="82"/>
+        <Caret Line="4" Column="42"/>
       </Position1>
       <Position2>
         <Filename Value="utf.lpr"/>
-        <Caret Line="35" Column="23" TopLine="20"/>
+        <Caret Line="12" Column="9"/>
       </Position2>
       <Position3>
         <Filename Value="utf.lpr"/>
-        <Caret Line="34" Column="29" TopLine="20"/>
+        <Caret Line="40" Column="15"/>
       </Position3>
       <Position4>
         <Filename Value="utf.lpr"/>
-        <Caret Line="44" Column="10" TopLine="30"/>
+        <Caret Line="35" Column="32" TopLine="3"/>
       </Position4>
       <Position5>
         <Filename Value="utf.lpr"/>
-        <Caret Line="27" Column="17" TopLine="21"/>
+        <Caret Line="31" Column="16" TopLine="22"/>
       </Position5>
       <Position6>
         <Filename Value="utf.lpr"/>
-        <Caret Line="36" Column="36" TopLine="20"/>
+        <Caret Line="37" Column="24" TopLine="23"/>
       </Position6>
       <Position7>
         <Filename Value="utf.lpr"/>
-        <Caret Line="44" Column="16" TopLine="6"/>
+        <Caret Line="41" Column="38" TopLine="18"/>
       </Position7>
+      <Position8>
+        <Filename Value="utf.lpr"/>
+        <Caret Line="7" Column="21"/>
+      </Position8>
+      <Position9>
+        <Filename Value="utf.lpr"/>
+        <Caret Line="154" TopLine="128"/>
+      </Position9>
+      <Position10>
+        <Filename Value="utf.lpr"/>
+        <Caret Line="7" Column="18"/>
+      </Position10>
+      <Position11>
+        <Filename Value="utf.lpr"/>
+        <Caret Line="20" Column="77"/>
+      </Position11>
+      <Position12>
+        <Filename Value="utf.lpr"/>
+        <Caret Line="154" TopLine="128"/>
+      </Position12>
+      <Position13>
+        <Filename Value="utf.lpr"/>
+        <Caret Line="9" Column="37"/>
+      </Position13>
+      <Position14>
+        <Filename Value="utf.lpr"/>
+        <Caret Line="18" Column="16"/>
+      </Position14>
+      <Position15>
+        <Filename Value="utf.lpr"/>
+        <Caret Line="20" Column="23" TopLine="2"/>
+      </Position15>
     </JumpHistory>
   </ProjectSession>
 </CONFIG>

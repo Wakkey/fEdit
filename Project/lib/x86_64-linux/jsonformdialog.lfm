@@ -1,7 +1,7 @@
 object JSONForm2: TJSONForm2
   Left = 244
   Height = 416
-  Top = 142
+  Top = 36
   Width = 518
   Caption = 'JSONForm2'
   ClientHeight = 416
@@ -13,6 +13,7 @@ object JSONForm2: TJSONForm2
   OnClose = FormClose
   OnCreate = FormCreate
   OnShow = FormShow
+  Position = poScreenCenter
   LCLVersion = '1.6.2.0'
   object TabSheet15: TTabSheet
     Caption = 'color'

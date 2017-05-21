@@ -1,14 +1,13 @@
 object openfiletypeform: Topenfiletypeform
   Left = 398
   Height = 197
-  Top = 242
+  Top = 265
   Width = 349
   BorderStyle = bsDialog
   Caption = '開くファイルタイプを指定'
   ClientHeight = 197
   ClientWidth = 349
-  Position = poScreenCenter
-  LCLVersion = '1.6.0.4'
+  LCLVersion = '1.6.2.0'
   object CheckGroup1: TCheckGroup
     Left = 0
     Height = 197

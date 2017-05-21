@@ -9,7 +9,7 @@ uses
   Interfaces, // this includes the LCL widgetset
   Forms, printer4lazarus, main, unit_edit, function_unit, comp, colordlg,
   tool_window, find_unit, macrow, repraceMacro, filetype_form, HtmlEdit, htmlpropedit,
-  sqlpropedit, TableBuilder, JSONFormdialog, Jsonparse, versiondialog, tmp_clr, supportcodeinput
+  sqlpropedit, TableBuilder, JSONFormdialog, Jsonparse, versiondialog, tmp_clr
   { you can add units after this };
 
 {$R *.res}
@@ -33,7 +33,6 @@ begin
   Application.CreateForm(Tvershon_form, vershon_form);
   Application.CreateForm(Tcolor_form, color_form);
   Application.CreateForm(TtmpClr, tmpClr);
-  Application.CreateForm(Tcode_auto_support, code_auto_support);
   Application.Run;
 end.
 

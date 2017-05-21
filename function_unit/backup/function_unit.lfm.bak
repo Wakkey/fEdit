@@ -4,7 +4,6 @@ object functionunit: Tfunctionunit
   Top = 285
   Width = 295
   Caption = 'functionunit'
-  OnCloseQuery = FormCloseQuery
   OnCreate = FormCreate
-  LCLVersion = '1.6.0.4'
+  LCLVersion = '1.6.2.0'
 end

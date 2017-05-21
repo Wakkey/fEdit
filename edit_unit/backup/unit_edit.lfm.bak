@@ -1,7 +1,7 @@
 object editform: Teditform
-  Left = 453
+  Left = 395
   Height = 310
-  Top = 239
+  Top = 418
   Width = 524
   Caption = 'editform'
   ClientHeight = 310
@@ -28,13 +28,13 @@ object editform: Teditform
     OnChanging = PageControl1Changing
     object TabSheet1: TTabSheet
       Caption = 'CodeEditMode'
-      ClientHeight = 271
-      ClientWidth = 518
+      ClientHeight = 282
+      ClientWidth = 516
       inline SynEdit1: TSynEdit
         Left = 0
-        Height = 271
+        Height = 282
         Top = 0
-        Width = 518
+        Width = 516
         Align = alClient
         Font.Height = -13
         Font.Name = 'Courier New'
@@ -44,9 +44,6 @@ object editform: Teditform
         ParentFont = False
         PopupMenu = PopupMenu1
         TabOrder = 0
-        OnKeyDown = SynEdit1KeyDown
-        OnKeyPress = SynEdit1KeyPress
-        OnMouseDown = SynEdit1MouseDown
         Gutter.Width = 57
         Gutter.MouseActions = <>
         RightGutter.Width = 0
@@ -539,17 +536,16 @@ object editform: Teditform
     end
     object TabSheet2: TTabSheet
       Caption = 'MemoMode'
-      ClientHeight = 282
-      ClientWidth = 516
+      ClientHeight = 271
+      ClientWidth = 518
       object Memo1: TMemo
         Left = 0
-        Height = 282
+        Height = 271
         Top = 0
-        Width = 516
+        Width = 518
         Align = alClient
         ScrollBars = ssVertical
         TabOrder = 0
-        TabStop = False
       end
     end
     object TabSheet3: TTabSheet
@@ -795,28 +791,5 @@ object editform: Teditform
     Params = <>
     left = 128
     top = 101
-  end
-  object SynCompletion1: TSynCompletion
-    OnExecute = SynCompletion1Execute
-    Position = 0
-    LinesInWindow = 6
-    SelectedColor = clHighlight
-    CaseSensitive = False
-    Width = 262
-    LongLineHintType = sclpNone
-    AutoUseSingleIdent = False
-    ShortCut = 16416
-    EndOfTokenChr = '()[].'
-    OnCodeCompletion = SynCompletion1CodeCompletion
-    ExecCommandID = ecSelLineStart
-    left = 248
-    top = 133
-  end
-  object SynAutoComplete1: TSynAutoComplete
-    EndOfTokenChr = '()[].'
-    ShortCut = 8224
-    ExecCommandID = ecUserDefined0
-    left = 248
-    top = 160
   end
 end

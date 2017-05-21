@@ -5,9 +5,9 @@ unit unit_edit;
 interface
 
 uses
-  Classes, SysUtils, FileUtil, SynEdit, SynCompletion, Forms, Controls,
-  Graphics, Dialogs, Menus, ComCtrls, StdCtrls, ExtCtrls, EditBtn, FileCtrl,
-  DBGrids, sqlite3conn, sqldb, db, Types, LCLType;
+  Classes, SysUtils, FileUtil, SynEdit, Forms, Controls, Graphics, Dialogs,
+  Menus, ComCtrls, StdCtrls, ExtCtrls, EditBtn, FileCtrl, DBGrids, sqlite3conn,
+  sqldb, db;
 
 type
 
@@ -48,8 +48,6 @@ type
     SQLite3Connection1: TSQLite3Connection;
     SQLQuery1: TSQLQuery;
     SQLTransaction1: TSQLTransaction;
-    SynAutoComplete1: TSynAutoComplete;
-    SynCompletion1: TSynCompletion;
     SynEdit1: TSynEdit;
     TabSheet1: TTabSheet;
     TabSheet2: TTabSheet;
@@ -80,16 +78,7 @@ type
     procedure PopupMenu1Close(Sender: TObject);
     procedure SaveDialog1SelectionChange(Sender: TObject);
     procedure SaveDialog1TypeChange(Sender: TObject);
-    procedure SynCompletion1CodeCompletion(var Value: string;
-      SourceValue: string; var SourceStart, SourceEnd: TPoint;
-      KeyChar: TUTF8Char; Shift: TShiftState);
-    procedure SynCompletion1Execute(Sender: TObject);
     procedure SynEdit1Change(Sender: TObject);
-    procedure SynEdit1KeyDown(Sender: TObject; var Key: Word; Shift: TShiftState
-      );
-    procedure SynEdit1KeyPress(Sender: TObject; var Key: char);
-    procedure SynEdit1MouseDown(Sender: TObject; Button: TMouseButton;
-      Shift: TShiftState; X, Y: Integer);
   private
     { private declarations }
     edit_y,edit_x,sel:integer;
@@ -103,9 +92,7 @@ type
     Edit:TStringList;
     editCaretY,editCaretX:integer;
     Json_write:TStringList;
-    code_suport:TStringList;
     tabNo:integer;
-    input_char:string;
   end;
 
 var
@@ -113,7 +100,7 @@ var
 
 implementation
 
-uses function_unit, main, comp, repraceMacro, supportcodeinput;
+uses function_unit, main, comp, repraceMacro;
 
 {$R *.lfm}
 
@@ -127,12 +114,7 @@ begin
   Edit.Clear;
   Json_write := TstringList.Create;
   Json_write.clear;
-  code_suport := TstringList.Create;
-  code_suport.Clear;
   PageControl1.PageIndex:= 0;
-  SynCompletion1.Editor := synedit1;
-  SynAutoComplete1.Editor := synedit1;
-  input_char:='';
 end;
 
 procedure Teditform.FormDockDrop(Sender: TObject; Source: TDragDockObject; X,
@@ -305,106 +287,9 @@ begin
   st.Free;
 end;
 
-procedure Teditform.SynCompletion1CodeCompletion(var Value: string;
-  SourceValue: string; var SourceStart, SourceEnd: TPoint; KeyChar: TUTF8Char;
-  Shift: TShiftState);
-begin
-  //showmessage(SourceValue + ' '+ Value + ' ' + keychar);
-
-end;
-
-procedure Teditform.SynCompletion1Execute(Sender: TObject);
-begin
-
-end;
-
 procedure Teditform.SynEdit1Change(Sender: TObject);
 begin
   save_complate := false;
-end;
-
-procedure Teditform.SynEdit1KeyDown(Sender: TObject; var Key: Word;
-  Shift: TShiftState);
-  function delete_char(str:string;count:integer):string;
-  var
-    s,s1:string;
-    i:integer;
-  begin
-        s := str;
-        for i := 1 to length(s)-count do begin
-          s1 := s1 + s[i];
-        end;
-        delete_char := s1;
-  end;
-
-begin
-  if (word(chr(37)) = key) or
-      (word(chr(38)) = key) or
-      (word(chr(39)) = key) or
-      (word(chr(40)) = key) or
-      (word(chr(46)) = key) or
-      (word(chr(13))= key) then begin
-    input_char := '';
-  end else if (word(chr(8)) = key) then begin
-    case ByteType(input_char,length(input_char)-1) of
-      mbSingleByte: input_char := delete_char(input_char,2);//1byte
-      mbLeadByte: input_char := delete_char(input_char,2);//2byte of 1
-      mbTrailByte: input_char := delete_char(input_char,3);//2byte of 2
-    end;
-  end;
-end;
-
-procedure Teditform.SynEdit1KeyPress(Sender: TObject; var Key: char);
-var
-   apoint,temppoint:tpoint;
-   s:string;
-   i,i1:integer;
-   st,st1:TStringList;
-begin
-  if code_suport.Text <> '' then begin
-      if code_auto_support.ListBox1.Items.Text = '' then begin
-        code_auto_support.ListBox1.Items.Text := code_suport.Text;
-      end;
-      input_char := input_char + key;
-      st:=TStringList.Create;
-      st1:=TStringList.Create;
-      st1.Clear;
-      st.Text := code_auto_support.ListBox1.Items.Text;
-      for i := 0 to st.Count -1 do begin
-        i1 := ansipos(input_char,' '+st[i]);
-        if i1 <> 0 then begin
-          st1.Add(st[i]);
-        end;
-      end;
-      code_auto_support.ListBox1.Items.Text := st1.Text;
-      st.Free;
-      st1.Free;
-      if code_auto_support.ListBox1.Items.Count = -1 then begin
-          code_auto_support.Close;
-          exit;
-      end;
-             temppoint:=SynEdit1.CaretXY;
-             temppoint.y:=temppoint.y+1;
-             //temppoint.x:=temppoint.x-1;
-             //s := synedit1.Lines[temppoint.y];
-             //s[temppoint.x] := ' ';
-             //synedit1.Lines[temppoint.y] := s;
-             apoint:= SynEdit1.ClientToScreen(SynEdit1.RowColumnToPixels(temppoint));
-             //apoint.x:=apoint.x-1;
-             //SynCompletion1.Execute(key,apoint);
-             code_auto_support.SetBounds(apoint.X,apoint.Y {+ ( synedit1.LineHeight )}
-               ,code_auto_support.Width,code_auto_support.Height);
-             code_auto_support.Show;
-
-             mainform.ActiveControl := synedit1;
-
-  end;
-end;
-
-procedure Teditform.SynEdit1MouseDown(Sender: TObject; Button: TMouseButton;
-  Shift: TShiftState; X, Y: Integer);
-begin
-  input_char:='';
 end;
 
 end.

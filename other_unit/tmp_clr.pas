@@ -48,25 +48,63 @@ end;
 
 procedure TtmpClr.Button1Click(Sender: TObject);
 begin
-  functionunit.TempFIle_Clear1('.ba1');
-  functionunit.TempFIle_Clear2('temp1.txt');
+    {$IFDEF Windows}
+         functionunit.TempFIle_Clear1('tmp\','.ba1');
+         functionunit.TempFIle_Clear2('Backupfile\','temp1.txt');
+    {$ENDIF}
+    {$IFDEF LINUX}
+         functionunit.TempFIle_Clear1('tmp\','.ba1');
+         functionunit.TempFIle_Clear2('Backupfile\','temp1.txt');
+    {$ENDIF}
+    {$IFDEF Darwin}
+         functionunit.TempFIle_Clear1('tmp/','.ba1');
+         functionunit.TempFIle_Clear2('Backupfile/','temp1.txt');
+    {$ENDIF}
 end;
 
 procedure TtmpClr.Button2Click(Sender: TObject);
 begin
-  functionunit.TempFIle_Clear1('.ba2');
-  functionunit.TempFIle_Clear2('temp2.txt');
+  {$IFDEF Windows}
+       functionunit.TempFIle_Clear1('tmp\','.ba2');
+       functionunit.TempFIle_Clear2('Backupfile\','temp2.txt');
+  {$ENDIF}
+  {$IFDEF LINUX}
+       functionunit.TempFIle_Clear1('tmp\','.ba2');
+       functionunit.TempFIle_Clear2('Backupfile\','temp2.txt');
+  {$ENDIF}
+  {$IFDEF Darwin}
+       functionunit.TempFIle_Clear1('tmp\','.ba2');
+       functionunit.TempFIle_Clear2('Backupfile\','temp2.txt');
+  {$ENDIF}
 end;
 
 procedure TtmpClr.Button3Click(Sender: TObject);
 begin
-  functionunit.TempFIle_Clear1('.ba');
-  functionunit.TempFIle_Clear2('temp3.txt');
+  {$IFDEF Windows}
+       functionunit.TempFIle_Clear1('tmp\','.ba');
+       functionunit.TempFIle_Clear2('Backupfile\','temp3.txt');
+  {$ENDIF}
+  {$IFDEF LINUX}
+       functionunit.TempFIle_Clear1('tmp\','.ba');
+       functionunit.TempFIle_Clear2('Backupfile\','temp3.txt');
+  {$ENDIF}
+  {$IFDEF Darwin}
+       functionunit.TempFIle_Clear1('tmp\','.ba');
+       functionunit.TempFIle_Clear2('Backupfile\','temp3.txt');
+  {$ENDIF}
 end;
 
 procedure TtmpClr.Button4Click(Sender: TObject);
 begin
-  functionunit.TempFIle_Clear2('test.*');
+  {$IFDEF Windows}
+       functionunit.TempFIle_Clear2('tmp\','test.*');
+  {$ENDIF}
+  {$IFDEF LINUX}
+       functionunit.TempFIle_Clear2('tmp\','test.*');
+  {$ENDIF}
+  {$IFDEF Darwin}
+       functionunit.TempFIle_Clear2('tmp/','test.*');
+  {$ENDIF}
 end;
 
 end.

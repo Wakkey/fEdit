@@ -12,8 +12,7 @@ uses
   synhighlighterunixshellscript, SynHighlighterCss, SynHighlighterPHP,
   SynHighlighterTeX, SynHighlighterSQL, SynHighlighterPython, SynHighlighterVB,
   SynHighlighterAny, SynHighlighterMulti, SynHighlighterBat, SynHighlighterIni,
-  SynHighlighterPo, SynCompletion, PrintersDlgs, Forms, Controls, Graphics,
-  Dialogs, ExtDlgs;
+  SynHighlighterPo, PrintersDlgs, Forms, Controls, Graphics, Dialogs, ExtDlgs;
 
 type
 

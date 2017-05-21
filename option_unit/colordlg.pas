@@ -226,21 +226,10 @@ begin
   st1:=TStringList.Create;
   st2:=TStringList.Create;
   try
-  {$IFDEF Windows}
-  st.LoadFromFile(extractfilepath(paramstr(0))+'ini\mnu_title.txt');
-  st1.LoadFromFile(extractfilepath(paramstr(0))+'ini\mnu_caption.txt');
-  st2.LoadFromFile(extractfilepath(paramstr(0))+'ini\mnu_shortcut.txt');
-  {$ENDIF}
-  {$IFDEF Linux}
-  st.LoadFromFile(extractfilepath(paramstr(0))+'ini\mnu_title.txt');
-  st1.LoadFromFile(extractfilepath(paramstr(0))+'ini\mnu_caption.txt');
-  st2.LoadFromFile(extractfilepath(paramstr(0))+'ini\mnu_shortcut.txt');
-  {$ENDIF}
-  {$IFDEF Darwin}
-  st.LoadFromFile(extractfilepath(paramstr(0))+'ini/mnu_title.txt');
-  st1.LoadFromFile(extractfilepath(paramstr(0))+'ini/mnu_caption.txt');
-  st2.LoadFromFile(extractfilepath(paramstr(0))+'ini/mnu_shortcut.txt');
-  {$ENDIF}
+  st.LoadFromFile(extractfilepath(paramstr(0))+'mnu_title.txt');
+  st1.LoadFromFile(extractfilepath(paramstr(0))+'mnu_caption.txt');
+  st2.LoadFromFile(extractfilepath(paramstr(0))+'mnu_shortcut.txt');
+
 
   finally
   functionunit.mnu_custum_set(st,st1,st2);
@@ -420,21 +409,10 @@ begin
     inttostr(color_form.ComboBox6.Items.Count)
   );
   color_form.ComboBox6.ItemIndex := color_form.ComboBox6.Items.Count -1;
-  {$IFDEF Windows}
-  setfile := 'ini\'+ inttostr(ComboBox6.ItemIndex+1)+'.ini';
-  setfile2 := 'ini\'+ inttostr(ComboBox6.ItemIndex+1)+'t.ini';
-  setfile3 := 'ini\'+ inttostr(ComboBox6.ItemIndex+1)+'tt.ini';
-  {$ENDIF}
-  {$IFDEF Linux}
-  setfile := 'ini/'+ inttostr(ComboBox6.ItemIndex+1)+'.ini';
-  setfile2 := 'ini/'+ inttostr(ComboBox6.ItemIndex+1)+'t.ini';
-  setfile3 := 'ini/'+ inttostr(ComboBox6.ItemIndex+1)+'tt.ini';
-  {$ENDIF}
-  {$IFDEF Darwin}
-  setfile := 'ini/'+ inttostr(ComboBox6.ItemIndex+1)+'.ini';
-  setfile2 := 'ini/'+ inttostr(ComboBox6.ItemIndex+1)+'t.ini';
-  setfile3 := 'ini/'+ inttostr(ComboBox6.ItemIndex+1)+'tt.ini';
-  {$ENDIF}
+
+  setfile := inttostr(ComboBox6.ItemIndex+1)+'.ini';
+  setfile2 := inttostr(ComboBox6.ItemIndex+1)+'t.ini';
+  setfile3 := inttostr(ComboBox6.ItemIndex+1)+'tt.ini';
   if not checkbox3.Checked then begin
     functionunit.toolbarbuttoncount.SaveToFile(
          systoutf8(utf8tosys( ExtractFilePath( (Paramstr(0)) ) + setfile ))

@@ -1,66 +1,67 @@
 object JSONEditForm: TJSONEditForm
-  Left = 329
-  Height = 537
-  Top = 159
-  Width = 891
+  Left = 801
+  Height = 490
+  Top = 1
+  Width = 782
   Caption = 'JSONSchemaEdit'
-  ClientHeight = 537
-  ClientWidth = 891
+  ClientHeight = 490
+  ClientWidth = 782
   Color = clBtnFace
   Font.Color = clWindowText
   Font.Height = -11
   Font.Name = 'Tahoma'
   OnCreate = FormCreate
+  Position = poScreenCenter
   LCLVersion = '1.6.2.0'
   Visible = True
   object Panel2: TPanel
     Left = 0
-    Height = 537
+    Height = 490
     Top = 0
-    Width = 891
+    Width = 782
     Align = alClient
     Caption = 'Panel2'
-    ClientHeight = 537
-    ClientWidth = 891
+    ClientHeight = 490
+    ClientWidth = 782
     TabOrder = 0
     object Panel3: TPanel
       Left = 1
-      Height = 535
+      Height = 488
       Top = 1
-      Width = 889
+      Width = 780
       Align = alClient
       Caption = 'Panel2'
-      ClientHeight = 535
-      ClientWidth = 889
+      ClientHeight = 488
+      ClientWidth = 780
       TabOrder = 0
       object Panel7: TPanel
         Left = 1
-        Height = 533
+        Height = 486
         Top = 1
-        Width = 887
+        Width = 778
         Align = alClient
-        ClientHeight = 533
-        ClientWidth = 887
+        ClientHeight = 486
+        ClientWidth = 778
         TabOrder = 0
         object GroupBox5: TGroupBox
           Left = 1
-          Height = 531
+          Height = 484
           Top = 1
           Width = 352
           Align = alLeft
           Caption = '編集領域'
-          ClientHeight = 513
+          ClientHeight = 466
           ClientWidth = 348
           TabOrder = 0
           OnClick = GroupBox5Click
           object GroupBox1: TGroupBox
             Left = 0
-            Height = 114
+            Height = 67
             Top = 399
             Width = 348
             Align = alRight
             Caption = '配置位置及びサイズ調整'
-            ClientHeight = 96
+            ClientHeight = 49
             ClientWidth = 344
             TabOrder = 0
             OnClick = GroupBox1Click
@@ -228,7 +229,7 @@ object JSONEditForm: TJSONEditForm
           object Panel10: TPanel
             Left = 0
             Height = 256
-            Top = 0
+            Top = 143
             Width = 348
             Align = alTop
             ClientHeight = 256
@@ -421,7 +422,7 @@ object JSONEditForm: TJSONEditForm
           object Panel9: TPanel
             Left = 0
             Height = 143
-            Top = 256
+            Top = 0
             Width = 348
             Align = alTop
             ClientHeight = 143
@@ -533,13 +534,13 @@ object JSONEditForm: TJSONEditForm
         end
         object GroupBox6: TGroupBox
           Left = 353
-          Height = 531
+          Height = 484
           Top = 1
-          Width = 533
+          Width = 424
           Align = alClient
           Caption = 'デザイン'
-          ClientHeight = 513
-          ClientWidth = 529
+          ClientHeight = 466
+          ClientWidth = 420
           TabOrder = 1
           OnClick = GroupBox6Click
           object MeisiForm: TPanel

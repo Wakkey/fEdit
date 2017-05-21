@@ -158,8 +158,8 @@ begin
     functionunit.macrosetup(functionunit.macrocount);
     inc(functionunit.macrocount);
   end;
-  //color_form.BTN_SetMnu2Click(Sender);
-  //color_form.Button11Click(Sender);
+  color_form.BTN_SetMnu2Click(Sender);
+  color_form.Button11Click(Sender);
   macro_form.Edit1.Clear;
   macro_form.Edit2.Text:= '';
   macro_form.ComboBox1.Text:= '';

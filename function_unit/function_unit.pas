@@ -31,11 +31,9 @@ type
   { Tfunctionunit }
 
   Tfunctionunit = class(TForm)
-    procedure FormCloseQuery(Sender: TObject; var CanClose: boolean);
     procedure FormCreate(Sender: TObject);
   private
     { private declarations }
-    ACriticalSection: TRTLCriticalSection;
     saveep:array[0..255] of integer;
     fcolorset,bcolorset:string;
 
@@ -124,11 +122,11 @@ type
     Edit_arry:array[0..40] of TEdit;
     true_boot:boolean;
     function load(setfile,setname2:widestring):boolean;
-    function save(setfile,setname1:widestring):boolean;
+    function save(dir,setfile,setname1:widestring):boolean;
     function loadmenulist:boolean;
     function mnu_Load():boolean;
-    function iniread:boolean;
-    function iniwrite:boolean;
+    function iniread(dir:string):boolean;
+    function iniwrite(dir:string):boolean;
     function toolbar_start():boolean;
     function setdialog:boolean;
     function create_StringList():boolean;
@@ -236,9 +234,9 @@ type
     function macload(i:integer;s:string):boolean;
     function macsave(i:integer;s:string):boolean;
     {$ENDIF}
-    function TempFIle_Clear1(s:string):boolean;
-    function TempFIle_Clear2(s:string):boolean;
-    function TempFIle_Clear3(s:string):boolean;
+    function TempFIle_Clear1(dir,s:string):boolean;
+    function TempFIle_Clear2(dir,s:string):boolean;
+    function TempFIle_Clear3(dir,s:string):boolean;
 
     function EnumFileFromDir(Dir: string;st:TstringList):boolean;
     {Edit menu}
@@ -280,8 +278,8 @@ type
     function macro_run2(file_name:string):boolean;
     function macro_runex(file_name:string):boolean;
     function pross(set_name,set_name2:string):boolean;
-    function pross2(command,option:string):boolean;
-    function pross3(command,option:string):boolean;
+    function pross2(command:string):boolean;
+    function pross3(command:string):boolean;
     function Mcrocheck(send:TObject;sw:boolean):boolean;
     function LngeMenu_copy:boolean;
 
@@ -296,8 +294,6 @@ type
     function Set_Label(No:integer;SetLabel:string;ParentComp:TWinControl):TLabel;
     function Set_Edit(No:integer;SetEdit:string;ParentComp:TWinControl):TEdit;
     function Set_Coomp(HtmlParts:string;EditParts:TStringList;comp:TWinControl):boolean;
-    function read_sorce(TabNo:integer;filename:string):boolean;
-    function bunkatu2(st,st2:TStringList):boolean;
 
     {sqlBuilder}
     function openSQLBuilder(i:integer):boolean;
@@ -315,7 +311,6 @@ var
   functionunit: Tfunctionunit;
   {$IFDEF WIN32}
      function load_text(st:pchar):pchar; stdcall; external 'utf.dll';
-     function load_text2(st:pchar):pchar; stdcall; external 'utf.dll';
      function save_text(st:pchar):pchar; stdcall; external 'utf.dll';
      function encod_unicode(s:pchar):integer; stdcall; external 'utf.dll';
      function decoed_unicode(s:pchar):integer; stdcall; external 'utf.dll';
@@ -358,36 +353,11 @@ var
   i,i1,i2,i3,count:integer;
   LIst:TStringList;
   s,s1,s2,s3:string;
-  function ReadSorce(filenamess:string;st:TStringlist):boolean;
-    var
-      tf : TextFile;
-    begin
-      ReadSorce := false;
-      try
-        AssignFile(tf, filenamess);
-        Reset(tf);
-        while not Eof(tf) do begin
-          Readln(tf, filenamess);
-          st.Add(filenamess);
-        end;
-      finally
-        CloseFile(tf);
-        ReadSorce := true;
-      end
-  end;
 begin
   List := TStringList.Create;
   List.Clear;
   try
-    {$IFDEF Windows}
-      List.LoadFromFile(utf8tosys(systoutf8( ExtractFilePath( (Paramstr(0)) ) + 'Backupfile\' + setfile )));
-    {$ENDIF}
-    {$IFDEF Linux}
     List.LoadFromFile(utf8tosys(systoutf8( ExtractFilePath( (Paramstr(0)) ) + 'Backupfile\' + setfile )));
-    {$ENDIF}
-    {$IFDEF Darwin}
-    List.LoadFromFile(utf8tosys(systoutf8( ExtractFilePath( (Paramstr(0)) ) + 'Backupfile/' + setfile )));
-    {$ENDIF}
   finally
     functionunit.deleteAll_edittab();
     try
@@ -408,24 +378,8 @@ begin
           end;
           //showmessage(utf8tosys(ExtractFilePath( systoutf8(Paramstr(0)) ) +
             //( IntToStr(i) + setname2)));
-          {$IFDEF Windows}
-           try
-             ReadSorce(utf8tosys(ExtractFilePath( systoutf8(Paramstr(0)) ) +  'Backupfile\' + ( IntToStr(i) + setname2)),
-             functionunit.editlist.Items[i].Edit );
-           except
-
-           end;
-          //functionunit.editlist.Items[i].Edit.LoadFromFile(utf8tosys(ExtractFilePath( systoutf8(Paramstr(0)) ) + ( IntToStr(i) + 'Backupfile\' + setname2)));
-          {$ENDIF}
-          {$IFDEF Linux}
           functionunit.editlist.Items[i].Edit.LoadFromFile(utf8tosys(ExtractFilePath( systoutf8(Paramstr(0)) ) +
             ( IntToStr(i) + 'Backupfile\' + setname2)));
-          {$ENDIF}
-          {$IFDEF Darwin}
-          functionunit.editlist.Items[i].Edit.LoadFromFile(utf8tosys(ExtractFilePath( systoutf8(Paramstr(0)) ) +
-            ( IntToStr(i) + 'Backupfile/' + setname2)));
-          {$ENDIF}
-
           //functionunit.memoload(i,utf8tosys(ExtractFilePath( systoutf8(Paramstr(0)) ) +
           //  ( IntToStr(i) + setname2)));
           functionunit.editlist.Items[i].SynEdit1.Lines.Text:=
@@ -444,7 +398,7 @@ begin
           s := extractfileext(functionunit.editlist.Items[i].filename_path);
           s1 := extractfilename(functionunit.editlist.Items[i].filename_path);
       //showmessage(s);
-        case s of
+      case s of
         '.txt':;
         '.html':mainform.Menu_HTMLClick(mainform.Menu_HTML);
         '.htm':mainform.Menu_HTMLClick(mainform.Menu_HTML);
@@ -474,8 +428,8 @@ begin
             functionunit.editlist.Items[i].PageControl1.ActivePageIndex:=2;
             functionunit.editlist.Items[i].Panel1.Visible:=TRUE;
          end;
-        end;
       end;
+        end;
 
       end;
 
@@ -485,7 +439,7 @@ begin
   end;
 end;
 
-function Tfunctionunit.save(setfile,setname1:widestring):boolean;
+function Tfunctionunit.save(dir,setfile,setname1:widestring):boolean;
 var
   i:integer;
   s,s1:string;
@@ -504,43 +458,16 @@ begin
       List.Add(functionunit.editlist.Items[i].filename_path);
     end;
   finally
-    {$IFDEF win32}
     ForceDirectories( ExtractFilePath( ParamStr(0) ) + 'Backupfile\');
     List.SaveToFile(
        utf8tosys(systoutf8( ExtractFilePath( (Paramstr(0)) ) + 'Backupfile\' + setfile )
       ));
-    {$ENDIF}
-    {$IFDEF Linux}
-    ForceDirectories( ExtractFilePath( ParamStr(0) ) + 'Backupfile\');
-    List.SaveToFile(
-       utf8tosys(systoutf8( ExtractFilePath( (Paramstr(0)) ) + 'Backupfile\' + setfile )
-      ));
-    {$ENDIF}
-    {$IFDEF Darwin}
-    ForceDirectories( ExtractFilePath( ParamStr(0) ) + 'Backupfile/');
-    List.SaveToFile(
-       utf8tosys(systoutf8( ExtractFilePath( (Paramstr(0)) ) + 'Backupfile/' + setfile )
-      ));
-    {$ENDIF}
   end;
-
-
   for i := 0 to mainform.PageControl1.PageCount -2 do begin
        mainform.PageControl1.PageIndex := i;
        s1 := mainform.PageControl1.Pages[i].Caption;
-       {$IFDEF win32}
-       s :=  (ansitoutf8( ExtractFilePath( (Paramstr(0) )) + 'Backupfile\' +
+       s :=  (ansitoutf8( ExtractFilePath( (Paramstr(0) )) + dir +
              IntToStr(i) + setname1));
-       {$ENDIF}
-       {$IFDEF Linux}
-       s :=  (ansitoutf8( ExtractFilePath( (Paramstr(0) )) + 'Backupfile\' +
-             IntToStr(i) + setname1));
-       {$ENDIF}
-       {$IFDEF Darwin}
-       s :=  (ansitoutf8( ExtractFilePath( (Paramstr(0) )) + 'Backupfile/' +
-             IntToStr(i) + setname1));
-       {$ENDIF}
-
        try
          //functionunit.save_sw := true;
          if functionunit.editlist.Items[i].PageControl1.ActivePageIndex = 0 then begin
@@ -601,7 +528,7 @@ begin
       end;
 end;
 
-function Tfunctionunit.iniread:boolean;
+function Tfunctionunit.iniread(dir:string):boolean;
 var
   alist:TStringList;
   i,i1,i2,i3:integer;
@@ -609,21 +536,10 @@ var
 begin
   alist := TStringList.Create;
   alist.Clear;
-  {$IFDEF Win32}
   alist.LoadFromFile(
-    utf8tosys(ExtractFilePath( systoutf8(Paramstr(0)) )  + 'ini\' + 'seting.ini')
+    utf8tosys(ExtractFilePath( systoutf8(Paramstr(0)) )  + dir + 'seting.ini')
   );
-  {$ENDIF}
-  {$IFDEF Linux}
-  alist.LoadFromFile(
-    utf8tosys(ExtractFilePath( systoutf8(Paramstr(0)) )  + 'ini\' + 'seting.ini')
-  );
-  {$ENDIF}
-  {$IFDEF Darwin}
-  alist.LoadFromFile(
-    utf8tosys(ExtractFilePath( systoutf8(Paramstr(0)) )  + 'ini/' + 'seting.ini')
-  );
-  {$ENDIF}
+
   i := alist.IndexOf('formtop');
   if -1 < i then begin
     mainform.Top := strtoint(alist[i+1]);
@@ -964,7 +880,7 @@ begin
 
 end;
 
-function Tfunctionunit.iniwrite:boolean;
+function Tfunctionunit.iniwrite(dir:string):boolean;
 var
   alist:TStringList;
   i,i1,i2:integer;
@@ -1337,25 +1253,11 @@ begin
 
   alist.Add('toolbaraligin');
     alist.Add(functionunit.toolbaraligin(''));
-  {$IFDEF WIN32}
-  ForceDirectories( ExtractFilePath( (Paramstr(0)) )  + 'ini\' );
-  alist.SaveToFile(
-    utf8tosys(systoutf8(ExtractFilePath( (Paramstr(0)) )  + 'ini\' + 'seting.ini')
-  ));
-  {$ENDIF}
-  {$IFDEF Linux}
-  ForceDirectories( ExtractFilePath( (Paramstr(0)) )  + 'ini\' );
-  alist.SaveToFile(
-    utf8tosys(systoutf8(ExtractFilePath( (Paramstr(0)) )  + 'ini\' + 'seting.ini')
-  ));
-  {$ENDIF}
-  {$IFDEF Darwin}
-  ForceDirectories( ExtractFilePath( (Paramstr(0)) )  + 'ini/' );
-  alist.SaveToFile(
-    utf8tosys(systoutf8(ExtractFilePath( (Paramstr(0)) )  + 'ini/' + 'seting.ini')
-  ));
-  {$ENDIF}
 
+    ForceDirectories( ExtractFilePath( (Paramstr(0)) )  + dir );
+  alist.SaveToFile(
+    utf8tosys(systoutf8(ExtractFilePath( (Paramstr(0)) )  + dir + 'seting.ini')
+  ));
 end;
 
 function Tfunctionunit.toolbar_start():boolean;
@@ -1436,7 +1338,7 @@ begin
     inc(i);//err2
 
     functionunit.mnu_Load();
-    {$IFDEF WIN32}
+    {$IFDEF Windows}
          inc(i);//err3
          mainform.Menu_Ansi.Checked:= true;
     {$ENDIF}
@@ -1453,11 +1355,30 @@ begin
     //functionunit.new(false);
     functionunit.toolbar_start();
     try
-      functionunit.iniread;
+      {$IFDEF Windows}
+         functionunit.iniread('ini\');
+      {$ENDIF}
+      {$IFDEF LINUX}
+         functionunit.iniread('ini\');
+      {$ENDIF}
+      {$IFDEF Darwin}
+         functionunit.iniread('ini/');
+      {$ENDIF}
      except
        //functionunit.frmpsnset;
-       functionunit.iniwrite;
-       functionunit.iniread;
+
+       {$IFDEF Windows}
+         functionunit.iniread('ini\');
+         functionunit.iniwrite('ini\');
+      {$ENDIF}
+      {$IFDEF LINUX}
+         functionunit.iniread('ini\');
+         functionunit.iniwrite('ini\');
+      {$ENDIF}
+      {$IFDEF Darwin}
+         functionunit.iniread('ini/');
+         functionunit.iniwrite('ini/');
+      {$ENDIF}
      end;
      editlist.Items[0].SynEdit1.Font.Name:= font_name;
      editlist.Items[0].SynEdit1.Font.Size:= font_size;
@@ -1479,7 +1400,6 @@ begin
      {for i1 := 1 to ParamCount do begin
        functionunit.fileopen(ansitoutf8(Paramstr(i1)));
      end;}
-  color_form.Button11Click(mainform);
   functionunit.true_boot := true;
   st:= TStringlist.Create;
   st.Clear;
@@ -2026,17 +1946,8 @@ end;
 function Tfunctionunit.SelectToolBarPreSet(i:integer):integer;
 var
   s:TStringList;
-  setfile,inis:string;
+  setfile:string;
 begin
-  {$IFDEF Win}
-  inis := 'ini\';
-  {$ENDIF}
-  {$IFDEF Linux}
-  inis := 'ini\';
-  {$ENDIF}
-  {$IFDEF Darwin}
-  inis := 'ini/';
-  {$ENDIF}
   s := TStringList.Create;;
   s.Clear;
   case i of
@@ -2047,7 +1958,7 @@ begin
      try
        setfile := inttostr(i)+'.ini';
         s.LoadFromFile(
-         utf8tosys(systoutf8( ExtractFilePath( (Paramstr(0)) )  + inis + setfile ))
+         utf8tosys(systoutf8( ExtractFilePath( (Paramstr(0)) )  + 'ini\' + setfile ))
         );
       except
       s.Text:=
@@ -2068,7 +1979,7 @@ begin
       + '26' + chr(13)
       + '27' + chr(13);
       s.SaveToFile(
-         systoutf8(utf8tosys( ExtractFilePath( (Paramstr(0)) )  + inis + setfile ))
+         systoutf8(utf8tosys( ExtractFilePath( (Paramstr(0)) )  + 'ini\' + setfile ))
         );
       end;
     end;
@@ -2077,7 +1988,7 @@ begin
      try
      setfile := inttostr(i)+'.ini';
         s.LoadFromFile(
-         utf8tosys(systoutf8( ExtractFilePath( (Paramstr(0)) )  + inis + setfile ))
+         utf8tosys(systoutf8( ExtractFilePath( (Paramstr(0)) )  + 'ini\' + setfile ))
         );
       except
      s.Text:=
@@ -2095,7 +2006,7 @@ begin
      + '17' + chr(13)
      + '19' + chr(13);
     s.SaveToFile(
-         systoutf8(utf8tosys( ExtractFilePath( (Paramstr(0)) )  + inis + setfile ))
+         systoutf8(utf8tosys( ExtractFilePath( (Paramstr(0)) )  + 'ini\' + setfile ))
         );
       end;
     end;
@@ -2104,7 +2015,7 @@ begin
      try
      setfile := inttostr(i)+'.ini';
         s.LoadFromFile(
-         utf8tosys(systoutf8( ExtractFilePath( (Paramstr(0)) )  + inis + setfile ))
+         utf8tosys(systoutf8( ExtractFilePath( (Paramstr(0)) )  + 'ini\' + setfile ))
         );
       except
      s.Text:=
@@ -2133,7 +2044,7 @@ begin
      + '33' + chr(13)
      + '35' + chr(13);
     s.SaveToFile(
-         systoutf8(utf8tosys( ExtractFilePath( (Paramstr(0)) )  + inis + setfile ))
+         systoutf8(utf8tosys( ExtractFilePath( (Paramstr(0)) )  + 'ini\' + setfile ))
         );
       end;
     end;
@@ -2142,7 +2053,7 @@ begin
      try
      setfile := inttostr(i)+'.ini';
         s.LoadFromFile(
-         utf8tosys(systoutf8( ExtractFilePath( (Paramstr(0)) )  + inis + setfile ))
+         utf8tosys(systoutf8( ExtractFilePath( (Paramstr(0)) )  + 'ini\' + setfile ))
         );
       except
      s.Text:=
@@ -2172,7 +2083,7 @@ begin
      + '56' + chr(13)
      + '57' + chr(13);
     s.SaveToFile(
-         systoutf8(utf8tosys( ExtractFilePath( (Paramstr(0)) )  + inis + setfile ))
+         systoutf8(utf8tosys( ExtractFilePath( (Paramstr(0)) )  + 'ini\' + setfile ))
         );
       end;
     end;
@@ -2181,7 +2092,7 @@ begin
      try
      setfile := inttostr(i)+'.ini';
         s.LoadFromFile(
-         utf8tosys(systoutf8( ExtractFilePath( (Paramstr(0)) )  + inis + setfile ))
+         utf8tosys(systoutf8( ExtractFilePath( (Paramstr(0)) )  + 'ini\' + setfile ))
         );
       except
      s.Text:=
@@ -2217,7 +2128,7 @@ begin
      + '118' + chr(13)
      + '119' + chr(13);
     s.SaveToFile(
-         systoutf8(utf8tosys( ExtractFilePath( (Paramstr(0)) )  + inis + setfile ))
+         systoutf8(utf8tosys( ExtractFilePath( (Paramstr(0)) )  + 'ini\' + setfile ))
         );
       end;
     end;
@@ -2229,18 +2140,9 @@ end;
 function Tfunctionunit.SelectToolBarPreSet2(i:integer):integer;
 var
   s,s1,s2:TStringList;
-  setfile,setfile2,setfile3,inis:string;
+  setfile,setfile2,setfile3:string;
   i1,i2:integer;
 begin
-  {$IFDEF Win}
-  inis := 'ini\';
-  {$ENDIF}
-  {$IFDEF Linux}
-  inis := 'ini/';
-  {$ENDIF}
-  {$IFDEF Darwin}
-  inis := 'ini/';
-  {$ENDIF}
   s := TStringList.Create;
   s.Clear;
   s1 := TStringList.Create;
@@ -2256,10 +2158,10 @@ begin
        setfile2 := inttostr(1)+'t.ini';
        setfile3 := inttostr(1)+'tt.ini' ;
         s.LoadFromFile(
-         utf8tosys(systoutf8( ExtractFilePath( (Paramstr(0)) )  + inis + setfile2 ))
+         utf8tosys(systoutf8( ExtractFilePath( (Paramstr(0)) )  + 'ini\' + setfile2 ))
         );
         s1.LoadFromFile(
-         utf8tosys(systoutf8( ExtractFilePath( (Paramstr(0)) )  + inis + setfile3 ))
+         utf8tosys(systoutf8( ExtractFilePath( (Paramstr(0)) )  + 'ini\' + setfile3 ))
         );
       except
       s.Text:=
@@ -2433,7 +2335,7 @@ begin
      + 't6' + chr(13);
 
       s.SaveToFile(
-         systoutf8(utf8tosys( ExtractFilePath( (Paramstr(0)) )  + inis + setfile2 ))
+         systoutf8(utf8tosys( ExtractFilePath( (Paramstr(0)) )  + 'ini\' + setfile2 ))
         );
 
 
@@ -2450,7 +2352,7 @@ begin
      + 'マクロ' + chr(13);
 
       s1.SaveToFile(
-         systoutf8(utf8tosys( ExtractFilePath( (Paramstr(0)) )  + inis + setfile3 ))
+         systoutf8(utf8tosys( ExtractFilePath( (Paramstr(0)) )  + 'ini\' + setfile3 ))
         );
       end;
     end;
@@ -2792,23 +2694,9 @@ begin
    //end;
     i1 := i1 +2;
   end;
-  {$IFDEF Win}
   st.SaveToFile(extractfilepath(paramstr(0)) + 'ini\' + 'mnu_title.txt');
   st2.SaveToFile(extractfilepath(paramstr(0)) + 'ini\' + 'mnu_caption.txt');
   st3.SaveToFile(extractfilepath(paramstr(0)) + 'ini\' + 'mnu_shortcut.txt');
-  {$ENDIF}
-  {$IFDEF Linux}
-  st.SaveToFile(extractfilepath(paramstr(0)) + 'ini\' + 'mnu_title.txt');
-  st2.SaveToFile(extractfilepath(paramstr(0)) + 'ini\' + 'mnu_caption.txt');
-  st3.SaveToFile(extractfilepath(paramstr(0)) + 'ini\' + 'mnu_shortcut.txt');
-  {$ENDIF}
-  {$IFDEF Darwin}
-  st.SaveToFile(extractfilepath(paramstr(0)) + 'ini/' + 'mnu_title.txt');
-  st2.SaveToFile(extractfilepath(paramstr(0)) + 'ini/' + 'mnu_caption.txt');
-  st3.SaveToFile(extractfilepath(paramstr(0)) + 'ini/' + 'mnu_shortcut.txt');
-  {$ENDIF}
-
-
 end;
 
 function Tfunctionunit.load_mnu_set:boolean;
@@ -2830,21 +2718,9 @@ begin
   //functionunit.toolbarbuttonparnt2.Clear;
   //showmessage(inttostr(functionunit.toolbarbuttonparnt.Count) + ' ' + inttostr(functionunit.toolbarbuttoncount2.Count));
   try
-  {$IFDEF Win}
   st.LoadFromFile(extractfilepath(paramstr(0)) + 'ini\' + 'mnu_title.txt');
   st2.LoadFromFile(extractfilepath(paramstr(0)) + 'ini\' + 'mnu_caption.txt');
   st3.LoadFromFile(extractfilepath(paramstr(0)) + 'ini\' + 'mnu_shortcut.txt');
-  {$ENDIF}
-  {$IFDEF Linux}
-  st.LoadFromFile(extractfilepath(paramstr(0)) + 'ini\' + 'mnu_title.txt');
-  st2.LoadFromFile(extractfilepath(paramstr(0)) + 'ini\' + 'mnu_caption.txt');
-  st3.LoadFromFile(extractfilepath(paramstr(0)) + 'ini\' + 'mnu_shortcut.txt');
-  {$ENDIF}
-  {$IFDEF Darwin}
-  st.LoadFromFile(extractfilepath(paramstr(0)) + 'ini/' + 'mnu_title.txt');
-  st2.LoadFromFile(extractfilepath(paramstr(0)) + 'ini/' + 'mnu_caption.txt');
-  st3.LoadFromFile(extractfilepath(paramstr(0)) + 'ini/' + 'mnu_shortcut.txt');
-  {$ENDIF}
   finally
   //for i := 0 to btn_count -1 do begin
    s:=functionunit.toolbarbuttonparnt[i];
@@ -5964,42 +5840,20 @@ begin
      end;
      {$IFDEF WIN32}
           if macro_comand[i1] = 'コード補完読込' then begin
-            functionunit.read_sorce(mainform.PageControl1.ActivePageIndex, ad1);
+            //functionunit.libopoen2(ad1);
           end else if macro_comand[i1] = 'fEdit起動' then begin
             ShellExecute(Handle, 'OPEN', pchar(Paramstr(0)),pchar(ad1),'', SW_SHOW);
-          end else if macro_comand[i1] = '開く' then begin
+          end else if macro_comand[i1] = 'エクスプローラ起動' then begin
             ShellExecute(Handle, 'OPEN', pchar('explorer.exe'),pchar(ad1),'', SW_SHOW);
           end else begin
             ShellExecute(Handle, 'OPEN', pchar(ad0),pchar(utf8toansi(ad1)),'', SW_SHOW);
           end;
      {$ENDIF}
      {$IFDEF LINUX}
-          if macro_comand[i1] = 'コード補完読込' then begin
-            functionunit.read_sorce(mainform.PageControl1.ActivePageIndex, ad1);
-          end else if macro_comand[i1] = 'fEdit起動' then begin
-            //ShellExecute(Handle, 'OPEN', pchar(Paramstr(0)),pchar(ad1),'', SW_SHOW);
-            functionunit.pross2(Paramstr(0),ad1);
-          end else if macro_comand[i1] = '開く' then begin
-            //ShellExecute(Handle, 'OPEN', pchar('explorer.exe'),pchar(ad1),'', SW_SHOW);
-            functionunit.pross2(ad1,'');
-          end else begin
-            //ShellExecute(Handle, 'OPEN', pchar(ad0),pchar(utf8toansi(ad1)),'', SW_SHOW);
-            functionunit.pross2(ad0,ad1);
-          end;
+
      {$ENDIF}
      {$IFDEF Darwin}
-          if macro_comand[i1] = 'コード補完読込' then begin
-            functionunit.read_sorce(mainform.PageControl1.ActivePageIndex, ad1);
-          end else if macro_comand[i1] = 'fEdit起動' then begin
-            //ShellExecute(Handle, 'OPEN', pchar(Paramstr(0)),pchar(ad1),'', SW_SHOW);
-            functionunit.pross3(Paramstr(0),ad1);
-          end else if macro_comand[i1] = '開く' then begin
-            //ShellExecute(Handle, 'OPEN', pchar('explorer.exe'),pchar(ad1),'', SW_SHOW);
-            functionunit.pross3(ad1,'');
-          end else begin
-            //ShellExecute(Handle, 'OPEN', pchar(ad0),pchar(utf8toansi(ad1)),'', SW_SHOW);
-            functionunit.pross3(ad0,ad1);
-          end;
+
      {$ENDIF}
 
    end;
@@ -6012,7 +5866,7 @@ var
 begin
   case lng of
     'Bat':begin
-       comment := 'chcp 65001; @echo';
+       comment := '@echo';
        comment2 := '@echo off';
        functionunit.lngtype2 := 'echo on';
        functionunit.editlist.Items[i].SynEdit1.Lines.Insert(functionunit.editlist.Items[i].SynEdit1.CaretY , functionunit.lngtype2 + chr(13)+ ' MacroEnd ' + lng + chr(13))
@@ -6131,19 +5985,8 @@ var
  sorcename,langege:string;
  sl1,sl2:TStringList;
 begin
-  {$IFDEF Win}
   ForceDirectories( ExtractFilePath( (Paramstr(0)) )  + 'temp\' );
   sorcename := ExtractFilePath( systoutf8(Paramstr(0)))  + 'temp\' + 'test.';
-  {$ENDIF}
-  {$IFDEF Linux}
-  ForceDirectories( ExtractFilePath( (Paramstr(0)) )  + 'temp\' );
-  sorcename := ExtractFilePath( systoutf8(Paramstr(0)))  + 'temp\' + 'test.';
-  {$ENDIF}
-  {$IFDEF Darwin}
-  ForceDirectories( ExtractFilePath( (Paramstr(0)) )  + 'temp/' );
-  sorcename := ExtractFilePath( systoutf8(Paramstr(0)))  + 'temp/' + 'test.';
-  {$ENDIF}
-
   //ここに、切り取ったソースを保存するコードまたは関数を書く
   sl1 := TStringList.Create;
   sl2 := TStringList.Create;
@@ -6232,15 +6075,18 @@ begin
     url4 := utf8toansi('');
   {$IFDEF win32}
     ShellExecute(Handle, 'OPEN', pchar(url2), '', '', SW_SHOW);
+  functionunit.TempFIle_Clear3('tmp\','test.*');
   {$ENDIF}
   {$IFDEF LINUX}
     //Windows_unit.pross3(url2);
     functionunit.pross2(extractfilename(url2));
+  functionunit.TempFIle_Clear3('tmp\','test.*');
   {$ENDIF}
   {$IFDEF Darwin}
-     functionunit.pross3(url2,'');
+     functionunit.pross3(url2);
+  functionunit.TempFIle_Clear3('tmp/','test.*');
   {$ENDIF}
-  functionunit.TempFIle_Clear3('test.*');
+
 end;
 
 function Tfunctionunit.macro_run(file_name:string):boolean;
@@ -6255,7 +6101,7 @@ begin
      functionunit.pross2(file_name);
   {$ENDIF}
   {$IFDEF Darwin}
-     functionunit.pross3(file_name,'');
+     functionunit.pross3(file_name);
   {$ENDIF}
 end;
 
@@ -6286,7 +6132,7 @@ begin
      functionunit.pross2(file_name);
   {$ENDIF}
   {$IFDEF Darwin}
-     functionunit.pross3(file_name,'');
+     functionunit.pross3(file_name);
   {$ENDIF}
 end;
 
@@ -6340,7 +6186,7 @@ begin
   sv.Free;
 end;
 
-function Tfunctionunit.pross2(command,option:string):boolean;
+function Tfunctionunit.pross2(command:string):boolean;
 var
   sv: TProcess;
   ps,ps2:string;
@@ -6360,9 +6206,6 @@ begin
       ps2 := '"' + ps2 + '"';
       sv.Options:=[poWaitOnExit, poUsePipes, poStderrToOutPut];
       sv.CommandLine:= 'xdg-open ' +command;
-      if option <> '' then begin
-        sv.Parameters.Add({'echo ' +ps+ ' | sudo -S ' +} option );
-      end;
       //sv.Parameters.Add('-c');
       //sv.Parameters.Add('cd '+ps2+';');
       //sv.Parameters.Add({'echo ' +ps+ ' | sudo -S ' +}'xdg-open chmod 755 '+ command );
@@ -6370,15 +6213,12 @@ begin
       sv.Executable:= '/bin/sh';
       sv.Parameters.Add('-c');
       sv.Parameters.Add({'echo ' +ps+ ' | sudo -S ' +}'xdg-open '+ command );
-      if option <> '' then begin
-        sv.Parameters.Add({'echo ' +ps+ ' | sudo -S ' +} option );
-      end;
     end;
     sv.Execute;
     sv.Free;
 end;
 
-function Tfunctionunit.pross3(command,option:string):boolean;
+function Tfunctionunit.pross3(command:string):boolean;
 var
   sv: TProcess;
   ps:string;
@@ -6389,9 +6229,6 @@ begin
     sv.Executable:= '/usr/bin/open';
     //sv.Parameters.Add('-n');
     sv.Parameters.Add({'echo ' +ps+ ' | sudo -S ' +} command );
-    if option <> '' then begin
-      sv.Parameters.Add({'echo ' +ps+ ' | sudo -S ' +} option );
-    end;
     sv.Execute;
     sv.Free;
 end;
@@ -6443,7 +6280,7 @@ var
   c1,c2:pchar;
   sw:boolean;
 begin
-        {$IFDEF Windows}
+        {$IFDEF WIN32}
             functionunit.winload(i,s);
         {$ENDIF}
         {$IFDEF LINUX}
@@ -6463,7 +6300,7 @@ var
 begin
         //s1 := extractfilepath(paramstr(0))+ 'tmp0.txt';
         //CopyFile(s,s1);
-        {$IFDEF Windows}
+        {$IFDEF WIN32}
              //functionunit.Run(functionunit.memosave(i,s,memo));
              functionunit.winsave(i,s,memo);
         {$ENDIF}
@@ -6484,11 +6321,27 @@ begin
   try
 
     inc(i);
-    functionunit.iniwrite();
-    TempFIle_Clear1('.ba');
-    TempFIle_Clear2('temp3.txt');
-    functionunit.save('temp3.txt','.ba');
-    functionunit.TempFIle_Clear3('test.*');
+    {$IFDEF Windows}
+         functionunit.iniwrite('ini\');
+         TempFIle_Clear1('tmp\','.ba');
+         TempFIle_Clear2('tmp\','temp3.txt');
+         functionunit.save('Backupfile\','temp3.txt','.ba');
+         functionunit.TempFIle_Clear3('tmp\','test.*');
+    {$ENDIF}
+    {$IFDEF LINUX}
+         functionunit.iniwrite('ini\');
+         TempFIle_Clear1('tmp\','.ba');
+         TempFIle_Clear2('tmp\','temp3.txt');
+         functionunit.save('Backupfile\','temp3.txt','.ba');
+         functionunit.TempFIle_Clear3('tmp\','test.*');
+    {$ENDIF}
+    {$IFDEF Darwin}
+         functionunit.iniwrite('ini/');
+         TempFIle_Clear1('ini/','.ba');
+         TempFIle_Clear2('ini/','temp3.txt');
+         functionunit.save('Backupfile/','temp3.txt','.ba');
+         functionunit.TempFIle_Clear3('tmp/','test.*');
+    {$ENDIF}
     inc(i);
     functionunit.addnew_tab(false);
     functionunit.deleteAll_edittab();
@@ -6521,30 +6374,11 @@ var
     s,s1,s2:string;
     st,st2:Tstringlist;
     i3:integer;
-    function loadSorce:boolean;
-    var
-     strmFile: TFileStream;
+    {function loadSorce:ThreadFunc;
     begin
-      Application.ProcessMessages;
       st:=TStringlist.Create;
-      strmFile := TFileStream.Create(FileNames, fmOpenRead);
-      try
-        strmFile.Seek(0, soFromBeginning);//ポインタをファイルの先頭に戻す
-        strmFile.Read(st,1000);
-        //st.LoadFromStream(strmFile)
-      finally
-        strmFile.Free;
-      end;
-      showmessage(st.Text);
-      //st.LoadFromFile(functionunit.editlist.Items[i].filename_path);
-      st2:=TStringlist.Create;
-      st2.Clear;
-      //functionunit.Run(functionunit.bunkatu2(st,st2));
-      functionunit.bunkatu2(st,st2);
-      functionunit.editlist.Items[mainform.PageControl1.ActivePageIndex].code_suport.Text:=st2.Text;
-      st.Free;
-      st2.Free;
-    end;
+      st.LoadFromFile(functionunit.editlist.Items[i].filename_path);
+    end; }
 
   begin
     try
@@ -6602,15 +6436,13 @@ var
       functionunit.memoload(i,functionunit.editlist.Items[i].filename_path);
 
       //functionunit.Run(loadSorce);
-      //loadSorce;
-      //st2:=TStringlist.Create;
-      //st2.Clear;
+      st2:=TStringlist.Create;
+      st2.Clear;
       //functionunit.Run(functionunit.bunkatu2(st,st2));
-      //functionunit.bunkatu2(st,st2);
+
 
       with functionunit.editlist.Items[i] do begin
         //code_suport.Text:= st2.Text;
-        //SynCompletion1.ItemList.Text:= st2.Text;
         //st.Free;
         //st2.Free;
         if PageControl1.ActivePage =  TabSheet1 then begin
@@ -6852,31 +6684,31 @@ end;
 {$IFDEF WIN32}
 
 function Tfunctionunit.winload(i:integer;s:string):boolean;
-var
-  edt:Tmemo;
-  function ReadSorce(s:string;st:TStringlist):boolean;
+  function load_stream(st1:string;st2:TStringList):boolean;
   var
     tf : TextFile;
+    s:string;
   begin
-    ReadSorce := false;
     try
-      AssignFile(tf, s);
-      Reset(tf);
-      while not Eof(tf) do begin
-        Readln(tf, s);
-        st.Add(s);
-      end;
-    finally
-      CloseFile(tf);
-      ReadSorce := true;
-    end
+      try
+        AssignFile(tf, st1);
+        Reset(tf);
+        while not Eof(tf) do begin
+          Readln(tf, s);
+          st2.Add(s);
+        end;
+      finally
+        CloseFile(tf);
+      end
+    except
+    end;
   end;
-  function encode_charset(i:integer;s:string;memo:TMemo):boolean;
+  function encode_charset(i:integer;s:string):boolean;
   var
     s1:ansistring;
     s2:widestring;
     s4,s3:string;
-    p:pchar;
+    p,pst:pchar;
     st,st1,st2,st3:TStringList;
     i1:integer;
     function pross(pram:string):boolean;
@@ -6922,6 +6754,7 @@ var
       //memo.LoadFromFile((ansitoutf8(s)));
       st := TStringList.Create;
       st2 := TStringList.Create;
+      st.Clear;
       st2.Clear;
       //functionunit.editlist.Items[i].Edit.Text := ((memo.Text));
       {st.Text:= 'chcp 65001|(echo ' + memo.Lines[0] + '';
@@ -6944,16 +6777,18 @@ var
       //st2.Delete(0);
       //load_text(st3,st2);
       //functionunit.editlist.Items[i].Edit.Text := ((st3.Text));
-       st.Text := memo.Lines.Text;
-       //st2.Text := load_text(pchar(st.Text));
-       load_text2(pchar(s));
-       ReadSorce(ExtractFilePath( Paramstr( 0 ) ) + 'tmp.txt' ,functionunit.editlist.Items[i].Edit);
+       //st.Text := memo.Lines.Text;
        {for i1 := 0 to st.Count -1 do begin
          st2.Add(string(load_text(pchar(st[i1]))));
        end;}
+       //showmessage(s);
+       load_text(pchar(s));
+       load_stream(ExtractFilePath( ParamStr( 0 ) ) + 'tmp.txt' ,st);
+       //st2.Text:= string(pst);
        //st.LoadFromFile(extractfilepath(paramstr(0))+'tmp.txt');
-      //functionunit.editlist.Items[i].Edit.Text := ((st2.Text));
+      functionunit.editlist.Items[i].Edit.Text := ((st.Text));
       st2.Free;
+      st.Free;
       {s := st[0];
       for i1 := 4 to length(s)-1 do begin
         s3 := s3 + s[i1];
@@ -6966,32 +6801,23 @@ var
       encode_charset := true;
     end else if MainForm.Menu_UTF8.Checked then begin
        //memo.LoadFromFile(((s)));
-       ReadSorce(s, functionunit.editlist.Items[i].Edit);
-       //functionunit.editlist.Items[i].Edit.Text := (memo.Text);
+       st := TStringList.Create;
+       st.Clear;
+       load_stream(s,st);
+       functionunit.editlist.Items[i].Edit.Text := st.Text;
+       st.Free;
        encode_charset := true;
     end;
     functionunit.editlist.Items[i].save_complate := true;
   end;
-var
-  st:TStringlist;
 begin
     try
-      st := TStringlist.Create;
-      st.Clear;
-      {if not ReadSorce(s,st) then begin
-        showmessage('読み込みに失敗しました');
-        exit;
-      end;}
-      edt := TMemo.Create(owner);
-      edt.Parent := functionunit;
-      edt.Enabled:= true;
-      //edt.Lines.Text:= st.Text;
-      //showmessage(st.Text);
+      //edt := TMemo.Create(owner);
+      //edt.Parent := functionunit;
+      //edt.Enabled:= true;
       //edt.Lines.LoadFromFile(s);
-      //functionunit.editlist.Items[mainform.PageControl1.PageIndex].SynEdit1.Text:= st.Text;
-      encode_charset(i,s,edt);
-      edt.Free;
-      st.Free;
+      encode_charset(i,s);
+      //edt.Free;
     finally
 
     end;
@@ -8110,74 +7936,49 @@ begin
   url1 := utf8toansi(word);
   if functionunit.editlist.Items[mainform.PageControl1.ActivePageIndex].PageControl1.PageIndex = 1 then
     url3 := '';
-  {$IFDEF Windows}
+  {$IFDEF WIN32}
      ShellExecute(Handle, 'OPEN', pchar(url1 + url2 + ' ' + url3 + url4), '', '', SW_SHOW);
   {$ENDIF}
   {$IFDEF LINUX}
      functionunit.pross2(url1 + url2 + ' ' + url3 + url4);
   {$ENDIF}
   {$IFDEF Darwin}
-     functionunit.pross3(url1 + url2 + ' ' + url3 + url4,'');
+     functionunit.pross3(url1 + url2 + ' ' + url3 + url4);
   {$ENDIF}
 end;
 
-function TFunctionunit.TempFIle_Clear1(s:string):boolean;
+function TFunctionunit.TempFIle_Clear1(dir,s:string):boolean;
 var
   i:integer;
   filename:string;
 begin
   i := 0;
-  {$IFDEF Windows}
-  filename := extractfilepath(paramstr(0)) + 'Backupfile\' + inttostr(i) + s;
-  {$ENDIF}
-  {$IFDEF Linux}
-  filename := extractfilepath(paramstr(0)) + 'Backupfile\' + inttostr(i) + s;
-  {$ENDIF}
-  {$IFDEF Darwin}
-  filename := extractfilepath(paramstr(0)) + 'Backupfile/' + inttostr(i) + s;
-  {$ENDIF}
+  filename := extractfilepath(paramstr(0)) + dir + inttostr(i) + s;
   while FileExists(filename) do begin
       SysUtils.DeleteFile(filename);
       //showmessage(filename);
       inc(i);
-  {$IFDEF Windows}
-  filename := extractfilepath(paramstr(0)) + 'Backupfile\' + inttostr(i) + s;
-  {$ENDIF}
-  {$IFDEF Linux}
-  filename := extractfilepath(paramstr(0)) + 'Backupfile\' + inttostr(i) + s;
-  {$ENDIF}
-  {$IFDEF Darwin}
-  filename := extractfilepath(paramstr(0)) + 'Backupfile/' + inttostr(i) + s;
-  {$ENDIF}
+      filename := extractfilepath(paramstr(0)) + dir + inttostr(i) + s;
 
   end;
 end;
 
-function TFunctionunit.TempFIle_Clear2(s:string):boolean;
+function TFunctionunit.TempFIle_Clear2(dir,s:string):boolean;
 var
   i:integer;
   filename:string;
 begin
-  {$IFDEF Windows}
-  filename := extractfilepath(paramstr(0)) + 'Backupfile\' + inttostr(i) + s;
-  {$ENDIF}
-  {$IFDEF Linux}
-  filename := extractfilepath(paramstr(0)) + 'Backupfile\' + inttostr(i) + s;
-  {$ENDIF}
-  {$IFDEF Darwin}
-  filename := extractfilepath(paramstr(0)) + 'Backupfile/' + inttostr(i) + s;
-  {$ENDIF}
+  filename := extractfilepath(paramstr(0)) + dir +  s;
   if FileExists(filename) then begin
       SysUtils.DeleteFile(filename);
   end;
 end;
 
-function find_file(st:TStringList):boolean;
+function find_file(dir:string;st:TStringList):boolean;
 var
   F: TSearchRec;
 begin
-  {$IFDEF Windows}
-  if FindFirst(extractfilepath(paramstr(0)) + 'temp\' + '*.*', faAnyFile, F) = 0 then begin
+  if FindFirst(extractfilepath(paramstr(0)) + dir + '*.*', faAnyFile, F) = 0 then begin
     repeat
       if (F.Attr and faAnyFile) = F.Attr then begin
         st.Add(F.Name);
@@ -8185,31 +7986,9 @@ begin
     until FindNext(F) <> 0;
     //FindClose( F );
   end;
-  {$ENDIF}
-  {$IFDEF Linux}
-  if FindFirst(extractfilepath(paramstr(0)) + 'temp\' + '*.*', faAnyFile, F) = 0 then begin
-    repeat
-      if (F.Attr and faAnyFile) = F.Attr then begin
-        st.Add(F.Name);
-      end
-    until FindNext(F) <> 0;
-    //FindClose( F );
-  end;
-  {$ENDIF}
-  {$IFDEF Darwin}
-  if FindFirst(extractfilepath(paramstr(0)) + 'temp/' + '*.*', faAnyFile, F) = 0 then begin
-    repeat
-      if (F.Attr and faAnyFile) = F.Attr then begin
-        st.Add(F.Name);
-      end
-    until FindNext(F) <> 0;
-    //FindClose( F );
-  end;
-  {$ENDIF}
-
 end;
 
-function TFunctionunit.TempFIle_Clear3(s:string):boolean;
+function TFunctionunit.TempFIle_Clear3(dir,s:string):boolean;
 var
   i:integer;
   filename:string;
@@ -8219,17 +7998,9 @@ begin
   st :=TStringList.create;
   st.Clear;
   WildCard := TMask.Create(s);
-  find_file(st);
+  find_file(dir,st);
   for i := 0 to st.count -1 do begin
-    {$IFDEF Windows}
-    FileName := ExtractFilepath(paramstr(0)) + 'temp\' + st[i];
-    {$ENDIF}
-    {$IFDEF Linux}
-    FileName := ExtractFilepath(paramstr(0)) + 'temp\' + st[i];
-    {$ENDIF}
-    {$IFDEF Darwin}
-    FileName := ExtractFilepath(paramstr(0)) + 'temp/' + st[i];
-    {$ENDIF}
+    FileName := ExtractFilepath(paramstr(0)) + dir + st[i];
     if WildCard.Matches(st[i]) then begin
       SysUtils.DeleteFile(filename);
     end;
@@ -8586,43 +8357,7 @@ begin
   st5.Free;
 end;
 
-function TFunctionunit.read_sorce(TabNo:integer;filename:string):boolean;
-var
- st,st2:TStringlist;
-begin
-  st := TStringList.Create;
-  st.LoadFromFile(filename);
-  st2 := TStringList.Create;
-  st2.Clear;
-  //functionunit.Run(functionunit.bunkatu2(st,st2));
-  functionunit.bunkatu2(st,st2);
-  functionunit.editlist.Items[TabNo].SynCompletion1.ItemList.Text:= st2.Text;
-  st.Free;
-  st2.Free;
-end;
 
-function Tfunctionunit.bunkatu2(st,st2:TStringList):boolean;
-var
-  i:integer;
-  st3:TStringList;
-  s:string;
-begin
-  st3 := TStringList.Create;
-  st3.Clear;
-  s:= ';:=''"!$%&+-*`@~^\|/><?()[]{},.  ';
-  st.Text := StringReplace(st.Text, ',', char(13), [rfReplaceAll]);
-  for i := 0 to length(s) -1 do begin
-    //Application.ProcessMessages;
-    st.Text := StringReplace(st.Text, s[i] , char(13), [rfReplaceAll]);
-  end;
-  for i := 0 to st.Count -1 do begin
-    //Application.ProcessMessages;
-    if -1 = st3.IndexOf(st[i]) then begin
-      st3.Add(st[i]);
-    end;
-  end;
-  st2.text := st3.Text;
-end;
 
 
 //スレッド関連ファンクション
@@ -8663,11 +8398,6 @@ begin
 
   end;
   exit;
-end;
-
-procedure Tfunctionunit.FormCloseQuery(Sender: TObject; var CanClose: boolean);
-begin
-  DoneCriticalsection(ACriticalSection);
 end;
 
 procedure Tfunctionunit.FormCreate(Sender: TObject);

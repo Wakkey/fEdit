@@ -12,7 +12,7 @@ object color_form: Tcolor_form
   OnCreate = FormCreate
   OnShow = FormShow
   Position = poScreenCenter
-  LCLVersion = '1.6.0.4'
+  LCLVersion = '1.6.2.0'
   object BitBtn1: TBitBtn
     Left = 416
     Height = 30
@@ -42,8 +42,8 @@ object color_form: Tcolor_form
     Height = 340
     Top = 8
     Width = 388
-    ActivePage = TabSheet4
-    TabIndex = 3
+    ActivePage = TabSheet5
+    TabIndex = 4
     TabOrder = 2
     OnChange = PageControl1Change
     object TabSheet1: TTabSheet
@@ -57,8 +57,8 @@ object color_form: Tcolor_form
         Top = 8
         Width = 224
         Caption = '全般エディタカラー'
-        ClientHeight = 284
-        ClientWidth = 216
+        ClientHeight = 287
+        ClientWidth = 220
         TabOrder = 0
         object ColorListBox1: TColorListBox
           Left = 110
@@ -106,8 +106,8 @@ object color_form: Tcolor_form
         Top = 4
         Width = 328
         Caption = 'ハイライト表示設定'
-        ClientHeight = 288
-        ClientWidth = 320
+        ClientHeight = 291
+        ClientWidth = 324
         TabOrder = 0
         object ColorListBox3: TColorListBox
           Left = 6
@@ -162,10 +162,10 @@ object color_form: Tcolor_form
         end
         object ComboBox2: TComboBox
           Left = 130
-          Height = 20
+          Height = 26
           Top = 55
           Width = 178
-          ItemHeight = 0
+          ItemHeight = 18
           Style = csDropDownList
           TabOrder = 3
         end
@@ -179,10 +179,10 @@ object color_form: Tcolor_form
         end
         object ComboBox3: TComboBox
           Left = 130
-          Height = 20
+          Height = 26
           Top = 26
           Width = 178
-          ItemHeight = 0
+          ItemHeight = 18
           ItemIndex = 3
           Items.Strings = (
             'BAT'
@@ -225,10 +225,10 @@ object color_form: Tcolor_form
         end
         object ComboBox7: TComboBox
           Left = 130
-          Height = 20
+          Height = 26
           Top = 0
           Width = 178
-          ItemHeight = 0
+          ItemHeight = 18
           OnChange = ComboBox7Change
           OnDropDown = ComboBox7DropDown
           Style = csDropDownList
@@ -246,8 +246,8 @@ object color_form: Tcolor_form
         Top = 4
         Width = 376
         Caption = '各種設定'
-        ClientHeight = 281
-        ClientWidth = 368
+        ClientHeight = 284
+        ClientWidth = 372
         TabOrder = 0
         object GroupBox5: TGroupBox
           Left = 12
@@ -255,8 +255,8 @@ object color_form: Tcolor_form
           Top = 0
           Width = 350
           Caption = 'コード入力サポート'
-          ClientHeight = 253
-          ClientWidth = 342
+          ClientHeight = 256
+          ClientWidth = 346
           TabOrder = 0
           object CheckBox1: TCheckBox
             Left = 12
@@ -281,16 +281,16 @@ object color_form: Tcolor_form
     end
     object TabSheet4: TTabSheet
       Caption = 'ツールバーの設定'
-      ClientHeight = 301
-      ClientWidth = 382
+      ClientHeight = 309
+      ClientWidth = 380
       object GroupBox6: TGroupBox
         Left = 4
         Height = 296
         Top = 8
         Width = 368
         Caption = 'ツールバー'
-        ClientHeight = 276
-        ClientWidth = 360
+        ClientHeight = 279
+        ClientWidth = 364
         TabOrder = 0
         object Bevel2: TBevel
           Left = 6
@@ -307,7 +307,7 @@ object color_form: Tcolor_form
         end
         object CheckBox3: TCheckBox
           Left = 80
-          Height = 18
+          Height = 22
           Top = 3
           Width = 79
           Caption = 'Tab有効化'
@@ -331,6 +331,7 @@ object color_form: Tcolor_form
             Width = 160
             ItemHeight = 0
             OnDblClick = Button5Click
+            ScrollWidth = 158
             TabOrder = 1
           end
           object Button4: TButton
@@ -358,6 +359,7 @@ object color_form: Tcolor_form
             Width = 168
             ItemHeight = 0
             OnDblClick = Button4Click
+            ScrollWidth = 166
             TabOrder = 4
           end
         end
@@ -373,10 +375,10 @@ object color_form: Tcolor_form
         end
         object ComboBox5: TComboBox
           Left = 174
-          Height = 21
+          Height = 26
           Top = 36
           Width = 100
-          ItemHeight = 0
+          ItemHeight = 18
           OnChange = ComboBox5Change
           TabOrder = 3
           Visible = False
@@ -403,10 +405,10 @@ object color_form: Tcolor_form
         end
         object ComboBox6: TComboBox
           Left = 168
-          Height = 20
+          Height = 26
           Top = 3
           Width = 98
-          ItemHeight = 0
+          ItemHeight = 18
           OnChange = ComboBox6Change
           OnDropDown = ComboBox6DropDown
           Style = csDropDownList
@@ -414,9 +416,9 @@ object color_form: Tcolor_form
         end
         object CheckBox4: TCheckBox
           Left = 16
-          Height = 18
+          Height = 22
           Top = 3
-          Width = 57
+          Width = 58
           Caption = '非表示'
           OnChange = CheckBox4Change
           OnClick = CheckBox4Click
@@ -444,13 +446,13 @@ object color_form: Tcolor_form
     end
     object TabSheet5: TTabSheet
       Caption = 'メニュー設定'
-      ClientHeight = 312
+      ClientHeight = 309
       ClientWidth = 380
       object Label19: TLabel
         Left = 140
-        Height = 15
+        Height = 12
         Top = 72
-        Width = 45
+        Width = 54
         Caption = 'メニュー名'
         ParentColor = False
       end
@@ -461,11 +463,12 @@ object color_form: Tcolor_form
         Width = 104
         ItemHeight = 0
         OnClick = List_SubMnuClick
+        ScrollWidth = 118
         TabOrder = 0
       end
       object Edit_SubMnu: TEdit
         Left = 132
-        Height = 23
+        Height = 26
         Top = 88
         Width = 104
         TabOrder = 1
@@ -486,20 +489,21 @@ object color_form: Tcolor_form
         Width = 104
         ItemHeight = 0
         OnClick = List_SubMnu1Click
+        ScrollWidth = 118
         TabOrder = 3
       end
       object Edit_SubMnu1: TEdit
         Left = 12
-        Height = 23
+        Height = 26
         Top = 88
         Width = 104
         TabOrder = 4
       end
       object Label21: TLabel
         Left = 20
-        Height = 15
+        Height = 12
         Top = 72
-        Width = 48
+        Width = 51
         Caption = 'タイトル名'
         ParentColor = False
       end
@@ -528,11 +532,12 @@ object color_form: Tcolor_form
         Width = 104
         ItemHeight = 0
         OnClick = List_SubMnu2Click
+        ScrollWidth = 118
         TabOrder = 7
       end
       object Edit_SubMnu2: TEdit
         Left = 257
-        Height = 23
+        Height = 26
         Top = 88
         Width = 99
         OnKeyDown = Edit_SubMnu2KeyDown
@@ -542,9 +547,9 @@ object color_form: Tcolor_form
       end
       object Label22: TLabel
         Left = 256
-        Height = 15
+        Height = 12
         Top = 72
-        Width = 75
+        Width = 90
         Caption = 'ショートカットキー'
         ParentColor = False
       end
@@ -559,30 +564,30 @@ object color_form: Tcolor_form
       end
       object CheckCTRL: TCheckBox
         Left = 260
-        Height = 19
+        Height = 22
         Top = 48
-        Width = 63
+        Width = 77
         Caption = 'CTRLキー'
         TabOrder = 10
       end
       object CheckSheft: TCheckBox
         Left = 260
-        Height = 19
+        Height = 22
         Top = 16
-        Width = 61
+        Width = 73
         Caption = 'Shiftキー'
         TabOrder = 11
       end
-      object BTN_SetMnu2: TButton
-        Left = 12
-        Height = 25
-        Top = 13
-        Width = 232
-        Caption = 'メニューから設定を読込み'
-        OnClick = BTN_SetMnu2Click
-        TabOrder = 12
-      end
     end
+  end
+  object BTN_SetMnu2: TButton
+    Left = 32
+    Height = 25
+    Top = 48
+    Width = 232
+    Caption = 'メニューから設定を読込み'
+    OnClick = BTN_SetMnu2Click
+    TabOrder = 3
   end
   object PopupMenu1: TPopupMenu
     left = 424

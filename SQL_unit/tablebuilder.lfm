@@ -1,7 +1,7 @@
 object Form2: TForm2
-  Left = 385
+  Left = 474
   Height = 234
-  Top = 295
+  Top = 164
   Width = 689
   BorderStyle = bsDialog
   Caption = 'SQL Lite Table Maker　Ver１.00'
@@ -17,7 +17,7 @@ object Form2: TForm2
   OnCreate = FormCreate
   OnShow = FormShow
   Position = poScreenCenter
-  LCLVersion = '1.6.0.4'
+  LCLVersion = '1.6.4.0'
   object Panel1: TPanel
     Left = 0
     Height = 234
@@ -31,9 +31,9 @@ object Form2: TForm2
     OnClick = Panel1Click
     object Label9: TLabel
       Left = 470
-      Height = 15
+      Height = 12
       Top = 14
-      Width = 36
+      Width = 39
       Caption = 'ＳＱＬ文'
       ParentColor = False
     end
@@ -43,22 +43,22 @@ object Form2: TForm2
       Top = 6
       Width = 441
       Caption = 'テーブル作成'
-      ClientHeight = 197
-      ClientWidth = 433
+      ClientHeight = 201
+      ClientWidth = 437
       TabOrder = 0
       object Label3: TLabel
         Left = 230
-        Height = 15
+        Height = 12
         Top = 10
-        Width = 165
+        Width = 171
         Caption = 'テーブルネーム名を入力　※必須'
         ParentColor = False
       end
       object Label5: TLabel
         Left = 14
-        Height = 15
+        Height = 12
         Top = 120
-        Width = 46
+        Width = 48
         Caption = 'キー設定'
         ParentColor = False
       end
@@ -82,7 +82,7 @@ object Form2: TForm2
       end
       object Label6: TLabel
         Left = 14
-        Height = 15
+        Height = 12
         Top = 42
         Width = 132
         Caption = 'フィールド名を入力※必須'
@@ -90,9 +90,9 @@ object Form2: TForm2
       end
       object Label7: TLabel
         Left = 264
-        Height = 15
+        Height = 12
         Top = 42
-        Width = 121
+        Width = 124
         Caption = '型を入力を入力　※必須'
         ParentColor = False
       end
@@ -108,7 +108,7 @@ object Form2: TForm2
       end
       object Edit2: TEdit
         Left = 96
-        Height = 22
+        Height = 20
         Top = 10
         Width = 121
         OnChange = Edit2Change
@@ -116,11 +116,11 @@ object Form2: TForm2
       end
       object ComboBox2: TComboBox
         Left = 78
-        Height = 21
+        Height = 20
         Top = 120
         Width = 121
         Enabled = False
-        ItemHeight = 0
+        ItemHeight = 12
         TabOrder = 2
       end
       object Button4: TButton
@@ -145,7 +145,7 @@ object Form2: TForm2
       end
       object Edit3: TEdit
         Left = 14
-        Height = 22
+        Height = 20
         Top = 58
         Width = 234
         Enabled = False
@@ -154,11 +154,11 @@ object Form2: TForm2
       end
       object ComboBox3: TComboBox
         Left = 264
-        Height = 23
+        Height = 20
         Top = 58
         Width = 145
         Enabled = False
-        ItemHeight = 0
+        ItemHeight = 12
         Items.Strings = (
           'NULL'
           'INTEGER'
@@ -218,7 +218,7 @@ object Form2: TForm2
       end
       object Edit1: TEdit
         Left = 49
-        Height = 22
+        Height = 20
         Top = 158
         Width = 80
         OnChange = Edit1Change

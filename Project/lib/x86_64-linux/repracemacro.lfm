@@ -1,7 +1,7 @@
 object reprace_unit: Treprace_unit
-  Left = 270
+  Left = 320
   Height = 303
-  Top = 140
+  Top = 149
   Width = 322
   BorderStyle = bsDialog
   Caption = '文字列操作関数'
@@ -9,6 +9,7 @@ object reprace_unit: Treprace_unit
   ClientWidth = 322
   FormStyle = fsStayOnTop
   OnActivate = FormActivate
+  Position = poScreenCenter
   LCLVersion = '1.6.2.0'
   object CheckBox1: TCheckBox
     Left = 16

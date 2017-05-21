@@ -1,10 +1,10 @@
 object JSONForm2: TJSONForm2
-  Left = 244
-  Height = 410
-  Top = 119
+  Left = 468
+  Height = 416
+  Top = 308
   Width = 518
   Caption = 'JSONForm2'
-  ClientHeight = 410
+  ClientHeight = 416
   ClientWidth = 518
   Color = clBtnFace
   Font.Color = clWindowText
@@ -14,37 +14,37 @@ object JSONForm2: TJSONForm2
   OnCreate = FormCreate
   OnShow = FormShow
   Position = poScreenCenter
-  LCLVersion = '1.6.0.4'
+  LCLVersion = '1.6.4.0'
   object TabSheet15: TTabSheet
     Caption = 'color'
   end
   object Panel1: TPanel
     Left = 0
-    Height = 410
+    Height = 416
     Top = 0
     Width = 518
     Align = alClient
     BevelOuter = bvLowered
-    ClientHeight = 410
+    ClientHeight = 416
     ClientWidth = 518
     TabOrder = 1
     object Panel2: TPanel
       Left = 1
-      Height = 361
+      Height = 367
       Top = 48
       Width = 516
       Align = alClient
-      ClientHeight = 361
+      ClientHeight = 367
       ClientWidth = 516
       TabOrder = 0
       object PageControl5: TPageControl
         Left = 1
-        Height = 359
+        Height = 365
         Top = 1
         Width = 514
-        ActivePage = TabSheet23
+        ActivePage = TabSheet29
         Align = alClient
-        TabIndex = 2
+        TabIndex = 8
         TabOrder = 0
         OnChange = PageControl5Change
         object TabSheet31: TTabSheet
@@ -190,7 +190,7 @@ object JSONForm2: TJSONForm2
         end
         object TabSheet23: TTabSheet
           Caption = 'string'
-          ClientHeight = 333
+          ClientHeight = 339
           ClientWidth = 506
           object string2_Check3: TCheckBox
             Left = 112
@@ -244,7 +244,7 @@ object JSONForm2: TJSONForm2
           object Panel12: TPanel
             Left = 0
             Height = 80
-            Top = 253
+            Top = 259
             Width = 506
             Align = alBottom
             Caption = 'Panel10'
@@ -972,8 +972,6 @@ object JSONForm2: TJSONForm2
             Top = 192
             Width = 72
             CalendarDisplaySettings = [dsShowHeadings, dsShowDayNames]
-            OKCaption = 'OK'
-            CancelCaption = 'Cancel'
             DateOrder = doNone
             ButtonWidth = 23
             NumGlyphs = 1
@@ -986,8 +984,6 @@ object JSONForm2: TJSONForm2
             Top = 192
             Width = 72
             CalendarDisplaySettings = [dsShowHeadings, dsShowDayNames]
-            OKCaption = 'OK'
-            CancelCaption = 'Cancel'
             DateOrder = doNone
             ButtonWidth = 23
             NumGlyphs = 1
@@ -1018,8 +1014,6 @@ object JSONForm2: TJSONForm2
             Top = 224
             Width = 72
             CalendarDisplaySettings = [dsShowHeadings, dsShowDayNames]
-            OKCaption = 'OK'
-            CancelCaption = 'Cancel'
             DateOrder = doNone
             ButtonWidth = 23
             NumGlyphs = 1

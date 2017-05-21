@@ -1,14 +1,13 @@
 object HTMLMenu: THTMLMenu
   Left = 405
   Height = 292
-  Top = 188
+  Top = 211
   Width = 233
   Caption = 'HTML要素の追加'
   ClientHeight = 292
   ClientWidth = 233
   OnShow = FormShow
-  Position = poScreenCenter
-  LCLVersion = '1.6.0.4'
+  LCLVersion = '1.6.2.0'
   object ListBox1: TListBox
     Left = 0
     Height = 250

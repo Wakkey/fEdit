@@ -28,7 +28,6 @@ type
     MenuItem102: TMenuItem;
     MenuItem11: TMenuItem;
     MenuItem12: TMenuItem;
-    Menu_Custom: TMenuItem;
     MenuItem14: TMenuItem;
     MenuItem16: TMenuItem;
     MenuItem17: TMenuItem;
@@ -80,6 +79,7 @@ type
     Menu_CodeInsert: TMenuItem;
     Menu_code_support: TMenuItem;
     Menu_Css: TMenuItem;
+    Menu_Custom: TMenuItem;
     Menu_Delphi: TMenuItem;
     Menu_EditColor: TMenuItem;
     Menu_Exit: TMenuItem;
@@ -196,7 +196,6 @@ type
     procedure Menu_CClick(Sender: TObject);
     procedure Menu_CloseClick(Sender: TObject);
     procedure Menu_CssClick(Sender: TObject);
-    procedure Menu_CustomClick(Sender: TObject);
     procedure Menu_DelphiClick(Sender: TObject);
     procedure Menu_EditColorClick(Sender: TObject);
     procedure Menu_ExitClick(Sender: TObject);
@@ -212,7 +211,6 @@ type
     procedure Menu_JSClick(Sender: TObject);
     procedure Menu_jsnClick(Sender: TObject);
     procedure Menu_lazarusClick(Sender: TObject);
-    procedure Menu_LibOpenClick(Sender: TObject);
     procedure Menu_MacroElseClick(Sender: TObject);
     procedure Menu_MacroRunClick(Sender: TObject);
     procedure Menu_MacroSetUpClick(Sender: TObject);
@@ -428,9 +426,21 @@ end;
 
 procedure Tmainform.Menu_TEMP_SaveClick(Sender: TObject);
 begin
-  functionunit.TempFIle_Clear1('.ba1');
-  functionunit.TempFIle_Clear2('temp1.txt');
-  functionunit.save('temp1.txt','.ba1')
+  {$IFDEF Windows}
+       functionunit.TempFIle_Clear1('tmp\','.ba1');
+       functionunit.TempFIle_Clear2('tmp\','temp1.txt');
+       functionunit.save('tmp\','temp1.txt','.ba1');
+  {$ENDIF}
+  {$IFDEF LINUX}
+       functionunit.TempFIle_Clear1('tmp\','.ba1');
+       functionunit.TempFIle_Clear2('tmp\','temp1.txt');
+       functionunit.save('tmp\','temp1.txt','.ba1');
+  {$ENDIF}
+  {$IFDEF Darwin}
+       functionunit.TempFIle_Clear1('tmp/','.ba1');
+       functionunit.TempFIle_Clear2('tmp/','temp1.txt');
+       functionunit.save('tmp/','temp1.txt','.ba1');
+  {$ENDIF}
 end;
 
 procedure Tmainform.Menu_ToolBarTABClick(Sender: TObject);
@@ -600,11 +610,6 @@ begin
   functionunit.synchang(functionunit.synhl_No);
 end;
 
-procedure Tmainform.Menu_CustomClick(Sender: TObject);
-begin
-
-end;
-
 procedure Tmainform.Menu_DelphiClick(Sender: TObject);
 begin
   functionunit.synHL_No := 7;
@@ -704,13 +709,6 @@ begin
   functionunit.synHL_No := 20;
   functionunit.heighligthcheck(functionunit.synhl_No,true);
   functionunit.synchang(functionunit.synhl_No);
-end;
-
-procedure Tmainform.Menu_LibOpenClick(Sender: TObject);
-begin
-  if not datamodule1.OpenDialog1.Execute then
-    exit;
-  functionunit.read_sorce( mainform.PageControl1.ActivePageIndex, datamodule1.OpenDialog1.FileName );
 end;
 
 procedure Tmainform.Menu_MacroElseClick(Sender: TObject);
@@ -908,9 +906,21 @@ end;
 
 procedure Tmainform.MenuItem29Click(Sender: TObject);
 begin
-  functionunit.TempFIle_Clear1('.ba2');
-  functionunit.TempFIle_Clear2('temp2.txt');
-  functionunit.save('temp2.txt','.ba2')
+  {$IFDEF Windows}
+       functionunit.TempFIle_Clear1('tmp/','.ba2');
+       functionunit.TempFIle_Clear2('tmp/','temp2.txt');
+       functionunit.save('tmp/','temp2.txt','.ba2');
+  {$ENDIF}
+  {$IFDEF LINUX}
+       functionunit.TempFIle_Clear1('tmp/','.ba2');
+       functionunit.TempFIle_Clear2('tmp/','temp2.txt');
+       functionunit.save('tmp/','temp2.txt','.ba2');
+  {$ENDIF}
+  {$IFDEF Darwin}
+       functionunit.TempFIle_Clear1('tmp/','.ba2');
+       functionunit.TempFIle_Clear2('tmp/','temp2.txt');
+       functionunit.save('tmp/','temp2.txt','.ba2');
+  {$ENDIF}
 end;
 
 procedure Tmainform.MenuItem31Click(Sender: TObject);

@@ -1,10 +1,10 @@
 object mainform: Tmainform
-  Left = 479
+  Left = 497
   Height = 309
-  Top = 228
+  Top = 336
   Width = 577
   Caption = 'mainform'
-  ClientHeight = 289
+  ClientHeight = 309
   ClientWidth = 577
   Menu = MainMenu1
   OnClick = FormClick
@@ -12,7 +12,6 @@ object mainform: Tmainform
   OnDockOver = FormDockOver
   OnShow = FormShow
   OnUnDock = FormUnDock
-  Position = poScreenCenter
   LCLVersion = '1.6.0.4'
   object toolpanel: TPanel
     Left = 0
@@ -24,7 +23,7 @@ object mainform: Tmainform
   end
   object PageControl1: TPageControl
     Left = 0
-    Height = 256
+    Height = 276
     Top = 33
     Width = 577
     Align = alClient
@@ -308,7 +307,6 @@ object mainform: Tmainform
       end
       object Menu_LibOpen: TMenuItem
         Caption = '補完ライブラリ指定'
-        OnClick = Menu_LibOpenClick
       end
     end
     object Menu_RootOption: TMenuItem
@@ -359,7 +357,6 @@ object mainform: Tmainform
       end
       object Menu_SetMnu: TMenuItem
         Caption = 'メニューの設定'
-        OnClick = Menu_SetMnuClick
       end
       object MenuItem102: TMenuItem
         Caption = '-'
@@ -540,6 +537,9 @@ object mainform: Tmainform
         Caption = '-'
       end
     end
+    object Menu_Custom: TMenuItem
+      Caption = '拡張'
+    end
     object Menu_RootHelp: TMenuItem
       Caption = 'ヘルプ'
       object MenuItem22: TMenuItem
@@ -555,9 +555,6 @@ object mainform: Tmainform
         Caption = '紹介'
         OnClick = Menu_VershonClick
       end
-    end
-    object Menu_Custom: TMenuItem
-      Caption = '拡張'
     end
   end
 end

@@ -1,13 +1,12 @@
 object tmpClr: TtmpClr
   Left = 682
   Height = 259
-  Top = 218
+  Top = 241
   Width = 194
   Caption = 'tmpClr'
   ClientHeight = 259
   ClientWidth = 194
   OnCreate = FormCreate
-  Position = poScreenCenter
   LCLVersion = '1.6.0.4'
   object Button1: TButton
     Left = 16

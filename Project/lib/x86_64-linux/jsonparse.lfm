@@ -1,7 +1,7 @@
 object Json_pars: TJson_pars
-  Left = 330
+  Left = 307
   Height = 240
-  Top = 187
+  Top = 164
   Width = 477
   Caption = 'JsonParce'
   ClientHeight = 240
@@ -34,6 +34,7 @@ object Json_pars: TJson_pars
     Width = 280
     Lines.Strings = (
       'Memo1'
+      ''
     )
     TabOrder = 2
   end

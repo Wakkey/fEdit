@@ -1,7 +1,7 @@
 object editform: Teditform
-  Left = 298
+  Left = 395
   Height = 310
-  Top = 350
+  Top = 418
   Width = 524
   Caption = 'editform'
   ClientHeight = 310
@@ -44,7 +44,6 @@ object editform: Teditform
         ParentFont = False
         PopupMenu = PopupMenu1
         TabOrder = 0
-        OnKeyPress = SynEdit1KeyPress
         Gutter.Width = 57
         Gutter.MouseActions = <>
         RightGutter.Width = 0
@@ -537,17 +536,16 @@ object editform: Teditform
     end
     object TabSheet2: TTabSheet
       Caption = 'MemoMode'
-      ClientHeight = 282
-      ClientWidth = 516
+      ClientHeight = 271
+      ClientWidth = 518
       object Memo1: TMemo
         Left = 0
-        Height = 282
+        Height = 271
         Top = 0
-        Width = 516
+        Width = 518
         Align = alClient
         ScrollBars = ssVertical
         TabOrder = 0
-        TabStop = False
       end
     end
     object TabSheet3: TTabSheet
@@ -793,25 +791,5 @@ object editform: Teditform
     Params = <>
     left = 128
     top = 101
-  end
-  object SynCompletion1: TSynCompletion
-    Position = 0
-    LinesInWindow = 6
-    SelectedColor = clHighlight
-    CaseSensitive = False
-    Width = 262
-    AutoUseSingleIdent = True
-    ShortCut = 16416
-    EndOfTokenChr = '()[].'
-    ExecCommandID = ecSynCompletionExecute
-    left = 248
-    top = 133
-  end
-  object SynAutoComplete1: TSynAutoComplete
-    EndOfTokenChr = '()[].'
-    ShortCut = 8224
-    ExecCommandID = ecSynAutoCompletionExecute
-    left = 247
-    top = 161
   end
 end

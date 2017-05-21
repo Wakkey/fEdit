@@ -1,14 +1,13 @@
 object vershon_form: Tvershon_form
-  Left = 429
+  Left = 579
   Height = 348
-  Top = 304
+  Top = 132
   Width = 447
   BorderStyle = bsDialog
   Caption = 'バージョン情報'
   ClientHeight = 348
   ClientWidth = 447
   OnShow = FormShow
-  Position = poScreenCenter
   LCLVersion = '1.6.0.4'
   object GroupBox1: TGroupBox
     Left = 0
@@ -17,20 +16,18 @@ object vershon_form: Tvershon_form
     Width = 447
     Align = alBottom
     Caption = 'ReadMe'
-    ClientHeight = 149
+    ClientHeight = 151
     ClientWidth = 439
     TabOrder = 0
     object Memo1: TMemo
       Left = 0
-      Height = 149
+      Height = 151
       Top = 0
       Width = 439
       Align = alClient
       Lines.Strings = (
         ''
         ' '
-        ''
-        ''
         ''
         ''
         ''

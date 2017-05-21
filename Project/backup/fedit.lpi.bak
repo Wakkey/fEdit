@@ -44,66 +44,66 @@
         <PackageName Value="LCL"/>
       </Item5>
     </RequiredPackages>
-    <Units Count="22">
+    <Units Count="20">
       <Unit0>
         <Filename Value="fedit.lpr"/>
         <IsPartOfProject Value="True"/>
       </Unit0>
       <Unit1>
-        <Filename Value="../main_unit/main.pas"/>
+        <Filename Value="main.pas"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="mainform"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
       </Unit1>
       <Unit2>
-        <Filename Value="../edit_unit/unit_edit.pas"/>
+        <Filename Value="unit_edit.pas"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="editform"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
       </Unit2>
       <Unit3>
-        <Filename Value="../function_unit/function_unit.pas"/>
+        <Filename Value="function_unit.pas"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="functionunit"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
       </Unit3>
       <Unit4>
-        <Filename Value="../other_unit/tool_window.pas"/>
+        <Filename Value="tool_window.pas"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="ToolWindow"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
       </Unit4>
       <Unit5>
-        <Filename Value="../comp_unit/comp.pas"/>
+        <Filename Value="comp.pas"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="DataModule1"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
       </Unit5>
       <Unit6>
-        <Filename Value="../macro_unit/macrow.pas"/>
+        <Filename Value="macrow.pas"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="macro_form"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
       </Unit6>
       <Unit7>
-        <Filename Value="../find_unit/find_unit.pas"/>
+        <Filename Value="find_unit.pas"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="find_form"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
       </Unit7>
       <Unit8>
-        <Filename Value="../find_unit/function_find.pas"/>
+        <Filename Value="function_find.pas"/>
         <IsPartOfProject Value="True"/>
       </Unit8>
       <Unit9>
-        <Filename Value="../find_unit/repracemacro.pas"/>
+        <Filename Value="repracemacro.pas"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="reprace_unit"/>
         <HasResources Value="True"/>
@@ -111,14 +111,14 @@
         <UnitName Value="repraceMacro"/>
       </Unit9>
       <Unit10>
-        <Filename Value="../other_unit/filetype_form.pas"/>
+        <Filename Value="filetype_form.pas"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="openfiletypeform"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
       </Unit10>
       <Unit11>
-        <Filename Value="../html_unit/htmledit.pas"/>
+        <Filename Value="htmledit.pas"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="HTMLMenu"/>
         <HasResources Value="True"/>
@@ -126,19 +126,19 @@
         <UnitName Value="HtmlEdit"/>
       </Unit11>
       <Unit12>
-        <Filename Value="../html_unit/htmlpropedit.pas"/>
+        <Filename Value="htmlpropedit.pas"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="HTMLProp"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
       </Unit12>
       <Unit13>
-        <Filename Value="../SQL_unit/sqlpropedit.pas"/>
+        <Filename Value="sqlpropedit.pas"/>
         <IsPartOfProject Value="True"/>
         <HasResources Value="True"/>
       </Unit13>
       <Unit14>
-        <Filename Value="../SQL_unit/tablebuilder.pas"/>
+        <Filename Value="tablebuilder.pas"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="Form2"/>
         <HasResources Value="True"/>
@@ -146,7 +146,7 @@
         <UnitName Value="TableBuilder"/>
       </Unit14>
       <Unit15>
-        <Filename Value="../JSON_unit/jsonformdialog.pas"/>
+        <Filename Value="jsonformdialog.pas"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="JSONForm2"/>
         <HasResources Value="True"/>
@@ -154,7 +154,7 @@
         <UnitName Value="JSONFormdialog"/>
       </Unit15>
       <Unit16>
-        <Filename Value="../JSON_unit/jsonformedit.pas"/>
+        <Filename Value="jsonformedit.pas"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="JSONEditForm"/>
         <HasResources Value="True"/>
@@ -162,7 +162,7 @@
         <UnitName Value="JSONFormEdit"/>
       </Unit16>
       <Unit17>
-        <Filename Value="../JSON_unit/jsonparse.pas"/>
+        <Filename Value="jsonparse.pas"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="Json_pars"/>
         <HasResources Value="True"/>
@@ -170,33 +170,19 @@
         <UnitName Value="Jsonparse"/>
       </Unit17>
       <Unit18>
-        <Filename Value="../verjon_unit/versiondialog.pas"/>
+        <Filename Value="versiondialog.pas"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="vershon_form"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
       </Unit18>
       <Unit19>
-        <Filename Value="../other_unit/tmp_clr.pas"/>
+        <Filename Value="tmp_clr.pas"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="tmpClr"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
       </Unit19>
-      <Unit20>
-        <Filename Value="../option_unit/colordlg.pas"/>
-        <IsPartOfProject Value="True"/>
-        <ComponentName Value="color_form"/>
-        <HasResources Value="True"/>
-        <ResourceBaseClass Value="Form"/>
-      </Unit20>
-      <Unit21>
-        <Filename Value="../code_suport/supportcodeinput.pas"/>
-        <IsPartOfProject Value="True"/>
-        <ComponentName Value="code_auto_support"/>
-        <HasResources Value="True"/>
-        <ResourceBaseClass Value="Form"/>
-      </Unit21>
     </Units>
   </ProjectOptions>
   <CompilerOptions>
@@ -206,7 +192,6 @@
     </Target>
     <SearchPaths>
       <IncludeFiles Value="$(ProjOutDir)"/>
-      <OtherUnitFiles Value="../comp_unit;../edit_unit;../find_unit;../SQL_unit;../function_unit;../html_unit;../JSON_unit;../macro_unit;../main_unit;../other_unit;../verjon_unit;../option_unit;../code_suport"/>
       <UnitOutputDirectory Value="lib/$(TargetCPU)-$(TargetOS)"/>
     </SearchPaths>
     <Linking>

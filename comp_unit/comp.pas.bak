@@ -12,8 +12,7 @@ uses
   synhighlighterunixshellscript, SynHighlighterCss, SynHighlighterPHP,
   SynHighlighterTeX, SynHighlighterSQL, SynHighlighterPython, SynHighlighterVB,
   SynHighlighterAny, SynHighlighterMulti, SynHighlighterBat, SynHighlighterIni,
-  SynHighlighterPo, SynCompletion, PrintersDlgs, Forms, Controls, Graphics,
-  Dialogs, ExtDlgs;
+  SynHighlighterPo, PrintersDlgs, Forms, Controls, Graphics, Dialogs, ExtDlgs;
 
 type
 
@@ -31,9 +30,7 @@ type
     ReplaceDialog1: TReplaceDialog;
     SaveDialog1: TSaveDialog;
     SynAnySyn1: TSynAnySyn;
-    SynAutoComplete1: TSynAutoComplete;
     SynBatSyn1: TSynBatSyn;
-    SynCompletion1: TSynCompletion;
     SynCppSyn1: TSynCppSyn;
     SynCssSyn1: TSynCssSyn;
     SynDiffSyn1: TSynDiffSyn;

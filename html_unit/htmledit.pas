@@ -65,15 +65,7 @@ begin
   st4.Clear;
 
   setHtmlfunc := TStringList.Create;
-  {$IFDEF Windows}
   s1 := extractfilepath(Paramstr(0)) + 'ini\' + 'Edit_type.txt';
-  {$ENDIF}
-  {$IFDEF Linux}
-  s1 := extractfilepath(Paramstr(0)) + 'ini\' + 'Edit_type.txt';
-  {$ENDIF}
-  {$IFDEF Darwin}
-  s1 := extractfilepath(Paramstr(0)) + 'ini/' + 'Edit_type.txt';
-  {$ENDIF}
   //showmessage(s1);
   if not loadSTringList(setHtmlfunc,s1) then begin
     showmessage('読み込みに失敗しました:' + char(13)+s1);

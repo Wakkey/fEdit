@@ -287,24 +287,4 @@ object DataModule1: TDataModule1
     left = 136
     top = 105
   end
-  object SynAutoComplete1: TSynAutoComplete
-    EndOfTokenChr = '()[].'
-    ShortCut = 8224
-    ExecCommandID = ecSynAutoCompletionExecute
-    left = 191
-    top = 105
-  end
-  object SynCompletion1: TSynCompletion
-    Position = 0
-    LinesInWindow = 6
-    SelectedColor = clHighlight
-    CaseSensitive = False
-    Width = 262
-    AutoUseSingleIdent = True
-    ShortCut = 16416
-    EndOfTokenChr = '()[].'
-    ExecCommandID = ecSynCompletionExecute
-    left = 220
-    top = 105
-  end
 end

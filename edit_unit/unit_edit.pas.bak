@@ -5,9 +5,9 @@ unit unit_edit;
 interface
 
 uses
-  Classes, SysUtils, FileUtil, SynEdit, SynCompletion, Forms, Controls,
-  Graphics, Dialogs, Menus, ComCtrls, StdCtrls, ExtCtrls, EditBtn, FileCtrl,
-  DBGrids, sqlite3conn, sqldb, db;
+  Classes, SysUtils, FileUtil, SynEdit, Forms, Controls, Graphics, Dialogs,
+  Menus, ComCtrls, StdCtrls, ExtCtrls, EditBtn, FileCtrl, DBGrids, sqlite3conn,
+  sqldb, db;
 
 type
 
@@ -48,8 +48,6 @@ type
     SQLite3Connection1: TSQLite3Connection;
     SQLQuery1: TSQLQuery;
     SQLTransaction1: TSQLTransaction;
-    SynAutoComplete1: TSynAutoComplete;
-    SynCompletion1: TSynCompletion;
     SynEdit1: TSynEdit;
     TabSheet1: TTabSheet;
     TabSheet2: TTabSheet;
@@ -81,7 +79,6 @@ type
     procedure SaveDialog1SelectionChange(Sender: TObject);
     procedure SaveDialog1TypeChange(Sender: TObject);
     procedure SynEdit1Change(Sender: TObject);
-    procedure SynEdit1KeyPress(Sender: TObject; var Key: char);
   private
     { private declarations }
     edit_y,edit_x,sel:integer;
@@ -118,8 +115,6 @@ begin
   Json_write := TstringList.Create;
   Json_write.clear;
   PageControl1.PageIndex:= 0;
-  SynCompletion1.Editor := synedit1;
-  SynAutoComplete1.Editor := synedit1;
 end;
 
 procedure Teditform.FormDockDrop(Sender: TObject; Source: TDragDockObject; X,
@@ -295,22 +290,6 @@ end;
 procedure Teditform.SynEdit1Change(Sender: TObject);
 begin
   save_complate := false;
-end;
-
-procedure Teditform.SynEdit1KeyPress(Sender: TObject; var Key: char);
-var
-   apoint,temppoint:tpoint;
-   s:string;
-begin
-             temppoint:=SynEdit1.CaretXY;
-             temppoint.y:=temppoint.y+1;
-             temppoint.x:=temppoint.x-1;
-             s := synedit1.Lines[temppoint.y];
-             //s[temppoint.x] := ' ';
-             //synedit1.Lines[temppoint.y] := s;
-             apoint:= SynEdit1.ClientToScreen(SynEdit1.RowColumnToPixels(temppoint));
-             apoint.x:=apoint.x-1;
-             SynCompletion1.Execute(s[temppoint.x],apoint);
 end;
 
 end.

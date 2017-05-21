@@ -1,7 +1,7 @@
 object editform: Teditform
-  Left = 395
+  Left = 800
   Height = 310
-  Top = 418
+  Top = 182
   Width = 524
   Caption = 'editform'
   ClientHeight = 310
@@ -536,17 +536,17 @@ object editform: Teditform
     end
     object TabSheet2: TTabSheet
       Caption = 'MemoMode'
-      ClientHeight = 275
-      ClientWidth = 518
+      ClientHeight = 282
+      ClientWidth = 516
       object Memo1: TMemo
         Left = 0
-        Height = 279
+        Height = 282
         Top = 0
         Width = 516
         Align = alClient
-        HideSelection = False
         ScrollBars = ssVertical
         TabOrder = 0
+        TabStop = False
       end
     end
     object TabSheet3: TTabSheet

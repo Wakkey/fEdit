@@ -1,7 +1,7 @@
 object find_form: Tfind_form
-  Left = 502
+  Left = 800
   Height = 321
-  Top = 304
+  Top = 169
   Width = 477
   Caption = '検索/置換'
   ClientHeight = 321
@@ -13,7 +13,7 @@ object find_form: Tfind_form
   OnCreate = FormCreate
   OnShow = FormShow
   Position = poScreenCenter
-  LCLVersion = '1.6.0.4'
+  LCLVersion = '1.6.2.0'
   object GroupBox1: TGroupBox
     Left = 0
     Height = 321
@@ -21,38 +21,38 @@ object find_form: Tfind_form
     Width = 477
     Align = alClient
     Caption = '検索結果'
-    ClientHeight = 301
-    ClientWidth = 469
+    ClientHeight = 304
+    ClientWidth = 473
     TabOrder = 0
     object TabControl1: TTabControl
       Left = 0
-      Height = 301
+      Height = 304
       Top = 0
-      Width = 469
+      Width = 473
       OnChange = TabControl1Change
       OnChanging = TabControl1Changing
       Align = alClient
       TabOrder = 0
       object Label1: TLabel
         Left = 192
-        Height = 20
+        Height = 12
         Top = 32
-        Width = 65
+        Width = 60
         Caption = '検索文字列'
         ParentColor = False
       end
       object Label2: TLabel
         Left = 192
-        Height = 20
+        Height = 12
         Top = 82
-        Width = 65
+        Width = 60
         Caption = '置換文字列'
         ParentColor = False
       end
       object ListBox2: TListBox
         Left = 26
-        Height = 269
-        Top = 30
+        Height = 299
+        Top = 3
         Width = 158
         Align = alLeft
         ItemHeight = 0
@@ -61,22 +61,22 @@ object find_form: Tfind_form
       end
       object FIndTextAlia: TComboBox
         Left = 206
-        Height = 21
+        Height = 26
         Top = 54
         Width = 243
         AutoSelect = False
-        ItemHeight = 0
+        ItemHeight = 18
         OnKeyDown = FIndTextAliaKeyDown
         OnKeyUp = FIndTextAliaKeyUp
         TabOrder = 1
       end
       object RplaceTextAlia: TComboBox
         Left = 206
-        Height = 21
+        Height = 26
         Top = 102
         Width = 243
         AutoSelect = False
-        ItemHeight = 0
+        ItemHeight = 18
         OnKeyUp = RplaceTextAliaKeyUp
         TabOrder = 2
       end
@@ -138,16 +138,16 @@ object find_form: Tfind_form
       end
       object ChekChar: TCheckBox
         Left = 204
-        Height = 18
+        Height = 22
         Top = 126
-        Width = 157
+        Width = 159
         Caption = '大文字/小文字を区別する'
         TabOrder = 9
       end
       object ListBox1: TListBox
         Left = 2
-        Height = 269
-        Top = 30
+        Height = 299
+        Top = 3
         Width = 24
         Align = alLeft
         ItemHeight = 0

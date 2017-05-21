@@ -1,5 +1,5 @@
 object ToolWindow: TToolWindow
-  Left = 398
+  Left = 325
   Height = 95
   Top = 232
   Width = 459
@@ -7,7 +7,7 @@ object ToolWindow: TToolWindow
   ClientHeight = 95
   ClientWidth = 459
   FormStyle = fsStayOnTop
-  LCLVersion = '1.6.0.4'
+  LCLVersion = '1.6.2.0'
   object ToolBar2: TToolBar
     Left = 0
     Top = 0

@@ -1,7 +1,7 @@
 object ToolWindow: TToolWindow
   Left = 398
   Height = 95
-  Top = 232
+  Top = 255
   Width = 459
   Caption = 'ToolWindow'
   ClientHeight = 95

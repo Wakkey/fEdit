@@ -1,10 +1,10 @@
 object mainform: Tmainform
-  Left = 479
+  Left = 434
   Height = 309
-  Top = 228
+  Top = 141
   Width = 577
   Caption = 'mainform'
-  ClientHeight = 309
+  ClientHeight = 288
   ClientWidth = 577
   Menu = MainMenu1
   OnClick = FormClick
@@ -13,7 +13,7 @@ object mainform: Tmainform
   OnShow = FormShow
   OnUnDock = FormUnDock
   Position = poScreenCenter
-  LCLVersion = '1.6.0.4'
+  LCLVersion = '1.6.2.0'
   object toolpanel: TPanel
     Left = 0
     Height = 33
@@ -24,7 +24,7 @@ object mainform: Tmainform
   end
   object PageControl1: TPageControl
     Left = 0
-    Height = 276
+    Height = 255
     Top = 33
     Width = 577
     Align = alClient

@@ -1,7 +1,7 @@
 object find_form: Tfind_form
-  Left = 502
+  Left = 996
   Height = 321
-  Top = 304
+  Top = 538
   Width = 477
   Caption = '検索/置換'
   ClientHeight = 321
@@ -12,7 +12,6 @@ object find_form: Tfind_form
   OnCloseQuery = FormCloseQuery
   OnCreate = FormCreate
   OnShow = FormShow
-  Position = poScreenCenter
   LCLVersion = '1.6.0.4'
   object GroupBox1: TGroupBox
     Left = 0

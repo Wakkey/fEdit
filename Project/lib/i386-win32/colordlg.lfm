@@ -1,7 +1,7 @@
 object color_form: Tcolor_form
-  Left = 485
+  Left = 399
   Height = 353
-  Top = 276
+  Top = 310
   Width = 500
   BorderStyle = bsDialog
   Caption = '設定ダイアログ'
@@ -12,7 +12,7 @@ object color_form: Tcolor_form
   OnCreate = FormCreate
   OnShow = FormShow
   Position = poScreenCenter
-  LCLVersion = '1.6.0.4'
+  LCLVersion = '1.6.4.0'
   object BitBtn1: TBitBtn
     Left = 416
     Height = 30
@@ -42,8 +42,8 @@ object color_form: Tcolor_form
     Height = 340
     Top = 8
     Width = 388
-    ActivePage = TabSheet5
-    TabIndex = 4
+    ActivePage = TabSheet4
+    TabIndex = 3
     TabOrder = 2
     OnChange = PageControl1Change
     object TabSheet1: TTabSheet
@@ -281,8 +281,8 @@ object color_form: Tcolor_form
     end
     object TabSheet4: TTabSheet
       Caption = 'ツールバーの設定'
-      ClientHeight = 301
-      ClientWidth = 382
+      ClientHeight = 312
+      ClientWidth = 380
       object GroupBox6: TGroupBox
         Left = 4
         Height = 296
@@ -307,9 +307,9 @@ object color_form: Tcolor_form
         end
         object CheckBox3: TCheckBox
           Left = 80
-          Height = 18
+          Height = 19
           Top = 3
-          Width = 79
+          Width = 74
           Caption = 'Tab有効化'
           OnChange = CheckBox3Change
           OnClick = CheckBox3Click
@@ -414,9 +414,9 @@ object color_form: Tcolor_form
         end
         object CheckBox4: TCheckBox
           Left = 16
-          Height = 18
+          Height = 19
           Top = 3
-          Width = 57
+          Width = 56
           Caption = '非表示'
           OnChange = CheckBox4Change
           OnClick = CheckBox4Click

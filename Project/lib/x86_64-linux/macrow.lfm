@@ -1,7 +1,7 @@
 object macro_form: Tmacro_form
-  Left = 814
+  Left = 195
   Height = 216
-  Top = 175
+  Top = 236
   Width = 589
   BorderStyle = bsDialog
   Caption = 'マクロ作成ウインドウ'
@@ -9,6 +9,7 @@ object macro_form: Tmacro_form
   ClientWidth = 589
   OnActivate = FormActivate
   OnCreate = FormCreate
+  Position = poScreenCenter
   LCLVersion = '1.6.2.0'
   object BitBtn1: TBitBtn
     Left = 496
@@ -85,7 +86,7 @@ object macro_form: Tmacro_form
           '次のタブフォルダ'
           '最初のタブフォルダ'
           '最後のタブフォルダ'
-          ''
+          'ファイル選択ダイアログ'
         )
         TabOrder = 1
       end
@@ -153,6 +154,7 @@ object macro_form: Tmacro_form
           '次のタブフォルダ'
           '最初のタブフォルダ'
           '最後のタブフォルダ'
+          'ファイル選択ダイアログ'
           ''
         )
         TabOrder = 6

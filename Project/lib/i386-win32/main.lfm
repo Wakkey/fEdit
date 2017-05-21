@@ -1,7 +1,7 @@
 object mainform: Tmainform
-  Left = 801
+  Left = 474
   Height = 309
-  Top = 313
+  Top = 266
   Width = 577
   Caption = 'mainform'
   ClientHeight = 289
@@ -308,7 +308,6 @@ object mainform: Tmainform
       end
       object Menu_LibOpen: TMenuItem
         Caption = '補完ライブラリ指定'
-        OnClick = Menu_LibOpenClick
       end
     end
     object Menu_RootOption: TMenuItem
@@ -540,6 +539,9 @@ object mainform: Tmainform
         Caption = '-'
       end
     end
+    object Menu_Custom: TMenuItem
+      Caption = '拡張'
+    end
     object Menu_RootHelp: TMenuItem
       Caption = 'ヘルプ'
       object MenuItem22: TMenuItem
@@ -555,9 +557,6 @@ object mainform: Tmainform
         Caption = '紹介'
         OnClick = Menu_VershonClick
       end
-    end
-    object Menu_Custom: TMenuItem
-      Caption = '拡張'
     end
   end
 end

@@ -5,32 +5,30 @@ object vershon_form: Tvershon_form
   Width = 447
   BorderStyle = bsDialog
   Caption = 'バージョン情報'
-  ClientHeight = 348
-  ClientWidth = 447
+  ClientHeight = 0
+  ClientWidth = 0
   OnShow = FormShow
   Position = poScreenCenter
   LCLVersion = '1.6.0.4'
   object GroupBox1: TGroupBox
     Left = 0
     Height = 171
-    Top = 177
-    Width = 447
+    Top = -171
+    Width = 0
     Align = alBottom
     Caption = 'ReadMe'
-    ClientHeight = 149
-    ClientWidth = 439
+    ClientHeight = 151
+    ClientWidth = 0
     TabOrder = 0
     object Memo1: TMemo
       Left = 0
-      Height = 149
+      Height = 151
       Top = 0
-      Width = 439
+      Width = 0
       Align = alClient
       Lines.Strings = (
         ''
         ' '
-        ''
-        ''
         ''
         ''
         ''
@@ -42,9 +40,9 @@ object vershon_form: Tvershon_form
   end
   object Label1: TLabel
     Left = 24
-    Height = 27
+    Height = 28
     Top = 23
-    Width = 61
+    Width = 62
     Caption = 'Label1'
     Font.CharSet = SHIFTJIS_CHARSET
     Font.Height = -19
@@ -67,9 +65,9 @@ object vershon_form: Tvershon_form
   end
   object Label3: TLabel
     Left = 24
-    Height = 27
+    Height = 28
     Top = 87
-    Width = 248
+    Width = 249
     Caption = 'http://yuhi-it-s.com/fEdit/'
     Font.CharSet = SHIFTJIS_CHARSET
     Font.Height = -19
@@ -83,9 +81,9 @@ object vershon_form: Tvershon_form
   end
   object Label4: TLabel
     Left = 24
-    Height = 27
+    Height = 28
     Top = 55
-    Width = 170
+    Width = 190
     Caption = '最新版をダウンロード'
     Font.CharSet = SHIFTJIS_CHARSET
     Font.Height = -19
@@ -97,9 +95,9 @@ object vershon_form: Tvershon_form
   end
   object Label2: TLabel
     Left = 24
-    Height = 30
+    Height = 31
     Top = 135
-    Width = 142
+    Width = 146
     Caption = 'Yuhi Wakiyasu'
     Font.CharSet = SHIFTJIS_CHARSET
     Font.Height = -21
