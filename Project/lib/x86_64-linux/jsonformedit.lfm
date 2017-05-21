@@ -1,7 +1,7 @@
 object JSONEditForm: TJSONEditForm
-  Left = 801
+  Left = 351
   Height = 490
-  Top = 1
+  Top = 358
   Width = 782
   Caption = 'JSONSchemaEdit'
   ClientHeight = 490
@@ -12,7 +12,7 @@ object JSONEditForm: TJSONEditForm
   Font.Name = 'Tahoma'
   OnCreate = FormCreate
   Position = poScreenCenter
-  LCLVersion = '1.6.2.0'
+  LCLVersion = '1.6.4.0'
   Visible = True
   object Panel2: TPanel
     Left = 0
@@ -330,9 +330,9 @@ object JSONEditForm: TJSONEditForm
                 end
                 object S_ID_Check: TCheckBox
                   Left = 8
-                  Height = 21
+                  Height = 19
                   Top = 48
-                  Width = 70
+                  Width = 68
                   Caption = 'SchemaID'
                   Checked = True
                   State = cbChecked
@@ -350,9 +350,9 @@ object JSONEditForm: TJSONEditForm
                 end
                 object S_Title_Check: TCheckBox
                   Left = 8
-                  Height = 21
+                  Height = 19
                   Top = 96
-                  Width = 79
+                  Width = 77
                   Caption = 'SchemaTitle'
                   Checked = True
                   State = cbChecked
@@ -369,9 +369,9 @@ object JSONEditForm: TJSONEditForm
                 end
                 object S_discription_Check: TCheckBox
                   Left = 8
-                  Height = 21
+                  Height = 19
                   Top = 144
-                  Width = 74
+                  Width = 72
                   Caption = 'description'
                   Checked = True
                   State = cbChecked
@@ -380,9 +380,9 @@ object JSONEditForm: TJSONEditForm
                 end
                 object S_Var_Check: TCheckBox
                   Left = 7
-                  Height = 21
+                  Height = 19
                   Top = 0
-                  Width = 78
+                  Width = 76
                   Caption = 'Schema Var'
                   Checked = True
                   State = cbChecked

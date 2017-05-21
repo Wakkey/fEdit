@@ -1,14 +1,14 @@
 object HTMLProp: THTMLProp
-  Left = 390
+  Left = 558
   Height = 436
-  Top = 16
+  Top = 270
   Width = 394
   Caption = 'HTMLプロパティエディタ'
   ClientHeight = 436
   ClientWidth = 394
   OnCreate = FormCreate
   Position = poScreenCenter
-  LCLVersion = '1.6.2.0'
+  LCLVersion = '1.6.4.0'
   object Panel1: TPanel
     Left = 0
     Height = 50

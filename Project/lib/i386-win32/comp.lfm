@@ -1,10 +1,10 @@
 object DataModule1: TDataModule1
-  Left = 800
+  Left = 753
   Height = 240
-  Top = 145
+  Top = 244
   Width = 320
   Caption = 'datamodule1'
-  LCLVersion = '1.6.2.0'
+  LCLVersion = '1.6.0.4'
   object SynExporterHTML1: TSynExporterHTML
     Color = clWindow
     DefaultFilter = 'HTML Document (*.htm,*.html)|*.htm;*.html'

@@ -1,7 +1,7 @@
 object DataModule1: TDataModule1
-  Left = 776
+  Left = 800
   Height = 240
-  Top = 260
+  Top = 145
   Width = 320
   Caption = 'datamodule1'
   LCLVersion = '1.6.2.0'

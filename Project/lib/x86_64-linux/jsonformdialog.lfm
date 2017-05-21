@@ -1,7 +1,7 @@
 object JSONForm2: TJSONForm2
-  Left = 244
+  Left = 468
   Height = 416
-  Top = 36
+  Top = 308
   Width = 518
   Caption = 'JSONForm2'
   ClientHeight = 416
@@ -14,7 +14,7 @@ object JSONForm2: TJSONForm2
   OnCreate = FormCreate
   OnShow = FormShow
   Position = poScreenCenter
-  LCLVersion = '1.6.2.0'
+  LCLVersion = '1.6.4.0'
   object TabSheet15: TTabSheet
     Caption = 'color'
   end
@@ -42,9 +42,9 @@ object JSONForm2: TJSONForm2
         Height = 365
         Top = 1
         Width = 514
-        ActivePage = TabSheet23
+        ActivePage = TabSheet29
         Align = alClient
-        TabIndex = 2
+        TabIndex = 8
         TabOrder = 0
         OnChange = PageControl5Change
         object TabSheet31: TTabSheet
@@ -194,9 +194,9 @@ object JSONForm2: TJSONForm2
           ClientWidth = 506
           object string2_Check3: TCheckBox
             Left = 112
-            Height = 21
+            Height = 19
             Top = 168
-            Width = 78
+            Width = 76
             Caption = 'max Length'
             Checked = True
             State = cbChecked
@@ -222,9 +222,9 @@ object JSONForm2: TJSONForm2
           end
           object string1_Check3: TCheckBox
             Left = 8
-            Height = 21
+            Height = 19
             Top = 168
-            Width = 74
+            Width = 72
             Caption = 'min Length'
             Checked = True
             State = cbChecked
@@ -290,9 +290,9 @@ object JSONForm2: TJSONForm2
           end
           object P_ID_Check14: TCheckBox
             Left = 8
-            Height = 21
+            Height = 19
             Top = 8
-            Width = 134
+            Width = 132
             Caption = 'リソースID properties ID'
             Checked = True
             State = cbChecked
@@ -308,9 +308,9 @@ object JSONForm2: TJSONForm2
           end
           object P_Title_Check14: TCheckBox
             Left = 8
-            Height = 21
+            Height = 19
             Top = 63
-            Width = 132
+            Width = 130
             Caption = 'タイトル properties Title'
             Checked = True
             State = cbChecked
@@ -326,9 +326,9 @@ object JSONForm2: TJSONForm2
           end
           object P_discription_Check14: TCheckBox
             Left = 8
-            Height = 21
+            Height = 19
             Top = 120
-            Width = 153
+            Width = 151
             Caption = '説明 properties description'
             Checked = True
             State = cbChecked

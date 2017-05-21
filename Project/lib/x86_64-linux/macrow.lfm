@@ -1,7 +1,7 @@
 object macro_form: Tmacro_form
-  Left = 195
+  Left = 349
   Height = 216
-  Top = 236
+  Top = 220
   Width = 589
   BorderStyle = bsDialog
   Caption = 'マクロ作成ウインドウ'
@@ -10,7 +10,7 @@ object macro_form: Tmacro_form
   OnActivate = FormActivate
   OnCreate = FormCreate
   Position = poScreenCenter
-  LCLVersion = '1.6.2.0'
+  LCLVersion = '1.6.4.0'
   object BitBtn1: TBitBtn
     Left = 496
     Height = 30
@@ -45,38 +45,38 @@ object macro_form: Tmacro_form
     OnChange = PageControl1Change
     object TabSheet1: TTabSheet
       Caption = '登録'
-      ClientHeight = 169
+      ClientHeight = 172
       ClientWidth = 464
       OnShow = TabSheet1Show
       object Edit1: TEdit
         Left = 9
-        Height = 26
+        Height = 23
         Top = 34
         Width = 173
         TabOrder = 0
       end
       object Label1: TLabel
         Left = 14
-        Height = 12
+        Height = 15
         Top = 10
-        Width = 70
+        Width = 63
         Caption = 'マクロタイトル'
         ParentColor = False
       end
       object Label2: TLabel
         Left = 14
-        Height = 12
+        Height = 15
         Top = 68
-        Width = 133
+        Width = 118
         Caption = 'マクロ実行プログラム指定'
         ParentColor = False
       end
       object ComboBox1: TComboBox
         Left = 190
-        Height = 26
+        Height = 23
         Top = 90
         Width = 134
-        ItemHeight = 18
+        ItemHeight = 15
         Items.Strings = (
           'カレントタブファイル'
           '次のタブファイル'
@@ -101,18 +101,18 @@ object macro_form: Tmacro_form
       end
       object Label3: TLabel
         Left = 276
-        Height = 12
+        Height = 15
         Top = 68
-        Width = 164
+        Width = 144
         Caption = '指定タブ/フォルダ/指定ファイル'
         ParentColor = False
       end
       object edit2: TComboBox
         Left = 9
-        Height = 26
+        Height = 23
         Top = 90
         Width = 173
-        ItemHeight = 18
+        ItemHeight = 15
         Items.Strings = (
           'コード補完読込'
           'fEdit起動'
@@ -141,10 +141,10 @@ object macro_form: Tmacro_form
       end
       object ComboBox2: TComboBox
         Left = 328
-        Height = 26
+        Height = 23
         Top = 90
         Width = 134
-        ItemHeight = 18
+        ItemHeight = 15
         Items.Strings = (
           'カレントタブファイル'
           '次のタブファイル'

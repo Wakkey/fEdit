@@ -1,7 +1,7 @@
 object vershon_form: Tvershon_form
-  Left = 337
+  Left = 357
   Height = 348
-  Top = 104
+  Top = 304
   Width = 447
   BorderStyle = bsDialog
   Caption = 'バージョン情報'
@@ -9,7 +9,7 @@ object vershon_form: Tvershon_form
   ClientWidth = 447
   OnShow = FormShow
   Position = poScreenCenter
-  LCLVersion = '1.6.2.0'
+  LCLVersion = '1.6.4.0'
   object GroupBox1: TGroupBox
     Left = 0
     Height = 171
@@ -17,12 +17,12 @@ object vershon_form: Tvershon_form
     Width = 447
     Align = alBottom
     Caption = 'ReadMe'
-    ClientHeight = 154
+    ClientHeight = 151
     ClientWidth = 443
     TabOrder = 0
     object Memo1: TMemo
       Left = 0
-      Height = 154
+      Height = 151
       Top = 0
       Width = 443
       Align = alClient
