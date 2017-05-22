@@ -288,13 +288,33 @@ end;
 
 procedure Tmainform.Menu_OLD_LoadClick(Sender: TObject);
 begin
+  {$IFDEF Windows}
   try
     functionunit.deleteAll_edittab();
-    functionunit.load('temp3.txt','.ba');
+    functionunit.load('Backupfile\','temp3.txt','.ba');
   except
     functionunit.deleteAll_edittab();
     showmessage('前回終了時のファイルがありません');
   end;
+  {$ENDIF}
+  {$IFDEF LINUX}
+  try
+    functionunit.deleteAll_edittab();
+    functionunit.load('Backupfile/','temp3.txt','.ba');
+  except
+    functionunit.deleteAll_edittab();
+    showmessage('前回終了時のファイルがありません');
+  end;
+  {$ENDIF}
+  {$IFDEF Darwin}
+  try
+    functionunit.deleteAll_edittab();
+    functionunit.load('Backupfile/','temp3.txt','.ba');
+  except
+    functionunit.deleteAll_edittab();
+    showmessage('前回終了時のファイルがありません');
+  end;
+  {$ENDIF}
 end;
 
 procedure Tmainform.Menu_OpenClick(Sender: TObject);
@@ -414,32 +434,51 @@ end;
 
 procedure Tmainform.Menu_TEMP_LoadClick(Sender: TObject);
 begin
+  {$IFDEF Windows}
   try
-    //Mainform.Menu_AllCloseClick(mainform.Menu_AllClose);
     functionunit.deleteAll_edittab();
-    functionunit.load('temp1.txt','.ba1');
+    functionunit.load('Backupfile\','temp1.txt','.ba1');
   except
     functionunit.deleteAll_edittab();
     showmessage('一時保存ファイルがありません');
   end;
+  {$ENDIF}
+  {$IFDEF LINUX}
+  try
+    functionunit.deleteAll_edittab();
+    functionunit.load('Backupfile/','temp1.txt','.ba1');
+  except
+    functionunit.deleteAll_edittab();
+    showmessage('一時保存ファイルがありません');
+  end;
+  {$ENDIF}
+  {$IFDEF Darwin}
+    try
+      functionunit.deleteAll_edittab();
+      functionunit.load('Backupfile/','temp1.txt','.ba1');
+    except
+      functionunit.deleteAll_edittab();
+      showmessage('一時保存ファイルがありません');
+    end;
+  {$ENDIF}
 end;
 
 procedure Tmainform.Menu_TEMP_SaveClick(Sender: TObject);
 begin
   {$IFDEF Windows}
-       functionunit.TempFIle_Clear1('tmp\','.ba1');
-       functionunit.TempFIle_Clear2('tmp\','temp1.txt');
-       functionunit.save('tmp\','temp1.txt','.ba1');
+       functionunit.TempFIle_Clear1('Backupfile\','.ba1');
+       functionunit.TempFIle_Clear2('Backupfile\','temp1.txt');
+       functionunit.save('Backupfile\','temp1.txt','.ba1');
   {$ENDIF}
   {$IFDEF LINUX}
-       functionunit.TempFIle_Clear1('tmp\','.ba1');
-       functionunit.TempFIle_Clear2('tmp\','temp1.txt');
-       functionunit.save('tmp\','temp1.txt','.ba1');
+       functionunit.TempFIle_Clear1('Backupfile/','.ba1');
+       functionunit.TempFIle_Clear2('Backupfile/','temp1.txt');
+       functionunit.save('Backupfile/','temp1.txt','.ba1');
   {$ENDIF}
   {$IFDEF Darwin}
-       functionunit.TempFIle_Clear1('tmp/','.ba1');
-       functionunit.TempFIle_Clear2('tmp/','temp1.txt');
-       functionunit.save('tmp/','temp1.txt','.ba1');
+       functionunit.TempFIle_Clear1('Backupfile/','.ba1');
+       functionunit.TempFIle_Clear2('Backupfile/','temp1.txt');
+       functionunit.save('Backupfile/','temp1.txt','.ba1');
   {$ENDIF}
 end;
 
@@ -869,14 +908,33 @@ end;
 
 procedure Tmainform.MenuItem18Click(Sender: TObject);
 begin
+ {$IFDEF Windows}
   try
-    //Mainform.Menu_AllCloseClick(mainform.Menu_AllClose);
     functionunit.deleteAll_edittab();
-    functionunit.load('temp2.txt','.ba2');
+    functionunit.load('Backupfile\','temp2.txt','.ba2');
   except
     functionunit.deleteAll_edittab();
     showmessage('一時保存ファイルがありません');
   end;
+  {$ENDIF}
+  {$IFDEF LINUX}
+  try
+    functionunit.deleteAll_edittab();
+    functionunit.load('Backupfile/','temp2.txt','.ba2');
+  except
+    functionunit.deleteAll_edittab();
+    showmessage('一時保存ファイルがありません');
+  end;
+  {$ENDIF}
+  {$IFDEF Darwin}
+  try
+    functionunit.deleteAll_edittab();
+    functionunit.load('Backupfile/','temp2.txt','.ba2');
+  except
+    functionunit.deleteAll_edittab();
+    showmessage('一時保存ファイルがありません');
+  end;
+  {$ENDIF}
 end;
 
 procedure Tmainform.MenuItem21Click(Sender: TObject);
@@ -907,19 +965,19 @@ end;
 procedure Tmainform.MenuItem29Click(Sender: TObject);
 begin
   {$IFDEF Windows}
-       functionunit.TempFIle_Clear1('tmp/','.ba2');
-       functionunit.TempFIle_Clear2('tmp/','temp2.txt');
-       functionunit.save('tmp/','temp2.txt','.ba2');
+       functionunit.TempFIle_Clear1('Backupfile\','.ba2');
+       functionunit.TempFIle_Clear2('Backupfile\','temp2.txt');
+       functionunit.save('Backupfile\','temp2.txt','.ba2');
   {$ENDIF}
   {$IFDEF LINUX}
-       functionunit.TempFIle_Clear1('tmp/','.ba2');
-       functionunit.TempFIle_Clear2('tmp/','temp2.txt');
-       functionunit.save('tmp/','temp2.txt','.ba2');
+       functionunit.TempFIle_Clear1('Backupfile/','.ba2');
+       functionunit.TempFIle_Clear2('Backupfile/','temp2.txt');
+       functionunit.save('Backupfile/','temp2.txt','.ba2');
   {$ENDIF}
   {$IFDEF Darwin}
-       functionunit.TempFIle_Clear1('tmp/','.ba2');
-       functionunit.TempFIle_Clear2('tmp/','temp2.txt');
-       functionunit.save('tmp/','temp2.txt','.ba2');
+       functionunit.TempFIle_Clear1('Backupfile/','.ba2');
+       functionunit.TempFIle_Clear2('Backupfile/','temp2.txt');
+       functionunit.save('Backupfile/','temp2.txt','.ba2');
   {$ENDIF}
 end;
 

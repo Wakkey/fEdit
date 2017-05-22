@@ -458,9 +458,9 @@ begin
       List.Add(functionunit.editlist.Items[i].filename_path);
     end;
   finally
-    ForceDirectories( ExtractFilePath( ParamStr(0) ) + 'Backupfile\');
+    ForceDirectories( ExtractFilePath( ParamStr(0) ) + dir);
     List.SaveToFile(
-       utf8tosys(systoutf8( ExtractFilePath( (Paramstr(0)) ) + 'Backupfile\' + setfile )
+       utf8tosys(systoutf8( ExtractFilePath( (Paramstr(0)) ) + dir + setfile )
       ));
   end;
   for i := 0 to mainform.PageControl1.PageCount -2 do begin
@@ -1343,9 +1343,11 @@ begin
          mainform.Menu_Ansi.Checked:= true;
     {$ENDIF}
     {$IFDEF LINUX}
+         inc(i);//err3
          mainform.Menu_UTF8.Checked:= true;
     {$ENDIF}
     {$IFDEF Darwin}
+         inc(i);//err3
          mainform.Menu_UTF8.Checked:= true;
     {$ENDIF}
     inc(i);//err4
@@ -1359,21 +1361,21 @@ begin
          functionunit.iniread('ini\');
       {$ENDIF}
       {$IFDEF LINUX}
-         functionunit.iniread('ini\');
+         functionunit.iniread('ini/');
       {$ENDIF}
       {$IFDEF Darwin}
          functionunit.iniread('ini/');
       {$ENDIF}
      except
        //functionunit.frmpsnset;
-
+       inc(i);//err5
        {$IFDEF Windows}
          functionunit.iniread('ini\');
          functionunit.iniwrite('ini\');
       {$ENDIF}
       {$IFDEF LINUX}
-         functionunit.iniread('ini\');
-         functionunit.iniwrite('ini\');
+         functionunit.iniread('ini/');
+         functionunit.iniwrite('ini/');
       {$ENDIF}
       {$IFDEF Darwin}
          functionunit.iniread('ini/');
@@ -1382,18 +1384,18 @@ begin
      end;
      editlist.Items[0].SynEdit1.Font.Name:= font_name;
      editlist.Items[0].SynEdit1.Font.Size:= font_size;
-     editlist.Items[0].Memo1.Font.Name:= font_name;
-     editlist.Items[0].Memo1.Font.Size:= font_size;
+     //editlist.Items[0].Memo1.Font.Name:= font_name;
+     //editlist.Items[0].Memo1.Font.Size:= font_size;
 
 
      functionunit.new;
      functionunit.TitleSet(functionunit.editlist.Items[mainform.PageControl1.PageIndex].filename);
-     inc(i);//err5
-     functionunit.setdialog;
      inc(i);//err6
-     //ここでエラー
+     functionunit.setdialog;
      inc(i);//err7
+     //ここでエラー
      functionunit.LngeMenu_copy;
+     inc(i);//err8
      functionunit.load_mnu_set();
      inc(i);//err9
 
@@ -1457,10 +1459,10 @@ begin
   tabs := editlist.Count;
   addnew_tab(false);
   mainform.PageControl1.AddTabSheet;
-
+  //tabs := mainform.PageControl1.PageCount -1;
   editlist.add(Teditform);
   editlist.Items[tabs] := Teditform.Create(self);
-  editlist.Items[tabs].Visible:=false;
+  //editlist.Items[tabs].Visible:=false;
   editlist.Items[tabs].Caption:= 'newfile' + inttostr(edit_count);
   editlist.Items[tabs].tabNo:= edit_count;
   editlist.Items[tabs].filename_path := 'newfile' + inttostr(edit_count);
@@ -1470,13 +1472,13 @@ begin
   editlist.Items[tabs].SynEdit1.Font.Name:= font_name;
   editlist.Items[tabs].SynEdit1.Font.Size:= font_size;
 
-  editlist.Items[tabs].Memo1.Font.Name:= font_name;
-  editlist.Items[tabs].Memo1.Font.Size:= font_size;
+  //editlist.Items[tabs].Memo1.Font.Name:= font_name;
+  //editlist.Items[tabs].Memo1.Font.Size:= font_size;
 
   mainform.PageControl1.Pages[tabs].Caption:= editlist.Items[tabs].Caption;
-  editlist.Items[tabs].char_sets:= 'UTF8';
+  //editlist.Items[tabs].char_sets:= 'UTF8';
   editlist.Items[tabs].dock_sw:= false;
-  editlist.Items[tabs].Visible:= true;
+  //editlist.Items[tabs].Visible:= true;
   functionunit.TitleSet(
     editlist.Items[tabs].filename_path
   );
@@ -1487,6 +1489,7 @@ begin
     functionunit.LoadHighLightColorPriSet(functionunit.LoadColorPriset);
     end;
     DragMode := dmAutomatic;
+    visible := true;
     Show;
     editlist.Items[tabs].SynEdit1.ScrollBars:= ssBoth;
 
@@ -1503,6 +1506,9 @@ var
   tabs:integer;
 begin
     tabs := mainform.PageControl1.PageCount-1;
+    //editlist.Items[tabs].Visible:= true;
+    //window_off(tabs);
+    //show;
     //functionunit.editlist.Items[tabs].SynEdit1.Font.Size := functionunit.LoadFontSizePriset;
     //functionunit.editlist.Items[tabs].SynEdit1.Color := functionunit.LoadColorPriset;
     //functionunit.editlist.Items[tabs].Memo1.Font.Size:= functionunit.LoadFontSizePriset;
@@ -1530,7 +1536,7 @@ begin
         editlist.Items[i].dock_sw:= true;
         WindowState:= wsNormal;
         width := width +1;
-        Visible:=true;
+        //Visible:=true;
       end;
    except
    end;
@@ -2694,9 +2700,22 @@ begin
    //end;
     i1 := i1 +2;
   end;
+
+  {$IFDEF Windows}
   st.SaveToFile(extractfilepath(paramstr(0)) + 'ini\' + 'mnu_title.txt');
   st2.SaveToFile(extractfilepath(paramstr(0)) + 'ini\' + 'mnu_caption.txt');
   st3.SaveToFile(extractfilepath(paramstr(0)) + 'ini\' + 'mnu_shortcut.txt');
+  {$ENDIF}
+  {$IFDEF LINUX}
+  st.SaveToFile(extractfilepath(paramstr(0)) + 'ini/' + 'mnu_title.txt');
+  st2.SaveToFile(extractfilepath(paramstr(0)) + 'ini/' + 'mnu_caption.txt');
+  st3.SaveToFile(extractfilepath(paramstr(0)) + 'ini/' + 'mnu_shortcut.txt');
+  {$ENDIF}
+  {$IFDEF Darwin}
+  st.SaveToFile(extractfilepath(paramstr(0)) + 'ini/' + 'mnu_title.txt');
+  st2.SaveToFile(extractfilepath(paramstr(0)) + 'ini/' + 'mnu_caption.txt');
+  st3.SaveToFile(extractfilepath(paramstr(0)) + 'ini/' + 'mnu_shortcut.txt');
+  {$ENDIF}
 end;
 
 function Tfunctionunit.load_mnu_set:boolean;
@@ -2718,9 +2737,21 @@ begin
   //functionunit.toolbarbuttonparnt2.Clear;
   //showmessage(inttostr(functionunit.toolbarbuttonparnt.Count) + ' ' + inttostr(functionunit.toolbarbuttoncount2.Count));
   try
+  {$IFDEF Windows}
   st.LoadFromFile(extractfilepath(paramstr(0)) + 'ini\' + 'mnu_title.txt');
   st2.LoadFromFile(extractfilepath(paramstr(0)) + 'ini\' + 'mnu_caption.txt');
   st3.LoadFromFile(extractfilepath(paramstr(0)) + 'ini\' + 'mnu_shortcut.txt');
+  {$ENDIF}
+  {$IFDEF LINUX}
+  st.LoadFromFile(extractfilepath(paramstr(0)) + 'ini/' + 'mnu_title.txt');
+  st2.LoadFromFile(extractfilepath(paramstr(0)) + 'ini/' + 'mnu_caption.txt');
+  st3.LoadFromFile(extractfilepath(paramstr(0)) + 'ini/' + 'mnu_shortcut.txt');
+  {$ENDIF}
+  {$IFDEF Darwin}
+  st.LoadFromFile(extractfilepath(paramstr(0)) + 'ini/' + 'mnu_title.txt');
+  st2.LoadFromFile(extractfilepath(paramstr(0)) + 'ini/' + 'mnu_caption.txt');
+  st3.LoadFromFile(extractfilepath(paramstr(0)) + 'ini/' + 'mnu_shortcut.txt');
+  {$ENDIF}
   finally
   //for i := 0 to btn_count -1 do begin
    s:=functionunit.toolbarbuttonparnt[i];
@@ -6329,11 +6360,11 @@ begin
          functionunit.TempFIle_Clear3('tmp\','test.*');
     {$ENDIF}
     {$IFDEF LINUX}
-         functionunit.iniwrite('ini\');
-         TempFIle_Clear1('tmp\','.ba');
-         TempFIle_Clear2('tmp\','temp3.txt');
-         functionunit.save('Backupfile\','temp3.txt','.ba');
-         functionunit.TempFIle_Clear3('tmp\','test.*');
+         functionunit.iniwrite('ini/');
+         TempFIle_Clear1('tmp/','.ba');
+         TempFIle_Clear2('tmp/','temp3.txt');
+         functionunit.save('Backupfile/','temp3.txt','.ba');
+         functionunit.TempFIle_Clear3('tmp/','test.*');
     {$ENDIF}
     {$IFDEF Darwin}
          functionunit.iniwrite('ini/');
@@ -6781,7 +6812,7 @@ function Tfunctionunit.winload(i:integer;s:string):boolean;
        {for i1 := 0 to st.Count -1 do begin
          st2.Add(string(load_text(pchar(st[i1]))));
        end;}
-       showmessage(s);
+       //showmessage(s);
        load_text(pchar(s));
        load_stream(ExtractFilePath( ParamStr( 0 ) ) + 'tmp.txt' ,st);
        //st2.Text:= string(pst);
@@ -6924,6 +6955,25 @@ function Tfunctionunit.linuxload(i:integer;s:string):boolean;
 var
   sw:boolean;
   s1:string;
+  function load_stream(st1:string;st2:TStringList):boolean;
+  var
+    tf : TextFile;
+    s:string;
+  begin
+    try
+      try
+        AssignFile(tf, st1);
+        Reset(tf);
+        while not Eof(tf) do begin
+          Readln(tf, s);
+          st2.Add(s);
+        end;
+      finally
+        CloseFile(tf);
+      end
+    except
+    end;
+  end;
   function encode_charset(i:integer;s:widestring):boolean;
   var
     Process:TProcess;
@@ -6947,7 +6997,8 @@ var
       //プロセスを実行
       Process.Execute;
       //ファイルを読み込む
-      functionunit.editlist.Items[i].Edit.LoadFromFile( setfile );
+      load_stream( setfile ,
+      functionunit.editlist.Items[i].Edit{.LoadFromFile(}  );
       Process.Free;
       //作業フォルダが汚れない様に、読み込んだ一時ファイルを削除する
       Process := TProcess.Create(nil);
@@ -6975,7 +7026,9 @@ var
       //プロセスを実行
       Process.Execute;
       //ファイルを読み込む
-      functionunit.editlist.Items[i].Edit.LoadFromFile( setfile );
+      load_stream( setfile ,
+      functionunit.editlist.Items[i].Edit{.LoadFromFile(}  );
+
       Process.Free;
       //作業フォルダが汚れない様に、読み込んだ一時ファイルを削除する
       Process := TProcess.Create(nil);
@@ -6988,7 +7041,9 @@ var
       Process.Free;
       encode_charset := true;
     end else if mainform.Menu_UTF8.Checked then begin
-       functionunit.editlist.Items[i].Edit.LoadFromFile((s));
+       load_stream( s ,
+       functionunit.editlist.Items[i].Edit{.LoadFromFile(}  );
+       //functionunit.editlist.Items[i].Edit.LoadFromFile((s));
        encode_charset := true;
     end;
   finally

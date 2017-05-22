@@ -121,7 +121,7 @@ type
     ptoolbar:array[0..100] of TToolbar;
     Edit_arry:array[0..40] of TEdit;
     true_boot:boolean;
-    function load(setfile,setname2:widestring):boolean;
+    function load(dir, setfile,setname2:widestring):boolean;
     function save(dir,setfile,setname1:widestring):boolean;
     function loadmenulist:boolean;
     function mnu_Load():boolean;
@@ -348,7 +348,7 @@ end;
 
 
 
-function Tfunctionunit.load(setfile,setname2:widestring):boolean;
+function Tfunctionunit.load(dir, setfile,setname2:widestring):boolean;
 var
   i,i1,i2,i3,count:integer;
   LIst:TStringList;
@@ -357,7 +357,7 @@ begin
   List := TStringList.Create;
   List.Clear;
   try
-    List.LoadFromFile(utf8tosys(systoutf8( ExtractFilePath( (Paramstr(0)) ) + 'Backupfile\' + setfile )));
+    List.LoadFromFile(utf8tosys(systoutf8( ExtractFilePath( (Paramstr(0)) ) + dir + setfile )));
   finally
     functionunit.deleteAll_edittab();
     try
