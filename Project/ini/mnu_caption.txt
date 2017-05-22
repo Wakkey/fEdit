@@ -1,4 +1,4 @@
-新規
+﻿新規
 -
 開く
 最近扱ったファイルを開く
@@ -113,7 +113,7 @@ SQLTable Builder
 JSONFormEdit
 JSONFormCreater
 HtmlEdit
--
+ファイル探索
 マクロ言語指定
 マクロ記号挿入
 マクロ実行

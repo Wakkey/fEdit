@@ -1,7 +1,7 @@
 object editform: Teditform
-  Left = 800
+  Left = 395
   Height = 310
-  Top = 182
+  Top = 418
   Width = 524
   Caption = 'editform'
   ClientHeight = 310
@@ -12,9 +12,8 @@ object editform: Teditform
   OnCreate = FormCreate
   OnDockDrop = FormDockDrop
   OnDockOver = FormDockOver
-  OnDropFiles = FormDropFiles
   OnUnDock = FormUnDock
-  LCLVersion = '1.6.4.0'
+  LCLVersion = '1.6.0.4'
   object PageControl1: TPageControl
     Left = 0
     Height = 310
@@ -537,17 +536,16 @@ object editform: Teditform
     end
     object TabSheet2: TTabSheet
       Caption = 'MemoMode'
-      ClientHeight = 282
-      ClientWidth = 516
+      ClientHeight = 271
+      ClientWidth = 518
       object Memo1: TMemo
         Left = 0
-        Height = 282
+        Height = 271
         Top = 0
-        Width = 516
+        Width = 518
         Align = alClient
         ScrollBars = ssVertical
         TabOrder = 0
-        TabStop = False
       end
     end
     object TabSheet3: TTabSheet

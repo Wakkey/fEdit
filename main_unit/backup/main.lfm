@@ -519,9 +519,9 @@ object mainform: Tmainform
         Caption = 'HtmlEdit'
         OnClick = MenuItem28Click
       end
-      object MenuItem16: TMenuItem
+      object MenuItem13: TMenuItem
         Caption = 'ファイル検索'
-        OnClick = MenuItem16Click
+        OnClick = MenuItem13Click
       end
       object MenuItem4: TMenuItem
         Caption = 'マクロ言語指定'

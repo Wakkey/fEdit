@@ -28,8 +28,8 @@ type
     MenuItem102: TMenuItem;
     MenuItem11: TMenuItem;
     MenuItem12: TMenuItem;
+    MenuItem13: TMenuItem;
     MenuItem14: TMenuItem;
-    MenuItem16: TMenuItem;
     MenuItem17: TMenuItem;
     MenuItem18: TMenuItem;
     MenuItem19: TMenuItem;
@@ -944,16 +944,6 @@ begin
 end;
 
 procedure Tmainform.MenuItem13Click(Sender: TObject);
-begin
-
-end;
-
-procedure Tmainform.MenuItem15Click(Sender: TObject);
-begin
-
-end;
-
-procedure Tmainform.MenuItem16Click(Sender: TObject);
 var
   fname:string;
   st:TStringlist;
@@ -968,14 +958,22 @@ begin
          functionunit.FileFindDir(ansitoutf8(fname),st);
       {$ENDIF}
       {$IFDEF LINUX}
-         functionunit.FileFindDir((fname),st);
+         functionunit.EnumFileFromDir((fname),st);
       {$ENDIF}
       {$IFDEF Darwin}
-         functionunit.FileFindDir((fname),st);
+         functionunit.EnumFileFromDir((fname),st);
       {$ENDIF}
       functionunit.newwindow();
-      functionunit.editlist.Items[mainform.PageControl1.PageCount-1].SynEdit1.Lines.text := st.Text;
+      functionunit.editlist.Items[mainform.PageControl1.PageCount-2].SynEdit1.Lines.text := st.Text;
+end;
 
+procedure Tmainform.MenuItem15Click(Sender: TObject);
+begin
+
+end;
+
+procedure Tmainform.MenuItem16Click(Sender: TObject);
+begin
 
 end;
 

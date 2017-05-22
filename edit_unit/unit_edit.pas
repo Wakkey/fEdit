@@ -146,10 +146,10 @@ begin
          functionunit.FileFindDir(ansitoutf8(fname),st);
       {$ENDIF}
       {$IFDEF LINUX}
-         functionunit.FileFindDir((fname),st);
+         functionunit.EnumFileFromDir((fname),st);
       {$ENDIF}
       {$IFDEF Darwin}
-         functionunit.FileFindDir((fname),st);
+         functionunit.EnumFileFromDir((fname),st);
       {$ENDIF}
   end;
   if st.Count > 0 then begin

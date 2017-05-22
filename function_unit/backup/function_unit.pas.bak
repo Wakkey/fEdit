@@ -379,7 +379,7 @@ begin
           //showmessage(utf8tosys(ExtractFilePath( systoutf8(Paramstr(0)) ) +
             //( IntToStr(i) + setname2)));
           functionunit.editlist.Items[i].Edit.LoadFromFile(utf8tosys(ExtractFilePath( systoutf8(Paramstr(0)) ) +
-            (  dir + IntToStr(i) + setname2)));
+            ( IntToStr(i) + dir + setname2)));
           //functionunit.memoload(i,utf8tosys(ExtractFilePath( systoutf8(Paramstr(0)) ) +
           //  ( IntToStr(i) + setname2)));
           functionunit.editlist.Items[i].SynEdit1.Lines.Text:=
