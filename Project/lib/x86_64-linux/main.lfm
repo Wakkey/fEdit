@@ -4,16 +4,17 @@ object mainform: Tmainform
   Top = 266
   Width = 577
   Caption = 'mainform'
-  ClientHeight = 289
+  ClientHeight = 286
   ClientWidth = 577
   Menu = MainMenu1
   OnClick = FormClick
   OnCloseQuery = FormCloseQuery
   OnDockOver = FormDockOver
+  OnDropFiles = FormDropFiles
   OnShow = FormShow
   OnUnDock = FormUnDock
   Position = poScreenCenter
-  LCLVersion = '1.6.4.0'
+  LCLVersion = '1.6.0.4'
   object toolpanel: TPanel
     Left = 0
     Height = 33
@@ -24,7 +25,7 @@ object mainform: Tmainform
   end
   object PageControl1: TPageControl
     Left = 0
-    Height = 256
+    Height = 253
     Top = 33
     Width = 577
     Align = alClient
@@ -50,6 +51,7 @@ object mainform: Tmainform
       end
       object MenuItem5: TMenuItem
         Caption = '最近扱ったファイルを開く'
+        OnClick = MenuItem5Click
       end
       object Menu_ReOpen: TMenuItem
         Caption = '開き直す'
@@ -518,7 +520,8 @@ object mainform: Tmainform
         OnClick = MenuItem28Click
       end
       object MenuItem16: TMenuItem
-        Caption = '-'
+        Caption = 'ファイル検索'
+        OnClick = MenuItem16Click
       end
       object MenuItem4: TMenuItem
         Caption = 'マクロ言語指定'

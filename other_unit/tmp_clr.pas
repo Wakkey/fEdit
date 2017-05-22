@@ -49,15 +49,15 @@ end;
 procedure TtmpClr.Button1Click(Sender: TObject);
 begin
     {$IFDEF Windows}
-         functionunit.TempFIle_Clear1('tmp\','.ba1');
+         functionunit.TempFIle_Clear1('Backupfile\','.ba1');
          functionunit.TempFIle_Clear2('Backupfile\','temp1.txt');
     {$ENDIF}
     {$IFDEF LINUX}
-         functionunit.TempFIle_Clear1('tmp\','.ba1');
-         functionunit.TempFIle_Clear2('Backupfile\','temp1.txt');
+         functionunit.TempFIle_Clear1('Backupfile/','.ba1');
+         functionunit.TempFIle_Clear2('Backupfile/','temp1.txt');
     {$ENDIF}
     {$IFDEF Darwin}
-         functionunit.TempFIle_Clear1('tmp/','.ba1');
+         functionunit.TempFIle_Clear1('Backupfile/','.ba1');
          functionunit.TempFIle_Clear2('Backupfile/','temp1.txt');
     {$ENDIF}
 end;
@@ -65,15 +65,15 @@ end;
 procedure TtmpClr.Button2Click(Sender: TObject);
 begin
   {$IFDEF Windows}
-       functionunit.TempFIle_Clear1('tmp\','.ba2');
+       functionunit.TempFIle_Clear1('Backupfile\','.ba2');
        functionunit.TempFIle_Clear2('Backupfile\','temp2.txt');
   {$ENDIF}
   {$IFDEF LINUX}
-       functionunit.TempFIle_Clear1('tmp\','.ba2');
-       functionunit.TempFIle_Clear2('Backupfile\','temp2.txt');
+       functionunit.TempFIle_Clear1('Backupfile/','.ba2');
+       functionunit.TempFIle_Clear2('Backupfile/','temp2.txt');
   {$ENDIF}
   {$IFDEF Darwin}
-       functionunit.TempFIle_Clear1('tmp\','.ba2');
+       functionunit.TempFIle_Clear1('Backupfile\','.ba2');
        functionunit.TempFIle_Clear2('Backupfile\','temp2.txt');
   {$ENDIF}
 end;
@@ -81,16 +81,16 @@ end;
 procedure TtmpClr.Button3Click(Sender: TObject);
 begin
   {$IFDEF Windows}
-       functionunit.TempFIle_Clear1('tmp\','.ba');
+       functionunit.TempFIle_Clear1('Backupfile\','.ba');
        functionunit.TempFIle_Clear2('Backupfile\','temp3.txt');
   {$ENDIF}
   {$IFDEF LINUX}
-       functionunit.TempFIle_Clear1('tmp\','.ba');
-       functionunit.TempFIle_Clear2('Backupfile\','temp3.txt');
+       functionunit.TempFIle_Clear1('Backupfile/','.ba');
+       functionunit.TempFIle_Clear2('Backupfile/','temp3.txt');
   {$ENDIF}
   {$IFDEF Darwin}
-       functionunit.TempFIle_Clear1('tmp\','.ba');
-       functionunit.TempFIle_Clear2('Backupfile\','temp3.txt');
+       functionunit.TempFIle_Clear1('Backupfile/','.ba');
+       functionunit.TempFIle_Clear2('Backupfile/','temp3.txt');
   {$ENDIF}
 end;
 
@@ -100,7 +100,7 @@ begin
        functionunit.TempFIle_Clear2('tmp\','test.*');
   {$ENDIF}
   {$IFDEF LINUX}
-       functionunit.TempFIle_Clear2('tmp\','test.*');
+       functionunit.TempFIle_Clear2('tmp/','test.*');
   {$ENDIF}
   {$IFDEF Darwin}
        functionunit.TempFIle_Clear2('tmp/','test.*');

@@ -7,7 +7,7 @@ interface
 uses
   SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, ComCtrls, StdCtrls, ExtCtrls, FileUtil, Process,
-  lclintf, Menus {$IFDEF WIN32}, shellapi,comobj {$ENDIF};
+  lclintf, Menus {$IFDEF Windows}, shellapi,comobj {$ENDIF};
 
 type
   TCompList = class(TList)

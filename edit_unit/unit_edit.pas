@@ -65,6 +65,7 @@ type
       Y: Integer);
     procedure FormDockOver(Sender: TObject; Source: TDragDockObject; X,
       Y: Integer; State: TDragState; var Accept: Boolean);
+    procedure FormDropFiles(Sender: TObject; const FileNames: array of String);
     procedure FormUnDock(Sender: TObject; Client: TControl;
       NewTarget: TWinControl; var Allow: Boolean);
     procedure MenuItem23Click(Sender: TObject);
@@ -100,7 +101,7 @@ var
 
 implementation
 
-uses function_unit, main, comp, repraceMacro;
+uses function_unit, main, comp, repraceMacro, filetype_form;
 
 {$R *.lfm}
 
@@ -127,6 +128,55 @@ procedure Teditform.FormDockOver(Sender: TObject; Source: TDragDockObject; X,
   Y: Integer; State: TDragState; var Accept: Boolean);
 begin
 
+end;
+
+procedure Teditform.FormDropFiles(Sender: TObject;
+  const FileNames: array of String);
+var
+  fname:string;
+  st,s:TStringlist;
+  i,i1:integer;
+begin
+  st:= TStringList.Create;
+  st.Clear;
+  s:= TStringList.Create;
+  s.Clear;
+  for fname in filenames do begin
+      {$IFDEF Windows}
+         functionunit.FileFindDir(ansitoutf8(fname),st);
+      {$ENDIF}
+      {$IFDEF LINUX}
+         functionunit.FileFindDir((fname),st);
+      {$ENDIF}
+      {$IFDEF Darwin}
+         functionunit.FileFindDir((fname),st);
+      {$ENDIF}
+  end;
+  if st.Count > 0 then begin
+    for i1 := 1 to st.count -1 do begin
+      if (-1 = openfiletypeform.CheckGroup1.Items.IndexOf(extractfileext(st[i1]))) then begin
+        openfiletypeform.CheckGroup1.Items.Add(extractfileext(st[i1]));
+      end;
+    end;
+    if openfiletypeform.CheckGroup1.Items.Count > 0 then begin
+      openfiletypeform.ShowModal;
+      for i := 0 to openfiletypeform.CheckGroup1.Items.Count -1 do begin
+          if openfiletypeform.CheckGroup1.Checked[i] then begin
+            s.add( openfiletypeform.CheckGroup1.Items[i] );
+          end;
+      end;
+      for i1 := 0 to st.Count -1 do begin
+         if -1 <> s.IndexOf( extractfileext(st[i1]) ) then begin
+           try
+             functionunit.fileopen(st[i1]);
+           except
+           end;
+         end;
+      end;
+    end;
+  end;
+  s.Free;
+  st.Free;
 end;
 
 procedure Teditform.FormUnDock(Sender: TObject; Client: TControl;
