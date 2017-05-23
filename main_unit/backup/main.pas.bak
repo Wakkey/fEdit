@@ -6,7 +6,7 @@ interface
 
 uses
   Classes, SysUtils, FileUtil, Forms, Controls, Graphics, Dialogs, Menus,
-  ExtCtrls, ComCtrls, comp;
+  ExtCtrls, ComCtrls, comp, db, sqldb;
 
 type
 
@@ -185,6 +185,7 @@ type
     procedure MenuItem29Click(Sender: TObject);
     procedure MenuItem31Click(Sender: TObject);
     procedure MenuItem32Click(Sender: TObject);
+    procedure MenuItem3Click(Sender: TObject);
     procedure MenuItem5Click(Sender: TObject);
     procedure MenuItem7Click(Sender: TObject);
     procedure MenuItem86Click(Sender: TObject);
@@ -947,24 +948,52 @@ procedure Tmainform.MenuItem13Click(Sender: TObject);
 var
   fname:string;
   st:TStringlist;
+  i:integer;
+  dir,msg :string;
 begin
-  st:=TStringlist.Create;
-  st.Clear;
-  if not DataModule1.SelectDirectoryDialog1.Execute then
-    exit;
-
-      fname := DataModule1.SelectDirectoryDialog1.FileName;
-      {$IFDEF Windows}
-         functionunit.FileFindDir(ansitoutf8(fname),st);
-      {$ENDIF}
-      {$IFDEF LINUX}
-         functionunit.EnumFileFromDir((fname),st);
-      {$ENDIF}
-      {$IFDEF Darwin}
-         functionunit.EnumFileFromDir((fname),st);
-      {$ENDIF}
+      st := TStringlist.Create;
+      st.Text:= functionunit.editlist.Items[mainform.PageControl1.PageIndex].SynEdit1.Lines.Text;
       functionunit.newwindow();
-      functionunit.editlist.Items[mainform.PageControl1.PageCount-1].SynEdit1.Lines.text := st.Text;
+      functionunit.editlist.Items[mainform.PageControl1.PageCount-2].MemDataset1.FieldDefs.Add('dir',ftString,500);
+      functionunit.editlist.Items[mainform.PageControl1.PageCount-2].MemDataset1.CreateTable;
+      functionunit.editlist.Items[mainform.PageControl1.PageCount-2].MemDataset1.Open;
+
+      for i := 0 to st.Count -1 do begin
+        functionunit.editlist.Items[mainform.PageControl1.PageCount-2].MemDataset1.Append;
+        functionunit.editlist.Items[mainform.PageControl1.PageCount-2].MemDataset1.FieldByName('dir').Value:=st[i];
+        functionunit.editlist.Items[mainform.PageControl1.PageCount-2].MemDataset1.Post;
+      end;
+      ForceDirectories( ExtractFilePath( ParamStr( 0 ) ) + dir );
+      //functionunit.editlist.Items[mainform.PageControl1.PageCount-2].MemDataset1.SaveToFile( ExtractFilePath( ParamStr( 0 ) ) + dir + 'temp.dir' );
+      //functionunit.editlist.Items[mainform.PageControl1.PageCount-2].MemDataset1.FileName := ExtractFilePath( ParamStr( 0 ) ) + dir + 'temp.dir';
+       //functionunit.editlist.Items[mainform.PageControl1.PageCount-2].SQLQuery1.SQL.Text := 'select * from temp;';
+      //functionunit.editlist.Items[mainform.PageControl1.PageCount-2].SQLite3Connection1.DatabaseName := ExtractFilePath( ParamStr( 0 ) ) + dir + 'temp.db3';
+
+      functionunit.editlist.Items[mainform.PageControl1.PageCount-2].MemDataset1.Active:=true;
+      //functionunit.editlist.Items[mainform.PageControl1.PageCount-2].SQLQuery1.SQL.Text := 'select * from temp.db3;';
+      //functionunit.editlist.Items[mainform.PageControl1.PageCount-2].SQLQuery1.Active:=true;
+      //functionunit.editlist.Items[mainform.PageControl1.PageCount-2].SQLQuery1.Active:=true;
+
+      //functionunit.editlist.Items[mainform.PageControl1.PageCount-2].SynEdit1.Lines.text := st.Text;
+
+      //functionunit.editlist.Items[mainform.PageControl1.PageCount-2].PageControl1.PageIndex:= 2;
+      msg := inputbox('検索語句','','');
+      //functionunit.editlist.Items[mainform.PageControl1.PageCount-2].MemDataset1.Locate('dir',msg,[]);
+
+      functionunit.editlist.Items[mainform.PageControl1.PageCount-2].MemDataset1.First;
+      while not functionunit.editlist.Items[mainform.PageControl1.PageCount-2].MemDataset1.EOF do begin
+        if 0 < ansipos(msg,' ' + functionunit.editlist.Items[mainform.PageControl1.PageCount-2].MemDataset1.FieldByName('dir').AsString) then begin
+        functionunit.editlist.Items[mainform.PageControl1.PageCount-2].SynEdit1.Lines.Add(
+        functionunit.editlist.Items[mainform.PageControl1.PageCount-2].MemDataset1.FieldByName('dir').AsString
+        );
+       end;
+        functionunit.editlist.Items[mainform.PageControl1.PageCount-2].MemDataset1.Next;
+      end;
+
+      functionunit.editlist.Items[mainform.PageControl1.PageCount-2].MemDataset1.SaveToFile(ExtractFilePath( ParamStr( 0 ) ) + dir + 'temp.dir');
+      //functionunit.editlist.Items[mainform.PageControl1.PageCount-2].MemDataset1.FileName := ;
+      functionunit.editlist.Items[mainform.PageControl1.PageCount-2].MemDataset1.Active:=false;
+      st.Free;
 end;
 
 procedure Tmainform.MenuItem15Click(Sender: TObject);
@@ -1069,6 +1098,37 @@ end;
 procedure Tmainform.MenuItem32Click(Sender: TObject);
 begin
   tmpclr.ShowModal;
+end;
+
+procedure Tmainform.MenuItem3Click(Sender: TObject);
+var
+  fname:string;
+  st:TStringlist;
+  i:integer;
+  dir,msg :string;
+begin
+  st:=TStringlist.Create;
+  st.Clear;
+  if not DataModule1.SelectDirectoryDialog1.Execute then
+    exit;
+
+      fname := DataModule1.SelectDirectoryDialog1.FileName;
+      {$IFDEF Windows}
+         functionunit.FileFindDir(ansitoutf8(fname),st);
+         dir := 'tmp\';
+      {$ENDIF}
+      {$IFDEF LINUX}
+         functionunit.EnumFileFromDir((fname),st);
+         dir := 'tmp/';
+      {$ENDIF}
+      {$IFDEF Darwin}
+         functionunit.EnumFileFromDir((fname),st);
+         dir := 'tmp/';
+      {$ENDIF}
+
+      functionunit.newwindow();
+      functionunit.editlist.Items[mainform.PageControl1.PageCount-2].SynEdit1.Lines.Text:= st.Text;
+      st.Free;
 end;
 
 procedure Tmainform.MenuItem5Click(Sender: TObject);

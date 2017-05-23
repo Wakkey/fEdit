@@ -1,0 +1,51 @@
+object HTMLMenu: THTMLMenu
+  Left = 405
+  Height = 292
+  Top = 160
+  Width = 233
+  Caption = 'HTML要素の追加'
+  ClientHeight = 292
+  ClientWidth = 233
+  OnShow = FormShow
+  Position = poScreenCenter
+  LCLVersion = '1.6.4.0'
+  Visible = True
+  object ListBox1: TListBox
+    Left = 0
+    Height = 250
+    Top = 42
+    Width = 233
+    Align = alClient
+    ItemHeight = 0
+    TabOrder = 0
+  end
+  object Panel1: TPanel
+    Left = 0
+    Height = 42
+    Top = 0
+    Width = 233
+    Align = alTop
+    ClientHeight = 42
+    ClientWidth = 233
+    TabOrder = 1
+    object Button1: TButton
+      Left = 16
+      Height = 25
+      Top = 8
+      Width = 75
+      Caption = '要素追加'
+      OnClick = Button1Click
+      TabOrder = 0
+    end
+    object BitBtn1: TBitBtn
+      Left = 144
+      Height = 30
+      Top = 8
+      Width = 75
+      DefaultCaption = True
+      Kind = bkClose
+      ModalResult = 11
+      TabOrder = 1
+    end
+  end
+end

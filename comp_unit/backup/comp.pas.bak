@@ -29,6 +29,7 @@ type
     PrinterSetupDialog1: TPrinterSetupDialog;
     ReplaceDialog1: TReplaceDialog;
     SaveDialog1: TSaveDialog;
+    SelectDirectoryDialog1: TSelectDirectoryDialog;
     SynAnySyn1: TSynAnySyn;
     SynBatSyn1: TSynBatSyn;
     SynCppSyn1: TSynCppSyn;

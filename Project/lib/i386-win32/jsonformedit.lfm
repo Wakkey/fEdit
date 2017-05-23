@@ -1,7 +1,7 @@
 object JSONEditForm: TJSONEditForm
-  Left = 351
+  Left = 569
   Height = 490
-  Top = 358
+  Top = 341
   Width = 782
   Caption = 'JSONSchemaEdit'
   ClientHeight = 490

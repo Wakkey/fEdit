@@ -7,7 +7,7 @@ interface
 uses
   Classes, SysUtils, FileUtil, SynEdit, Forms, Controls, Graphics, Dialogs,
   Menus, ComCtrls, StdCtrls, ExtCtrls, EditBtn, FileCtrl, DBGrids, sqlite3conn,
-  sqldb, db;
+  sqldb, db, memds;
 
 type
 
@@ -18,14 +18,11 @@ type
     Button1: TButton;
     Button2: TButton;
     Button3: TButton;
-    Button4: TButton;
     DataSource1: TDataSource;
     DBGrid1: TDBGrid;
-    DirectoryEdit1: TDirectoryEdit;
     Edit1: TEdit;
-    Edit2: TEdit;
-    FileListBox1: TFileListBox;
     Label6: TLabel;
+    MemDataset1: TMemDataset;
     Memo1: TMemo;
     MenuItem22: TMenuItem;
     MenuItem23: TMenuItem;
@@ -40,9 +37,6 @@ type
     PageControl1: TPageControl;
     Panel1: TPanel;
     Panel2: TPanel;
-    Panel3: TPanel;
-    Panel4: TPanel;
-    Panel5: TPanel;
     PopupMenu1: TPopupMenu;
     SaveDialog1: TSaveDialog;
     SQLite3Connection1: TSQLite3Connection;
@@ -143,7 +137,7 @@ begin
   s.Clear;
   for fname in filenames do begin
       {$IFDEF Windows}
-         functionunit.EnumFileFromDir(ansitoutf8(fname),st);
+         functionunit.FileFindDir(ansitoutf8(fname),st);
       {$ENDIF}
       {$IFDEF LINUX}
          functionunit.EnumFileFromDir((fname),st);
@@ -217,7 +211,7 @@ end;
 
 procedure Teditform.Button1Click(Sender: TObject);
 begin
-  SQLite3Connection1.DatabaseName := filename_path;
+  {SQLite3Connection1.DatabaseName := filename_path;
   SQLite3Connection1.Close; // Ensure the connection is closed when we start
   try
     try
@@ -231,7 +225,7 @@ begin
     end;
   except
     ShowMessage('Unable to check if database file exists');
-  end;
+  end;}
 end;
 
 procedure Teditform.Button2Click(Sender: TObject);
@@ -255,7 +249,7 @@ end;
 
 procedure Teditform.FileListBox1DblClick(Sender: TObject);
 begin
-  sql := FileListBox1.FileName;
+
 end;
 
 procedure Teditform.FormClose(Sender: TObject; var CloseAction: TCloseAction);

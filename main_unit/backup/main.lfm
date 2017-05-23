@@ -1,7 +1,7 @@
 object mainform: Tmainform
-  Left = 474
+  Left = 473
   Height = 309
-  Top = 266
+  Top = 362
   Width = 577
   Caption = 'mainform'
   ClientHeight = 289
@@ -42,7 +42,7 @@ object mainform: Tmainform
         Caption = '新規'
         OnClick = Menu_NewClick
       end
-      object MenuItem3: TMenuItem
+      object MenuItem87: TMenuItem
         Caption = '-'
       end
       object Menu_Open: TMenuItem
@@ -57,6 +57,10 @@ object mainform: Tmainform
         Caption = '開き直す'
         OnClick = Menu_ReOpenClick
       end
+      object MenuItem3: TMenuItem
+        Caption = 'ディレクトリ探索'
+        OnClick = MenuItem3Click
+      end
       object MenuItem81: TMenuItem
         Caption = '-'
       end
@@ -68,9 +72,6 @@ object mainform: Tmainform
         Caption = '名前を付けて保存'
         OnClick = Menu_SaveAsClick
       end
-      object MenuItem91: TMenuItem
-        Caption = '-'
-      end
       object Menu_All_Save: TMenuItem
         Caption = '全て上書き保存'
         OnClick = Menu_All_SaveClick
@@ -78,7 +79,7 @@ object mainform: Tmainform
       object Menu_AllSaveAs: TMenuItem
         Caption = '全て名前を付けて保存'
       end
-      object MenuItem87: TMenuItem
+      object MenuItem91: TMenuItem
         Caption = '-'
       end
       object Menu_Ansi: TMenuItem
@@ -520,7 +521,7 @@ object mainform: Tmainform
         OnClick = MenuItem28Click
       end
       object MenuItem13: TMenuItem
-        Caption = 'ファイル検索'
+        Caption = '高速文書抽出'
         OnClick = MenuItem13Click
       end
       object MenuItem4: TMenuItem

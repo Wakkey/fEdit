@@ -21,6 +21,7 @@ type
     procedure FormShow(Sender: TObject);
   private
     { private declarations }
+    dir:string;
   public
     { public declarations }
   end;
@@ -65,7 +66,7 @@ begin
   st4.Clear;
 
   setHtmlfunc := TStringList.Create;
-  s1 := extractfilepath(Paramstr(0)) + 'ini\' + 'Edit_type.txt';
+  s1 := extractfilepath(Paramstr(0)) + dir + 'Edit_type.txt';
   //showmessage(s1);
   if not loadSTringList(setHtmlfunc,s1) then begin
     showmessage('読み込みに失敗しました:' + char(13)+s1);
@@ -76,7 +77,7 @@ begin
 
 
   getHtmlFunc := TStringList.Create;
-  s1 := extractfilepath(Paramstr(0)) + 'ini\' + 'HTML_Item.txt';
+  s1 := extractfilepath(Paramstr(0)) + dir + 'HTML_Item.txt';
   if not loadSTringList(getHtmlFunc,s1)  then begin
     showmessage('読み込みに失敗しました:' + char(13)+s1);
     exit;
@@ -131,7 +132,16 @@ begin
 end;
 begin
   st := TStringList.Create;
-  s1 := extractfilepath(paramstr(0)) +'Edit_type.txt';
+  {$IFDEF Windows}
+       dir :='ini\';
+  {$ENDIF}
+  {$IFDEF LINUX}
+       dir :='ini/';
+  {$ENDIF}
+  {$IFDEF Darwin}
+       dir :='ini/';
+  {$ENDIF}
+  s1 := extractfilepath(paramstr(0)) + dir +'Edit_type.txt';
   StrListLoad(st,s1);
   Htmlmenu.ListBox1.Items.Text:= st.text;
   st.free;

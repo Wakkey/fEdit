@@ -1,5 +1,5 @@
 object find_form: Tfind_form
-  Left = 800
+  Left = 816
   Height = 321
   Top = 169
   Width = 477

@@ -5,8 +5,8 @@ unit comp;
 interface
 
 uses
-  Classes, SysUtils, FileUtil, SynExportHTML, SynPluginSyncroEdit,
-  SynHighlighterPas, SynHighlighterCpp, SynHighlighterJava,
+  Classes, SysUtils, db, memds, sqldb, FileUtil, SynExportHTML,
+  SynPluginSyncroEdit, SynHighlighterPas, SynHighlighterCpp, SynHighlighterJava,
   SynHighlighterJScript, SynHighlighterPerl, SynHighlighterHTML,
   SynHighlighterXML, SynHighlighterLFM, SynHighlighterDiff,
   synhighlighterunixshellscript, SynHighlighterCss, SynHighlighterPHP,
@@ -21,8 +21,10 @@ type
   TDataModule1 = class(TForm)
     CalculatorDialog1: TCalculatorDialog;
     CalendarDialog1: TCalendarDialog;
+    DataSource1: TDataSource;
     FindDialog1: TFindDialog;
     FontDialog1: TFontDialog;
+    MemDataset1: TMemDataset;
     OpenDialog1: TOpenDialog;
     PageSetupDialog1: TPageSetupDialog;
     PrintDialog1: TPrintDialog;
@@ -30,6 +32,7 @@ type
     ReplaceDialog1: TReplaceDialog;
     SaveDialog1: TSaveDialog;
     SelectDirectoryDialog1: TSelectDirectoryDialog;
+    SQLQuery1: TSQLQuery;
     SynAnySyn1: TSynAnySyn;
     SynBatSyn1: TSynBatSyn;
     SynCppSyn1: TSynCppSyn;
