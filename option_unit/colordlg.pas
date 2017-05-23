@@ -178,6 +178,7 @@ end;
 procedure Tcolor_form.BTN_SetMnu2Click(Sender: TObject);
 var
   st,st1,st2:TStringList;
+  dir:string;
 begin
   st:=TStringList.Create;
   st1:=TStringList.Create;
@@ -186,18 +187,27 @@ begin
   st1.Clear;
   st2.Clear;
   functionunit.mnu_custum(st,st1,st2);
+    {$IFDEF Windows}
+          dir:='ini\';
+     {$ENDIF}
+     {$IFDEF LINUX}
+          dir:='ini/';
+     {$ENDIF}
+     {$IFDEF Darwin}
+          dir:='ini/';
+     {$ENDIF}
   try
-    st.SaveToFile(extractfilepath(paramstr(0))+'mnu_title.txt');
-    st1.SaveToFile(extractfilepath(paramstr(0))+'mnu_caption.txt');
-    st2.SaveToFile(extractfilepath(paramstr(0))+'mnu_shortcut.txt');
+    st.SaveToFile(extractfilepath(paramstr(0))+dir+'mnu_title.txt');
+    st1.SaveToFile(extractfilepath(paramstr(0))+dir+'mnu_caption.txt');
+    st2.SaveToFile(extractfilepath(paramstr(0))+dir+'mnu_shortcut.txt');
   except
   end;
   try
-    st.LoadFromFile(extractfilepath(paramstr(0))+'mnu_shortcut.txt');
+    st.LoadFromFile(extractfilepath(paramstr(0))+dir+'mnu_shortcut.txt');
     color_form.List_SubMnu2.Items.Text:= st.Text;
-    st.LoadFromFile(extractfilepath(paramstr(0))+'mnu_title.txt');
+    st.LoadFromFile(extractfilepath(paramstr(0))+dir+'mnu_title.txt');
     color_form.List_SubMnu1.Items.Text:= st.Text;
-    st.LoadFromFile(extractfilepath(paramstr(0))+'mnu_caption.txt');
+    st.LoadFromFile(extractfilepath(paramstr(0))+dir+'mnu_caption.txt');
     color_form.List_SubMnu.Items.Text:= st.Text;
   except
   end;
@@ -221,14 +231,24 @@ end;
 procedure Tcolor_form.Button11Click(Sender: TObject);
 var
   st,st1,st2:TStringList;
+  dir:string;
 begin
   st:=TStringList.Create;
   st1:=TStringList.Create;
   st2:=TStringList.Create;
+    {$IFDEF Windows}
+          dir:='ini\';
+     {$ENDIF}
+     {$IFDEF LINUX}
+          dir:='ini/';
+     {$ENDIF}
+     {$IFDEF Darwin}
+          dir:='ini/';
+     {$ENDIF}
   try
-  st.LoadFromFile(extractfilepath(paramstr(0))+'mnu_title.txt');
-  st1.LoadFromFile(extractfilepath(paramstr(0))+'mnu_caption.txt');
-  st2.LoadFromFile(extractfilepath(paramstr(0))+'mnu_shortcut.txt');
+  st.LoadFromFile(extractfilepath(paramstr(0))+dir+'mnu_title.txt');
+  st1.LoadFromFile(extractfilepath(paramstr(0))+dir+'mnu_caption.txt');
+  st2.LoadFromFile(extractfilepath(paramstr(0))+dir+'mnu_shortcut.txt');
 
 
   finally
@@ -241,7 +261,17 @@ end;
 procedure Tcolor_form.Button14Click(Sender: TObject);
 var
   st:TstringList;
+  dir:string;
 begin
+    {$IFDEF Windows}
+          dir:='ini\';
+     {$ENDIF}
+     {$IFDEF LINUX}
+          dir:='ini/';
+     {$ENDIF}
+     {$IFDEF Darwin}
+          dir:='ini/';
+     {$ENDIF}
   with color_form.List_SubMnu2 do begin
     if ItemIndex = -1 then
       exit;
@@ -249,7 +279,7 @@ begin
     st.Clear;
     items[ItemIndex] := Edit_SubMnu2.Text;
     st.Text := items.Text;
-    st.SaveToFile(extractfilepath(paramstr(0))+'mnu_shortcut.txt');
+    st.SaveToFile(extractfilepath(paramstr(0))+dir+'mnu_shortcut.txt');
     st.Free;
   end;
 end;
@@ -332,27 +362,46 @@ end;
 procedure Tcolor_form.Button7Click(Sender: TObject);
 var
   st:TstringList;
+  dir:string;
 begin
+     {$IFDEF Windows}
+          dir:='ini\';
+     {$ENDIF}
+     {$IFDEF LINUX}
+          dir:='ini/';
+     {$ENDIF}
+     {$IFDEF Darwin}
+          dir:='ini/';
+     {$ENDIF}
   st := TStringList.Create;
   st.Clear;
   with color_form.List_SubMnu do begin
     items[ItemIndex] := Edit_SubMnu.Text;
     st.Text := items.Text;
-    st.SaveToFile(extractfilepath(paramstr(0))+'mnu_caption.txt');
+    st.SaveToFile(extractfilepath(paramstr(0))+dir+'mnu_caption.txt');
   end;
 end;
 
 procedure Tcolor_form.Button8Click(Sender: TObject);
 var
-  setfile,setfile2,setfile3:string;
+  dir,setfile,setfile2,setfile3:string;
   aList:TStringList;
   i1,i2,i3:integer;
 begin
+     {$IFDEF Windows}
+          dir:='ini\';
+     {$ENDIF}
+     {$IFDEF LINUX}
+          dir:='ini/';
+     {$ENDIF}
+     {$IFDEF Darwin}
+          dir:='ini/';
+     {$ENDIF}
   aList := TstringList.Create;
   alist.Clear;
-  setfile := inttostr(ComboBox6.ItemIndex+1)+'.ini';
-  setfile2 := inttostr(ComboBox6.ItemIndex+1)+'t.ini';
-  setfile3 := inttostr(ComboBox6.ItemIndex+1)+'tt.ini';
+  setfile := inttostr(ComboBox6.ItemIndex+1)+dir+'.ini';
+  setfile2 := inttostr(ComboBox6.ItemIndex+1)+dir+'t.ini';
+  setfile3 := inttostr(ComboBox6.ItemIndex+1)+dir+'tt.ini';
   if not checkbox3.Checked then begin
     functionunit.toolbarbuttoncount.Insert(0,inttostr(listbox1.Count-1));
     functionunit.toolbarbuttoncount.Insert(0,'toolbarbutton');
@@ -403,16 +452,25 @@ end;
 
 procedure Tcolor_form.Button9Click(Sender: TObject);
 var
-setfile,setfile2,setfile3:string;
+setfile,setfile2,setfile3,dir:string;
 begin
+     {$IFDEF Windows}
+          dir:='ini\';
+     {$ENDIF}
+     {$IFDEF LINUX}
+          dir:='ini/';
+     {$ENDIF}
+     {$IFDEF Darwin}
+          dir:='ini/';
+     {$ENDIF}
   color_form.ComboBox6.Items.Add(
     inttostr(color_form.ComboBox6.Items.Count)
   );
   color_form.ComboBox6.ItemIndex := color_form.ComboBox6.Items.Count -1;
 
-  setfile := inttostr(ComboBox6.ItemIndex+1)+'.ini';
-  setfile2 := inttostr(ComboBox6.ItemIndex+1)+'t.ini';
-  setfile3 := inttostr(ComboBox6.ItemIndex+1)+'tt.ini';
+  setfile := inttostr(ComboBox6.ItemIndex+1)+dir+'.ini';
+  setfile2 := inttostr(ComboBox6.ItemIndex+1)+dir+'t.ini';
+  setfile3 := inttostr(ComboBox6.ItemIndex+1)+dir+'tt.ini';
   if not checkbox3.Checked then begin
     functionunit.toolbarbuttoncount.SaveToFile(
          systoutf8(utf8tosys( ExtractFilePath( (Paramstr(0)) ) + setfile ))
@@ -434,21 +492,33 @@ begin
 
   if mainform.Menu_MultWindow.Checked then begin
     if not color_form.CheckBox3.Checked then begin
-      combobox6.ItemIndex:= 0;
+
       //mainform.winmodeheight:= mainform.toolbar2.Height + mainform.PageControl1.Height;
       //mainform.Height := mainform.winmodeheight;
       toolwindow.PageControl1.Visible := not true;
       mainform.Menu_ToolBarTAB.Checked := not true;
       color_form.PageControl1.Visible:= true;
     end else begin
-      combobox6.ItemIndex:= 0;
       //mainform.winmodeheight:= mainform.toolbar2.Height + mainform.PageControl1.Height + 30;
       //mainform.Height := mainform.winmodeheight;
       toolwindow.PageControl1.Visible := true;
       mainform.Menu_ToolBarTAB.Checked := true;
       color_form.PageControl1.Visible:= not true;
     end;
+
   end;
+  if color_form.Visible and (checkbox3.Checked or not checkbox3.Checked) then begin
+    //showmessage(inttostr(combobox6.ItemIndex));
+    combobox6.ItemIndex:= 0;
+    functionunit.tabseting1;
+    functionunit.tabseting2;
+    functionunit.pageout;
+    functionunit.resizedocwindow(mainform.PageControl1.ActivePageIndex);
+    //combobox6.onChange(combobox6);
+    exit;
+  end;
+
+
   functionunit.tabseting1;
   functionunit.tabseting2;
   functionunit.pageout;
@@ -748,9 +818,9 @@ end;
 procedure Tcolor_form.Edit_SubMnu2KeyDown(Sender: TObject; var Key: Word;
   Shift: TShiftState);
 begin
-  //if shortcut_key = 0 then
-    //shortcut_key := key;
-  showmessage(inttostr(key));
+  if shortcut_key = 0 then
+    shortcut_key := key;
+  //showmessage(inttostr(key));
 end;
 
 procedure Tcolor_form.Edit_SubMnu2KeyPress(Sender: TObject; var Key: char);
@@ -1079,15 +1149,25 @@ end;
 procedure Tcolor_form.PageControl1Change(Sender: TObject);
 var
   st:TStringList;
+  dir:string;
 begin
+     {$IFDEF Windows}
+          dir:='ini\';
+     {$ENDIF}
+     {$IFDEF LINUX}
+          dir:='ini/';
+     {$ENDIF}
+     {$IFDEF Darwin}
+          dir:='ini/';
+     {$ENDIF}
   if color_form.PageControl1.ActivePageIndex=4 then begin
     st := TStringList.Create;
     try
-    st.LoadFromFile(extractfilepath(paramstr(0))+'mnu_shortcut.txt');
+    st.LoadFromFile(extractfilepath(paramstr(0))+dir+'mnu_shortcut.txt');
     color_form.List_SubMnu2.Items.Text:= st.Text;
-    st.LoadFromFile(extractfilepath(paramstr(0))+'mnu_title.txt');
+    st.LoadFromFile(extractfilepath(paramstr(0))+dir+'mnu_title.txt');
     color_form.List_SubMnu1.Items.Text:= st.Text;
-    st.LoadFromFile(extractfilepath(paramstr(0))+'mnu_caption.txt');
+    st.LoadFromFile(extractfilepath(paramstr(0))+dir+'mnu_caption.txt');
     color_form.List_SubMnu.Items.Text:= st.Text;
     except
     end;
