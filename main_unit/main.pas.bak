@@ -28,8 +28,8 @@ type
     MenuItem102: TMenuItem;
     MenuItem11: TMenuItem;
     MenuItem12: TMenuItem;
+    MenuItem13: TMenuItem;
     MenuItem14: TMenuItem;
-    MenuItem16: TMenuItem;
     MenuItem17: TMenuItem;
     MenuItem18: TMenuItem;
     MenuItem19: TMenuItem;
@@ -167,6 +167,7 @@ type
     procedure FormCloseQuery(Sender: TObject; var CanClose: boolean);
     procedure FormDockOver(Sender: TObject; Source: TDragDockObject; X,
       Y: Integer; State: TDragState; var Accept: Boolean);
+    procedure FormDropFiles(Sender: TObject; const FileNames: array of String);
     procedure FormShow(Sender: TObject);
     procedure FormUnDock(Sender: TObject; Client: TControl;
       NewTarget: TWinControl; var Allow: Boolean);
@@ -174,6 +175,7 @@ type
     procedure MenuItem10Click(Sender: TObject);
     procedure MenuItem13Click(Sender: TObject);
     procedure MenuItem15Click(Sender: TObject);
+    procedure MenuItem16Click(Sender: TObject);
     procedure MenuItem17Click(Sender: TObject);
     procedure MenuItem18Click(Sender: TObject);
     procedure MenuItem19Click(Sender: TObject);
@@ -183,6 +185,7 @@ type
     procedure MenuItem29Click(Sender: TObject);
     procedure MenuItem31Click(Sender: TObject);
     procedure MenuItem32Click(Sender: TObject);
+    procedure MenuItem5Click(Sender: TObject);
     procedure MenuItem7Click(Sender: TObject);
     procedure MenuItem86Click(Sender: TObject);
     procedure MenuItem8Click(Sender: TObject);
@@ -288,13 +291,33 @@ end;
 
 procedure Tmainform.Menu_OLD_LoadClick(Sender: TObject);
 begin
+  {$IFDEF Windows}
   try
     functionunit.deleteAll_edittab();
-    functionunit.load('temp3.txt','.ba');
+    functionunit.load('Backupfile\','temp3.txt','.ba');
   except
     functionunit.deleteAll_edittab();
     showmessage('前回終了時のファイルがありません');
   end;
+  {$ENDIF}
+  {$IFDEF LINUX}
+  try
+    functionunit.deleteAll_edittab();
+    functionunit.load('Backupfile/','temp3.txt','.ba');
+  except
+    functionunit.deleteAll_edittab();
+    showmessage('前回終了時のファイルがありません');
+  end;
+  {$ENDIF}
+  {$IFDEF Darwin}
+  try
+    functionunit.deleteAll_edittab();
+    functionunit.load('Backupfile/','temp3.txt','.ba');
+  except
+    functionunit.deleteAll_edittab();
+    showmessage('前回終了時のファイルがありません');
+  end;
+  {$ENDIF}
 end;
 
 procedure Tmainform.Menu_OpenClick(Sender: TObject);
@@ -846,6 +869,55 @@ begin
 
 end;
 
+procedure Tmainform.FormDropFiles(Sender: TObject;
+  const FileNames: array of String);
+var
+  fname:string;
+  st,s:TStringlist;
+  i,i1:integer;
+begin
+  st:= TStringList.Create;
+  st.Clear;
+  s:= TStringList.Create;
+  s.Clear;
+  for fname in filenames do begin
+      {$IFDEF Windows}
+         functionunit.FileFindDir(ansitoutf8(fname),st);
+      {$ENDIF}
+      {$IFDEF LINUX}
+         functionunit.FileFindDir((fname),st);
+      {$ENDIF}
+      {$IFDEF Darwin}
+         functionunit.FileFindDir((fname),st);
+      {$ENDIF}
+  end;
+  if st.Count > 0 then begin
+    for i1 := 1 to st.count -1 do begin
+      if (-1 = openfiletypeform.CheckGroup1.Items.IndexOf(extractfileext(st[i1]))) then begin
+        openfiletypeform.CheckGroup1.Items.Add(extractfileext(st[i1]));
+      end;
+    end;
+    if openfiletypeform.CheckGroup1.Items.Count > 0 then begin
+      openfiletypeform.ShowModal;
+      for i := 0 to openfiletypeform.CheckGroup1.Items.Count -1 do begin
+          if openfiletypeform.CheckGroup1.Checked[i] then begin
+            s.add( openfiletypeform.CheckGroup1.Items[i] );
+          end;
+      end;
+      for i1 := 0 to st.Count -1 do begin
+         if -1 <> s.IndexOf( extractfileext(st[i1]) ) then begin
+           try
+             functionunit.fileopen(st[i1]);
+           except
+           end;
+         end;
+      end;
+    end;
+  end;
+  s.Free;
+  st.Free;
+end;
+
 
 procedure Tmainform.FormShow(Sender: TObject);
 begin
@@ -872,11 +944,35 @@ begin
 end;
 
 procedure Tmainform.MenuItem13Click(Sender: TObject);
+var
+  fname:string;
+  st:TStringlist;
+begin
+  st:=TStringlist.Create;
+  st.Clear;
+  if not DataModule1.SelectDirectoryDialog1.Execute then
+    exit;
+
+      fname := DataModule1.SelectDirectoryDialog1.FileName;
+      {$IFDEF Windows}
+         functionunit.FileFindDir(ansitoutf8(fname),st);
+      {$ENDIF}
+      {$IFDEF LINUX}
+         functionunit.EnumFileFromDir((fname),st);
+      {$ENDIF}
+      {$IFDEF Darwin}
+         functionunit.EnumFileFromDir((fname),st);
+      {$ENDIF}
+      functionunit.newwindow();
+      functionunit.editlist.Items[mainform.PageControl1.PageCount-2].SynEdit1.Lines.text := st.Text;
+end;
+
+procedure Tmainform.MenuItem15Click(Sender: TObject);
 begin
 
 end;
 
-procedure Tmainform.MenuItem15Click(Sender: TObject);
+procedure Tmainform.MenuItem16Click(Sender: TObject);
 begin
 
 end;
@@ -975,6 +1071,11 @@ begin
   tmpclr.ShowModal;
 end;
 
+procedure Tmainform.MenuItem5Click(Sender: TObject);
+begin
+
+end;
+
 procedure Tmainform.MenuItem7Click(Sender: TObject);
 begin
   functionunit.MacroInsart(mainform.PageControl1.pageIndex,functionunit.macro_lng);
@@ -1009,51 +1110,8 @@ end;
 
 procedure Tmainform.ApplicationProperties1DropFiles(Sender: TObject;
   const FileNames: array of String);
-var
-  i,i1:integer;
-  s,st:TStringlist;
 begin
-  st:= TStringlist.Create;
-  st.Clear;
-  s:= TStringlist.Create;
-  s.Clear;
-  for I := 0 to High(FileNames) do begin
-  //functionunit.Run(functionunit.EnumFileFromDir(ansitoutf8(FileNames[i]),st));
-  functionunit.EnumFileFromDir(ansitoutf8(FileNames[i]),st)
-  end;
-  if st.Count > 0 then begin
-    for i1 := 1 to st.count -1 do begin
-      if -1 = openfiletypeform.CheckGroup1.Items.IndexOf(extractfileext(st[i1])) then begin
-        openfiletypeform.CheckGroup1.Items.Add(extractfileext(st[i1]));
-      end;
-    end;
-    if openfiletypeform.CheckGroup1.Items.Count > 2 then begin
-      openfiletypeform.ShowModal;
-      for i := 0 to openfiletypeform.CheckGroup1.Items.Count -1 do begin
-          if openfiletypeform.CheckGroup1.Checked[i] then begin
-            s.add( openfiletypeform.CheckGroup1.Items[i] );
-          end;
-      end;
-      for i1 := 0 to st.Count -1 do begin
-         if -1 <> s.IndexOf( extractfileext(st[i1]) ) then begin
-           try
-             functionunit.fileopen(ansitoutf8(st[i1]));
-           except
-           end;
-         end;
-      end;
-    end else begin
-      if st.Count = 1 then begin
-        //interface_unit.open(ansitoutf8(FileNames[0]));
-      end;
-      for i1 := 0 to st.Count -1 do begin
-        try
-          functionunit.fileopen(ansitoutf8(st[i1]));
-        except
-        end;
-      end;
-    end;
-  end;
+
 end;
 
 end.

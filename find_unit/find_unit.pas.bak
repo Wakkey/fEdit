@@ -62,6 +62,7 @@ type
     function listallload(i:integer):string;
     function find1page(i:integer;find_base,find_output:TStringlist):boolean;
     function findallpage():boolean;
+    function Rpraceallpage():boolean;
     function selselect(Tabs:integer): boolean;
     function TXTReplace():boolean;
   end;
@@ -193,7 +194,9 @@ var
   i,i1,ans:integer;
   msg:string;
   s1,s2:TStringList;
+  all:boolean;
 begin
+  all := false;
   WindowState:= wsMinimized;
   i1 := mainform.PageControl1.ActivePageIndex;
   msg  := '文字列を置き換えます' + chr($d) + chr($a) + 'よろしいですか？';
@@ -209,17 +212,19 @@ begin
   functionunit.findtext(FIndTextAlia.Text,s1,s2,0);
   Listbox1.Items.Text:= s2.Text;
   i := listbox1.ItemIndex;
-  if (i < 0) and (listbox1.Items.Count -1 > 0) then begin
+  if (i < 0) and (listbox1.Items.Count > 0) then begin
     i := 0
-  end else if i < listbox1.Items.Count then
-    exit;
+  end;// else if i < listbox1.Items.Count then
+    //exit;
   listbox1.ItemIndex := i;
   selselect(
       mainform.PageControl1.ActivePageIndex
     );
   while 0 <> ListBox1.Items.Count do begin
-    ans := messagedlg(msg, mtinformation, [mbOk,mbNo,mbCancel], 0);
-    if ans = 1 then begin
+    if not all then begin
+      ans := messagedlg(msg, mtinformation, [mbAll,mbOk,mbNo,mbCancel], 0);
+    end;
+    if ( not all ) and ( ans = 1 ) or ( all ) then begin
         selselect(i1);
         if functionunit.editlist.Items[i1].PageControl1.ActivePage =  functionunit.editlist.Items[i1].TabSheet1 then begin
           functionunit.editlist.Items[i1].SynEdit1.SelText:= RplaceTextAlia.Text;
@@ -234,16 +239,19 @@ begin
          Listbox1.Items.Text:= s2.Text;
          listbox1.ItemIndex := i;
 
-       end else if  ans = 7 then begin
+       end else if  ( not all ) and (  ans = 7 ) then begin
         inc(i);
         listbox1.ItemIndex := i;
-       end else if ans = 2 then begin
+       end else if ans = 8 then begin
+        all := true;
+      end else if  ( not all ) and ( ans = 2 ) then begin
         break;
       end;
   end;
   s1.Free;
   s2.Free;
   WindowState:= wsNormal;
+  all := false;
 end;
 
 
@@ -275,6 +283,37 @@ begin
   TabControl1.TabIndex:= TabControl1.Tabs.Count -1;
 
 end;
+
+function Tfind_form.Rpraceallpage():boolean;
+var
+  i:integer;
+  s1,s2:TStringList;
+begin
+  s1 := TStringList.Create;
+  s1.Clear;
+  s2 := TStringList.Create;
+  s2.Clear;
+
+
+  Memo1.Clear;
+  for i := 0 to 255 do begin
+    Listset[i].Clear;
+  end;
+  for i := 0 to mainform.PageControl1.PageCount -2 do begin
+    s1.Clear;
+    s2.Clear;
+    s1.Text := functionunit.editlist.Items[i].Edit.Text;
+    find1page(i,s1,s2);
+    Listset[i].Text:= s2.Text;
+    Listset2[i].Text:= ListBox2.Items.Text;
+    Memo1.Lines.Add(inttostr(i));
+    RpreceClick(Rprece);
+    //chekfinds;
+  end;
+  TabControl1.TabIndex:= TabControl1.Tabs.Count -1;
+
+end;
+
 
 function Tfind_form.listclear:boolean;
 var
@@ -433,7 +472,15 @@ begin
   for i := 0 to TabControl1.Tabs.Count -1 do begin
     TabControl1.TabIndex := i;
     TabControl1Change(TabControl1);
-    TXTReplace;
+    showmessage(inttostr(listbox2.Count));
+    if listbox2.Count > 0 then begin
+      listbox2.ItemIndex:= 0;
+      TXTReplace;
+      //FIndsAllClick(FIndsAll);
+      //FIndsClick(FInds);
+      //RpreceClick(Rprece);
+    end;
+
   end;
 end;
 
@@ -548,24 +595,13 @@ end;
 
 procedure Tfind_form.TabControl1Change(Sender: TObject);
 begin
-  {
-  MainForm.TabControl1.TabIndex:= strtoint(Memo1.Lines[find_form.TabControl1.TabIndex]);
-  aList.LoadFromFile(
-        ExtractFilePath( Paramstr(0) ) +
-          {ExtractFileName} Memo1.Lines[find_form.TabControl1.TabIndex] + '.lst'
-          );
-  ListBox1.Items.Text:= aList.Text;
-  }
-  //showmessage(Memo1.Lines[find_form.TabControl1.TabIndex]);
   if tabclrsw then begin
     tabclrsw := false;
     exit;
   end;
-  mainform.PageControl1.PageIndex := strtoint(Memo1.Lines[find_form.TabControl1.TabIndex]);
-  ListBox1.Items.Text:= listset[strtoint(memo1.Lines[find_form.TabControl1.TabIndex])].Text;
-  ListBox2.Items.Text:= listset2[strtoint(memo1.Lines[find_form.TabControl1.TabIndex])].Text;
-
-  //listallload(strtoint(Memo1.Lines[find_form.TabControl1.TabIndex]));
+  mainform.PageControl1.PageIndex := strtoint(Memo1.Lines[TabControl1.TabIndex]);
+  ListBox1.Items.Text:= listset[strtoint(memo1.Lines[TabControl1.TabIndex])].Text;
+  ListBox2.Items.Text:= listset2[strtoint(memo1.Lines[TabControl1.TabIndex])].Text;
 end;
 
 procedure Tfind_form.TabControl1Changing(Sender: TObject; var AllowChange: Boolean);

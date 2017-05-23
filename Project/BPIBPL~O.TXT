@@ -1,6 +1,0 @@
-count
-1
-Backup_0
-UTF8
-newfile0
-newfile0
