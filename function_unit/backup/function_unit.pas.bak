@@ -379,7 +379,7 @@ begin
           //showmessage(utf8tosys(ExtractFilePath( systoutf8(Paramstr(0)) ) +
             //( IntToStr(i) + setname2)));
           functionunit.editlist.Items[i].Edit.LoadFromFile(utf8tosys(ExtractFilePath( systoutf8(Paramstr(0)) ) +
-            ( IntToStr(i) + dir + setname2)));
+            (  dir + IntToStr(i) + setname2)));
           //functionunit.memoload(i,utf8tosys(ExtractFilePath( systoutf8(Paramstr(0)) ) +
           //  ( IntToStr(i) + setname2)));
           functionunit.editlist.Items[i].SynEdit1.Lines.Text:=
@@ -436,6 +436,7 @@ begin
     except
     end;
     mainform.PageControl1.Pages[0].Caption := s3;
+    functionunit.editlist.Items[i].SaveDialog1.Filter := datamodule1.SaveDialog1.Filter;
   end;
 end;
 
@@ -1328,7 +1329,7 @@ begin
       exit;
     end;
     mainform.AllowDropFiles := true;
-
+    setdialog;
     //functionunit.Filename:= '';
     functionunit.version:= '';
     functionunit.versionSet('0.51');
@@ -1508,6 +1509,7 @@ begin
     page := mainform.PageControl1.PageIndex;
     mainform.PageControl1.Pages[page].OnClick:= mainform.OnClick;
     mainform.PageControl1.Pages[page].OnUnDock:=mainform.OnUnDock;
+    editlist.Items[tabs].SaveDialog1.Filter:= datamodule1.SaveDialog1.Filter;
   end;
 end;
 
@@ -6023,11 +6025,20 @@ end;
 
 function codesave:String;
 var
- sorcename,langege:string;
+ sorcename,langege,dir:string;
  sl1,sl2:TStringList;
 begin
-  ForceDirectories( ExtractFilePath( (Paramstr(0)) )  + 'temp\' );
-  sorcename := ExtractFilePath( systoutf8(Paramstr(0)))  + 'temp\' + 'test.';
+  {$IFDEF Windows}
+    dir := 'temp\';
+  {$ENDIF}
+  {$IFDEF LINUX}
+   dir := 'temp/';
+  {$ENDIF}
+  {$IFDEF Darwin}
+     dir := 'temp/';
+  {$ENDIF}
+  ForceDirectories( ExtractFilePath( (Paramstr(0)) )  + dir );
+  sorcename := ExtractFilePath( systoutf8(Paramstr(0)))  + dir + 'test.';
   //ここに、切り取ったソースを保存するコードまたは関数を書く
   sl1 := TStringList.Create;
   sl2 := TStringList.Create;

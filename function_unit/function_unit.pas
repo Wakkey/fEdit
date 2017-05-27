@@ -1414,10 +1414,10 @@ begin
          functionunit.FileFindDir(ansitoutf8(ParamStr(i)),st);
       {$ENDIF}
       {$IFDEF LINUX}
-         functionunit.EnumFileFromDir((ParamStr(i)),st);
+         functionunit.FileFindDir((ParamStr(i)),st);
       {$ENDIF}
       {$IFDEF Darwin}
-         functionunit.EnumFileFromDir((ParamStr(i)),st);
+         functionunit.FileFindDir((ParamStr(i)),st);
       {$ENDIF}
   end;
   if st.Count > 0 then begin

@@ -1,19 +1,20 @@
 object mainform: Tmainform
-  Left = 434
+  Left = 473
   Height = 309
-  Top = 141
+  Top = 362
   Width = 577
   Caption = 'mainform'
-  ClientHeight = 288
+  ClientHeight = 289
   ClientWidth = 577
   Menu = MainMenu1
   OnClick = FormClick
   OnCloseQuery = FormCloseQuery
   OnDockOver = FormDockOver
+  OnDropFiles = FormDropFiles
   OnShow = FormShow
   OnUnDock = FormUnDock
   Position = poScreenCenter
-  LCLVersion = '1.6.2.0'
+  LCLVersion = '1.6.4.0'
   object toolpanel: TPanel
     Left = 0
     Height = 33
@@ -24,7 +25,7 @@ object mainform: Tmainform
   end
   object PageControl1: TPageControl
     Left = 0
-    Height = 255
+    Height = 256
     Top = 33
     Width = 577
     Align = alClient
@@ -41,7 +42,7 @@ object mainform: Tmainform
         Caption = '新規'
         OnClick = Menu_NewClick
       end
-      object MenuItem3: TMenuItem
+      object MenuItem87: TMenuItem
         Caption = '-'
       end
       object Menu_Open: TMenuItem
@@ -50,10 +51,15 @@ object mainform: Tmainform
       end
       object MenuItem5: TMenuItem
         Caption = '最近扱ったファイルを開く'
+        OnClick = MenuItem5Click
       end
       object Menu_ReOpen: TMenuItem
         Caption = '開き直す'
         OnClick = Menu_ReOpenClick
+      end
+      object MenuItem3: TMenuItem
+        Caption = 'ディレクトリ探索'
+        OnClick = MenuItem3Click
       end
       object MenuItem81: TMenuItem
         Caption = '-'
@@ -66,9 +72,6 @@ object mainform: Tmainform
         Caption = '名前を付けて保存'
         OnClick = Menu_SaveAsClick
       end
-      object MenuItem91: TMenuItem
-        Caption = '-'
-      end
       object Menu_All_Save: TMenuItem
         Caption = '全て上書き保存'
         OnClick = Menu_All_SaveClick
@@ -76,7 +79,7 @@ object mainform: Tmainform
       object Menu_AllSaveAs: TMenuItem
         Caption = '全て名前を付けて保存'
       end
-      object MenuItem87: TMenuItem
+      object MenuItem91: TMenuItem
         Caption = '-'
       end
       object Menu_Ansi: TMenuItem
@@ -517,8 +520,13 @@ object mainform: Tmainform
         Caption = 'HtmlEdit'
         OnClick = MenuItem28Click
       end
-      object MenuItem16: TMenuItem
-        Caption = '-'
+      object MenuItem13: TMenuItem
+        Caption = '高速文書抽出'
+        OnClick = MenuItem13Click
+      end
+      object MenuItem95: TMenuItem
+        Caption = 'フローチャート作成'
+        OnClick = MenuItem95Click
       end
       object MenuItem4: TMenuItem
         Caption = 'マクロ言語指定'
@@ -534,9 +542,6 @@ object mainform: Tmainform
       object Menu_MacroRun: TMenuItem
         Caption = '実行'
         OnClick = Menu_MacroRunClick
-      end
-      object MenuItem95: TMenuItem
-        Caption = '-'
       end
     end
     object Menu_Custom: TMenuItem

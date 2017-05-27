@@ -1,10 +1,10 @@
 object DataModule1: TDataModule1
   Left = 753
-  Height = 240
-  Top = 244
+  Height = 307
+  Top = 177
   Width = 320
   Caption = 'datamodule1'
-  LCLVersion = '1.6.0.4'
+  LCLVersion = '1.6.4.0'
   object SynExporterHTML1: TSynExporterHTML
     Color = clWindow
     DefaultFilter = 'HTML Document (*.htm,*.html)|*.htm;*.html'
@@ -285,6 +285,26 @@ object DataModule1: TDataModule1
     OKCaption = 'OK(&O)'
     CancelCaption = 'キャンセル'
     left = 136
+    top = 105
+  end
+  object SelectDirectoryDialog1: TSelectDirectoryDialog
+    left = 191
+    top = 105
+  end
+  object DataSource1: TDataSource
+    left = 220
+    top = 105
+  end
+  object MemDataset1: TMemDataset
+    FieldDefs = <>
+    left = 249
+    top = 105
+  end
+  object SQLQuery1: TSQLQuery
+    FieldDefs = <>
+    Options = []
+    Params = <>
+    left = 278
     top = 105
   end
 end

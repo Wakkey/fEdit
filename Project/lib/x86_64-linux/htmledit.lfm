@@ -8,7 +8,7 @@ object HTMLMenu: THTMLMenu
   ClientWidth = 233
   OnShow = FormShow
   Position = poScreenCenter
-  LCLVersion = '1.6.2.0'
+  LCLVersion = '1.6.4.0'
   object ListBox1: TListBox
     Left = 0
     Height = 250

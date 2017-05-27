@@ -1,7 +1,7 @@
 object FCFM: TFCFM
-  Left = 370
+  Left = 298
   Height = 542
-  Top = 258
+  Top = 200
   Width = 957
   Caption = 'Lapid FlowChort Design Tool'
   ClientHeight = 542
@@ -12,7 +12,7 @@ object FCFM: TFCFM
   Font.Name = 'Tahoma'
   FormStyle = fsStayOnTop
   OnCreate = FormCreate
-  LCLVersion = '1.6.4.0'
+  LCLVersion = '1.6.0.4'
   object Panel2: TPanel
     Left = 0
     Height = 542
@@ -48,13 +48,13 @@ object FCFM: TFCFM
           Top = 1
           Width = 256
           Align = alRight
-          ClientHeight = 518
+          ClientHeight = 532
           ClientWidth = 252
           TabOrder = 0
           object Panel8: TPanel
             Left = 0
             Height = 198
-            Top = 320
+            Top = 334
             Width = 252
             Align = alBottom
             ClientHeight = 198
@@ -67,28 +67,28 @@ object FCFM: TFCFM
               Width = 250
               Align = alBottom
               Caption = '要素配置位置調整'
-              ClientHeight = 103
+              ClientHeight = 108
               ClientWidth = 246
               TabOrder = 0
               object Label1: TLabel
                 Left = 16
-                Height = 13
+                Height = 11
                 Top = 19
-                Width = 12
+                Width = 11
                 Caption = '縦'
                 ParentColor = False
               end
               object Label2: TLabel
                 Left = 16
-                Height = 13
+                Height = 11
                 Top = 35
-                Width = 12
+                Width = 11
                 Caption = '横'
                 ParentColor = False
               end
               object Label3: TLabel
                 Left = 18
-                Height = 13
+                Height = 11
                 Top = 73
                 Width = 20
                 Caption = '高さ'
@@ -96,9 +96,9 @@ object FCFM: TFCFM
               end
               object Label4: TLabel
                 Left = 17
-                Height = 13
+                Height = 11
                 Top = 53
-                Width = 12
+                Width = 11
                 Caption = '幅'
                 ParentColor = False
               end
@@ -144,7 +144,7 @@ object FCFM: TFCFM
               end
               object UpDown1: TUpDown
                 Left = 89
-                Height = 21
+                Height = 27
                 Top = 11
                 Width = 16
                 Associate = ComboBox2
@@ -156,27 +156,27 @@ object FCFM: TFCFM
               end
               object ComboBox2: TComboBox
                 Left = 40
-                Height = 21
+                Height = 27
                 Top = 11
                 Width = 49
-                ItemHeight = 13
+                ItemHeight = 0
                 OnChange = ComboBox2Change
                 OnKeyPress = ComboBox2KeyPress
                 TabOrder = 5
               end
               object ComboBox3: TComboBox
                 Left = 40
-                Height = 21
+                Height = 27
                 Top = 32
                 Width = 49
-                ItemHeight = 13
+                ItemHeight = 0
                 OnChange = ComboBox3Change
                 OnKeyPress = ComboBox2KeyPress
                 TabOrder = 6
               end
               object UpDown2: TUpDown
                 Left = 89
-                Height = 21
+                Height = 27
                 Top = 32
                 Width = 16
                 Associate = ComboBox3
@@ -188,17 +188,17 @@ object FCFM: TFCFM
               end
               object ComboBox5: TComboBox
                 Left = 40
-                Height = 21
+                Height = 27
                 Top = 51
                 Width = 49
-                ItemHeight = 13
+                ItemHeight = 0
                 OnChange = ComboBox5Change
                 OnKeyPress = ComboBox2KeyPress
                 TabOrder = 8
               end
               object UpDown4: TUpDown
                 Left = 89
-                Height = 21
+                Height = 27
                 Top = 51
                 Width = 16
                 Associate = ComboBox5
@@ -210,17 +210,17 @@ object FCFM: TFCFM
               end
               object ComboBox4: TComboBox
                 Left = 40
-                Height = 21
+                Height = 27
                 Top = 70
                 Width = 49
-                ItemHeight = 13
+                ItemHeight = 0
                 OnChange = ComboBox4Change
                 OnKeyPress = ComboBox2KeyPress
                 TabOrder = 10
               end
               object UpDown3: TUpDown
                 Left = 89
-                Height = 21
+                Height = 27
                 Top = 70
                 Width = 16
                 Associate = ComboBox4
@@ -238,15 +238,15 @@ object FCFM: TFCFM
               Width = 250
               Align = alClient
               Caption = '要素追加・設定変更'
-              ClientHeight = 57
+              ClientHeight = 62
               ClientWidth = 246
               TabOrder = 1
               object ComboBox6: TComboBox
                 Left = 4
-                Height = 21
+                Height = 31
                 Top = 0
                 Width = 208
-                ItemHeight = 13
+                ItemHeight = 0
                 OnChange = ComboBox6Change
                 Style = csDropDownList
                 TabOrder = 0
@@ -292,17 +292,17 @@ object FCFM: TFCFM
           end
           object GroupBox8: TGroupBox
             Left = 0
-            Height = 216
+            Height = 230
             Top = 0
             Width = 252
             Align = alClient
             Caption = 'プロジェクト一覧'
-            ClientHeight = 198
+            ClientHeight = 217
             ClientWidth = 248
             TabOrder = 1
             object ListBox1: TListBox
               Left = 0
-              Height = 142
+              Height = 161
               Top = 56
               Width = 248
               Align = alClient
@@ -315,7 +315,9 @@ object FCFM: TFCFM
               OnDblClick = ListBox1DblClick
               ParentFont = False
               PopupMenu = PopupMenu1
+              ScrollWidth = 246
               TabOrder = 0
+              TopIndex = -1
             end
             object Panel5: TPanel
               Left = 0
@@ -366,43 +368,43 @@ object FCFM: TFCFM
               end
               object Label6: TLabel
                 Left = 131
-                Height = 13
+                Height = 11
                 Top = 9
-                Width = 12
+                Width = 11
                 Caption = '縦'
                 ParentColor = False
               end
               object Label7: TLabel
                 Left = 130
-                Height = 13
+                Height = 11
                 Top = 27
-                Width = 12
+                Width = 11
                 Caption = '横'
                 ParentColor = False
               end
               object ComboBox7: TComboBox
                 Left = 168
-                Height = 21
+                Height = 27
                 Top = 4
                 Width = 49
-                ItemHeight = 13
+                ItemHeight = 0
                 OnChange = ComboBox5Change
                 OnKeyPress = ComboBox2KeyPress
                 TabOrder = 2
               end
               object ComboBox8: TComboBox
                 Left = 168
-                Height = 21
+                Height = 27
                 Top = 24
                 Width = 49
-                ItemHeight = 13
+                ItemHeight = 0
                 OnChange = ComboBox4Change
                 OnKeyPress = ComboBox2KeyPress
                 TabOrder = 3
               end
               object UpDown5: TUpDown
                 Left = 217
-                Height = 21
+                Height = 27
                 Top = 24
                 Width = 16
                 Associate = ComboBox8
@@ -414,7 +416,7 @@ object FCFM: TFCFM
               end
               object UpDown6: TUpDown
                 Left = 217
-                Height = 21
+                Height = 27
                 Top = 4
                 Width = 16
                 Associate = ComboBox7
@@ -429,11 +431,11 @@ object FCFM: TFCFM
           object GroupBox3: TGroupBox
             Left = 0
             Height = 104
-            Top = 216
+            Top = 230
             Width = 252
             Align = alBottom
             Caption = '接続線編集'
-            ClientHeight = 86
+            ClientHeight = 91
             ClientWidth = 248
             TabOrder = 2
             object Memo1: TMemo
@@ -473,30 +475,30 @@ object FCFM: TFCFM
             end
             object ComboBox1: TComboBox
               Left = 8
-              Height = 21
+              Height = 31
               Top = 8
               Width = 80
               Enabled = False
-              ItemHeight = 13
+              ItemHeight = 0
               OnChange = ComboBox1Change
               Style = csDropDownList
               TabOrder = 2
             end
             object Label8: TLabel
               Left = 104
-              Height = 13
+              Height = 11
               Top = 16
-              Width = 8
+              Width = 9
               Caption = 'と'
               ParentColor = False
             end
             object ComboBox9: TComboBox
               Left = 128
-              Height = 21
+              Height = 31
               Top = 8
               Width = 80
               Enabled = False
-              ItemHeight = 13
+              ItemHeight = 0
               OnChange = ComboBox9Change
               Style = csDropDownList
               TabOrder = 3
@@ -522,10 +524,10 @@ object FCFM: TFCFM
             end
             object ComboBox10: TComboBox
               Left = 12
-              Height = 21
+              Height = 27
               Top = 49
               Width = 84
-              ItemHeight = 13
+              ItemHeight = 0
               ItemIndex = 0
               Items.Strings = (
                 '青矢印'
@@ -544,19 +546,19 @@ object FCFM: TFCFM
           Width = 695
           Align = alClient
           Caption = 'デザイン'
-          ClientHeight = 518
+          ClientHeight = 523
           ClientWidth = 691
           TabOrder = 1
           object ScrollBox1: TScrollBox
             Left = 0
-            Height = 518
+            Height = 523
             Top = 0
             Width = 691
             HorzScrollBar.Page = 673
             VertScrollBar.Page = 504
             Align = alClient
-            ClientHeight = 514
-            ClientWidth = 687
+            ClientHeight = 521
+            ClientWidth = 689
             TabOrder = 0
             object MeisiForm: TPanel
               Left = -7
@@ -576,7 +578,7 @@ object FCFM: TFCFM
                 Top = 4
                 Width = 153
                 Caption = 'フォーカス'
-                ClientHeight = 82
+                ClientHeight = 87
                 ClientWidth = 149
                 Color = clSilver
                 ParentColor = False

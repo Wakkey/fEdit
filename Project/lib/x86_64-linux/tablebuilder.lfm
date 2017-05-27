@@ -1,11 +1,11 @@
 object Form2: TForm2
-  Left = 474
-  Height = 234
-  Top = 164
+  Left = 406
+  Height = 233
+  Top = 148
   Width = 689
   BorderStyle = bsDialog
   Caption = 'SQL Lite Table Maker　Ver１.00'
-  ClientHeight = 234
+  ClientHeight = 233
   ClientWidth = 689
   Color = clBtnFace
   Font.CharSet = SHIFTJIS_CHARSET
@@ -20,12 +20,12 @@ object Form2: TForm2
   LCLVersion = '1.6.4.0'
   object Panel1: TPanel
     Left = 0
-    Height = 234
+    Height = 233
     Top = 0
     Width = 689
     Align = alClient
     BevelOuter = bvLowered
-    ClientHeight = 234
+    ClientHeight = 233
     ClientWidth = 689
     TabOrder = 0
     OnClick = Panel1Click

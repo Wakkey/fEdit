@@ -1,7 +1,7 @@
 object editform: Teditform
-  Left = 395
+  Left = 635
   Height = 310
-  Top = 418
+  Top = 211
   Width = 524
   Caption = 'editform'
   ClientHeight = 310
@@ -12,8 +12,9 @@ object editform: Teditform
   OnCreate = FormCreate
   OnDockDrop = FormDockDrop
   OnDockOver = FormDockOver
+  OnDropFiles = FormDropFiles
   OnUnDock = FormUnDock
-  LCLVersion = '1.6.0.4'
+  LCLVersion = '1.6.4.0'
   object PageControl1: TPageControl
     Left = 0
     Height = 310
@@ -536,39 +537,40 @@ object editform: Teditform
     end
     object TabSheet2: TTabSheet
       Caption = 'MemoMode'
-      ClientHeight = 271
-      ClientWidth = 518
+      ClientHeight = 282
+      ClientWidth = 516
       object Memo1: TMemo
         Left = 0
-        Height = 271
+        Height = 282
         Top = 0
-        Width = 518
+        Width = 516
         Align = alClient
         ScrollBars = ssVertical
         TabOrder = 0
+        TabStop = False
       end
     end
     object TabSheet3: TTabSheet
       Caption = 'ViewMode'
-      ClientHeight = 275
-      ClientWidth = 518
+      ClientHeight = 282
+      ClientWidth = 516
       object TreeView1: TTreeView
         Left = 0
-        Height = 279
+        Height = 282
         Top = 0
         Width = 516
         Align = alClient
-        DefaultItemHeight = 14
+        DefaultItemHeight = 18
         TabOrder = 0
       end
       object Panel1: TPanel
         Left = 0
-        Height = 279
+        Height = 282
         Top = 0
         Width = 516
         Align = alClient
         Caption = 'Panel1'
-        ClientHeight = 279
+        ClientHeight = 282
         ClientWidth = 516
         TabOrder = 1
         object Panel2: TPanel
@@ -609,98 +611,24 @@ object editform: Teditform
           end
           object Label6: TLabel
             Left = 18
-            Height = 12
+            Height = 15
             Top = 104
-            Width = 45
+            Width = 46
             Caption = 'Port番号'
             ParentColor = False
           end
           object Edit1: TEdit
             Left = 80
-            Height = 26
+            Height = 23
             Top = 103
             Width = 152
             TabOrder = 3
             Text = '3306'
           end
-          object Panel4: TPanel
-            Left = 1
-            Height = 102
-            Top = 1
-            Width = 399
-            Align = alLeft
-            Caption = 'Panel4'
-            ClientHeight = 102
-            ClientWidth = 399
-            TabOrder = 4
-            object Panel5: TPanel
-              Left = 208
-              Height = 100
-              Top = 1
-              Width = 190
-              Align = alRight
-              ClientHeight = 100
-              ClientWidth = 190
-              TabOrder = 0
-              object DirectoryEdit1: TDirectoryEdit
-                Left = 1
-                Height = 33
-                Top = 66
-                Width = 188
-                ShowHidden = False
-                ButtonWidth = 23
-                NumGlyphs = 1
-                Align = alClient
-                MaxLength = 0
-                TabOrder = 0
-              end
-              object Button4: TButton
-                Left = 1
-                Height = 65
-                Top = 1
-                Width = 188
-                Align = alTop
-                Caption = 'ホームフォルダに移動'
-                TabOrder = 1
-              end
-            end
-            object Panel3: TPanel
-              Left = 1
-              Height = 100
-              Top = 1
-              Width = 207
-              Align = alClient
-              Caption = 'Panel3'
-              ClientHeight = 100
-              ClientWidth = 207
-              TabOrder = 1
-              object FileListBox1: TFileListBox
-                Left = 1
-                Height = 72
-                Top = 27
-                Width = 205
-                Align = alClient
-                Directory = 'C:\lazarus'
-                ItemHeight = 0
-                Mask = '*.db3'
-                OnClick = FileListBox1Click
-                OnDblClick = FileListBox1DblClick
-                TabOrder = 0
-              end
-              object Edit2: TEdit
-                Left = 1
-                Height = 26
-                Top = 1
-                Width = 205
-                Align = alTop
-                TabOrder = 1
-              end
-            end
-          end
         end
         object DBGrid1: TDBGrid
           Left = 1
-          Height = 173
+          Height = 176
           Top = 105
           Width = 514
           Align = alClient
@@ -791,5 +719,10 @@ object editform: Teditform
     Params = <>
     left = 128
     top = 101
+  end
+  object MemDataset1: TMemDataset
+    FieldDefs = <>
+    left = 187
+    top = 102
   end
 end

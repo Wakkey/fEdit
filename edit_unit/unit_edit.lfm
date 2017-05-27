@@ -14,7 +14,7 @@ object editform: Teditform
   OnDockOver = FormDockOver
   OnDropFiles = FormDropFiles
   OnUnDock = FormUnDock
-  LCLVersion = '1.6.4.0'
+  LCLVersion = '1.6.0.4'
   object PageControl1: TPageControl
     Left = 0
     Height = 310
@@ -29,13 +29,13 @@ object editform: Teditform
     OnChanging = PageControl1Changing
     object TabSheet1: TTabSheet
       Caption = 'CodeEditMode'
-      ClientHeight = 282
-      ClientWidth = 516
+      ClientHeight = 279
+      ClientWidth = 520
       inline SynEdit1: TSynEdit
         Left = 0
-        Height = 282
+        Height = 279
         Top = 0
-        Width = 516
+        Width = 520
         Align = alClient
         Font.Height = -13
         Font.Name = 'Courier New'
@@ -537,8 +537,8 @@ object editform: Teditform
     end
     object TabSheet2: TTabSheet
       Caption = 'MemoMode'
-      ClientHeight = 282
-      ClientWidth = 516
+      ClientHeight = 279
+      ClientWidth = 520
       object Memo1: TMemo
         Left = 0
         Height = 282
@@ -552,8 +552,8 @@ object editform: Teditform
     end
     object TabSheet3: TTabSheet
       Caption = 'ViewMode'
-      ClientHeight = 282
-      ClientWidth = 516
+      ClientHeight = 279
+      ClientWidth = 520
       object TreeView1: TTreeView
         Left = 0
         Height = 282

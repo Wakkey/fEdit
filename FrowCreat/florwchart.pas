@@ -5,8 +5,8 @@ unit FlorwChart;
 interface
 
 uses
-  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, ComCtrls, StdCtrls, ExtCtrls, FileUtil, shellapi,comobj, Process,
+  Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, ComCtrls, StdCtrls, ExtCtrls, FileUtil, Process,
   lclintf, Menus;
 
 type
@@ -169,6 +169,7 @@ type
     count:integer;
     bmp_base,meisi_base:TBitmap;
     editNo_tmp:integer;
+    dir:string;
   public
     { Public 宣言 }
     compset:TLabel;
@@ -615,7 +616,7 @@ begin
   end;
 
   with FCFM.comp.Items[i] do begin
-      Hint := FCFM.setdir + '\' + savefile;
+      Hint := FCFM.setdir + FCFM.dir + savefile;
       img.top := FCFM.TrackBar1.Position;
       img.Left := FCFM.TrackBar2.Position;
       img.Width := FCFM.TrackBar4.Position;
@@ -643,7 +644,7 @@ end;
 function create_TFC_Comp(savefile:string;i:integer;pnl:TFC_Comp):boolean;
 begin
   with FCFM.comp.Items[i] do begin
-      Hint := FCFM.setdir + '\' + savefile;
+      Hint := FCFM.setdir + FCFM.dir + savefile;
       pnl.top := FCFM.TrackBar1.Position;
       pnl.Left := FCFM.TrackBar2.Position;
       pnl.Width := FCFM.TrackBar4.Position;
@@ -893,7 +894,8 @@ var
   tags:integer;
 begin
   with FCFM.comp.Items[i] do begin
-      Hint := {FCFM.setdir + '\' +} savefile;
+      //showmessage(savefile);
+      Hint := {FCFM.setdir + FCFM.dir +} savefile;
       name := 'y' + inttostr(i);
       {pnl.top := FCFM.TrackBar1.Position;
       pnl.Left := FCFM.TrackBar2.Position;
@@ -993,21 +995,21 @@ begin
 
 end;
 
-function select_comp(s,dir:string;tp,lf,ht,dt:integer):boolean;
+function select_comp(s,dir2:string;tp,lf,ht,dt:integer):boolean;
 begin
   if s = '流れ図' then begin
     create_comp(TFC_comp.Create(FCFM),FCFM.MeisiForm,1,tp,lf,dt,ht);
-    create_TFC_comp(dir + inttostr(FCFM.comp.count div 3),FCFM.comp.Count -1,TFC_comp.Create(FCFM));
+    create_TFC_comp(dir2 + inttostr(FCFM.comp.count div 3),FCFM.comp.Count -1,TFC_comp.Create(FCFM));
     FCFM.ComboBox6.Items.Add(inttostr(FCFM.comp.count div 3) + s);
     FCFM.ComboBox1.Items.Add(inttostr(FCFM.comp.count div 3) + s);
     FCFM.ComboBox9.Items.Add(inttostr(FCFM.comp.count div 3) + s);
   end else if s = '青矢印' then begin
     create_comp(TMemo.Create(FCFM),FCFM.MeisiForm,2,tp,lf,dt,ht);
-    create_memo2( FCFM.setdir + '\' + inttostr(FCFM.ComboBox6.Items.Count +1),FCFM.comp.Count -1,TMemo.Create(FCFM),s,true);
+    create_memo2( {FCFM.setdir + }dir2 + inttostr(FCFM.ComboBox6.Items.Count +1),FCFM.comp.Count -1,TMemo.Create(FCFM),s,true);
     FCFM.ComboBox6.Items.Add(inttostr(FCFM.ComboBox6.Items.Count+1) + s);
   end else if s = '赤矢印' then begin
     create_comp(TMemo.Create(FCFM),FCFM.MeisiForm,3,tp,lf,dt,ht);
-    create_memo2( FCFM.setdir + '\' + inttostr(FCFM.ComboBox6.Items.Count +1),FCFM.comp.Count -1,TMemo.Create(FCFM),s,true);
+    create_memo2( {FCFM.setdir + }dir2 + inttostr(FCFM.ComboBox6.Items.Count +1),FCFM.comp.Count -1,TMemo.Create(FCFM),s,true);
     FCFM.ComboBox6.Items.Add(inttostr(FCFM.ComboBox6.Items.Count+1) + s);
   end;
 end;
@@ -1268,7 +1270,7 @@ begin
     //showmessage(ansitoutf8(ExtractFilePath( Paramstr(0) )) + '名刺サンプル' + '\Meisi.mpr');
     st.SaveToFile((ExtractFilePath( Paramstr(0)) + utf8toansi('サンプル.Label' + '\Meisi.mpr')));
     st.Free;
-    {FCFM.setprjdir := ExtractFilePath( Paramstr(0) ) + '名刺サンプル' + '\';
+    {FCFM.setprjdir := ExtractFilePath( Paramstr(0) ) + '名刺サンプル' + dir;
     loadseting(ExtractFilePath( Paramstr(0) ) + '名刺サンプル' + '\Meisi.mpr');}
     SearchDir := ansitoutf8(ExtractFilePath( Paramstr(0) ));
     EnumFileFromDir(SearchDir);
@@ -1621,26 +1623,8 @@ begin
 end;
 
 procedure TFCFM.ComboBox2KeyPress(Sender: TObject; var Key: Char);
-var
-  i,i1:integer;
 begin
-  //showmessage(inttostr(dwncount));
-  {if key = char(dwncount) then begin
-    dwncount := word(key) * 10;
-  end else begin
-    dwncount := word(key);
-  end;
-  for i := 0 to TComboBox(FCFM.ActiveControl).items.count -1 do begin
-    i1 := ansipos(inttostr(dwncount),TComboBox(FCFM.ActiveControl).items[i]);
-    if 0 < i1 then begin
-      dwncount := i1;
 
-      break
-    end;
-  end;}
-  TComboBox(FCFM.ActiveControl).itemIndex := i;
-  key := chr(0);
-  PostMessage(TComboBox(FCFM.ActiveControl).Handle, CB_SHOWDROPDOWN, 1, 0);
 end;
 
 procedure TFCFM.ComboBox3Change(Sender: TObject);
@@ -1777,6 +1761,15 @@ end;
 procedure TFCFM.FormCreate(Sender: TObject);
 begin
  //createmeomo;
+  {$IFDEF Windows}
+    dir := '\';
+  {$ENDIF}
+  {$IFDEF LINUX}
+   dir := '/';
+  {$ENDIF}
+  {$IFDEF Darwin}
+     dir := '/';
+  {$ENDIF}
   dwncount := 0;
   comp := TCompList.Create;
   comp.clear;
@@ -1816,8 +1809,8 @@ begin
   //resetcomp;
 
   FCFM.MeisiForm.Visible := true;
-  loadfile := ansitoutf8(ExtractFilePath( Paramstr(0) )) + listbox1.Items[listbox1.itemindex] + '\' +'ForwCreate.csv';
-   FCFM.setprjdir := ansitoutf8(ExtractFilePath( Paramstr(0) )) + listbox1.Items[listbox1.itemindex] + '\';
+  loadfile := ansitoutf8(ExtractFilePath( Paramstr(0) )) + listbox1.Items[listbox1.itemindex] + dir +'ForwCreate.csv';
+   FCFM.setprjdir := ansitoutf8(ExtractFilePath( Paramstr(0) )) + listbox1.Items[listbox1.itemindex] + dir;
    s := FCFM.setprjdir;
      s1 := '';
      for i := 0 to length(s)-1 do begin
@@ -1830,7 +1823,7 @@ begin
    memo1.Lines.Clear;
    label5.Caption:= '';
    setMeisiSize;
-   FCFM.setdir := {ExtractFilePath( Paramstr(0) ) +} listbox1.Items[listbox1.itemindex] + '\';
+   FCFM.setdir := {ExtractFilePath( Paramstr(0) ) +} listbox1.Items[listbox1.itemindex] + dir;
    loadSeting(loadfile);
    button3.Enabled:= true;
    listbox1.Enabled:= false;
@@ -2154,9 +2147,10 @@ begin
     try
       if 1 < length(FCFM.comp.Items[i].Hint) then begin
 
-       caption := FCFM.comp.Items[i].Hint;
+       //caption := FCFM.comp.Items[i].Hint;
         //showmessage(ExtractFilePath(Paramstr(0))+(FCFM.comp.Items[i].Hint));
-        m.Lines.LoadFromFile(extractfilepath(paramstr(0))+(FCFM.comp.Items[i].Hint));
+        //showmessage((FCFM.comp.Items[i].Hint));
+        m.Lines.LoadFromFile((FCFM.comp.Items[i].Hint));
         //showmessage(m.Lines.Text);
         if (-1 = FCFM.ComboBox6.Items.IndexOf( m.Lines[1] ) )
         or (-1 = FCFM.ComboBox6.Items.IndexOf( m.Lines[2] ) )
@@ -2166,9 +2160,9 @@ begin
         i1 := FCFM.ComboBox6.Items.IndexOf( m.Lines[1] );
         if -1 < i1 then begin
 
-          if m.Lines[0] = '青矢印' then begin
+          if 0 < ansipos('青矢印',' ' + m.Lines[0]) then begin
             FCFM.MeisiPIc.Canvas.Pen.Color:= clblue;
-          end else if m.Lines[0] = '赤矢印' then begin
+          end else if 0 < ansipos('赤矢印',' ' + m.Lines[0]) then begin
             FCFM.MeisiPIc.Canvas.Pen.Color:= clred;
           end;
           FCFM.MeisiPIc.Canvas.Pen.Width:= 4;
@@ -2384,14 +2378,29 @@ begin
   listbox1.Enabled:= true;
   button3.Enabled:= false;
   if -1 = FCFM.ListBox1.Items.IndexOf(edit1.Text) then begin
+  {$IFDEF Windows}
     s1 := ansitoutf8(ExtractFilePath( Paramstr(0) )) + edit1.Text + '.csv';
+    FCFM.setprjdir := (s1 + dir);
+    FCFM.setdir := ExtractFileName( s1 ) + dir;
+    SearchDir := ansitoutf8(ExtractFilePath( Paramstr(0) ));
+  {$ENDIF}
+  {$IFDEF LINUX}
+    s1 := (ExtractFilePath( Paramstr(0) )) + edit1.Text + '.csv';
+    FCFM.setprjdir := (s1 + dir);
+    FCFM.setdir := ExtractFileName( s1 ) + dir;
+    SearchDir := (ExtractFilePath( Paramstr(0) ));
+  {$ENDIF}
+  {$IFDEF Darwin}
+    s1 := (ExtractFilePath( Paramstr(0) )) + edit1.Text + '.csv';
+    FCFM.setprjdir := (s1 + dir);
+    FCFM.setdir := ExtractFileName( s1 ) + dir;
+    SearchDir := (ExtractFilePath( Paramstr(0) ));
+  {$ENDIF}
+
     CreateDirUTF8((s1));{ *Converted from CreateDir* }
     FCFM.MeisiForm.Width:= strtoint(combobox7.Text);
     FCFM.MeisiForm.Height:=strtoint(combobox8.Text);
     setMeisiSize;
-    FCFM.setprjdir := (s1 + '\');
-    FCFM.setdir := ExtractFileName( s1 ) + '\';
-    SearchDir := ansitoutf8(ExtractFilePath( Paramstr(0) ));
     listbox1.Items.Clear;
     EnumFileFromDir(SearchDir);
     FCFM.comp.Free;
@@ -2400,7 +2409,15 @@ begin
     FCFM.qrcomp.Free;
     FCFM.qrcomp := TcompList.Create;
     FCFM.qrcomp.Clear;
-    saveseting(utf8toansi(FCFM.setprjdir + 'Meisi.mpr'))
+  {$IFDEF Windows}
+    saveseting((FCFM.setprjdir + 'Meisi.mpr'));
+  {$ENDIF}
+  {$IFDEF LINUX}
+   saveseting((FCFM.setprjdir + 'Meisi.mpr'));
+  {$ENDIF}
+  {$IFDEF Darwin}
+     saveseting((FCFM.setprjdir + 'Meisi.mpr'));
+  {$ENDIF}
   end;
 end;
 

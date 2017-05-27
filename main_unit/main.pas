@@ -1120,11 +1120,11 @@ begin
          dir := 'tmp\';
       {$ENDIF}
       {$IFDEF LINUX}
-         functionunit.EnumFileFromDir((fname),st);
+         functionunit.FileFindDir((fname),st);
          dir := 'tmp/';
       {$ENDIF}
       {$IFDEF Darwin}
-         functionunit.EnumFileFromDir((fname),st);
+         functionunit.FileFindDir((fname),st);
          dir := 'tmp/';
       {$ENDIF}
 

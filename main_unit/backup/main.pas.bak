@@ -191,6 +191,7 @@ type
     procedure MenuItem86Click(Sender: TObject);
     procedure MenuItem8Click(Sender: TObject);
     procedure MenuItem90Click(Sender: TObject);
+    procedure MenuItem95Click(Sender: TObject);
     procedure MenuI_UnixShellClick(Sender: TObject);
     procedure MenuWindowTopClick(Sender: TObject);
     procedure Menu_AllCloseClick(Sender: TObject);
@@ -273,7 +274,8 @@ var
 implementation
 
 uses function_unit, unit_edit, colordlg, repraceMacro, macrow, filetype_form,
-  HtmlEdit, TableBuilder, JSONFormEdit, Jsonparse, versiondialog, tmp_clr;
+  HtmlEdit, TableBuilder, JSONFormEdit, Jsonparse, versiondialog, tmp_clr,
+  FlorwChart;
 
 {$R *.lfm}
 
@@ -954,7 +956,7 @@ begin
       st := TStringlist.Create;
       st.Text:= functionunit.editlist.Items[mainform.PageControl1.PageIndex].SynEdit1.Lines.Text;
       functionunit.newwindow();
-      functionunit.editlist.Items[mainform.PageControl1.PageCount-2].MemDataset1.FieldDefs.Add('dir',ftString,500);
+      functionunit.editlist.Items[mainform.PageControl1.PageCount-2].MemDataset1.FieldDefs.Add('dir',ftString,255);
       functionunit.editlist.Items[mainform.PageControl1.PageCount-2].MemDataset1.CreateTable;
       functionunit.editlist.Items[mainform.PageControl1.PageCount-2].MemDataset1.Open;
 
@@ -1091,7 +1093,7 @@ begin
   try
     Json_pars.OpenFile(functionunit.editlist.Items[mainform.PageControl1.PageIndex].filename_path);
   except
-    showmessage('err');
+    showmessage('このタブのファイルはJSONファイルではありません'+char(13)+'JSONファイルを読み込んだタブから開いてください');
   end;
 end;
 
@@ -1154,6 +1156,11 @@ end;
 procedure Tmainform.MenuItem90Click(Sender: TObject);
 begin
   functionunit.macro(sender);
+end;
+
+procedure Tmainform.MenuItem95Click(Sender: TObject);
+begin
+  fcfm.Show;
 end;
 
 procedure Tmainform.MenuI_UnixShellClick(Sender: TObject);
