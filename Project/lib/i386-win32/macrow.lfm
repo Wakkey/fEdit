@@ -1,7 +1,7 @@
 object macro_form: Tmacro_form
-  Left = 349
+  Left = 445
   Height = 216
-  Top = 220
+  Top = 335
   Width = 589
   BorderStyle = bsDialog
   Caption = 'マクロ作成ウインドウ'
@@ -119,6 +119,7 @@ object macro_form: Tmacro_form
           'エクスプローラ起動'
         )
         OnChange = edit2Change
+        OnDropDown = edit2DropDown
         TabOrder = 3
       end
       object Button3: TButton
@@ -159,6 +160,15 @@ object macro_form: Tmacro_form
         )
         TabOrder = 6
       end
+      object Button5: TButton
+        Left = 24
+        Height = 24
+        Top = 120
+        Width = 75
+        Caption = 'マクロ登録'
+        OnClick = Button5Click
+        TabOrder = 7
+      end
     end
     object TabSheet2: TTabSheet
       Caption = '削除'
@@ -192,10 +202,20 @@ object macro_form: Tmacro_form
       end
     end
   end
+  object FileListBox1: TFileListBox
+    Left = 488
+    Height = 80
+    Top = 112
+    Width = 100
+    Directory = 'extractfilepath(paramstr(0))+''macro'''
+    ItemHeight = 0
+    TabOrder = 3
+    Visible = False
+  end
   object OpenDialog1: TOpenDialog
     Filter = 'JavaScript|*.js|HTML|*.html|Css|*.css|XML|*.xml|Java|*.java|C|*.c|C++|*.cpp|C hedder|*.h|C++ hedder|*.hpp|Pascal/Delphi|*.pas|Bat|*.bat|INI|*.ini'
     Options = [ofAllowMultiSelect, ofEnableSizing, ofViewDetail]
-    left = 13
-    top = 32
+    left = 24
+    top = 160
   end
 end

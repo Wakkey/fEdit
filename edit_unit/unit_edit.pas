@@ -110,6 +110,7 @@ begin
   Json_write := TstringList.Create;
   Json_write.clear;
   PageControl1.PageIndex:= 0;
+
 end;
 
 procedure Teditform.FormDockDrop(Sender: TObject; Source: TDragDockObject; X,

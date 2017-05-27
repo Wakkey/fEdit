@@ -6,7 +6,9 @@ interface
 
 uses
   Classes, SysUtils, FileUtil, Forms, Controls, Graphics, Dialogs, StdCtrls,
-  Buttons, ComCtrls;
+  Buttons, ComCtrls, FileCtrl{$IFDEF Windows}
+    ,windows
+  {$ENDIF};
 
 type
 
@@ -19,10 +21,12 @@ type
     Button2: TButton;
     Button3: TButton;
     Button4: TButton;
+    Button5: TButton;
     ComboBox1: TComboBox;
     ComboBox2: TComboBox;
     edit2: TComboBox;
     Edit1: TEdit;
+    FileListBox1: TFileListBox;
     Label1: TLabel;
     Label2: TLabel;
     Label3: TLabel;
@@ -38,7 +42,9 @@ type
     procedure Button2Click(Sender: TObject);
     procedure Button3Click(Sender: TObject);
     procedure Button4Click(Sender: TObject);
+    procedure Button5Click(Sender: TObject);
     procedure edit2Change(Sender: TObject);
+    procedure edit2DropDown(Sender: TObject);
     procedure FormActivate(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure PageControl1Change(Sender: TObject);
@@ -55,7 +61,7 @@ var
 
 implementation
 
-uses function_unit, colordlg;
+uses function_unit, colordlg, main;
 
 { Tmacro_form }
 
@@ -108,9 +114,56 @@ begin
 
 end;
 
+procedure Tmacro_form.Button5Click(Sender: TObject);
+var
+  dir,macro:String;
+begin
+  {$IFDEF Windows}
+    dir := 'macro\';
+  {$ENDIF}
+  {$IFDEF LINUX}
+   dir := 'macro/';
+  {$ENDIF}
+  {$IFDEF Darwin}
+     dir := 'tmacro/';
+  {$ENDIF}
+  ForceDirectories( ExtractFilePath( (Paramstr(0)) )  + dir );
+  //macro := inputbox('マクロ名入力','','');
+  functionunit.newwindow();
+  SetCurrentDir( extractfilepath(Paramstr(0))+dir );
+  //functionunit.editlist.Items[mainform.PageControl1.PageCount-2].SaveDialog1.FileName:=extractfilepath(Paramstr(0))+dir+macro + combobox3.Text;
+  //functionunit.editlist.Items[mainform.PageControl1.PageCount-2].filename_path :=extractfilepath(Paramstr(0))+dir+macro + combobox3.Text;
+  //functionunit.editlist.Items[mainform.PageControl1.PageCount-2].filename:=macro;
+  showmessage('マクロを記述してください');
+  {$IFDEF Windows}
+    ShellExecute(Handle, 'OPEN', pchar(Paramstr(0)),pchar(extractfilepath(Paramstr(0))+dir+macro),'', SW_SHOW);
+
+  {$ENDIF}
+  {$IFDEF LINUX}
+   dir := 'macro/';
+  {$ENDIF}
+  {$IFDEF Darwin}
+     dir := 'tmacro/';
+  {$ENDIF}
+end;
+
 procedure Tmacro_form.edit2Change(Sender: TObject);
 begin
   edit1.Text:= edit2.Text;
+end;
+
+procedure Tmacro_form.edit2DropDown(Sender: TObject);
+var
+  i:integer;
+begin
+  macro_form.FileListBox1.UpdateFileList;
+  edit2.Items.Clear;
+  edit2.Items.Add('コード補完読込');
+  edit2.Items.Add('fEdit起動');
+  edit2.Items.Add('エクスプローラ起動');
+  for i := 0 to macro_form.FileListBox1.Items.Count -1 do begin
+    edit2.Items.Add( macro_form.FileListBox1.Items[i]);
+  end;
 end;
 
 procedure Tmacro_form.FormActivate(Sender: TObject);
@@ -120,6 +173,7 @@ end;
 
 procedure Tmacro_form.FormCreate(Sender: TObject);
 begin
+  macro_form.FileListBox1.Directory := extractfilepath(paramstr(0))+'macro';
   {for i := 0 to MainForm.count -1 do begin
     macro_form.ComboBox1.Items.Add();
   end;}

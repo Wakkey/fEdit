@@ -3,13 +3,13 @@
   <ProjectSession>
     <Version Value="10"/>
     <BuildModes Active="Default"/>
-    <Units Count="26">
+    <Units Count="27">
       <Unit0>
         <Filename Value="fedit.lpr"/>
         <IsPartOfProject Value="True"/>
-        <EditorIndex Value="11"/>
-        <TopLine Value="15"/>
-        <CursorPos X="47" Y="36"/>
+        <IsVisibleTab Value="True"/>
+        <EditorIndex Value="12"/>
+        <CursorPos X="37" Y="13"/>
         <UsageCount Value="202"/>
         <Loaded Value="True"/>
       </Unit0>
@@ -19,9 +19,9 @@
         <ComponentName Value="mainform"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <EditorIndex Value="14"/>
-        <TopLine Value="1089"/>
-        <CursorPos X="38" Y="1094"/>
+        <EditorIndex Value="15"/>
+        <TopLine Value="1147"/>
+        <CursorPos X="13" Y="1163"/>
         <UsageCount Value="202"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
@@ -33,8 +33,8 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <EditorIndex Value="1"/>
-        <TopLine Value="274"/>
-        <CursorPos X="6" Y="282"/>
+        <TopLine Value="103"/>
+        <CursorPos X="3" Y="113"/>
         <UsageCount Value="202"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
@@ -46,8 +46,8 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <EditorIndex Value="5"/>
-        <TopLine Value="5879"/>
-        <CursorPos X="43" Y="5243"/>
+        <TopLine Value="5859"/>
+        <CursorPos X="33" Y="5884"/>
         <UsageCount Value="202"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
@@ -58,7 +58,7 @@
         <ComponentName Value="ToolWindow"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <EditorIndex Value="20"/>
+        <EditorIndex Value="21"/>
         <CursorPos Y="36"/>
         <UsageCount Value="211"/>
         <Loaded Value="True"/>
@@ -82,8 +82,8 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <EditorIndex Value="10"/>
-        <TopLine Value="135"/>
-        <CursorPos X="36" Y="162"/>
+        <TopLine Value="115"/>
+        <CursorPos X="11" Y="140"/>
         <UsageCount Value="207"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
@@ -104,7 +104,7 @@
       <Unit8>
         <Filename Value="../find_unit/function_find.pas"/>
         <IsPartOfProject Value="True"/>
-        <EditorIndex Value="13"/>
+        <EditorIndex Value="14"/>
         <CursorPos X="15" Y="5"/>
         <UsageCount Value="202"/>
         <Loaded Value="True"/>
@@ -116,7 +116,7 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="repraceMacro"/>
-        <EditorIndex Value="18"/>
+        <EditorIndex Value="19"/>
         <TopLine Value="149"/>
         <CursorPos X="7" Y="74"/>
         <UsageCount Value="201"/>
@@ -129,7 +129,7 @@
         <ComponentName Value="openfiletypeform"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <EditorIndex Value="17"/>
+        <EditorIndex Value="18"/>
         <UsageCount Value="209"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
@@ -165,7 +165,7 @@
         <Filename Value="../SQL_unit/sqlpropedit.pas"/>
         <IsPartOfProject Value="True"/>
         <HasResources Value="True"/>
-        <EditorIndex Value="19"/>
+        <EditorIndex Value="20"/>
         <TopLine Value="123"/>
         <CursorPos X="10" Y="43"/>
         <UsageCount Value="200"/>
@@ -233,7 +233,7 @@
         <ComponentName Value="vershon_form"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <EditorIndex Value="16"/>
+        <EditorIndex Value="17"/>
         <TopLine Value="56"/>
         <CursorPos X="19" Y="71"/>
         <UsageCount Value="210"/>
@@ -246,7 +246,7 @@
         <ComponentName Value="tmpClr"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <EditorIndex Value="15"/>
+        <EditorIndex Value="16"/>
         <TopLine Value="61"/>
         <CursorPos X="42" Y="103"/>
         <UsageCount Value="398"/>
@@ -259,8 +259,7 @@
         <ComponentName Value="color_form"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <IsVisibleTab Value="True"/>
-        <EditorIndex Value="12"/>
+        <EditorIndex Value="13"/>
         <TopLine Value="481"/>
         <CursorPos X="5" Y="516"/>
         <UsageCount Value="431"/>
@@ -273,21 +272,21 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="504"/>
         <CursorPos X="11" Y="530"/>
-        <UsageCount Value="7"/>
+        <UsageCount Value="6"/>
       </Unit21>
       <Unit22>
         <Filename Value="/usr/lib/lazarus/1.6/lcl/interfaces/gtk2/gtk2widgetset.inc"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="923"/>
         <CursorPos Y="938"/>
-        <UsageCount Value="8"/>
+        <UsageCount Value="7"/>
       </Unit22>
       <Unit23>
         <Filename Value="../../../lazarus/fpc/3.0.2/source/rtl/win/wininc/ascdef.inc"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="248"/>
         <CursorPos X="20" Y="277"/>
-        <UsageCount Value="8"/>
+        <UsageCount Value="7"/>
       </Unit23>
       <Unit24>
         <Filename Value="../../../lazarus/components/synedit/synedittextbuffer.pp"/>
@@ -295,136 +294,149 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="538"/>
         <CursorPos Y="557"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="9"/>
       </Unit24>
       <Unit25>
         <Filename Value="../../../lazarus/lcl/include/customform.inc"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="2201"/>
         <CursorPos Y="2212"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="9"/>
       </Unit25>
+      <Unit26>
+        <Filename Value="../FrowCreat/florwchart.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="FCFM"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="FlorwChart"/>
+        <EditorIndex Value="11"/>
+        <CursorPos X="10" Y="10"/>
+        <UsageCount Value="25"/>
+        <Loaded Value="True"/>
+        <LoadedDesigner Value="True"/>
+      </Unit26>
     </Units>
     <JumpHistory Count="30" HistoryIndex="29">
       <Position1>
-        <Filename Value="../option_unit/colordlg.pas"/>
-        <Caret Line="209" Column="54" TopLine="169"/>
+        <Filename Value="../function_unit/function_unit.pas"/>
+        <Caret Line="5794" Column="12" TopLine="5748"/>
       </Position1>
       <Position2>
-        <Filename Value="../option_unit/colordlg.pas"/>
-        <Caret Line="180" Column="17" TopLine="163"/>
+        <Filename Value="../function_unit/function_unit.pas"/>
+        <Caret Line="5795" Column="22" TopLine="5749"/>
       </Position2>
       <Position3>
-        <Filename Value="../option_unit/colordlg.pas"/>
-        <Caret Line="181" Column="14" TopLine="163"/>
+        <Filename Value="../function_unit/function_unit.pas"/>
+        <Caret Line="5796" Column="12" TopLine="5750"/>
       </Position3>
       <Position4>
-        <Filename Value="../option_unit/colordlg.pas"/>
-        <Caret Line="180" Column="13" TopLine="153"/>
+        <Filename Value="../function_unit/function_unit.pas"/>
+        <Caret Line="5797" Column="22" TopLine="5751"/>
       </Position4>
       <Position5>
-        <Filename Value="../option_unit/colordlg.pas"/>
-        <Caret Line="234" Column="14" TopLine="212"/>
+        <Filename Value="../function_unit/function_unit.pas"/>
+        <Caret Line="5798" Column="12" TopLine="5752"/>
       </Position5>
       <Position6>
-        <Filename Value="../option_unit/colordlg.pas"/>
-        <Caret Line="264" Column="14" TopLine="239"/>
+        <Filename Value="../function_unit/function_unit.pas"/>
+        <Caret Line="5799" Column="22" TopLine="5753"/>
       </Position6>
       <Position7>
-        <Filename Value="../option_unit/colordlg.pas"/>
-        <Caret Line="365" Column="14" TopLine="340"/>
+        <Filename Value="../function_unit/function_unit.pas"/>
+        <Caret Line="5800" Column="12" TopLine="5754"/>
       </Position7>
       <Position8>
-        <Filename Value="../option_unit/colordlg.pas"/>
-        <Caret Line="387" Column="7" TopLine="365"/>
+        <Filename Value="../function_unit/function_unit.pas"/>
+        <Caret Line="5801" Column="22" TopLine="5755"/>
       </Position8>
       <Position9>
-        <Filename Value="../option_unit/colordlg.pas"/>
-        <Caret Line="1140" Column="14" TopLine="1115"/>
+        <Filename Value="../function_unit/function_unit.pas"/>
+        <Caret Line="5802" Column="12" TopLine="5756"/>
       </Position9>
       <Position10>
-        <Filename Value="../option_unit/colordlg.pas"/>
-        <Caret Line="811" Column="5" TopLine="794"/>
+        <Filename Value="../function_unit/function_unit.pas"/>
+        <Caret Line="5803" Column="22" TopLine="5757"/>
       </Position10>
       <Position11>
-        <Filename Value="../option_unit/colordlg.pas"/>
-        <Caret Line="816" Column="3" TopLine="814"/>
+        <Filename Value="../function_unit/function_unit.pas"/>
+        <Caret Line="5804" Column="12" TopLine="5758"/>
       </Position11>
       <Position12>
-        <Filename Value="../option_unit/colordlg.pas"/>
-        <Caret Line="825" Column="3" TopLine="819"/>
+        <Filename Value="../function_unit/function_unit.pas"/>
+        <Caret Line="5805" Column="22" TopLine="5759"/>
       </Position12>
       <Position13>
-        <Filename Value="../option_unit/colordlg.pas"/>
-        <Caret Line="704" Column="3" TopLine="693"/>
+        <Filename Value="../function_unit/function_unit.pas"/>
+        <Caret Line="5806" Column="12" TopLine="5760"/>
       </Position13>
       <Position14>
-        <Filename Value="../option_unit/colordlg.pas"/>
-        <Caret Line="719" Column="3" TopLine="692"/>
+        <Filename Value="../function_unit/function_unit.pas"/>
+        <Caret Line="5807" Column="22" TopLine="5761"/>
       </Position14>
       <Position15>
-        <Filename Value="../option_unit/colordlg.pas"/>
-        <Caret Line="93" Column="27" TopLine="67"/>
+        <Filename Value="../function_unit/function_unit.pas"/>
+        <Caret Line="5808" Column="12" TopLine="5762"/>
       </Position15>
       <Position16>
-        <Filename Value="../option_unit/colordlg.pas"/>
-        <Caret Line="348" Column="30" TopLine="318"/>
+        <Filename Value="../function_unit/function_unit.pas"/>
+        <Caret Line="5809" Column="22" TopLine="5763"/>
       </Position16>
       <Position17>
-        <Filename Value="../option_unit/colordlg.pas"/>
-        <Caret Line="350" Column="30" TopLine="318"/>
+        <Filename Value="../function_unit/function_unit.pas"/>
+        <Caret Line="5810" Column="12" TopLine="5764"/>
       </Position17>
       <Position18>
         <Filename Value="../function_unit/function_unit.pas"/>
-        <Caret Line="180" Column="26" TopLine="155"/>
+        <Caret Line="5811" Column="22" TopLine="5765"/>
       </Position18>
       <Position19>
         <Filename Value="../function_unit/function_unit.pas"/>
-        <Caret Line="205" Column="33" TopLine="180"/>
+        <Caret Line="5812" Column="12" TopLine="5767"/>
       </Position19>
       <Position20>
         <Filename Value="../function_unit/function_unit.pas"/>
-        <Caret Line="5238" Column="22" TopLine="5205"/>
+        <Caret Line="5813" Column="22" TopLine="5768"/>
       </Position20>
       <Position21>
-        <Filename Value="../option_unit/colordlg.pas"/>
-        <Caret Line="350" Column="30" TopLine="318"/>
+        <Filename Value="../function_unit/function_unit.pas"/>
+        <Caret Line="5814" Column="12" TopLine="5769"/>
       </Position21>
       <Position22>
-        <Filename Value="../option_unit/colordlg.pas"/>
-        <Caret Line="504" Column="28" TopLine="490"/>
+        <Filename Value="../function_unit/function_unit.pas"/>
+        <Caret Line="5816" Column="30" TopLine="5771"/>
       </Position22>
       <Position23>
-        <Filename Value="../option_unit/colordlg.pas"/>
-        <Caret Line="496" TopLine="469"/>
+        <Filename Value="../function_unit/function_unit.pas"/>
+        <Caret Line="5830" Column="16" TopLine="5785"/>
       </Position23>
       <Position24>
-        <Filename Value="../option_unit/colordlg.pas"/>
-        <Caret Line="510" Column="3" TopLine="475"/>
+        <Filename Value="../function_unit/function_unit.pas"/>
+        <Caret Line="5834" Column="29" TopLine="5788"/>
       </Position24>
       <Position25>
-        <Filename Value="../option_unit/colordlg.pas"/>
-        <Caret Line="493" TopLine="475"/>
+        <Filename Value="../macro_unit/macrow.pas"/>
+        <Caret Line="137" Column="16" TopLine="99"/>
       </Position25>
       <Position26>
-        <Filename Value="../option_unit/colordlg.pas"/>
-        <Caret Line="509" Column="4" TopLine="475"/>
+        <Filename Value="../macro_unit/macrow.pas"/>
+        <Caret Line="10" Column="6"/>
       </Position26>
       <Position27>
-        <Filename Value="../option_unit/colordlg.pas"/>
-        <Caret Line="512" Column="24" TopLine="475"/>
+        <Filename Value="../macro_unit/macrow.pas"/>
+        <Caret Line="139" Column="97" TopLine="112"/>
       </Position27>
       <Position28>
-        <Filename Value="../option_unit/colordlg.pas"/>
-        <Caret Line="511" Column="5" TopLine="484"/>
+        <Filename Value="../main_unit/main.pas"/>
+        <Caret Line="1158" Column="3" TopLine="1125"/>
       </Position28>
       <Position29>
-        <Filename Value="../option_unit/colordlg.pas"/>
-        <Caret Line="513" Column="21" TopLine="487"/>
+        <Filename Value="fedit.lpr"/>
+        <Caret Line="37" Column="39" TopLine="5"/>
       </Position29>
       <Position30>
-        <Filename Value="../option_unit/colordlg.pas"/>
-        <Caret Line="510" Column="2" TopLine="478"/>
+        <Filename Value="fedit.lpr"/>
+        <Caret Line="13" Column="29"/>
       </Position30>
     </JumpHistory>
   </ProjectSession>

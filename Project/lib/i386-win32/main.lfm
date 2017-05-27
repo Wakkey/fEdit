@@ -524,6 +524,10 @@ object mainform: Tmainform
         Caption = '高速文書抽出'
         OnClick = MenuItem13Click
       end
+      object MenuItem95: TMenuItem
+        Caption = 'フローチャート作成'
+        OnClick = MenuItem95Click
+      end
       object MenuItem4: TMenuItem
         Caption = 'マクロ言語指定'
       end
@@ -538,9 +542,6 @@ object mainform: Tmainform
       object Menu_MacroRun: TMenuItem
         Caption = '実行'
         OnClick = Menu_MacroRunClick
-      end
-      object MenuItem95: TMenuItem
-        Caption = '-'
       end
     end
     object Menu_Custom: TMenuItem

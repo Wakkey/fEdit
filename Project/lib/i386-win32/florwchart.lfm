@@ -1,0 +1,669 @@
+object FCFM: TFCFM
+  Left = 370
+  Height = 542
+  Top = 258
+  Width = 957
+  Caption = 'Lapid FlowChort Design Tool'
+  ClientHeight = 542
+  ClientWidth = 957
+  Color = clBtnFace
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  FormStyle = fsStayOnTop
+  OnCreate = FormCreate
+  LCLVersion = '1.6.4.0'
+  object Panel2: TPanel
+    Left = 0
+    Height = 542
+    Top = 0
+    Width = 957
+    Align = alClient
+    Caption = 'Panel2'
+    ClientHeight = 542
+    ClientWidth = 957
+    TabOrder = 0
+    object Panel3: TPanel
+      Left = 1
+      Height = 540
+      Top = 1
+      Width = 955
+      Align = alClient
+      Caption = 'Panel2'
+      ClientHeight = 540
+      ClientWidth = 955
+      TabOrder = 0
+      object Panel7: TPanel
+        Left = 1
+        Height = 538
+        Top = 1
+        Width = 953
+        Align = alClient
+        ClientHeight = 538
+        ClientWidth = 953
+        TabOrder = 0
+        object GroupBox5: TGroupBox
+          Left = 696
+          Height = 536
+          Top = 1
+          Width = 256
+          Align = alRight
+          ClientHeight = 518
+          ClientWidth = 252
+          TabOrder = 0
+          object Panel8: TPanel
+            Left = 0
+            Height = 198
+            Top = 320
+            Width = 252
+            Align = alBottom
+            ClientHeight = 198
+            ClientWidth = 252
+            TabOrder = 0
+            object GroupBox1: TGroupBox
+              Left = 1
+              Height = 121
+              Top = 76
+              Width = 250
+              Align = alBottom
+              Caption = '要素配置位置調整'
+              ClientHeight = 103
+              ClientWidth = 246
+              TabOrder = 0
+              object Label1: TLabel
+                Left = 16
+                Height = 13
+                Top = 19
+                Width = 12
+                Caption = '縦'
+                ParentColor = False
+              end
+              object Label2: TLabel
+                Left = 16
+                Height = 13
+                Top = 35
+                Width = 12
+                Caption = '横'
+                ParentColor = False
+              end
+              object Label3: TLabel
+                Left = 18
+                Height = 13
+                Top = 73
+                Width = 20
+                Caption = '高さ'
+                ParentColor = False
+              end
+              object Label4: TLabel
+                Left = 17
+                Height = 13
+                Top = 53
+                Width = 12
+                Caption = '幅'
+                ParentColor = False
+              end
+              object TrackBar1: TTrackBar
+                Left = 107
+                Height = 17
+                Top = 13
+                Width = 128
+                Max = 100
+                OnChange = TrackBar1Change
+                Position = 50
+                TabOrder = 0
+              end
+              object TrackBar2: TTrackBar
+                Left = 107
+                Height = 17
+                Top = 32
+                Width = 128
+                Max = 100
+                OnChange = TrackBar2Change
+                Position = 50
+                TabOrder = 1
+              end
+              object TrackBar4: TTrackBar
+                Left = 107
+                Height = 17
+                Top = 51
+                Width = 128
+                Max = 100
+                OnChange = TrackBar4Change
+                Position = 50
+                TabOrder = 2
+              end
+              object TrackBar3: TTrackBar
+                Left = 107
+                Height = 17
+                Top = 70
+                Width = 128
+                Max = 100
+                OnChange = TrackBar3Change
+                Position = 50
+                TabOrder = 3
+              end
+              object UpDown1: TUpDown
+                Left = 89
+                Height = 21
+                Top = 11
+                Width = 16
+                Associate = ComboBox2
+                Min = 0
+                OnChanging = UpDown1Changing
+                Position = 0
+                TabOrder = 4
+                Wrap = False
+              end
+              object ComboBox2: TComboBox
+                Left = 40
+                Height = 21
+                Top = 11
+                Width = 49
+                ItemHeight = 13
+                OnChange = ComboBox2Change
+                OnKeyPress = ComboBox2KeyPress
+                TabOrder = 5
+              end
+              object ComboBox3: TComboBox
+                Left = 40
+                Height = 21
+                Top = 32
+                Width = 49
+                ItemHeight = 13
+                OnChange = ComboBox3Change
+                OnKeyPress = ComboBox2KeyPress
+                TabOrder = 6
+              end
+              object UpDown2: TUpDown
+                Left = 89
+                Height = 21
+                Top = 32
+                Width = 16
+                Associate = ComboBox3
+                Min = 0
+                OnChanging = UpDown2Changing
+                Position = 0
+                TabOrder = 7
+                Wrap = False
+              end
+              object ComboBox5: TComboBox
+                Left = 40
+                Height = 21
+                Top = 51
+                Width = 49
+                ItemHeight = 13
+                OnChange = ComboBox5Change
+                OnKeyPress = ComboBox2KeyPress
+                TabOrder = 8
+              end
+              object UpDown4: TUpDown
+                Left = 89
+                Height = 21
+                Top = 51
+                Width = 16
+                Associate = ComboBox5
+                Min = 0
+                OnChanging = UpDown4Changing
+                Position = 0
+                TabOrder = 9
+                Wrap = False
+              end
+              object ComboBox4: TComboBox
+                Left = 40
+                Height = 21
+                Top = 70
+                Width = 49
+                ItemHeight = 13
+                OnChange = ComboBox4Change
+                OnKeyPress = ComboBox2KeyPress
+                TabOrder = 10
+              end
+              object UpDown3: TUpDown
+                Left = 89
+                Height = 21
+                Top = 70
+                Width = 16
+                Associate = ComboBox4
+                Min = 0
+                OnChanging = UpDown3Changing
+                Position = 0
+                TabOrder = 11
+                Wrap = False
+              end
+            end
+            object GroupBox2: TGroupBox
+              Left = 1
+              Height = 75
+              Top = 1
+              Width = 250
+              Align = alClient
+              Caption = '要素追加・設定変更'
+              ClientHeight = 57
+              ClientWidth = 246
+              TabOrder = 1
+              object ComboBox6: TComboBox
+                Left = 4
+                Height = 21
+                Top = 0
+                Width = 208
+                ItemHeight = 13
+                OnChange = ComboBox6Change
+                Style = csDropDownList
+                TabOrder = 0
+              end
+              object UpDown: TUpDown
+                Left = 206
+                Height = 20
+                Top = 0
+                Width = 17
+                Min = 0
+                Position = 0
+                TabOrder = 1
+                Wrap = False
+              end
+              object Button5: TButton
+                Left = 148
+                Height = 25
+                Top = 22
+                Width = 75
+                Caption = '削除'
+                OnClick = Button5Click
+                TabOrder = 2
+              end
+              object Button7: TButton
+                Left = 76
+                Height = 25
+                Top = 22
+                Width = 75
+                Caption = '設定反映'
+                OnClick = Button7Click
+                TabOrder = 3
+              end
+              object Button11: TButton
+                Left = 4
+                Height = 25
+                Top = 22
+                Width = 75
+                Caption = '記号追加'
+                OnClick = Button11Click
+                TabOrder = 4
+              end
+            end
+          end
+          object GroupBox8: TGroupBox
+            Left = 0
+            Height = 216
+            Top = 0
+            Width = 252
+            Align = alClient
+            Caption = 'プロジェクト一覧'
+            ClientHeight = 198
+            ClientWidth = 248
+            TabOrder = 1
+            object ListBox1: TListBox
+              Left = 0
+              Height = 142
+              Top = 56
+              Width = 248
+              Align = alClient
+              Font.CharSet = SHIFTJIS_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -12
+              Font.Name = 'ＭＳ Ｐゴシック'
+              ItemHeight = 0
+              OnClick = ListBox1Click
+              OnDblClick = ListBox1DblClick
+              ParentFont = False
+              PopupMenu = PopupMenu1
+              TabOrder = 0
+            end
+            object Panel5: TPanel
+              Left = 0
+              Height = 56
+              Top = 0
+              Width = 248
+              Align = alTop
+              BevelOuter = bvNone
+              ClientHeight = 56
+              ClientWidth = 248
+              TabOrder = 1
+              object Panel6: TPanel
+                Left = 6
+                Height = 26
+                Top = 25
+                Width = 117
+                BevelInner = bvLowered
+                BevelOuter = bvLowered
+                ClientHeight = 26
+                ClientWidth = 117
+                TabOrder = 0
+                object Button12: TButton
+                  Left = 64
+                  Height = 26
+                  Top = -1
+                  Width = 52
+                  Caption = '保存'
+                  OnClick = Button12Click
+                  TabOrder = 0
+                end
+                object Button3: TButton
+                  Left = 0
+                  Height = 26
+                  Top = -1
+                  Width = 64
+                  Caption = '新規'
+                  OnClick = Button3Click
+                  TabOrder = 1
+                end
+              end
+              object Edit1: TEdit
+                Left = 5
+                Height = 21
+                Top = 4
+                Width = 118
+                TabOrder = 1
+                Text = '新規'
+              end
+              object Label6: TLabel
+                Left = 131
+                Height = 13
+                Top = 9
+                Width = 12
+                Caption = '縦'
+                ParentColor = False
+              end
+              object Label7: TLabel
+                Left = 130
+                Height = 13
+                Top = 27
+                Width = 12
+                Caption = '横'
+                ParentColor = False
+              end
+              object ComboBox7: TComboBox
+                Left = 168
+                Height = 21
+                Top = 4
+                Width = 49
+                ItemHeight = 13
+                OnChange = ComboBox5Change
+                OnKeyPress = ComboBox2KeyPress
+                TabOrder = 2
+              end
+              object ComboBox8: TComboBox
+                Left = 168
+                Height = 21
+                Top = 24
+                Width = 49
+                ItemHeight = 13
+                OnChange = ComboBox4Change
+                OnKeyPress = ComboBox2KeyPress
+                TabOrder = 3
+              end
+              object UpDown5: TUpDown
+                Left = 217
+                Height = 21
+                Top = 24
+                Width = 16
+                Associate = ComboBox8
+                Min = 0
+                OnChanging = UpDown3Changing
+                Position = 0
+                TabOrder = 4
+                Wrap = False
+              end
+              object UpDown6: TUpDown
+                Left = 217
+                Height = 21
+                Top = 4
+                Width = 16
+                Associate = ComboBox7
+                Min = 0
+                OnChanging = UpDown4Changing
+                Position = 0
+                TabOrder = 5
+                Wrap = False
+              end
+            end
+          end
+          object GroupBox3: TGroupBox
+            Left = 0
+            Height = 104
+            Top = 216
+            Width = 252
+            Align = alBottom
+            Caption = '接続線編集'
+            ClientHeight = 86
+            ClientWidth = 248
+            TabOrder = 2
+            object Memo1: TMemo
+              Left = 8
+              Height = 1
+              Top = 0
+              Width = 1
+              Lines.Strings = (
+                'T'
+                'e'
+                'x'
+                't'
+              )
+              OnChange = Memo1Change
+              TabOrder = 0
+              Visible = False
+            end
+            object Image1: TImage
+              Left = 8
+              Height = 40
+              Top = 8
+              Width = 40
+              OnClick = Image1Click
+              OnDblClick = Image1DblClick
+              OnMouseDown = Image1MouseDown
+              Visible = False
+            end
+            object Button1: TButton
+              Left = 8
+              Height = 25
+              Top = 0
+              Width = 75
+              Caption = 'Button1'
+              OnClick = Button1Click
+              TabOrder = 1
+              Visible = False
+            end
+            object ComboBox1: TComboBox
+              Left = 8
+              Height = 21
+              Top = 8
+              Width = 80
+              Enabled = False
+              ItemHeight = 13
+              OnChange = ComboBox1Change
+              Style = csDropDownList
+              TabOrder = 2
+            end
+            object Label8: TLabel
+              Left = 104
+              Height = 13
+              Top = 16
+              Width = 8
+              Caption = 'と'
+              ParentColor = False
+            end
+            object ComboBox9: TComboBox
+              Left = 128
+              Height = 21
+              Top = 8
+              Width = 80
+              Enabled = False
+              ItemHeight = 13
+              OnChange = ComboBox9Change
+              Style = csDropDownList
+              TabOrder = 3
+            end
+            object Button2: TButton
+              Left = 112
+              Height = 26
+              Top = 48
+              Width = 56
+              Caption = 'で繋ぐ'
+              Enabled = False
+              OnClick = Button2Click
+              TabOrder = 4
+            end
+            object Button13: TButton
+              Left = 176
+              Height = 25
+              Top = 49
+              Width = 56
+              Caption = '矢印追加'
+              OnClick = Button13Click
+              TabOrder = 5
+            end
+            object ComboBox10: TComboBox
+              Left = 12
+              Height = 21
+              Top = 49
+              Width = 84
+              ItemHeight = 13
+              ItemIndex = 0
+              Items.Strings = (
+                '青矢印'
+                '赤矢印'
+              )
+              Style = csDropDownList
+              TabOrder = 6
+              Text = '青矢印'
+            end
+          end
+        end
+        object GroupBox6: TGroupBox
+          Left = 1
+          Height = 536
+          Top = 1
+          Width = 695
+          Align = alClient
+          Caption = 'デザイン'
+          ClientHeight = 518
+          ClientWidth = 691
+          TabOrder = 1
+          object ScrollBox1: TScrollBox
+            Left = 0
+            Height = 518
+            Top = 0
+            Width = 691
+            HorzScrollBar.Page = 673
+            VertScrollBar.Page = 504
+            Align = alClient
+            ClientHeight = 514
+            ClientWidth = 687
+            TabOrder = 0
+            object MeisiForm: TPanel
+              Left = -7
+              Height = 504
+              Top = 0
+              Width = 680
+              ClientHeight = 504
+              ClientWidth = 680
+              Color = clWhite
+              ParentColor = False
+              TabOrder = 0
+              Visible = False
+              OnClick = MeisiFormClick
+              object setCompIMG: TGroupBox
+                Left = 40
+                Height = 100
+                Top = 4
+                Width = 153
+                Caption = 'フォーカス'
+                ClientHeight = 82
+                ClientWidth = 149
+                Color = clSilver
+                ParentColor = False
+                ParentShowHint = False
+                ShowHint = True
+                TabOrder = 0
+                OnMouseDown = setCompIMGMouseDown
+                OnMouseMove = setCompIMGMouseMove
+                OnMouseUp = setCompIMGMouseUp
+                object waku: TPanel
+                  Left = 0
+                  Height = 84
+                  Top = -8
+                  Width = 144
+                  BevelOuter = bvNone
+                  ClientHeight = 84
+                  ClientWidth = 144
+                  Color = clWhite
+                  ParentColor = False
+                  TabOrder = 0
+                  OnMouseDown = wakuMouseDown
+                  OnMouseMove = wakuMouseMove
+                  OnMouseUp = wakuMouseUp
+                  object Image2: TImage
+                    Left = 0
+                    Height = 84
+                    Top = 0
+                    Width = 144
+                    Align = alClient
+                    OnClick = Image2Click
+                    OnDblClick = Image2DblClick
+                    OnMouseDown = wakuMouseDown
+                    OnMouseMove = wakuMouseMove
+                    OnMouseUp = wakuMouseUp
+                  end
+                  object Label5: TLabel
+                    Left = 0
+                    Height = 84
+                    Top = 0
+                    Width = 144
+                    Align = alClient
+                    AutoSize = False
+                    ParentColor = False
+                    WordWrap = True
+                    OnClick = Label5Click
+                    OnDblClick = Label5DblClick
+                    OnMouseDown = wakuMouseDown
+                    OnMouseMove = wakuMouseMove
+                    OnMouseUp = wakuMouseUp
+                  end
+                end
+              end
+              object MeisiPIc: TImage
+                Left = 1
+                Height = 502
+                Top = 1
+                Width = 678
+                Align = alClient
+                OnPaint = MeisiPIcPaint
+              end
+            end
+          end
+        end
+      end
+    end
+  end
+  object OpenDialog1: TOpenDialog
+    Filter = 'JpegFile|*.jpg;*.jpeg'
+    left = 272
+    top = 104
+  end
+  object FontDialog1: TFontDialog
+    Font.CharSet = SHIFTJIS_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -12
+    Font.Name = 'ＭＳ Ｐゴシック'
+    MinFontSize = 0
+    MaxFontSize = 0
+    left = 304
+    top = 104
+  end
+  object PopupMenu1: TPopupMenu
+    left = 729
+    top = 158
+    object MenuItem1: TMenuItem
+      Caption = '削除'
+      OnClick = MenuItem1Click
+    end
+  end
+end

@@ -7,7 +7,7 @@ interface
 uses
   Classes, SysUtils, FileUtil, SynEdit, Forms, Controls, Graphics, Dialogs,
   Menus, ComCtrls, StdCtrls, ExtCtrls, EditBtn, FileCtrl, DBGrids, sqlite3conn,
-  sqldb, db;
+  sqldb, db, memds;
 
 type
 
@@ -18,14 +18,11 @@ type
     Button1: TButton;
     Button2: TButton;
     Button3: TButton;
-    Button4: TButton;
     DataSource1: TDataSource;
     DBGrid1: TDBGrid;
-    DirectoryEdit1: TDirectoryEdit;
     Edit1: TEdit;
-    Edit2: TEdit;
-    FileListBox1: TFileListBox;
     Label6: TLabel;
+    MemDataset1: TMemDataset;
     Memo1: TMemo;
     MenuItem22: TMenuItem;
     MenuItem23: TMenuItem;
@@ -40,9 +37,6 @@ type
     PageControl1: TPageControl;
     Panel1: TPanel;
     Panel2: TPanel;
-    Panel3: TPanel;
-    Panel4: TPanel;
-    Panel5: TPanel;
     PopupMenu1: TPopupMenu;
     SaveDialog1: TSaveDialog;
     SQLite3Connection1: TSQLite3Connection;
@@ -65,6 +59,7 @@ type
       Y: Integer);
     procedure FormDockOver(Sender: TObject; Source: TDragDockObject; X,
       Y: Integer; State: TDragState; var Accept: Boolean);
+    procedure FormDropFiles(Sender: TObject; const FileNames: array of String);
     procedure FormUnDock(Sender: TObject; Client: TControl;
       NewTarget: TWinControl; var Allow: Boolean);
     procedure MenuItem23Click(Sender: TObject);
@@ -100,7 +95,7 @@ var
 
 implementation
 
-uses function_unit, main, comp, repraceMacro;
+uses function_unit, main, comp, repraceMacro, filetype_form;
 
 {$R *.lfm}
 
@@ -115,6 +110,7 @@ begin
   Json_write := TstringList.Create;
   Json_write.clear;
   PageControl1.PageIndex:= 0;
+  SaveDialog1.Filter := datamodule1.SaveDialog1.Filter;
 end;
 
 procedure Teditform.FormDockDrop(Sender: TObject; Source: TDragDockObject; X,
@@ -127,6 +123,55 @@ procedure Teditform.FormDockOver(Sender: TObject; Source: TDragDockObject; X,
   Y: Integer; State: TDragState; var Accept: Boolean);
 begin
 
+end;
+
+procedure Teditform.FormDropFiles(Sender: TObject;
+  const FileNames: array of String);
+var
+  fname:string;
+  st,s:TStringlist;
+  i,i1:integer;
+begin
+  st:= TStringList.Create;
+  st.Clear;
+  s:= TStringList.Create;
+  s.Clear;
+  for fname in filenames do begin
+      {$IFDEF Windows}
+         functionunit.FileFindDir(ansitoutf8(fname),st);
+      {$ENDIF}
+      {$IFDEF LINUX}
+         functionunit.EnumFileFromDir((fname),st);
+      {$ENDIF}
+      {$IFDEF Darwin}
+         functionunit.EnumFileFromDir((fname),st);
+      {$ENDIF}
+  end;
+  if st.Count > 0 then begin
+    for i1 := 1 to st.count -1 do begin
+      if (-1 = openfiletypeform.CheckGroup1.Items.IndexOf(extractfileext(st[i1]))) then begin
+        openfiletypeform.CheckGroup1.Items.Add(extractfileext(st[i1]));
+      end;
+    end;
+    if openfiletypeform.CheckGroup1.Items.Count > 0 then begin
+      openfiletypeform.ShowModal;
+      for i := 0 to openfiletypeform.CheckGroup1.Items.Count -1 do begin
+          if openfiletypeform.CheckGroup1.Checked[i] then begin
+            s.add( openfiletypeform.CheckGroup1.Items[i] );
+          end;
+      end;
+      for i1 := 0 to st.Count -1 do begin
+         if -1 <> s.IndexOf( extractfileext(st[i1]) ) then begin
+           try
+             functionunit.fileopen(st[i1]);
+           except
+           end;
+         end;
+      end;
+    end;
+  end;
+  s.Free;
+  st.Free;
 end;
 
 procedure Teditform.FormUnDock(Sender: TObject; Client: TControl;
@@ -167,7 +212,7 @@ end;
 
 procedure Teditform.Button1Click(Sender: TObject);
 begin
-  SQLite3Connection1.DatabaseName := filename_path;
+  {SQLite3Connection1.DatabaseName := filename_path;
   SQLite3Connection1.Close; // Ensure the connection is closed when we start
   try
     try
@@ -181,7 +226,7 @@ begin
     end;
   except
     ShowMessage('Unable to check if database file exists');
-  end;
+  end;}
 end;
 
 procedure Teditform.Button2Click(Sender: TObject);
@@ -205,7 +250,7 @@ end;
 
 procedure Teditform.FileListBox1DblClick(Sender: TObject);
 begin
-  sql := FileListBox1.FileName;
+
 end;
 
 procedure Teditform.FormClose(Sender: TObject; var CloseAction: TCloseAction);

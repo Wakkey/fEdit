@@ -7,7 +7,7 @@ interface
 uses
   Classes, SysUtils, FileUtil, Forms, Controls, Graphics, Dialogs, unit_edit,
   ComCtrls, StdCtrls, Menus, ExtDlgs, Process, fpjson, jsonparser, Masks, FileCtrl, Types
-  {$IFDEF WIN32}, shellAPI, WIndows {$ENDIF};
+  {$IFDEF Windows}, shellAPI, WIndows {$ENDIF};
 
 type
   TeditList = class(TList)
@@ -121,7 +121,7 @@ type
     ptoolbar:array[0..100] of TToolbar;
     Edit_arry:array[0..40] of TEdit;
     true_boot:boolean;
-    function load(setfile,setname2:widestring):boolean;
+    function load(dir, setfile,setname2:widestring):boolean;
     function save(dir,setfile,setname1:widestring):boolean;
     function loadmenulist:boolean;
     function mnu_Load():boolean;
@@ -220,7 +220,7 @@ type
     function char_set(SetTab:integer;char_type:string):boolean;
     function str_charsets(i:integer;s:string):string;
     function versionSet(ver:string):boolean;
-    {$IFDEF WIN32}
+    {$IFDEF Windows}
     function winload(i:integer;s:string):boolean;
     function winsave(i:integer;s:widestring;memo:TStringList):boolean;
     function get_window(h:handle):boolean;
@@ -238,7 +238,7 @@ type
     function TempFIle_Clear2(dir,s:string):boolean;
     function TempFIle_Clear3(dir,s:string):boolean;
 
-    function EnumFileFromDir(Dir: string;st:TstringList):boolean;
+    function FileFindDir(Dir: string;st:TstringList):boolean;
     {Edit menu}
     function undo():boolean;
     function redo():boolean;
@@ -309,7 +309,7 @@ type
 
 var
   functionunit: Tfunctionunit;
-  {$IFDEF WIN32}
+  {$IFDEF Windows}
      function load_text(st:pchar):pchar; stdcall; external 'utf.dll';
      function save_text(st:pchar):pchar; stdcall; external 'utf.dll';
      function encod_unicode(s:pchar):integer; stdcall; external 'utf.dll';
@@ -348,7 +348,7 @@ end;
 
 
 
-function Tfunctionunit.load(setfile,setname2:widestring):boolean;
+function Tfunctionunit.load(dir, setfile,setname2:widestring):boolean;
 var
   i,i1,i2,i3,count:integer;
   LIst:TStringList;
@@ -357,7 +357,7 @@ begin
   List := TStringList.Create;
   List.Clear;
   try
-    List.LoadFromFile(utf8tosys(systoutf8( ExtractFilePath( (Paramstr(0)) ) + 'Backupfile\' + setfile )));
+    List.LoadFromFile(utf8tosys(systoutf8( ExtractFilePath( (Paramstr(0)) ) + dir + setfile )));
   finally
     functionunit.deleteAll_edittab();
     try
@@ -379,7 +379,7 @@ begin
           //showmessage(utf8tosys(ExtractFilePath( systoutf8(Paramstr(0)) ) +
             //( IntToStr(i) + setname2)));
           functionunit.editlist.Items[i].Edit.LoadFromFile(utf8tosys(ExtractFilePath( systoutf8(Paramstr(0)) ) +
-            ( IntToStr(i) + 'Backupfile\' + setname2)));
+            (  dir + IntToStr(i) + setname2)));
           //functionunit.memoload(i,utf8tosys(ExtractFilePath( systoutf8(Paramstr(0)) ) +
           //  ( IntToStr(i) + setname2)));
           functionunit.editlist.Items[i].SynEdit1.Lines.Text:=
@@ -436,6 +436,7 @@ begin
     except
     end;
     mainform.PageControl1.Pages[0].Caption := s3;
+    functionunit.editlist.Items[i].SaveDialog1.Filter := datamodule1.SaveDialog1.Filter;
   end;
 end;
 
@@ -1327,8 +1328,8 @@ begin
     end else begin
       exit;
     end;
-    mainform.AllowDropFiles := not true;
-
+    mainform.AllowDropFiles := true;
+    setdialog;
     //functionunit.Filename:= '';
     functionunit.version:= '';
     functionunit.versionSet('0.51');
@@ -1369,7 +1370,7 @@ begin
      except
        //functionunit.frmpsnset;
        inc(i);//err5
-       {$IFDEF Windows}
+      {$IFDEF Windows}
          functionunit.iniread('ini\');
          functionunit.iniwrite('ini\');
       {$ENDIF}
@@ -1409,8 +1410,15 @@ begin
   s.Clear;
   //showmessage(inttostr(ParamCount));
   for I := 0 to ParamCount do begin
-      //functionunit.Run(functionunit.EnumFileFromDir(ansitoutf8(ParamStr(i)),st));
-      functionunit.EnumFileFromDir(ansitoutf8(ParamStr(i)),st)
+      {$IFDEF Windows}
+         functionunit.FileFindDir(ansitoutf8(ParamStr(i)),st);
+      {$ENDIF}
+      {$IFDEF LINUX}
+         functionunit.EnumFileFromDir((ParamStr(i)),st);
+      {$ENDIF}
+      {$IFDEF Darwin}
+         functionunit.EnumFileFromDir((ParamStr(i)),st);
+      {$ENDIF}
   end;
   if st.Count > 0 then begin
     for i1 := 1 to st.count -1 do begin
@@ -1446,6 +1454,9 @@ begin
   except
     showmessage('起動に失敗しました。'+chr(13)+'エラーコード '+inttostr(i));
   end;
+  s.Free;
+  st.Free;
+
 end;
 
 function Tfunctionunit.newwindow():boolean;
@@ -1498,6 +1509,7 @@ begin
     page := mainform.PageControl1.PageIndex;
     mainform.PageControl1.Pages[page].OnClick:= mainform.OnClick;
     mainform.PageControl1.Pages[page].OnUnDock:=mainform.OnUnDock;
+    editlist.Items[tabs].SaveDialog1.Filter:= datamodule1.SaveDialog1.Filter;
   end;
 end;
 
@@ -2811,9 +2823,9 @@ begin
    if -1 < i then begin
      for i1 := 0 to strtoint(st[i+1]) -1 do begin
        //This WIn32Code, Linux is ToolBar not runs
-       {$IFDEF WIN32}if not true_boot then begin{$ENDIF}
+       {$IFDEF Windows}if not true_boot then begin{$ENDIF}
          inc(tabtoolbarcount);
-       {$IFDEF WIN32}end;{$ENDIF}
+       {$IFDEF Windows}end;{$ENDIF}
        functionunit.toolbarbuttoncount2.Add(st[i4 +2]);
        s := st[i4 + 3];
        s1 := '';
@@ -5869,7 +5881,7 @@ begin
      end else begin
        ad1 := macro_param[i1];
      end;
-     {$IFDEF WIN32}
+     {$IFDEF Windows}
           if macro_comand[i1] = 'コード補完読込' then begin
             //functionunit.libopoen2(ad1);
           end else if macro_comand[i1] = 'fEdit起動' then begin
@@ -6104,7 +6116,7 @@ begin
     url3 := functionunit.lun_macro;
     url2 := utf8toansi(codesave);
     url4 := utf8toansi('');
-  {$IFDEF win32}
+  {$IFDEF Windows}
     ShellExecute(Handle, 'OPEN', pchar(url2), '', '', SW_SHOW);
   functionunit.TempFIle_Clear3('tmp\','test.*');
   {$ENDIF}
@@ -6124,7 +6136,7 @@ function Tfunctionunit.macro_run(file_name:string):boolean;
 var
  url:string;
 begin
-  {$IFDEF WIN32}
+  {$IFDEF Windows}
     url := utf8toansi(file_name);
     ShellExecute(Handle, 'OPEN', pchar(url), '', '', SW_SHOW);
   {$ENDIF}
@@ -6139,9 +6151,9 @@ end;
 function Tfunctionunit.macro_runex(file_name:string):boolean;
 var
  url:string;
- {$IFDEF WIN32}ShellEx: TShellExecuteInfo;{$ENDIF}
+ {$IFDEF Windows}ShellEx: TShellExecuteInfo;{$ENDIF}
 begin
-  {$IFDEF WIN32}
+  {$IFDEF Windows}
     url := utf8toansi(file_name);
 
   with ShellEx do begin
@@ -6171,7 +6183,7 @@ function Tfunctionunit.macro_run2(file_name:string):boolean;
 var
  url:string;
 begin
-  {$IFDEF WIN32}
+  {$IFDEF Windows}
     url := utf8toansi(file_name);
     //ShellExecute(Handle, 'open', 'cmd', pchar(url), '', SW_SHOW);
     //if ShellExecute(0,nil, 'open', PChar(url),nil,1) =0 then;
@@ -6311,7 +6323,7 @@ var
   c1,c2:pchar;
   sw:boolean;
 begin
-        {$IFDEF WIN32}
+        {$IFDEF Windows}
             functionunit.winload(i,s);
         {$ENDIF}
         {$IFDEF LINUX}
@@ -6331,7 +6343,7 @@ var
 begin
         //s1 := extractfilepath(paramstr(0))+ 'tmp0.txt';
         //CopyFile(s,s1);
-        {$IFDEF WIN32}
+        {$IFDEF Windows}
              //functionunit.Run(functionunit.memosave(i,s,memo));
              functionunit.winsave(i,s,memo);
         {$ENDIF}
@@ -6354,22 +6366,22 @@ begin
     inc(i);
     {$IFDEF Windows}
          functionunit.iniwrite('ini\');
-         TempFIle_Clear1('tmp\','.ba');
-         TempFIle_Clear2('tmp\','temp3.txt');
+         TempFIle_Clear1('Backupfile\','.ba');
+         TempFIle_Clear2('Backupfile\','temp3.txt');
          functionunit.save('Backupfile\','temp3.txt','.ba');
          functionunit.TempFIle_Clear3('tmp\','test.*');
     {$ENDIF}
     {$IFDEF LINUX}
          functionunit.iniwrite('ini/');
-         TempFIle_Clear1('tmp/','.ba');
-         TempFIle_Clear2('tmp/','temp3.txt');
+         TempFIle_Clear1('Backupfile/','.ba');
+         TempFIle_Clear2('Backupfile/','temp3.txt');
          functionunit.save('Backupfile/','temp3.txt','.ba');
          functionunit.TempFIle_Clear3('tmp/','test.*');
     {$ENDIF}
     {$IFDEF Darwin}
          functionunit.iniwrite('ini/');
-         TempFIle_Clear1('ini/','.ba');
-         TempFIle_Clear2('ini/','temp3.txt');
+         TempFIle_Clear1('Backupfile/','.ba');
+         TempFIle_Clear2('Backupfile/','temp3.txt');
          functionunit.save('Backupfile/','temp3.txt','.ba');
          functionunit.TempFIle_Clear3('tmp/','test.*');
     {$ENDIF}
@@ -6712,7 +6724,7 @@ begin
 end;
 
 
-{$IFDEF WIN32}
+{$IFDEF Windows}
 
 function Tfunctionunit.winload(i:integer;s:string):boolean;
   function load_stream(st1:string;st2:TStringList):boolean;
@@ -7430,7 +7442,7 @@ begin
     functionunit.editlist.Items[i].SynEdit1.SelStart:= i1;
     functionunit.editlist.Items[i].SynEdit1.SelText := data;
   end else if functionunit.editlist.Items[i].PageControl1.ActivePageIndex = 1 then begin
-    {$IFDEF WIN32}
+    {$IFDEF Windows}
     i1 := SendMessage(functionunit.editlist.Items[i].Memo1.Handle, EM_LINEFROMCHAR, functionunit.editlist.Items[i].Memo1.SelStart, 0);
     functionunit.editlist.Items[i].Memo1.SelStart:= i1;
     functionunit.editlist.Items[i].Memo1.SelText := data;
@@ -7611,7 +7623,7 @@ var
         i5 := 0;
       end;
       for i3 := i5 to i1 -1 do begin
-        {$IFDEF WIN32}
+        {$IFDEF Windows}
         i4 := i4 + length(s[i3]) + 2;
         {$ENDIF}
         {$IFDEF Darwin}
@@ -7800,7 +7812,7 @@ begin
       end else begin
         with Memo1 do begin
           //SelStart := SendMessage(RichEdit1.Handle, EM_LINEINDEX, StrToInt(1) - 1, 0);
-                  {$IFDEF WIN32}
+                  {$IFDEF Windows}
                      findsearch := Lines[SendMessage(Handle, EM_LINEINDEX, SelStart, 0)];
                   {$ENDIF}
                   {$IFDEF LINUX}
@@ -7991,7 +8003,7 @@ begin
   url1 := utf8toansi(word);
   if functionunit.editlist.Items[mainform.PageControl1.ActivePageIndex].PageControl1.PageIndex = 1 then
     url3 := '';
-  {$IFDEF WIN32}
+  {$IFDEF Windows}
      ShellExecute(Handle, 'OPEN', pchar(url1 + url2 + ' ' + url3 + url4), '', '', SW_SHOW);
   {$ENDIF}
   {$IFDEF LINUX}
@@ -8063,7 +8075,7 @@ begin
 end;
 
 //フォルダ再帰検索ファイル一覧取得関数
-function Tfunctionunit.EnumFileFromDir(Dir: string;st:TstringList):boolean;
+function Tfunctionunit.FileFindDir(Dir: string;st:TstringList):boolean;
 var
   Rec: TSearchRec;
   function add(d,f:string;st1:TStringList):boolean;
@@ -8089,7 +8101,7 @@ begin
          if Rec.Attr and faDirectory <> 0 then begin
            if (Rec.Name='.') or (Rec.Name='..') then
               Continue;
-              Result :=EnumFileFromDir(Dir + Rec.Name,st);
+              Result :=FileFindDir(Dir + Rec.Name,st);
          end else begin
             add(dir,rec.Name,st);
          end;
