@@ -7724,6 +7724,7 @@ begin
   //getText := TStringList.Create;
   //getText.Clear;
   s.Text:=settext.Text;
+
   i := -1;
   i1 := 0;
   for i1 := 0 to s.Count -1 do begin;

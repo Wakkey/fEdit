@@ -81,9 +81,9 @@ uses function_unit, main, function_find;
 function Tfind_form.find1page(i:integer;find_base,find_output:TStringlist):boolean;
 var
   i1,i2,i3,i4,i5:integer;
-  s:string;
+  s,s1:string;
   sw :boolean;
-  st1,st2,st3:TStringList;
+  st1,st2,st3,st4:TStringList;
 begin
   find_base.Text:= functionunit.editlist.Items[i].Edit.Text;
 
@@ -93,14 +93,25 @@ begin
   st2.Clear;
   st3 := TStringList.Create;
   st3.Clear;
+  st4 := TStringList.Create;
+  st4.Clear;
+  if ChekChar.Checked then begin
+    s1 := (FIndTextAlia.Text);
+    st4.Text := (find_base.Text);
+  end else begin
+    s1 :=  LowerCase(FIndTextAlia.Text);
+    st4.Text := LowerCase(find_base.Text);
+  end;
 
-  functionunit.findtext_test1(FIndTextAlia.Text,find_base,st1,0);
-  functionunit.findtext_test2(FIndTextAlia.Text,find_base,st2,0);
+  functionunit.findtext_test1(s1,st4,st1,0);
+  functionunit.findtext_test2(s1,st4,st2,0);
+
+
   for i1 := 0 to st1.Count -1 do begin
     if (st1[i1] <> '0') or (st2[i1] <> '0') then
       st3.Add(inttostr(strtoint(st2[i1])+1) + '行' + (st1[i1]) + '文字目');
   end;
-  functionunit.findtext(FIndTextAlia.Text,find_base,find_output,0);
+  functionunit.findtext(s1,st4,find_output,0);
   Listbox2.Items.Text:= st3.Text;
   TabControl1.Tabs.Add(
     mainform.PageControl1.Pages[i].Caption
@@ -109,6 +120,7 @@ begin
     st1.Free;
     st2.Free;
     st3.Free;
+    st4.Free;
   //実験開始用フラグ＝true
   sw := not true;
   {if sw then begin
@@ -157,7 +169,8 @@ begin
     st1.Free;
     st2.Free;
     st3.Free;
-  end;}
+    st4.Free;}
+
 end;
 
 function Tfind_form.selselect(Tabs:integer): boolean;

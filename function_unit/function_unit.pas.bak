@@ -1414,10 +1414,10 @@ begin
          functionunit.FileFindDir(ansitoutf8(ParamStr(i)),st);
       {$ENDIF}
       {$IFDEF LINUX}
-         functionunit.EnumFileFromDir((ParamStr(i)),st);
+         functionunit.FileFindDir((ParamStr(i)),st);
       {$ENDIF}
       {$IFDEF Darwin}
-         functionunit.EnumFileFromDir((ParamStr(i)),st);
+         functionunit.FileFindDir((ParamStr(i)),st);
       {$ENDIF}
   end;
   if st.Count > 0 then begin
@@ -6025,11 +6025,20 @@ end;
 
 function codesave:String;
 var
- sorcename,langege:string;
+ sorcename,langege,dir:string;
  sl1,sl2:TStringList;
 begin
-  ForceDirectories( ExtractFilePath( (Paramstr(0)) )  + 'temp\' );
-  sorcename := ExtractFilePath( systoutf8(Paramstr(0)))  + 'temp\' + 'test.';
+  {$IFDEF Windows}
+    dir := 'temp\';
+  {$ENDIF}
+  {$IFDEF LINUX}
+   dir := 'temp/';
+  {$ENDIF}
+  {$IFDEF Darwin}
+     dir := 'temp/';
+  {$ENDIF}
+  ForceDirectories( ExtractFilePath( (Paramstr(0)) )  + dir );
+  sorcename := ExtractFilePath( systoutf8(Paramstr(0)))  + dir + 'test.';
   //ここに、切り取ったソースを保存するコードまたは関数を書く
   sl1 := TStringList.Create;
   sl2 := TStringList.Create;
@@ -7715,6 +7724,7 @@ begin
   //getText := TStringList.Create;
   //getText.Clear;
   s.Text:=settext.Text;
+  showmessage(s.Text);
   i := -1;
   i1 := 0;
   for i1 := 0 to s.Count -1 do begin;

@@ -6,7 +6,7 @@ interface
 
 uses
   Classes, SysUtils, FileUtil, SynEdit, Forms, Controls, Graphics,
-  Dialogs, StdCtrls, Buttons, ExtCtrls{$IFDEF WIN32}, ShellAPI, Windows{$ENDIF};
+  Dialogs, StdCtrls, Buttons, ExtCtrls{$IFDEF Windows}, ShellAPI, Windows{$ENDIF};
 
 type
 
@@ -55,7 +55,7 @@ end;
 
 procedure Tvershon_form.Image1DblClick(Sender: TObject);
 begin
-  {$IFDEF WIN32}
+  {$IFDEF Windows}
      ShellExecute(Handle, 'OPEN', pchar('http://yuhi-it-s.com/'), '', '', SW_SHOW);
   {$ENDIF}
   {$IFDEF Darwin}
@@ -68,7 +68,7 @@ end;
 
 procedure Tvershon_form.Label3Click(Sender: TObject);
 begin
-  {$IFDEF WIN32}
+  {$IFDEF Windows}
      ShellExecute(Handle, 'OPEN', pchar(vershon_form.Label3.Caption), '', '', SW_SHOW);
   {$ENDIF}
   {$IFDEF Darwin}

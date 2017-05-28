@@ -1,7 +1,7 @@
 object tmpClr: TtmpClr
-  Left = 590
+  Left = 750
   Height = 259
-  Top = 193
+  Top = 174
   Width = 194
   Caption = 'tmpClr'
   ClientHeight = 259

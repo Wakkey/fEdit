@@ -129,6 +129,7 @@ type
     procedure ComboBox5Change(Sender: TObject);
     procedure ComboBox4Change(Sender: TObject);
     procedure Memo2DblClick(Sender: TObject);
+    procedure Panel7Click(Sender: TObject);
     procedure Panel8Click(Sender: TObject);
     procedure RadioGroup1Click(Sender: TObject);
     procedure S_TitleChange(Sender: TObject);
@@ -1741,6 +1742,11 @@ begin
   Memo2.Visible:=false;
 
   Button7Click(Sender);
+end;
+
+procedure TJSONEditForm.Panel7Click(Sender: TObject);
+begin
+
 end;
 
 procedure TJSONEditForm.Panel8Click(Sender: TObject);

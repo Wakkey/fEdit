@@ -5,5 +5,5 @@ object functionunit: Tfunctionunit
   Width = 295
   Caption = 'functionunit'
   OnCreate = FormCreate
-  LCLVersion = '1.6.0.4'
+  LCLVersion = '1.6.4.0'
 end

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CONFIG>
   <ProjectSession>
-    <Version Value="9"/>
+    <Version Value="10"/>
     <BuildModes Active="Default"/>
     <Units Count="28">
       <Unit0>
@@ -45,8 +45,8 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <EditorIndex Value="5"/>
-        <TopLine Value="1402"/>
-        <CursorPos X="34" Y="1420"/>
+        <TopLine Value="7666"/>
+        <CursorPos X="38" Y="7679"/>
         <UsageCount Value="202"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
@@ -93,9 +93,10 @@
         <ComponentName Value="find_form"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
+        <IsVisibleTab Value="True"/>
         <EditorIndex Value="2"/>
-        <TopLine Value="450"/>
-        <CursorPos X="18" Y="477"/>
+        <TopLine Value="87"/>
+        <CursorPos X="14" Y="123"/>
         <UsageCount Value="212"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
@@ -104,7 +105,7 @@
         <Filename Value="../find_unit/function_find.pas"/>
         <IsPartOfProject Value="True"/>
         <EditorIndex Value="14"/>
-        <CursorPos X="15" Y="5"/>
+        <CursorPos X="123" Y="10"/>
         <UsageCount Value="202"/>
         <Loaded Value="True"/>
       </Unit8>
@@ -116,7 +117,7 @@
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="repraceMacro"/>
         <EditorIndex Value="19"/>
-        <TopLine Value="149"/>
+        <TopLine Value="113"/>
         <CursorPos X="7" Y="74"/>
         <UsageCount Value="201"/>
         <Loaded Value="True"/>
@@ -206,8 +207,8 @@
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="JSONFormEdit"/>
         <EditorIndex Value="7"/>
-        <TopLine Value="2027"/>
-        <CursorPos X="3" Y="2029"/>
+        <TopLine Value="1747"/>
+        <CursorPos X="3" Y="1749"/>
         <UsageCount Value="206"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
@@ -246,7 +247,7 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <EditorIndex Value="16"/>
-        <TopLine Value="61"/>
+        <TopLine Value="19"/>
         <CursorPos X="42" Y="103"/>
         <UsageCount Value="398"/>
         <Loaded Value="True"/>
@@ -272,11 +273,10 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="FlorwChart"/>
-        <IsVisibleTab Value="True"/>
         <EditorIndex Value="11"/>
-        <TopLine Value="990"/>
-        <CursorPos X="80" Y="994"/>
-        <UsageCount Value="41"/>
+        <TopLine Value="966"/>
+        <CursorPos X="121" Y="976"/>
+        <UsageCount Value="69"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
       </Unit21>
@@ -286,21 +286,21 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="504"/>
         <CursorPos X="11" Y="530"/>
-        <UsageCount Value="4"/>
+        <UsageCount Value="1"/>
       </Unit22>
       <Unit23>
         <Filename Value="/usr/lib/lazarus/1.6/lcl/interfaces/gtk2/gtk2widgetset.inc"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="923"/>
         <CursorPos Y="938"/>
-        <UsageCount Value="5"/>
+        <UsageCount Value="2"/>
       </Unit23>
       <Unit24>
         <Filename Value="../../../lazarus/fpc/3.0.2/source/rtl/win/wininc/ascdef.inc"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="248"/>
         <CursorPos X="20" Y="277"/>
-        <UsageCount Value="5"/>
+        <UsageCount Value="2"/>
       </Unit24>
       <Unit25>
         <Filename Value="../../../lazarus/components/synedit/synedittextbuffer.pp"/>
@@ -308,14 +308,14 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="538"/>
         <CursorPos Y="557"/>
-        <UsageCount Value="7"/>
+        <UsageCount Value="4"/>
       </Unit25>
       <Unit26>
         <Filename Value="../../../lazarus/lcl/include/customform.inc"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="2201"/>
         <CursorPos Y="2212"/>
-        <UsageCount Value="7"/>
+        <UsageCount Value="4"/>
       </Unit26>
       <Unit27>
         <Filename Value="/usr/lib/lazarus/1.6/components/lazutils/lazutf8classes.pas"/>
@@ -323,129 +323,129 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="126"/>
         <CursorPos Y="143"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="7"/>
       </Unit27>
     </Units>
     <JumpHistory Count="30" HistoryIndex="29">
       <Position1>
-        <Filename Value="../FrowCreat/florwchart.pas"/>
-        <Caret Line="934" TopLine="905"/>
+        <Filename Value="../find_unit/find_unit.pas"/>
+        <Caret Line="98" TopLine="70"/>
       </Position1>
       <Position2>
-        <Filename Value="../FrowCreat/florwchart.pas"/>
-        <Caret Line="2152" TopLine="2140"/>
+        <Filename Value="../function_unit/function_unit.pas"/>
+        <Caret Line="259" Column="28" TopLine="234"/>
       </Position2>
       <Position3>
-        <Filename Value="../FrowCreat/florwchart.pas"/>
-        <Caret Line="1805" Column="3" TopLine="1809"/>
+        <Filename Value="../function_unit/function_unit.pas"/>
+        <Caret Line="7729" TopLine="7688"/>
       </Position3>
       <Position4>
-        <Filename Value="../FrowCreat/florwchart.pas"/>
-        <Caret Line="1017" Column="10" TopLine="1058"/>
+        <Filename Value="../function_unit/function_unit.pas"/>
+        <Caret Line="7723" TopLine="7688"/>
       </Position4>
       <Position5>
-        <Filename Value="../FrowCreat/florwchart.pas"/>
-        <Caret Line="647" Column="39" TopLine="661"/>
+        <Filename Value="../function_unit/function_unit.pas"/>
+        <Caret Line="7726" TopLine="7685"/>
       </Position5>
       <Position6>
-        <Filename Value="../FrowCreat/florwchart.pas"/>
-        <Caret Line="1805" Column="3" TopLine="1804"/>
+        <Filename Value="../function_unit/function_unit.pas"/>
+        <Caret Line="7618" Column="16" TopLine="7593"/>
       </Position6>
       <Position7>
-        <Filename Value="../FrowCreat/florwchart.pas"/>
-        <Caret Line="1017" Column="10" TopLine="1069"/>
+        <Filename Value="../function_unit/function_unit.pas"/>
+        <Caret Line="7620" TopLine="7593"/>
       </Position7>
       <Position8>
-        <Filename Value="../FrowCreat/florwchart.pas"/>
-        <Caret Line="897" TopLine="889"/>
+        <Filename Value="../find_unit/find_unit.pas"/>
+        <Caret Line="95" Column="37" TopLine="70"/>
       </Position8>
       <Position9>
-        <Filename Value="../FrowCreat/florwchart.pas"/>
-        <Caret Line="1806" Column="3" TopLine="1801"/>
+        <Filename Value="../find_unit/find_unit.pas"/>
+        <Caret Line="405" Column="3" TopLine="401"/>
       </Position9>
       <Position10>
-        <Filename Value="../FrowCreat/florwchart.pas"/>
-        <Caret Line="1018" Column="10" TopLine="1068"/>
+        <Filename Value="../find_unit/find_unit.pas"/>
+        <Caret Line="63" Column="23" TopLine="37"/>
       </Position10>
       <Position11>
-        <Filename Value="../FrowCreat/florwchart.pas"/>
-        <Caret Line="897" TopLine="849"/>
+        <Filename Value="../find_unit/find_unit.pas"/>
+        <Caret Line="96" Column="3" TopLine="75"/>
       </Position11>
       <Position12>
-        <Filename Value="../FrowCreat/florwchart.pas"/>
-        <Caret Line="1806" Column="3" TopLine="1810"/>
+        <Filename Value="../function_unit/function_unit.pas"/>
+        <Caret Line="259" Column="28" TopLine="234"/>
       </Position12>
       <Position13>
-        <Filename Value="../FrowCreat/florwchart.pas"/>
-        <Caret Line="1086" TopLine="1072"/>
+        <Filename Value="../find_unit/find_unit.pas"/>
+        <Caret Line="96" Column="3" TopLine="75"/>
       </Position13>
       <Position14>
-        <Filename Value="../FrowCreat/florwchart.pas"/>
-        <Caret Line="1314" Column="7" TopLine="1310"/>
+        <Filename Value="../find_unit/find_unit.pas"/>
+        <Caret Line="404" Column="3" TopLine="400"/>
       </Position14>
       <Position15>
-        <Filename Value="../FrowCreat/florwchart.pas"/>
-        <Caret Line="997" Column="30" TopLine="991"/>
+        <Filename Value="../find_unit/find_unit.pas"/>
+        <Caret Line="63" Column="23" TopLine="46"/>
       </Position15>
       <Position16>
-        <Filename Value="../FrowCreat/florwchart.pas"/>
-        <Caret Line="2355" Column="3" TopLine="2351"/>
+        <Filename Value="../JSON_unit/jsonformedit.pas"/>
+        <Caret Line="2058" Column="115" TopLine="2033"/>
       </Position16>
       <Position17>
-        <Filename Value="../FrowCreat/florwchart.pas"/>
-        <Caret Line="1314" Column="7" TopLine="1310"/>
+        <Filename Value="../find_unit/find_unit.pas"/>
+        <Caret Line="99" Column="11" TopLine="79"/>
       </Position17>
       <Position18>
-        <Filename Value="../FrowCreat/florwchart.pas"/>
-        <Caret Line="1008" TopLine="991"/>
+        <Filename Value="../find_unit/find_unit.pas"/>
+        <Caret Line="98" Column="10" TopLine="84"/>
       </Position18>
       <Position19>
-        <Filename Value="../FrowCreat/florwchart.pas"/>
-        <Caret Line="1007" TopLine="991"/>
+        <Filename Value="../find_unit/find_unit.pas"/>
+        <Caret Line="99" TopLine="84"/>
       </Position19>
       <Position20>
-        <Filename Value="../FrowCreat/florwchart.pas"/>
-        <Caret Line="1008" TopLine="991"/>
+        <Filename Value="../find_unit/find_unit.pas"/>
+        <Caret Line="100" TopLine="84"/>
       </Position20>
       <Position21>
-        <Filename Value="../FrowCreat/florwchart.pas"/>
-        <Caret Line="899" TopLine="876"/>
+        <Filename Value="../find_unit/find_unit.pas"/>
+        <Caret Line="106" TopLine="84"/>
       </Position21>
       <Position22>
-        <Filename Value="../FrowCreat/florwchart.pas"/>
-        <Caret Line="898" TopLine="876"/>
+        <Filename Value="../find_unit/find_unit.pas"/>
+        <Caret Line="102" TopLine="84"/>
       </Position22>
       <Position23>
-        <Filename Value="../FrowCreat/florwchart.pas"/>
-        <Caret Line="899" TopLine="876"/>
+        <Filename Value="../find_unit/find_unit.pas"/>
+        <Caret Line="103" TopLine="84"/>
       </Position23>
       <Position24>
-        <Filename Value="../FrowCreat/florwchart.pas"/>
-        <Caret Line="2153" Column="30" TopLine="2141"/>
+        <Filename Value="../find_unit/find_unit.pas"/>
+        <Caret Line="88" Column="41" TopLine="84"/>
       </Position24>
       <Position25>
-        <Filename Value="../FrowCreat/florwchart.pas"/>
-        <Caret Line="1006" TopLine="989"/>
+        <Filename Value="../find_unit/find_unit.pas"/>
+        <Caret Line="596" Column="3" TopLine="585"/>
       </Position25>
       <Position26>
-        <Filename Value="../FrowCreat/florwchart.pas"/>
-        <Caret Line="1007" TopLine="989"/>
+        <Filename Value="../find_unit/find_unit.pas"/>
+        <Caret Line="66" Column="23" TopLine="49"/>
       </Position26>
       <Position27>
-        <Filename Value="../FrowCreat/florwchart.pas"/>
-        <Caret Line="1008" TopLine="989"/>
+        <Filename Value="../find_unit/find_unit.pas"/>
+        <Caret Line="174" Column="30" TopLine="172"/>
       </Position27>
       <Position28>
-        <Filename Value="../FrowCreat/florwchart.pas"/>
-        <Caret Line="2165" Column="39" TopLine="2147"/>
+        <Filename Value="../find_unit/find_unit.pas"/>
+        <Caret Line="413" Column="3" TopLine="409"/>
       </Position28>
       <Position29>
-        <Filename Value="../FrowCreat/florwchart.pas"/>
-        <Caret Line="1006" TopLine="989"/>
+        <Filename Value="../find_unit/find_unit.pas"/>
+        <Caret Line="63" Column="23" TopLine="46"/>
       </Position29>
       <Position30>
-        <Filename Value="../FrowCreat/florwchart.pas"/>
-        <Caret Line="1007" TopLine="989"/>
+        <Filename Value="../find_unit/find_unit.pas"/>
+        <Caret Line="171" Column="14" TopLine="128"/>
       </Position30>
     </JumpHistory>
   </ProjectSession>

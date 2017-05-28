@@ -1,7 +1,7 @@
 object vershon_form: Tvershon_form
-  Left = 357
+  Left = 490
   Height = 348
-  Top = 304
+  Top = 302
   Width = 447
   BorderStyle = bsDialog
   Caption = 'バージョン情報'
