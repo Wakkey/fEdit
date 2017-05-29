@@ -82,6 +82,7 @@ type
     GroupBox6: TGroupBox;
     Panel8: TPanel;
     PopupMenu1: TPopupMenu;
+    SaveDialog1: TSaveDialog;
     ScrollBox1: TScrollBox;
     setCompIMG: TGroupBox;
     TrackBar1: TTrackBar;
@@ -135,6 +136,7 @@ type
     procedure ComboBox4Change(Sender: TObject);
     procedure Memo2DblClick(Sender: TObject);
     procedure MenuItem1Click(Sender: TObject);
+    procedure Panel5Click(Sender: TObject);
     procedure Panel8Click(Sender: TObject);
     procedure TrackBar1Change(Sender: TObject);
     procedure TrackBar2Change(Sender: TObject);
@@ -192,10 +194,12 @@ type
     setwidth,setheight:integer;
 
     ary_TFC_Comp:array [0..255] of TFC_Comp;
-    count_tec_comp:integer;
+    count_tec_comp,count_prt:integer;
     //function printPIC(pagenum:integer;filename:string):boolean;
     function resetprot:boolean;
     function print():boolean;
+    function write_canvas(i:integer):boolean;
+    function write_line(i:integer):boolean;
   end;
 
 var
@@ -1161,6 +1165,7 @@ begin
     FCFM.MeisiForm.Width:= strtoint(sl[0]);
     FCFM.MeisiForm.Height:= strtoint(sl[1]);
     count := strtoint(sl[2]) +1;
+    fcfm.count_prt:= count;
     B.Canvas.Create;
     B.Width := FCFM.MeisiPIc.Width;
     B.Height := FCFM.MeisiPIc.Height;
@@ -1331,11 +1336,344 @@ end;
 
 
 
+function TFcfm.write_canvas(i:integer):boolean;
+var
+  i1,i2,img_No,ct,cl,cw,ch,ch0,cw0,cw1:integer;
+  st:TStringList;
+  J:TJPegImage;
+begin
+  try
+  {with FCFM.comp.Items[i] do begin
+      Hint := FCFM.setdir + FCFM.dir + savefile;
+      pnl.top := FCFM.TrackBar1.Position;
+      pnl.Left := FCFM.TrackBar2.Position;
+      pnl.Width := FCFM.TrackBar4.Position;
+      pnl.Height := FCFM.TrackBar3.Position;
+      pnl.Visible := true;
+      pnl.Parent := Parent;
+  end;
+  //if loadPIC then begin
+    try
+        FCFM.comp.Items[i].Visible:= false;
+
+        meisi_base:= Timage.Create(pnl);
+        meisi_base.Parent := pnl;
+        meisi_base.Name:= 'i' + inttostr(i+1);
+        meisi_base.Align:= alleft;
+        pnl.img_No:=0;
+        meisi_base.Width:= 60;
+        meisi_base.Canvas.Brush.Color:= clWhite;
+        meisi_base.Canvas.Clear;
+        meisi_base.Canvas.Rectangle(0,0,meisi_base.Width,meisi_base.Height);
+        meisi_base.Canvas.Pen.Color:= clblack;
+        meisi_base.Canvas.Pen.Width:=2;
+        meisi_base.Canvas.TextOut(cl + 2,ct + 2,'処理');
+        meisi_base.Canvas.Rectangle(5,ch div 2,45,(ch div 2)+20);
+        meisi_base.OnClick:= FCFM.Image1.OnClick;
+        meisi_base.OndblClick:= FCFM.Image1.OndblClick;
+        FCFM.comp.Add(meisi_base);
+
+        pnl.TLB:= TLabel.Create(pnl);
+        pnl.TLB.Parent := pnl;
+        pnl.TLB.Name:= 'l' + inttostr(i+2);
+        pnl.TLB.Align:= alClient;
+        pnl.TLB.WordWrap:= True;
+        pnl.TLB.Caption:= FCFM.Memo1.Lines.Text;
+        pnl.TLB.OnClick:= FCFM.Image1.OnClick;
+        pnl.TLB.OndblClick:= FCFM.Image1.OndblClick;
+        FCFM.comp.Add(pnl.TLB);
+
+            pnl.TBtn := TButton.Create(FCFM);
+            pnl.TBtn.Parent := pnl;
+            pnl.TBtn.Align:= alTop;
+            pnl.TBtn.Visible := not true;
+            pnl.TBtn.Caption:= '保存';
+            pnl.TBtn.OnClick := FCFM.Button1Click;
+
+            pnl.TMem := TMemo.Create(FCFM);
+            pnl.TMem.Parent := pnl;
+            pnl.TMem.Align:= alclient;
+            try
+              pnl.TMem.Lines.LoadFromFile( FCFM.setprjdir + inttostr(i div 3) + 'm');
+              pnl.TLB.Caption:= pnl.TMem.Lines.Text;
+            except
+
+            end;
+            pnl.TMem.Visible := not true;
+           }
+        try
+          try
+           st := TStringList.Create;
+           st.LoadFromFile(setprjdir + inttostr(i)+ '_No');
+           img_No:= strtoint(st[0]);
+           st.Free;
+          except
+            img_No := 0;
+          end;
+
+         ct := ary_TFC_Comp[i].top;
+         cl := ary_TFC_Comp[i].left;
+         cw := ary_TFC_Comp[i].TIM.Left + ary_TFC_Comp[i].TIM.width;
+         cw0 := ary_TFC_Comp[i].left + ary_TFC_Comp[i].width;
+         cw1 := ary_TFC_Comp[i].left + ary_TFC_Comp[i].TIM.Width;
+         ch0 := ary_TFC_Comp[i].top + ary_TFC_Comp[i].height;
+         ch := ary_TFC_Comp[i].TIM.Top + ary_TFC_Comp[i].TIM.height;
+
+
+
+         //FCFM.Image1DblClick( meisi_base );
+            meisi_base.Canvas.Brush.Color:= clWhite;
+            //meisi_base.Canvas.Clear;
+            //meisi_base.Canvas.Rectangle(cl,ct,cw,ch0);
+            meisi_base.Canvas.Rectangle(cl,ct,cw0,ch0);
+            //meisi_base.Canvas.Rectangle(cl,ct,ary_TFC_Comp[i].TIM.Width,ch0);
+            meisi_base.Canvas.Pen.Color:= clblack;
+            meisi_base.Canvas.Pen.Width:=2;
 
 
 
 
 
+         try
+             st := TStringList.Create;
+             i2 := 0;
+             st.LoadFromFile( setprjdir + inttostr(i) + 'm');
+             for I1 := 0 to st.Count - 1 do begin
+               meisi_base.Canvas.TextOut(cw1,ct+ i2+2 ,st[i1]);
+               i2 := i2 + meisi_base.Canvas.TextHeight(st[i1]);
+             end;
+             st.Free;
+          except
+
+          end;
+
+
+
+
+
+            case img_No of
+               0: begin
+                  meisi_base.Canvas.Rectangle(cl + 5,(ch0 -(ch div 2)),cl + 45,(ch0 -(ch div 2))+20);
+                  meisi_base.Canvas.TextOut(cl + 2,ct + 2,'処理');
+               end;
+               1: begin
+                    meisi_base.Canvas.TextOut(cl + 2,ct + 2,'判断');
+                    with meisi_base.Canvas do begin
+                         MoveTo(cl+15,(ch0 -(ch div 2))+5);
+                         LineTo(cl+5,(ch0  -(ch div 2))+15);
+                         LineTo(cl+15,(ch0  -(ch div 2))+25);
+                         LineTo(cl+25,(ch0  -(ch div 2))+15);
+                         LineTo(cl+15,(ch0  -(ch div 2))+5);
+                   end;
+               end;
+               2: begin
+                   meisi_base.Canvas.TextOut(cl + 2,ct + 2,'定義済');
+                   meisi_base.Canvas.TextOut(cl + 2,ct +20,'処理');
+                   meisi_base.Canvas.Rectangle(cl +5,(ch0 -(ch div 2)),cl +45,(ch0 -(ch div 2))+20);
+                   meisi_base.Canvas.Rectangle(cl +15,(ch0 -(ch div 2)),cl +35,(ch0 -(ch div 2))+20);
+               end;
+               3: begin
+                   meisi_base.Canvas.TextOut(cl + 2,ct + 2,'手作業');
+                   with meisi_base.Canvas do begin
+                       MoveTo(cl+5,(ch0 -(ch div 2))+5);
+                       LineTo(cl+35,(ch0 -(ch div 2))+5);
+                       LineTo(cl+30,(ch0 -(ch div 2))+15);
+                       LineTo(cl+10,(ch0 -(ch div 2))+15);
+                       LineTo(cl+5,(ch0 -(ch div 2))+5);
+                   end;
+               end;
+               4: begin
+                   meisi_base.Canvas.TextOut(cl + 2,ct + 2,'組合わせ');
+                   with meisi_base.Canvas do begin
+                       MoveTo(cl+5,(ch0 -(ch div 2))+5);
+                       LineTo(cl+35,(ch0 -(ch div 2))+5);
+                       LineTo(cl+20,(ch0 -(ch div 2))+15);
+                       LineTo(cl+20,(ch0 -(ch div 2))+15);
+                       LineTo(cl+5,(ch0 -(ch div 2))+5);
+                   end;
+               end;
+               5: begin
+                   meisi_base.Canvas.TextOut(cl + 2,ct + 2,'抜出');
+                   with meisi_base.Canvas do begin
+                       MoveTo(cl+25,(ch0 -(ch div 2))+5);
+                       LineTo(cl+25,(ch0 -(ch div 2))+5);
+                       LineTo(cl+40,(ch0 -(ch div 2))+15);
+                       LineTo(cl+10,(ch0 -(ch div 2))+15);
+                       LineTo(cl+25,(ch0 -(ch div 2))+5);
+                   end;
+               end;
+               6: begin
+                   meisi_base.Canvas.TextOut(cl + 2,ct + 2,'照合');
+                   with meisi_base.Canvas do begin
+                       MoveTo(cl+5,(ch0 -(ch div 2))+5);
+                       LineTo(cl+35,(ch0 -(ch div 2))+5);
+                       LineTo(cl+20,(ch0 -(ch div 2))+15);
+                       LineTo(cl+20,(ch0 -(ch div 2))+15);
+                       LineTo(cl+5,(ch0 -(ch div 2))+5);
+
+                       MoveTo(cl+20,(ch0 -(ch div 2))+15);
+                       LineTo(cl+20,(ch0 -(ch div 2))+15);
+                       LineTo(cl+35,(ch0 -(ch div 2))+25);
+                       LineTo(cl+5,(ch0 -(ch div 2))+25);
+                       LineTo(cl+20,(ch0 -(ch div 2))+15);
+                   end;
+               end;
+              7: begin
+                   meisi_base.Canvas.TextOut(cl + 2,ct + 2,'分類');
+                   with meisi_base.Canvas do begin
+                       MoveTo(cl+20,(ch0 -(ch div 2))+5);
+                       LineTo(cl+20,(ch0 -(ch div 2))+5);
+                       LineTo(cl+35,(ch0 -(ch div 2))+15);
+                       LineTo(cl+5,(ch0 -(ch div 2))+15);
+                       LineTo(cl+20,(ch0 -(ch div 2))+5);
+
+                       MoveTo(cl+5,(ch0 -(ch div 2))+15);
+                       LineTo(cl+35,(ch0 -(ch div 2))+15);
+                       LineTo(cl+20,(ch0 -(ch div 2))+25);
+                       LineTo(cl+20,(ch0 -(ch div 2))+25);
+                       LineTo(cl+5,(ch0 -(ch div 2))+15);
+                   end;
+               end;
+               8: begin
+                   meisi_base.Canvas.TextOut(cl + 2,ct + 2,'手操作');
+                   meisi_base.Canvas.TextOut(cl + 2,ct +20,'入力');
+                   with meisi_base.Canvas do begin
+                       MoveTo(cl+5,(ch0 -(ch div 2))+8);
+                       LineTo(cl+35,(ch0 -(ch div 2))+5);
+                       LineTo(cl+35,(ch0 -(ch div 2))+15);
+                       LineTo(cl+5,(ch0 -(ch div 2))+15);
+                       LineTo(cl+5,(ch0 -(ch div 2))+8);
+                   end;
+               end;
+               9: begin
+                   meisi_base.Canvas.TextOut(cl + 2,ct + 2,'入出力');
+                   with meisi_base.Canvas do begin
+                       MoveTo(cl+10,(ch0 -(ch div 2))+5);
+                       LineTo(cl+35,(ch0 -(ch div 2))+5);
+                       LineTo(cl+30,(ch0 -(ch div 2))+15);
+                       LineTo(cl+5,(ch0 -(ch div 2))+15);
+                       LineTo(cl+10,(ch0 -(ch div 2))+5);
+                   end;
+               end;
+              10: begin
+                   meisi_base.Canvas.TextOut(cl + 2,ct + 2,'オンライン');
+                   meisi_base.Canvas.TextOut(cl + 2,ct +20,'記録');
+                   with meisi_base.Canvas do begin
+                       MoveTo(cl+15,(ch0 -(ch div 2))+5);
+                       LineTo(cl+35,(ch0 -(ch div 2))+5);
+                       LineTo(cl+30,(ch0 -(ch div 2))+10);
+                       LineTo(cl+35,(ch0 -(ch div 2))+15);
+                       LineTo(cl+15,(ch0 -(ch div 2))+15);
+                       LineTo(cl+10,(ch0 -(ch div 2))+10);
+                       LineTo(cl+15,(ch0 -(ch div 2))+5);
+                   end;
+               end;
+              11: begin
+                   meisi_base.Canvas.TextOut(cl + 2,ct + 2,'書類');
+                   with meisi_base.Canvas do begin
+                       MoveTo(cl+10,(ch0 -(ch div 2))+5);
+                       LineTo(cl+35,(ch0 -(ch div 2))+5);
+                       LineTo(cl+35,(ch0 -(ch div 2))+10);
+                       LineTo(cl+30,(ch0 -(ch div 2))+15);
+                       LineTo(cl+10,(ch0 -(ch div 2))+15);
+                       LineTo(cl+10,(ch0 -(ch div 2))+5);
+                   end;
+               end;
+              12: begin
+                   meisi_base.Canvas.TextOut(cl + 2,ct + 2,'紙カード');
+                   with meisi_base.Canvas do begin
+                       MoveTo(cl+15,(ch0 -(ch div 2))+5);
+                       LineTo(cl+35,(ch0 -(ch div 2))+5);
+                       LineTo(cl+35,(ch0 -(ch div 2))+15);
+                       LineTo(cl+10,(ch0 -(ch div 2))+15);
+                       LineTo(cl+10,(ch0 -(ch div 2))+10);
+                       LineTo(cl+15,(ch0 -(ch div 2))+5);
+                   end;
+               end;
+              13: begin
+                   meisi_base.Canvas.TextOut(cl + 2,ct + 2,'磁気ディスク');
+                   with meisi_base.Canvas do begin
+                       meisi_base.Canvas.Brush.Color:= clblack;
+                       //Arc(5, -(ch0 -(ch div 2)), 50, -(ch0 -(ch div 2))+10,300,10,300,20);
+                       Ellipse(cl+5, (ch0 -(ch div 2))+10,cl + 50, (ch0 -(ch div 2))+20);
+                       Ellipse(cl+5, (ch0 -(ch div 2))+5, cl +50, (ch0 -(ch div 2))+15);
+                       meisi_base.Canvas.Brush.Color:= clwhite;
+                       Ellipse(cl+5, (ch0 -(ch div 2)),cl + 50, (ch0 -(ch div 2))+10);
+                   end;
+               end;
+            end;
+        except
+
+        end;
+
+    except end;
+    try
+      //showmessage(setprjdir + 'pic.bmp');
+      //meisi_base.SaveToFile( utf8tosys(setprjdir + 'pic.bmp') );
+
+    except
+
+    end;
+
+    //FCFM.comp.Items[i].Create(FCFM);
+    //showmessage(FCFM.setdir +ExtractFileName(savefile));
+   // showmessage(FCFM.comp.Items[i].hint);
+
+    //create_panel := pnl;
+ // end;
+end;
+
+
+function TFCFM.write_line(i:integer):boolean;
+var
+  i1,i2:integer;
+  m:TMemo;
+begin
+  m :=TMemo.Create(FCFM);
+  m.Lines.Clear;
+    if FCFM.comp.Items[i].IsControl then
+      exit;
+    try
+      //if 1 < length(FCFM.comp.Items[i].Hint) then begin
+
+       //caption := FCFM.comp.Items[i].Hint;
+        //showmessage(ExtractFilePath(Paramstr(0))+(FCFM.comp.Items[i].Hint));
+        //showmessage((fcfm.setprjdir+ inttostr(i)));
+        m.Lines.LoadFromFile((fcfm.setprjdir+ inttostr(i)));
+        //showmessage(m.Lines.Text);
+        if (-1 = FCFM.ComboBox6.Items.IndexOf( m.Lines[1] ) )
+        or (-1 = FCFM.ComboBox6.Items.IndexOf( m.Lines[2] ) )
+        then begin
+          exit;
+        end;
+        i1 := FCFM.ComboBox6.Items.IndexOf( m.Lines[1] );
+        if -1 < i1 then begin
+
+          if 0 < ansipos('青矢印',' ' + m.Lines[0]) then begin
+            meisi_base.Canvas.Pen.Color:= clblue;
+          end else if 0 < ansipos('赤矢印',' ' + m.Lines[0]) then begin
+            meisi_base.Canvas.Pen.Color:= clred;
+          end;
+          meisi_base.Canvas.Pen.Width:= 4;
+          meisi_base.Canvas.MoveTo(FCFM.ary_TFC_Comp[i1].Left + (FCFM.ary_TFC_Comp[i1].Width div 2),
+                                       (FCFM.ary_TFC_Comp[i1].Top + (FCFM.ary_TFC_Comp[i1].Height div 2)));
+          //showmessage(inttostr(FCFM.ary_TFC_Comp[i1].Left + (FCFM.ary_TFC_Comp[i1].Width div 2)) + ' ' + inttostr(FCFM.ary_TFC_Comp[i1].Top + (FCFM.ary_TFC_Comp[i1].Height div 2)));
+          i2 := FCFM.ComboBox6.Items.IndexOf( m.Lines[2] );
+
+          if -1 < i2 then begin
+
+
+            meisi_base.Canvas.LineTo(FCFM.ary_TFC_Comp[i2].Left + (FCFM.ary_TFC_Comp[i2].Width div 2),
+                                       (FCFM.ary_TFC_Comp[i2].Top + (FCFM.ary_TFC_Comp[i2].Height div 2)));
+            //showmessage(inttostr(FCFM.ary_TFC_Comp[i2].Left + (FCFM.ary_TFC_Comp[i2].Width div 2)) + ' ' + inttostr(FCFM.ary_TFC_Comp[i2].Top + (FCFM.ary_TFC_Comp[i2].Height div 2)));
+
+          end;
+         end;
+        //end;
+      except
+      end;
+  m.Free;
+end;
 
 
 
@@ -1389,6 +1727,16 @@ begin
     //FCFM.ListBox1DblClick(FCFM.ListBox1);
   end;
 end;
+
+
+
+
+
+
+
+
+
+
 
 procedure TCompList.Put(Index: Integer; const Value: TControl);
 begin
@@ -1763,6 +2111,11 @@ var
         listbox1.Update;
       except
       end;
+end;
+
+procedure TFCFM.Panel5Click(Sender: TObject);
+begin
+
 end;
 
 procedure TFCFM.Panel8Click(Sender: TObject);
@@ -2539,9 +2892,9 @@ procedure TFCFM.Button4Click(Sender: TObject);
       LoadParams : Variant;
       Document   : Variant;
       TextCursor : Variant;
-      set_s1 :TStringList;
+      sl,set_s1 :TStringList;
       url,s,s1 :string;
-      i:integer;
+      i,i1:integer;
       J:TJPegImage;
       B:TBitmap;
     const
@@ -2597,24 +2950,79 @@ procedure TFCFM.Button4Click(Sender: TObject);
     //const
       //ServerName = 'com.sun.star.ServiceManager';
 begin
-
+   if not savedialog1.Execute then
+     exit;
     //FCFM.MeisiForm.Visible:=false;
-      FCFM.print();
+      //FCFM.print();
+             meisi_base := TBitmap.Create;
+             meisi_base.Canvas.Brush.Color := clBlack;
+             meisi_base.Width := FCFM.MeisiPIc.Width;
+             meisi_base.Height := FCFM.MeisiPIc.Height;
+             meisi_base.Canvas.Create;
+             meisi_base.Canvas.Brush.Color:= clWhite;
+             meisi_base.Canvas.Rectangle(0,0,meisi_base.Width,meisi_base.Height);
+             meisi_base.Canvas.Brush.Color := clwhite;
+             meisi_base.Canvas.pen.Color := clBlack;
+
+
+  sl := TStringList.Create;;
+  SL.LoadFromFile(utf8toansi(ansitoutf8(ExtractFilePath( Paramstr(0) )) + listbox1.Items[listbox1.itemindex] + dir +'ForwCreate.csv' ));
+  count := strtoint(sl[2]) +1;
+  i := 0;
+  i1 := 0;
+  while i < Count do begin
+    if SL[i+3] <> '1' then begin
+      //showmessage(sl[i+3] +','+ inttostr(i)+','+ inttostr(i1));
+      write_line(i1);
+      inc(i1);
+    end;
+    i := i + 6;
+  end;
+  i := 0;
+  i1 := 0;
+             meisi_base.Canvas.Brush.Color:= clWhite;
+             meisi_base.Canvas.Brush.Color := clwhite;
+             meisi_base.Canvas.pen.Color := clBlack;
+  while i < Count do begin
+    if SL[i+3] = '1' then begin
+      //showmessage(sl[i+3] +','+ inttostr(i)+','+ inttostr(i1));
+      write_canvas(i1);
+      inc(i1);
+    end;
+    i := i + 6;
+  end;
+
+
+
+          J :=TJpegImage.Create;
+          J.Assign(meisi_base);
+
+  {$IFDEF Windows}
+    J.SaveToFile(utf8tosys(savedialog1.FileName));
+  {$ENDIF}
+  {$IFDEF LINUX}
+    J.SaveToFile((savedialog1.FileName);
+  {$ENDIF}
+  {$IFDEF Darwin}
+    J.SaveToFile((savedialog1.FileName);
+  {$ENDIF}
+
+
       //showmessage('aaa');
       try
         try
-          B := TBitmap.Create;
-          J :=TJpegImage.Create;
-          B := fcfm.bmp_base;
-          J.Assign(B);
-          J.SaveToFile(ansitoutf8(ExtractFilePath( Paramstr(0) ) + 'temp.jpg'));
+          //B := TBitmap.Create;
+          //J :=TJpegImage.Create;
+          //B := fcfm.bmp_base;
+          //J.Assign(B);
+          //J.SaveToFile(ansitoutf8(ExtractFilePath( Paramstr(0) ) + 'temp.jpg'));
 
         except
           showmessage(ansitoutf8(ExtractFilePath( Paramstr(0) ) + 'temp.jpg' + ' not open'));
         end;
       finally
-        B.Free;
-        J.Free;
+        //B.Free;
+        //J.Free;
       end;
 end;
 

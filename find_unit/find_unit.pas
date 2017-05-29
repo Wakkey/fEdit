@@ -205,7 +205,7 @@ end;
 function Tfind_form.TXTReplace():boolean;
 var
   i,i1,ans:integer;
-  msg:string;
+  msg,s:string;
   s1,s2:TStringList;
   all:boolean;
 begin
@@ -222,7 +222,14 @@ begin
         end else if functionunit.editlist.Items[i1].PageControl1.ActivePage =  functionunit.editlist.Items[i1].TabSheet2 then begin
           s1.Text := functionunit.editlist.Items[i1].Memo1.Text;
         end;
-  functionunit.findtext(FIndTextAlia.Text,s1,s2,0);
+  if ChekChar.Checked then begin
+    s := (FIndTextAlia.Text);
+    //s1.Text := (s1.Text);
+  end else begin
+    s :=  LowerCase(FIndTextAlia.Text);
+    s1.Text := LowerCase(s1.Text);
+  end;
+  functionunit.findtext(s,s1,s2,0);
   Listbox1.Items.Text:= s2.Text;
   i := listbox1.ItemIndex;
   if (i < 0) and (listbox1.Items.Count > 0) then begin
@@ -241,12 +248,25 @@ begin
         selselect(i1);
         if functionunit.editlist.Items[i1].PageControl1.ActivePage =  functionunit.editlist.Items[i1].TabSheet1 then begin
           functionunit.editlist.Items[i1].SynEdit1.SelText:= RplaceTextAlia.Text;
+          //functionunit.editlist.Items[i1].SynEdit1.SelStart:=functionunit.editlist.Items[i1].SynEdit1.SelStart + length(RplaceTextAlia.Text) +1;
+          //functionunit.editlist.Items[i1].SynEdit1.SelEnd:=functionunit.editlist.Items[i1].SynEdit1.SelStart + length(RplaceTextAlia.Text) +2;
+          //showmessage(functionunit.editlist.Items[i1].SynEdit1.SelText);
           s1.Text := functionunit.editlist.Items[i1].SynEdit1.Text;
         end else if functionunit.editlist.Items[i1].PageControl1.ActivePage =  functionunit.editlist.Items[i1].TabSheet2 then begin
           functionunit.editlist.Items[i1].Memo1.SelText:= RplaceTextAlia.Text;
           s1.Text := functionunit.editlist.Items[i1].Memo1.Text;
         end;
          s2.Clear;
+         try
+           if 0 < ansipos(FIndTextAlia.Text,' ' + RplaceTextAlia.Text) then begin
+             if listbox2.Items.Count-1 > listbox2.ItemIndex then
+               listbox2.ItemIndex := listbox2.ItemIndex + 1
+             else
+               break;
+           end;
+         except
+             listbox2.ItemIndex := listbox2.ItemIndex -2;
+         end;
 
          functionunit.findtext(FIndTextAlia.Text,s1,s2,0);
          Listbox1.Items.Text:= s2.Text;

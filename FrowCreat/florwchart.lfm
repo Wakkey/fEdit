@@ -1,7 +1,7 @@
 object FCFM: TFCFM
-  Left = 562
+  Left = 550
   Height = 542
-  Top = 395
+  Top = 325
   Width = 957
   Caption = 'Lapid FlowChort Design Tool'
   ClientHeight = 542
@@ -328,6 +328,7 @@ object FCFM: TFCFM
               ClientHeight = 88
               ClientWidth = 248
               TabOrder = 1
+              OnClick = Panel5Click
               object Panel6: TPanel
                 Left = 6
                 Height = 26
@@ -675,5 +676,10 @@ object FCFM: TFCFM
       Caption = '削除'
       OnClick = MenuItem1Click
     end
+  end
+  object SaveDialog1: TSaveDialog
+    Filter = 'Jpeg|*.jpg'
+    left = 837
+    top = 98
   end
 end
