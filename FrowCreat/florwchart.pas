@@ -42,6 +42,7 @@ type
    Button3: TButton;
    Button4: TButton;
    Button5: TButton;
+   Button6: TButton;
    Button7: TButton;
    ComboBox1: TComboBox;
    ComboBox10: TComboBox;
@@ -200,12 +201,15 @@ type
     function print():boolean;
     function write_canvas(i:integer):boolean;
     function write_line(i:integer):boolean;
+    function write_arg_Line:boolean;
   end;
 
 var
   FCFM: TFCFM;
 
 implementation
+
+uses function_unit;
 
 {$R *.lfm}
 
@@ -776,6 +780,11 @@ begin
         pnl.TIM.Name:= 'i' + inttostr(i+1);
         pnl.TIM.Align:= alleft;
         pnl.img_No:=0;
+        pnl.st := TStringlist.Create;
+        pnl.st.Clear;
+        pnl.st.Add(inttostr(pnl.img_No));
+        pnl.st.SaveToFile(FCFM.setprjdir + inttostr(i)+'_No');
+        pnl.st.Free;
         pnl.TIM.Width:= 60;
         pnl.TIM.Canvas.Brush.Color:= clWhite;
         pnl.TIM.Canvas.Clear;
@@ -1675,7 +1684,172 @@ begin
   m.Free;
 end;
 
+function TFCFM.write_arg_Line:boolean;
+var
+  i,i1,i2,i3,i4:integer;
+  m:TMemo;
+  st,st1,st2,st3,st4:TStringlist;
+  sw : Boolean;
+  ary:array [0..255] of String;
+begin
+  m :=TMemo.Create(FCFM);
+  m.Lines.Clear;
+  st := Tstringlist.Create;
+  st1 := Tstringlist.Create;
+  st2 := Tstringlist.Create;
+  st3 := Tstringlist.Create;
+  st4 := Tstringlist.Create;
+  st.Clear;
+  st1.Clear;
+  st2.Clear;
+  st3.Clear;
+  st4.Clear;
+    try
+      //if 1 < length(FCFM.comp.Items[i].Hint) then begin
+       sw := false;
+       //caption := FCFM.comp.Items[i].Hint;
+        //showmessage(ExtractFilePath(Paramstr(0))+(FCFM.comp.Items[i].Hint));
+        //showmessage(inttostr(FCFM.comp.Count -1));
+        for i := 0 to FCFM.comp.Count -1 do begin
+          try
+            m.Lines.LoadFromFile((fcfm.setprjdir+ inttostr(i) +'_No'));
+            case strtoint(m.Lines[0]) of
+               0: begin
+                  st3.Add('処理');
+               end;
+               1: begin
+                    st3.Add('判断');
+               end;
+               2: begin
+                   st3.Add('定義済処理');
+               end;
+               3: begin
+                  st3.Add('手作業');
+               end;
+               4: begin
+                   st3.Add('組合せ');
+               end;
+               5: begin
+                   st3.Add('抜出');
+               end;
+               6: begin
+                   st3.Add('照合');
+               end;
+              7: begin
+                   st3.Add('分類');
+               end;
+               8: begin
+                  st3.Add('手操作入力');
+               end;
+               9: begin
+                  st3.Add('入出力');
+               end;
+              10: begin
+                   st3.Add('オンライン記録');
+               end;
+              11: begin
+                   st3.Add('書類');
+               end;
+              12: begin
+                   st3.Add('紙カード');
+               end;
+              13: begin
+                   st3.Add('磁気ディスク');
+               end;
+            end;
+          except
+            m.Lines.Clear;
+          end;
+          try
+            m.Lines.LoadFromFile((fcfm.setprjdir+ inttostr(i) +'m'));
+            ary[i] := m.Lines.Text;
+            st4.Add(inttostr(i));
+          except
+            m.Lines.Clear;
+          end;
+          try
+            m.Lines.LoadFromFile((fcfm.setprjdir+ inttostr(i)));
+          except
+            m.Lines.Clear;
+          end;
+          //showmessage(inttostr(i) +  char(13)+ m.Lines.Text);
+          if m.Lines.Count >=2 then begin
+            if (-1 = FCFM.ComboBox6.Items.IndexOf( m.Lines[1] ) )
+            or (-1 = FCFM.ComboBox6.Items.IndexOf( m.Lines[2] ) )
+            then begin
+              sw := false;
+            end else begin
+              sw := true;
+            end;
+          end else begin
 
+          end;
+          if (sw) and (m.Lines.Count >= 2) then begin
+
+          i1 := ComboBox6.Items.IndexOf( m.Lines[1] );
+          if -1 < i1 then begin
+            i3 := st1.IndexOf(m.Lines[1]);
+            if -1 < i3 then begin
+              st.Add('[' + st3[strtoint(st4[i1])] + ']' + char(13) + 'もし  ' +  ary[strtoint(st4[i1])] + '  ならば');
+              st.Add('    [' +st3[strtoint(st4[i1 +1])] +']'+char(13)+ '    '+ary[strtoint(st4[i1 +1])]);
+              st.Add('でなければ'+char(13)+ '    [' + st3[strtoint(st4[i1+2])] + ']' +char(13) +'    ' + ary[strtoint(st4[i1+2])]);
+            end else begin
+              if st3[strtoint(st4[i1])] <> '判断' then begin
+                st.Add('['+ st3[strtoint(st4[i1])] + ']' +char(13)+ ary[strtoint(st4[i1])]);
+                st.Add('次に');
+                //st.Add(st3[i1+1]);
+             end;
+           end;
+          end else begin
+            //該当なしの場合（空　）
+          end;
+            st1.Add(m.Lines[1]);
+            st2.Add(m.Lines[2]);
+          {i2 := ComboBox6.Items.IndexOf( m.Lines[2] );
+          if -1 < i2 then begin
+            i4 := st2.IndexOf(m.Lines[2]);
+            if -1 < i4 then begin
+              st.Add(m.Lines[2] + '  と');
+              st.Add(st[i1] + '  を');
+              st.Add(m.Lines[1] + 'に合流');
+            end else begin
+              st.Add(m.Lines[1]);
+              st.Add('次に');
+              st.Add(m.Lines[2]);
+            end;
+          end else begin
+            //該当なしの場合（空　）
+          end;}
+        end;
+
+       end;
+        functionunit.newwindow();
+        functionunit.editlist.Items[functionunit.edit_count-1].SynEdit1.Lines.Text:=st.Text;
+        //ここから　繰り返し
+        //処理番号[1]を取得、リストに入れる
+        //もし　処理番号　重複？　ならば
+        //複数選択肢（もし）にする
+        //もし　更に複数選択肢？ ならば
+        //複数選択肢「でなければ　もし　～～～　ならば」を追加
+
+
+        //処理番号[2]を取得、リストに入れる
+        //もし　処理番号　重複？　ならば
+        //取得した　処理番号[1]の キー　に　「ここから　[2]キー　へ移動」　を追加
+        //取得した　処理番号[2]の キー　に　「ここへ移動」　を追加
+        //キー[1]とキー[2]を連結する
+        //繰り返し　ここまで
+        //i1 := FCFM.ComboBox6.Items.IndexOf( m.Lines[1] );
+
+
+        //end;
+      except
+      end;
+  m.Free;
+  st.Free;
+  st1.Free;
+  st2.Free;
+end;
 
 
 
@@ -1814,7 +1988,7 @@ end;
 
 procedure TFCFM.Button6Click(Sender: TObject);
 begin
-
+  write_arg_Line;
 end;
 
 procedure TFCFM.Button7Click(Sender: TObject);

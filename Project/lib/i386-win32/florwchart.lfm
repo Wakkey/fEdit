@@ -435,6 +435,15 @@ object FCFM: TFCFM
                 OnClick = Button4Click
                 TabOrder = 6
               end
+              object Button6: TButton
+                Left = 88
+                Height = 25
+                Top = 56
+                Width = 153
+                Caption = '流れ図をアルゴリズムに変換'
+                OnClick = Button6Click
+                TabOrder = 7
+              end
             end
           end
           object GroupBox3: TGroupBox
@@ -679,7 +688,7 @@ object FCFM: TFCFM
   end
   object SaveDialog1: TSaveDialog
     Filter = 'Jpeg|*.jpg'
-    left = 837
-    top = 98
+    left = 848
+    top = 144
   end
 end
