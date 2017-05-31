@@ -1807,7 +1807,7 @@ begin
            ary_i[i] := Load_module(i,st2);
            ary[i] := st2.Text;
         end;
-        i2 := 0;
+        i3 := 0;
         for i := 0 to FCFM.comp.Count -1 do begin
            sw := Load_Line(i,lines);
           //showmessage(inttostr(i) +  char(13)+ m.Lines.Text);
@@ -1815,6 +1815,7 @@ begin
           if (sw) and (lines.Count >= 2) then begin
 
           i1 := ComboBox6.Items.IndexOf( lines[1] );
+          i2 := ComboBox6.Items.IndexOf( lines[2] );
           if -1 < i1 then begin
             //i3 := card.IndexOf(Lines[1]);
             //if -1 < i3 then begin
@@ -1822,21 +1823,28 @@ begin
             //end else begin
               sw2 := false;
               if card[ary_i[i1]] <> '判断' then begin
-                st.Add('['+ card[ary_i[i1]] + ']' +char(13)+ ary[i1]);
+                if st.Count <= 0 then begin
+                  st.Add('['+ card[ary_i[i1]] + ']' +char(13)+ ary[i1]);
+                end;
                 st.Add('次に');
+                if card[ary_i[i2]] <> '判断' then begin
+                  st.Add('['+ card[ary_i[i2]] + ']' +char(13)+ ary[i2]);
+                end;
                 //st.Add(st3[i1+1]);
              end;
-             if (not sw2) and (i2 <> i1) then begin
+             if (not sw2) and (i3 <> i1) then begin
               if card[ary_i[i1]] = '判断' then begin
-               st.Add('[' + card[ary_i[i1]] + ']' + char(13) + 'もし  ' +  ary[i1] + '  ならば');
-               st.Add('    [' +card[ary_i[i1]+1] +']'+char(13)+ '    '+ary[ary_i[i1]+1]);
-
+               st.Add('[' + card[ary_i[i1]] + ']' + char(13) + 'もし  ' +  ary[i1] + '  ならば  ここから');
+               //st.Add('    [' +card[ary_i[i1]+1] +']'+char(13)+ '    '+ary[ary_i[i1]+1]);
+                if (card[ary_i[i2]] <> '判断') and (0 < ansipos('青矢印',' '+lines[0])) then begin
+                  st.Add('['+ card[ary_i[i2]] + ']' +char(13)+ ary[i2]);
+                end;
                sw2 := true;
-               i2 := i1;
+               i3 := i1;
               end;
-             end else if (not sw2) and (i2 = i1) then  begin
+             end else if (not sw2) and (i3 = i1) then  begin
                 if card[ary_i[i1]] = '判断' then begin
-                  st.Add('でなければ'+char(13)); //+ '    [' + card[ary_i[i1]+2] + ']' +char(13) +'    ' + ary[ary_i[i1]+2]);
+                  st.Add('ここまで  でなければ'+char(13)); //+ '    [' + card[ary_i[i1]+2] + ']' +char(13) +'    ' + ary[ary_i[i1]+2]);
                   sw2 := true;
                 end;
              end else begin
@@ -2012,7 +2020,7 @@ begin
      showmessage('項目が選択されていません');
      exit;
    end;
-    try
+    {try
       m :=TMemo.Create(owner);
     //showmessage(FCFM.comp.Items[(i*2)+1].Hint+ ';'+ FCFM.comp.Items[(i*3)+1].Hint);
       m.Lines.LoadFromFile(extractfilepath(paramstr(0))+(FCFM.comp.Items[(i*3)+1].Hint));
@@ -2020,13 +2028,13 @@ begin
       m.lines.clear;
       m.Lines.SaveToFile(extractfilepath(paramstr(0))+(FCFM.comp.Items[(i*3)+1].Hint));
       m.Free;
-    except end;
+    except end;}
 
    try
-     comp.Items[i*3].free;
+     //comp.Items[i*3].free;
    except end;
    try
-    comp.Delete(i*3);
+    //comp.Delete(i*3);
    except end;
    combobox6.Items.delete(i);
    combobox6.text := '';
