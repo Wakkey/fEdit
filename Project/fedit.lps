@@ -274,9 +274,9 @@
         <UnitName Value="FlorwChart"/>
         <IsVisibleTab Value="True"/>
         <EditorIndex Value="11"/>
-        <TopLine Value="1765"/>
-        <CursorPos X="49" Y="1780"/>
-        <UsageCount Value="91"/>
+        <TopLine Value="1812"/>
+        <CursorPos X="48" Y="1839"/>
+        <UsageCount Value="102"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
       </Unit21>
@@ -286,21 +286,21 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="504"/>
         <CursorPos X="11" Y="530"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="9"/>
       </Unit22>
       <Unit23>
         <Filename Value="/usr/lib/lazarus/1.6/lcl/interfaces/gtk2/gtk2widgetset.inc"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="923"/>
         <CursorPos Y="938"/>
-        <UsageCount Value="1"/>
+        <UsageCount Value="10"/>
       </Unit23>
       <Unit24>
         <Filename Value="../../../lazarus/fpc/3.0.2/source/rtl/win/wininc/ascdef.inc"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="248"/>
         <CursorPos X="20" Y="277"/>
-        <UsageCount Value="1"/>
+        <UsageCount Value="10"/>
       </Unit24>
       <Unit25>
         <Filename Value="../../../lazarus/components/synedit/synedittextbuffer.pp"/>
@@ -308,14 +308,14 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="538"/>
         <CursorPos Y="557"/>
-        <UsageCount Value="3"/>
+        <UsageCount Value="2"/>
       </Unit25>
       <Unit26>
         <Filename Value="../../../lazarus/lcl/include/customform.inc"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="2201"/>
         <CursorPos Y="2212"/>
-        <UsageCount Value="3"/>
+        <UsageCount Value="2"/>
       </Unit26>
       <Unit27>
         <Filename Value="/usr/lib/lazarus/1.6/components/lazutils/lazutf8classes.pas"/>
@@ -323,136 +323,136 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="126"/>
         <CursorPos Y="143"/>
-        <UsageCount Value="6"/>
+        <UsageCount Value="5"/>
       </Unit27>
       <Unit28>
         <Filename Value="../../../lazarus/lcl/include/customlistbox.inc"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="168"/>
         <CursorPos Y="196"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="9"/>
       </Unit28>
     </Units>
     <JumpHistory Count="30" HistoryIndex="29">
       <Position1>
         <Filename Value="../FrowCreat/florwchart.pas"/>
-        <Caret Line="1712" TopLine="1680"/>
+        <Caret Line="1815" TopLine="1787"/>
       </Position1>
       <Position2>
         <Filename Value="../FrowCreat/florwchart.pas"/>
-        <Caret Line="1764" Column="15" TopLine="1729"/>
+        <Caret Line="1822" TopLine="1787"/>
       </Position2>
       <Position3>
         <Filename Value="../FrowCreat/florwchart.pas"/>
-        <Caret Line="1708" TopLine="1680"/>
+        <Caret Line="1823" TopLine="1787"/>
       </Position3>
       <Position4>
         <Filename Value="../FrowCreat/florwchart.pas"/>
-        <Caret Line="1709" TopLine="1680"/>
+        <Caret Line="1813" TopLine="1787"/>
       </Position4>
       <Position5>
         <Filename Value="../FrowCreat/florwchart.pas"/>
-        <Caret Line="1710" TopLine="1680"/>
+        <Caret Line="1822" TopLine="1787"/>
       </Position5>
       <Position6>
         <Filename Value="../FrowCreat/florwchart.pas"/>
-        <Caret Line="1782" TopLine="1755"/>
+        <Caret Line="1823" TopLine="1787"/>
       </Position6>
       <Position7>
         <Filename Value="../FrowCreat/florwchart.pas"/>
-        <Caret Line="1709" TopLine="1681"/>
+        <Caret Line="1813" TopLine="1787"/>
       </Position7>
       <Position8>
         <Filename Value="../FrowCreat/florwchart.pas"/>
-        <Caret Line="1710" TopLine="1681"/>
+        <Caret Line="1814" TopLine="1787"/>
       </Position8>
       <Position9>
         <Filename Value="../FrowCreat/florwchart.pas"/>
-        <Caret Line="1711" TopLine="1681"/>
+        <Caret Line="1815" TopLine="1787"/>
       </Position9>
       <Position10>
         <Filename Value="../FrowCreat/florwchart.pas"/>
-        <Caret Line="1782" TopLine="1755"/>
+        <Caret Line="1822" TopLine="1787"/>
       </Position10>
       <Position11>
         <Filename Value="../FrowCreat/florwchart.pas"/>
-        <Caret Line="1709" TopLine="1681"/>
+        <Caret Line="1823" TopLine="1787"/>
       </Position11>
       <Position12>
         <Filename Value="../FrowCreat/florwchart.pas"/>
-        <Caret Line="1710" TopLine="1681"/>
+        <Caret Line="1842" TopLine="1816"/>
       </Position12>
       <Position13>
         <Filename Value="../FrowCreat/florwchart.pas"/>
-        <Caret Line="1711" TopLine="1681"/>
+        <Caret Line="1700" Column="170" TopLine="1680"/>
       </Position13>
       <Position14>
         <Filename Value="../FrowCreat/florwchart.pas"/>
-        <Caret Line="1782" TopLine="1755"/>
+        <Caret Line="1747" TopLine="1722"/>
       </Position14>
       <Position15>
         <Filename Value="../FrowCreat/florwchart.pas"/>
-        <Caret Line="1700" Column="44" TopLine="1681"/>
+        <Caret Line="1707" TopLine="1679"/>
       </Position15>
       <Position16>
         <Filename Value="../FrowCreat/florwchart.pas"/>
-        <Caret Line="2986" Column="3" TopLine="2982"/>
+        <Caret Line="1817" TopLine="1791"/>
       </Position16>
       <Position17>
         <Filename Value="../FrowCreat/florwchart.pas"/>
-        <Caret Line="1117" Column="10" TopLine="1089"/>
+        <Caret Line="1707" TopLine="1680"/>
       </Position17>
       <Position18>
         <Filename Value="../FrowCreat/florwchart.pas"/>
-        <Caret Line="782" TopLine="756"/>
+        <Caret Line="1826" Column="11" TopLine="1788"/>
       </Position18>
       <Position19>
         <Filename Value="../FrowCreat/florwchart.pas"/>
-        <Caret Line="2704" Column="81" TopLine="2667"/>
+        <Caret Line="1819" Column="104" TopLine="1782"/>
       </Position19>
       <Position20>
         <Filename Value="../FrowCreat/florwchart.pas"/>
-        <Caret Line="2986" Column="3" TopLine="2982"/>
+        <Caret Line="1825" Column="15" TopLine="1784"/>
       </Position20>
       <Position21>
         <Filename Value="../FrowCreat/florwchart.pas"/>
-        <Caret Line="1117" Column="10" TopLine="1089"/>
+        <Caret Line="1821" TopLine="1786"/>
       </Position21>
       <Position22>
         <Filename Value="../FrowCreat/florwchart.pas"/>
-        <Caret Line="787" Column="20" TopLine="766"/>
+        <Caret Line="1819" TopLine="1786"/>
       </Position22>
       <Position23>
         <Filename Value="../FrowCreat/florwchart.pas"/>
-        <Caret Line="1989" Column="3" TopLine="1987"/>
+        <Caret Line="1818" TopLine="1786"/>
       </Position23>
       <Position24>
         <Filename Value="../FrowCreat/florwchart.pas"/>
-        <Caret Line="204" Column="28" TopLine="201"/>
+        <Caret Line="1819" TopLine="1786"/>
       </Position24>
       <Position25>
         <Filename Value="../FrowCreat/florwchart.pas"/>
-        <Caret Line="1788" Column="45" TopLine="1763"/>
+        <Caret Line="1821" Column="59" TopLine="1795"/>
       </Position25>
       <Position26>
         <Filename Value="../FrowCreat/florwchart.pas"/>
-        <Caret Line="1802" Column="14" TopLine="1763"/>
+        <Caret Line="1817" TopLine="1795"/>
       </Position26>
       <Position27>
         <Filename Value="../FrowCreat/florwchart.pas"/>
-        <Caret Line="1801" Column="15" TopLine="1775"/>
+        <Caret Line="1818" TopLine="1795"/>
       </Position27>
       <Position28>
         <Filename Value="../FrowCreat/florwchart.pas"/>
-        <Caret Line="1844" Column="8" TopLine="1843"/>
+        <Caret Line="1819" TopLine="1795"/>
       </Position28>
       <Position29>
         <Filename Value="../FrowCreat/florwchart.pas"/>
-        <Caret Line="1843" Column="27" TopLine="1772"/>
+        <Caret Line="1822" Column="63" TopLine="1801"/>
       </Position29>
       <Position30>
         <Filename Value="../FrowCreat/florwchart.pas"/>
-        <Caret Line="1795" Column="65" TopLine="1766"/>
+        <Caret Line="1839" Column="56" TopLine="1796"/>
       </Position30>
     </JumpHistory>
   </ProjectSession>

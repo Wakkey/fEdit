@@ -1687,124 +1687,169 @@ end;
 function TFCFM.write_arg_Line:boolean;
 var
   i,i1,i2,i3,i4:integer;
-  m:TMemo;
-  st,st1,st2,st3,st4:TStringlist;
-  sw : Boolean;
+
+  card,module,lines,st,st2:TStringlist;
+  sw ,sw2: Boolean;
   ary:array [0..255] of String;
+  ary_i:array [0..255] of integer;
+  function load_card(no:integer;str:TStringList):boolean;
+  var
+    m:TMemo;
+  begin
+          try
+            m :=TMemo.Create(FCFM);
+            m.Lines.Clear;
+            m.Lines.LoadFromFile((fcfm.setprjdir+ inttostr(no) +'_No'));
+            case strtoint(m.Lines[0]) of
+               0: begin
+                  str.Add('処理');
+               end;
+               1: begin
+                    str.Add('判断');
+               end;
+               2: begin
+                   str.Add('定義済処理');
+               end;
+               3: begin
+                  str.Add('手作業');
+               end;
+               4: begin
+                   str.Add('組合せ');
+               end;
+               5: begin
+                   str.Add('抜出');
+               end;
+               6: begin
+                   str.Add('照合');
+               end;
+              7: begin
+                   str.Add('分類');
+               end;
+               8: begin
+                  str.Add('手操作入力');
+               end;
+               9: begin
+                  str.Add('入出力');
+               end;
+              10: begin
+                   str.Add('オンライン記録');
+               end;
+              11: begin
+                   str.Add('書類');
+               end;
+              12: begin
+                   str.Add('紙カード');
+               end;
+              13: begin
+                   str.Add('磁気ディスク');
+               end;
+            end;
+          except
+            m.Lines.Clear;
+          end;
+          m.free;
+  end;
+  function Load_module(no:integer;str:TstringList):integer;
+  var
+    s:TStringList;
+  begin
+          try
+            s := TStringList.Create;
+            s.LoadFromFile((fcfm.setprjdir+ inttostr(no) +'m'));
+            str.text := s.Text;
+            Load_module := i;
+            s.Free;
+          except
+            s.Clear;
+          end;
+  end;
+  function Load_Line(no:integer;str:TStringList):boolean;
+  begin
+          try
+            str.LoadFromFile((fcfm.setprjdir+ inttostr(no)));
+          except
+            str.Clear;
+          end;
+          if str.Count >=2 then begin
+            if (-1 = FCFM.ComboBox6.Items.IndexOf( str[1] ) )
+            or (-1 = FCFM.ComboBox6.Items.IndexOf( str[2] ) )
+            then begin
+              Load_Line := false;
+            end else begin
+              Load_Line := true;
+            end;
+          end else begin
+            //Load_Line := false;
+            str.Clear;
+          end;
+  end;
+
 begin
-  m :=TMemo.Create(FCFM);
-  m.Lines.Clear;
+  card := Tstringlist.Create;
+  module := Tstringlist.Create;
+  lines := Tstringlist.Create;
   st := Tstringlist.Create;
-  st1 := Tstringlist.Create;
   st2 := Tstringlist.Create;
-  st3 := Tstringlist.Create;
-  st4 := Tstringlist.Create;
+  card.Clear;
+  module.Clear;
+  lines.Clear;
   st.Clear;
-  st1.Clear;
   st2.Clear;
-  st3.Clear;
-  st4.Clear;
     try
       //if 1 < length(FCFM.comp.Items[i].Hint) then begin
        sw := false;
+       sw2 := false;
        //caption := FCFM.comp.Items[i].Hint;
         //showmessage(ExtractFilePath(Paramstr(0))+(FCFM.comp.Items[i].Hint));
         //showmessage(inttostr(FCFM.comp.Count -1));
         for i := 0 to FCFM.comp.Count -1 do begin
-          try
-            m.Lines.LoadFromFile((fcfm.setprjdir+ inttostr(i) +'_No'));
-            case strtoint(m.Lines[0]) of
-               0: begin
-                  st3.Add('処理');
-               end;
-               1: begin
-                    st3.Add('判断');
-               end;
-               2: begin
-                   st3.Add('定義済処理');
-               end;
-               3: begin
-                  st3.Add('手作業');
-               end;
-               4: begin
-                   st3.Add('組合せ');
-               end;
-               5: begin
-                   st3.Add('抜出');
-               end;
-               6: begin
-                   st3.Add('照合');
-               end;
-              7: begin
-                   st3.Add('分類');
-               end;
-               8: begin
-                  st3.Add('手操作入力');
-               end;
-               9: begin
-                  st3.Add('入出力');
-               end;
-              10: begin
-                   st3.Add('オンライン記録');
-               end;
-              11: begin
-                   st3.Add('書類');
-               end;
-              12: begin
-                   st3.Add('紙カード');
-               end;
-              13: begin
-                   st3.Add('磁気ディスク');
-               end;
-            end;
-          except
-            m.Lines.Clear;
-          end;
-          try
-            m.Lines.LoadFromFile((fcfm.setprjdir+ inttostr(i) +'m'));
-            ary[i] := m.Lines.Text;
-            st4.Add(inttostr(i));
-          except
-            m.Lines.Clear;
-          end;
-          try
-            m.Lines.LoadFromFile((fcfm.setprjdir+ inttostr(i)));
-          except
-            m.Lines.Clear;
-          end;
+           load_card(i,card);
+           ary_i[i] := Load_module(i,st2);
+           ary[i] := st2.Text;
+        end;
+        i2 := 0;
+        for i := 0 to FCFM.comp.Count -1 do begin
+           sw := Load_Line(i,lines);
           //showmessage(inttostr(i) +  char(13)+ m.Lines.Text);
-          if m.Lines.Count >=2 then begin
-            if (-1 = FCFM.ComboBox6.Items.IndexOf( m.Lines[1] ) )
-            or (-1 = FCFM.ComboBox6.Items.IndexOf( m.Lines[2] ) )
-            then begin
-              sw := false;
-            end else begin
-              sw := true;
-            end;
-          end else begin
 
-          end;
-          if (sw) and (m.Lines.Count >= 2) then begin
+          if (sw) and (lines.Count >= 2) then begin
 
-          i1 := ComboBox6.Items.IndexOf( m.Lines[1] );
+          i1 := ComboBox6.Items.IndexOf( lines[1] );
           if -1 < i1 then begin
-            i3 := st1.IndexOf(m.Lines[1]);
-            if -1 < i3 then begin
-              st.Add('[' + st3[strtoint(st4[i1])] + ']' + char(13) + 'もし  ' +  ary[strtoint(st4[i1])] + '  ならば');
-              st.Add('    [' +st3[strtoint(st4[i1 +1])] +']'+char(13)+ '    '+ary[strtoint(st4[i1 +1])]);
-              st.Add('でなければ'+char(13)+ '    [' + st3[strtoint(st4[i1+2])] + ']' +char(13) +'    ' + ary[strtoint(st4[i1+2])]);
-            end else begin
-              if st3[strtoint(st4[i1])] <> '判断' then begin
-                st.Add('['+ st3[strtoint(st4[i1])] + ']' +char(13)+ ary[strtoint(st4[i1])]);
+            //i3 := card.IndexOf(Lines[1]);
+            //if -1 < i3 then begin
+
+            //end else begin
+              sw2 := false;
+              if card[ary_i[i1]] <> '判断' then begin
+                st.Add('['+ card[ary_i[i1]] + ']' +char(13)+ ary[i1]);
                 st.Add('次に');
                 //st.Add(st3[i1+1]);
              end;
-           end;
+             if (not sw2) and (i2 <> i1) then begin
+              if card[ary_i[i1]] = '判断' then begin
+               st.Add('[' + card[ary_i[i1]] + ']' + char(13) + 'もし  ' +  ary[i1] + '  ならば');
+               st.Add('    [' +card[ary_i[i1]+1] +']'+char(13)+ '    '+ary[ary_i[i1]+1]);
+
+               sw2 := true;
+               i2 := i1;
+              end;
+             end else if (not sw2) and (i2 = i1) then  begin
+                if card[ary_i[i1]] = '判断' then begin
+                  st.Add('でなければ'+char(13)); //+ '    [' + card[ary_i[i1]+2] + ']' +char(13) +'    ' + ary[ary_i[i1]+2]);
+                  sw2 := true;
+                end;
+             end else begin
+               //st.Add('    [' +card[ary_i[i1]] +']'+char(13)+ '    '+ary[i1+2]);
+             end;
+            //end;
+
           end else begin
             //該当なしの場合（空　）
+            //ary[i] := (Lines[1]);
+            //ary[i] := (Lines[2]);
           end;
-            st1.Add(m.Lines[1]);
-            st2.Add(m.Lines[2]);
+
           {i2 := ComboBox6.Items.IndexOf( m.Lines[2] );
           if -1 < i2 then begin
             i4 := st2.IndexOf(m.Lines[2]);
@@ -1845,10 +1890,10 @@ begin
         //end;
       except
       end;
-  m.Free;
   st.Free;
-  st1.Free;
-  st2.Free;
+  card.Free;
+  module.Free;
+  lines.Free;
 end;
 
 
@@ -1954,6 +1999,7 @@ begin
 
       FCFM.ComboBox6.ItemIndex := FCFM.ComboBox6.Items.Count -1;
       MeisiPIcPaint(Sender);
+      Button12Click(Sender);
 end;
 
 procedure TFCFM.Button5Click(Sender: TObject);
@@ -3000,6 +3046,7 @@ begin
 
   FCFM.ComboBox6.ItemIndex := FCFM.ComboBox6.Items.Count -1;
   FCFM.ComboBox6Change(Sender);
+  Button12Click(Sender);
 end;
 
 procedure TFCFM.Button13Click(Sender: TObject);
