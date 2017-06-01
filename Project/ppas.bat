@@ -1,13 +1,9 @@
 @echo off
-SET THEFILE=utf.dll
+SET THEFILE=fedit.exe
 echo Linking %THEFILE%
-C:\lazarus14\fpc\2.6.4\bin\i386-win32\ld.exe -b pei-i386 -m i386pe  --gc-sections  -s --dll  --entry _DLLMainCRTStartup   --base-file base.$$$ -o utf.dll link.res
+C:\lazarus\fpc\3.0.2\bin\i386-win32\ld.exe -b pei-i386 -m i386pe  --gc-sections   --subsystem windows --entry=_WinMainCRTStartup    -o fedit.exe link.res
 if errorlevel 1 goto linkend
-C:\lazarus14\fpc\2.6.4\bin\i386-win32\dlltool.exe -S C:\lazarus14\fpc\2.6.4\bin\i386-win32\as.exe -D utf.dll -e exp.$$$ --base-file base.$$$ 
-if errorlevel 1 goto linkend
-C:\lazarus14\fpc\2.6.4\bin\i386-win32\ld.exe -b pei-i386 -m i386pe  -s --dll  --entry _DLLMainCRTStartup   -o utf.dll link.res exp.$$$
-if errorlevel 1 goto linkend
-C:\lazarus14\fpc\2.6.4\bin\i386-win32\postw32.exe --subsystem console --input utf.dll --stack 16777216
+C:\lazarus\fpc\3.0.2\bin\i386-win32\postw32.exe --subsystem gui --input fedit.exe --stack 16777216
 if errorlevel 1 goto linkend
 goto end
 :asmend

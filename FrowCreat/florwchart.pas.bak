@@ -1120,13 +1120,40 @@ begin
 end;
 
 function select_comp(s,dir2:string;tp,lf,ht,dt:integer):boolean;
+var
+  s2:string;
+  function set_img_no(i:integer):string;
+  var
+    s1:string;
+  begin
+    s1:='';
+    case i of
+       0:s1:='処理';
+       1:s1:='判断';
+       2:s1:='定義済処理';
+       3:s1:='手作業';
+       4:s1:='組合せ';
+       5:s1:='抜出';
+       6:s1:='照合';
+       7:s1:='分類';
+       8:s1:='手操作入力';
+       9:s1:='入出力';
+       10:s1:='オンライン記録';
+       11:s1:='書類';
+       12:s1:='紙カード';
+       13:s1:='磁気ディスク';
+    end;
+    set_img_no := s1;
+  end;
+
 begin
-  if s = '流れ図' then begin
+  if s = 'f' then begin
     create_comp(TFC_comp.Create(FCFM),FCFM.MeisiForm,1,tp,lf,dt,ht);
     create_TFC_comp(dir2 + inttostr(FCFM.comp.count div 3),FCFM.comp.Count -1,TFC_comp.Create(FCFM));
-    FCFM.ComboBox6.Items.Add(inttostr(FCFM.comp.count div 3) + s);
-    FCFM.ComboBox1.Items.Add(inttostr(FCFM.comp.count div 3) + s);
-    FCFM.ComboBox9.Items.Add(inttostr(FCFM.comp.count div 3) + s);
+    s2 := set_img_no(FCFM.ary_TFC_Comp[fcfm.count_tec_comp-1].img_No);
+    FCFM.ComboBox6.Items.Add(inttostr(FCFM.comp.count div 3) + s + s2);
+    FCFM.ComboBox1.Items.Add(inttostr(FCFM.comp.count div 3) + s + s2);
+    FCFM.ComboBox9.Items.Add(inttostr(FCFM.comp.count div 3) + s + s2);
   end else if s = '青矢印' then begin
     create_comp(TMemo.Create(FCFM),FCFM.MeisiForm,2,tp,lf,dt,ht);
     create_memo2( {FCFM.setdir + }dir2 + inttostr(FCFM.ComboBox6.Items.Count +1),FCFM.comp.Count -1,TMemo.Create(FCFM),s,true);
@@ -1199,11 +1226,11 @@ begin
       try
         create_comp(TFC_comp.Create(FCFM),FCFM.MeisiForm,1,strtoint(SL[i+5]),strtoint(SL[i+6]),strtoint(SL[i+7]),strtoint(SL[i+8]));
         create_TFC_comp({extractfilepath(paramstr(0))+}sl[i+2],FCFM.comp.Count -1,TFC_comp.Create(FCFM));
-        FCFM.ComboBox6.Items.Add( inttostr((i1 div 3)+1) + '流れ図');
-        FCFM.ComboBox1.Items.Add( inttostr((i1 div 3)+1) + '流れ図');
-        FCFM.ComboBox9.Items.Add( inttostr((i1 div 3)+1) + '流れ図');
+        FCFM.ComboBox6.Items.Add( inttostr((i1 div 3)+1) + 'f');
+        FCFM.ComboBox1.Items.Add( inttostr((i1 div 3)+1) + 'f');
+        FCFM.ComboBox9.Items.Add( inttostr((i1 div 3)+1) + 'f');
       except end;
-      cmpname := '流れ図';
+      cmpname := 'f';
 
     end else if SL[i+3] = '2' then begin
       try
@@ -1244,7 +1271,7 @@ begin
         B.Free;
         J.Free;
       end;
-      if cmpname = '流れ図' then begin
+      if cmpname = 'f' then begin
 
       end else if  cmpname = 'メモ' then begin
         if st.Count > 0 then begin
@@ -2020,7 +2047,7 @@ begin
      showmessage('項目が選択されていません');
      exit;
    end;
-    try
+    {try
       m :=TMemo.Create(owner);
     //showmessage(FCFM.comp.Items[(i*2)+1].Hint+ ';'+ FCFM.comp.Items[(i*3)+1].Hint);
       m.Lines.LoadFromFile(extractfilepath(paramstr(0))+(FCFM.comp.Items[(i*3)+1].Hint));
@@ -2028,7 +2055,7 @@ begin
       m.lines.clear;
       m.Lines.SaveToFile(extractfilepath(paramstr(0))+(FCFM.comp.Items[(i*3)+1].Hint));
       m.Free;
-    except end;
+    except end;}
 
    try
      //comp.Items[i*3].free;
@@ -2056,7 +2083,7 @@ begin
      exit;
    end;
     savedir := FCFM.setprjdir;
-  if 0 < ansipos('流れ図',combobox6.Text) then begin
+  if 0 < ansipos('f',combobox6.Text) then begin
     try
       FCFM.ary_TFC_Comp[i].Top:= FCFM.setCompIMG.Top;
       FCFM.ary_TFC_Comp[i].Left:= FCFM.setCompIMG.Left;
@@ -2408,7 +2435,7 @@ begin
     except
 
     end;
-  end else if 0 < ansipos('流れ図',combobox6.Text) then begin
+  end else if 0 < ansipos('f',combobox6.Text) then begin
     try
       //set_editcomp(combobox6.itemIndex,memo1);
 
@@ -2636,7 +2663,7 @@ procedure TFCFM.Image1DblClick(Sender: TObject);
                    end;
                end;
                4: begin
-                   ary_TFC_Comp[i1].TIM.Canvas.TextOut(2,2,'組合わせ');
+                   ary_TFC_Comp[i1].TIM.Canvas.TextOut(2,2,'組合せ');
                    with ary_TFC_Comp[i1].TIM.Canvas do begin
                        MoveTo(5,(ary_TFC_Comp[i1].TIM.Height div 2)+5);
                        LineTo(35,(ary_TFC_Comp[i1].TIM.Height div 2)+5);
@@ -3044,7 +3071,7 @@ procedure TFCFM.Button11Click(Sender: TObject);
 var
   s:string;
 begin
-  s := '流れ図';
+  s := 'f';//'流れ図';
   select_comp(s,
               FCFM.setprjdir,
               strtoint(combobox2.Text),

@@ -1,7 +1,7 @@
 object FCFM: TFCFM
-  Left = 517
+  Left = 514
   Height = 542
-  Top = 478
+  Top = 395
   Width = 957
   Caption = 'Lapid FlowChort Design Tool'
   ClientHeight = 542
