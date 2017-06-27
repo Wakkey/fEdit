@@ -110,7 +110,7 @@ begin
   Json_write := TstringList.Create;
   Json_write.clear;
   PageControl1.PageIndex:= 0;
-  SaveDialog1.Filter := datamodule1.SaveDialog1.Filter;
+
 end;
 
 procedure Teditform.FormDockDrop(Sender: TObject; Source: TDragDockObject; X,
@@ -141,10 +141,10 @@ begin
          functionunit.FileFindDir(ansitoutf8(fname),st);
       {$ENDIF}
       {$IFDEF LINUX}
-         functionunit.EnumFileFromDir((fname),st);
+         functionunit.FileFindDir((fname),st);
       {$ENDIF}
       {$IFDEF Darwin}
-         functionunit.EnumFileFromDir((fname),st);
+         functionunit.FileFindDir((fname),st);
       {$ENDIF}
   end;
   if st.Count > 0 then begin

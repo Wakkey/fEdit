@@ -170,6 +170,9 @@ begin
       end;
     end;
   end;
+  if (st.count = 1) and (filenames[0] <> null) then begin
+      functionunit.fileopen( FileNames[0] );
+  end;
   s.Free;
   st.Free;
 end;

@@ -1450,6 +1450,9 @@ begin
       end;
     end;
   end;
+  if (st.count = 1) and (st[1] <> null) then begin
+      functionunit.fileopen( st[1] );
+  end;
      inc(i);//err10
   except
     showmessage('起動に失敗しました。'+chr(13)+'エラーコード '+inttostr(i));
@@ -7724,7 +7727,7 @@ begin
   //getText := TStringList.Create;
   //getText.Clear;
   s.Text:=settext.Text;
-  showmessage(s.Text);
+
   i := -1;
   i1 := 0;
   for i1 := 0 to s.Count -1 do begin;

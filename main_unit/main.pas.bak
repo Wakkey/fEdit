@@ -191,6 +191,7 @@ type
     procedure MenuItem86Click(Sender: TObject);
     procedure MenuItem8Click(Sender: TObject);
     procedure MenuItem90Click(Sender: TObject);
+    procedure MenuItem95Click(Sender: TObject);
     procedure MenuI_UnixShellClick(Sender: TObject);
     procedure MenuWindowTopClick(Sender: TObject);
     procedure Menu_AllCloseClick(Sender: TObject);
@@ -915,6 +916,9 @@ begin
          end;
       end;
     end;
+    if (st.count = 1) and (filenames[0] <> null) then begin
+      showmessage( FileNames[0] );
+    end;
   end;
   s.Free;
   st.Free;
@@ -1119,11 +1123,11 @@ begin
          dir := 'tmp\';
       {$ENDIF}
       {$IFDEF LINUX}
-         functionunit.EnumFileFromDir((fname),st);
+         functionunit.FileFindDir((fname),st);
          dir := 'tmp/';
       {$ENDIF}
       {$IFDEF Darwin}
-         functionunit.EnumFileFromDir((fname),st);
+         functionunit.FileFindDir((fname),st);
          dir := 'tmp/';
       {$ENDIF}
 
@@ -1155,6 +1159,11 @@ end;
 procedure Tmainform.MenuItem90Click(Sender: TObject);
 begin
   functionunit.macro(sender);
+end;
+
+procedure Tmainform.MenuItem95Click(Sender: TObject);
+begin
+  fcfm.Show;
 end;
 
 procedure Tmainform.MenuI_UnixShellClick(Sender: TObject);

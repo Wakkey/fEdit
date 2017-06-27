@@ -19,8 +19,8 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <EditorIndex Value="15"/>
-        <TopLine Value="1107"/>
-        <CursorPos X="34" Y="1127"/>
+        <TopLine Value="61"/>
+        <CursorPos X="70" Y="806"/>
         <UsageCount Value="202"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
@@ -32,8 +32,8 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <EditorIndex Value="1"/>
-        <TopLine Value="127"/>
-        <CursorPos X="34" Y="147"/>
+        <TopLine Value="135"/>
+        <CursorPos X="3" Y="175"/>
         <UsageCount Value="202"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
@@ -44,9 +44,10 @@
         <ComponentName Value="functionunit"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
+        <IsVisibleTab Value="True"/>
         <EditorIndex Value="5"/>
-        <TopLine Value="7666"/>
-        <CursorPos X="38" Y="7679"/>
+        <TopLine Value="1415"/>
+        <CursorPos X="19" Y="1453"/>
         <UsageCount Value="202"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
@@ -272,11 +273,10 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="FlorwChart"/>
-        <IsVisibleTab Value="True"/>
         <EditorIndex Value="11"/>
         <TopLine Value="3044"/>
-        <CursorPos X="76" Y="3063"/>
-        <UsageCount Value="110"/>
+        <CursorPos X="43" Y="3063"/>
+        <UsageCount Value="111"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
       </Unit21>
@@ -336,135 +336,124 @@
     <JumpHistory Count="30" HistoryIndex="29">
       <Position1>
         <Filename Value="../FrowCreat/florwchart.pas"/>
-        <Caret Line="2023" Column="6" TopLine="2013"/>
+        <Caret Line="1208" Column="63" TopLine="1181"/>
       </Position1>
       <Position2>
         <Filename Value="../FrowCreat/florwchart.pas"/>
-        <Caret Line="1992" Column="3" TopLine="1988"/>
+        <Caret Line="1247" Column="30" TopLine="1202"/>
       </Position2>
       <Position3>
         <Filename Value="../FrowCreat/florwchart.pas"/>
-        <Caret Line="1314" Column="10" TopLine="1309"/>
+        <Caret Line="2059" Column="20" TopLine="2034"/>
       </Position3>
       <Position4>
         <Filename Value="../FrowCreat/florwchart.pas"/>
-        <Caret Line="3047" Column="3" TopLine="3043"/>
+        <Caret Line="2411" Column="29" TopLine="2366"/>
       </Position4>
       <Position5>
         <Filename Value="../FrowCreat/florwchart.pas"/>
-        <Caret Line="1122" Column="10" TopLine="1094"/>
+        <Caret Line="3047" Column="24" TopLine="3001"/>
       </Position5>
       <Position6>
         <Filename Value="../FrowCreat/florwchart.pas"/>
-        <Caret Line="3047" Column="3" TopLine="3043"/>
+        <Caret Line="1247" Column="30" TopLine="1221"/>
       </Position6>
       <Position7>
         <Filename Value="../FrowCreat/florwchart.pas"/>
-        <Caret Line="1122" Column="10" TopLine="1094"/>
+        <Caret Line="3047" Column="24" TopLine="3001"/>
       </Position7>
       <Position8>
         <Filename Value="../FrowCreat/florwchart.pas"/>
-        <Caret Line="1064" Column="10" TopLine="1036"/>
+        <Caret Line="1247" Column="22" TopLine="1221"/>
       </Position8>
       <Position9>
         <Filename Value="../FrowCreat/florwchart.pas"/>
-        <Caret Line="2000" Column="7" TopLine="1996"/>
+        <Caret Line="3047" Column="24" TopLine="3016"/>
       </Position9>
       <Position10>
         <Filename Value="../FrowCreat/florwchart.pas"/>
-        <Caret Line="1122" Column="10" TopLine="1094"/>
+        <Caret Line="1124" Column="11" TopLine="1095"/>
       </Position10>
       <Position11>
         <Filename Value="../FrowCreat/florwchart.pas"/>
-        <Caret Line="1016" Column="10" TopLine="1003"/>
+        <Caret Line="1005" Column="23" TopLine="763"/>
       </Position11>
       <Position12>
         <Filename Value="../FrowCreat/florwchart.pas"/>
-        <Caret Line="3047" Column="24" TopLine="3039"/>
+        <Caret Line="3047" Column="3" TopLine="3043"/>
       </Position12>
       <Position13>
         <Filename Value="../FrowCreat/florwchart.pas"/>
-        <Caret Line="1124" Column="12" TopLine="1097"/>
+        <Caret Line="1139" Column="8" TopLine="1095"/>
       </Position13>
       <Position14>
         <Filename Value="../FrowCreat/florwchart.pas"/>
-        <Caret Line="1208" Column="63" TopLine="1181"/>
+        <Caret Line="3068" Column="3" TopLine="3064"/>
       </Position14>
       <Position15>
         <Filename Value="../FrowCreat/florwchart.pas"/>
-        <Caret Line="1247" Column="30" TopLine="1202"/>
+        <Caret Line="1160" Column="5" TopLine="1127"/>
       </Position15>
       <Position16>
         <Filename Value="../FrowCreat/florwchart.pas"/>
-        <Caret Line="2059" Column="20" TopLine="2034"/>
+        <Caret Line="1153" Column="61" TopLine="1139"/>
       </Position16>
       <Position17>
         <Filename Value="../FrowCreat/florwchart.pas"/>
-        <Caret Line="2411" Column="29" TopLine="2366"/>
+        <Caret Line="2798" Column="13" TopLine="2601"/>
       </Position17>
       <Position18>
-        <Filename Value="../FrowCreat/florwchart.pas"/>
-        <Caret Line="3047" Column="24" TopLine="3001"/>
+        <Filename Value="../main_unit/main.pas"/>
+        <Caret Line="1116" Column="39" TopLine="1107"/>
       </Position18>
       <Position19>
-        <Filename Value="../FrowCreat/florwchart.pas"/>
-        <Caret Line="1247" Column="30" TopLine="1221"/>
+        <Filename Value="../main_unit/main.pas"/>
+        <Caret Line="919" TopLine="874"/>
       </Position19>
       <Position20>
-        <Filename Value="../FrowCreat/florwchart.pas"/>
-        <Caret Line="3047" Column="24" TopLine="3001"/>
+        <Filename Value="../main_unit/main.pas"/>
+        <Caret Line="882" TopLine="874"/>
       </Position20>
       <Position21>
-        <Filename Value="../FrowCreat/florwchart.pas"/>
-        <Caret Line="1247" Column="22" TopLine="1221"/>
+        <Filename Value="../main_unit/main.pas"/>
+        <Caret Line="919" TopLine="874"/>
       </Position21>
       <Position22>
-        <Filename Value="../FrowCreat/florwchart.pas"/>
-        <Caret Line="3047" Column="24" TopLine="3016"/>
+        <Filename Value="../main_unit/main.pas"/>
+        <Caret Line="882" TopLine="874"/>
       </Position22>
       <Position23>
-        <Filename Value="../FrowCreat/florwchart.pas"/>
-        <Caret Line="1124" Column="11" TopLine="1095"/>
+        <Filename Value="../main_unit/main.pas"/>
+        <Caret Line="919" TopLine="881"/>
       </Position23>
       <Position24>
-        <Filename Value="../FrowCreat/florwchart.pas"/>
-        <Caret Line="1005" Column="23" TopLine="763"/>
+        <Filename Value="../main_unit/main.pas"/>
+        <Caret Line="882" TopLine="873"/>
       </Position24>
       <Position25>
-        <Filename Value="../FrowCreat/florwchart.pas"/>
-        <Caret Line="3047" Column="3" TopLine="3043"/>
+        <Filename Value="../main_unit/main.pas"/>
+        <Caret Line="919" Column="23" TopLine="873"/>
       </Position25>
       <Position26>
-        <Filename Value="../FrowCreat/florwchart.pas"/>
-        <Caret Line="1139" Column="8" TopLine="1095"/>
+        <Filename Value="../main_unit/main.pas"/>
+        <Caret Line="882" TopLine="873"/>
       </Position26>
       <Position27>
-        <Filename Value="../FrowCreat/florwchart.pas"/>
-        <Caret Line="3068" Column="3" TopLine="3064"/>
+        <Filename Value="../main_unit/main.pas"/>
+        <Caret Line="883" Column="156" TopLine="873"/>
       </Position27>
       <Position28>
-        <Filename Value="../FrowCreat/florwchart.pas"/>
-        <Caret Line="1160" Column="5" TopLine="1127"/>
+        <Filename Value="../edit_unit/unit_edit.pas"/>
+        <Caret Line="147" Column="34" TopLine="127"/>
       </Position28>
       <Position29>
-        <Filename Value="../FrowCreat/florwchart.pas"/>
-        <Caret Line="1153" Column="61" TopLine="1139"/>
+        <Filename Value="../function_unit/function_unit.pas"/>
+        <Caret Line="133" Column="18" TopLine="101"/>
       </Position29>
       <Position30>
-        <Filename Value="../FrowCreat/florwchart.pas"/>
-        <Caret Line="2798" Column="13" TopLine="2601"/>
+        <Filename Value="../function_unit/function_unit.pas"/>
+        <Caret Line="1455" Column="3" TopLine="1415"/>
       </Position30>
     </JumpHistory>
   </ProjectSession>
-  <Debugging>
-    <BreakPoints Count="1">
-      <Item1>
-        <Kind Value="bpkSource"/>
-        <WatchScope Value="wpsLocal"/>
-        <WatchKind Value="wpkWrite"/>
-        <Source Value="../FrowCreat/florwchart.pas"/>
-        <Line Value="3061"/>
-      </Item1>
-    </BreakPoints>
-  </Debugging>
 </CONFIG>

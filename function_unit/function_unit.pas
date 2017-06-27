@@ -1450,6 +1450,9 @@ begin
       end;
     end;
   end;
+  if (st.count = 2) and (st[1] <> null) then begin
+      functionunit.fileopen( st[1] );
+  end;
      inc(i);//err10
   except
     showmessage('起動に失敗しました。'+chr(13)+'エラーコード '+inttostr(i));
