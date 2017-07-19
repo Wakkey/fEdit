@@ -110,6 +110,7 @@ Chack_mnu
 コマンド削除
 -
 SQLTable Builder
+SQL Open
 JSONFormEdit
 JSONFormCreater
 HtmlEdit
@@ -119,7 +120,8 @@ HtmlEdit
 マクロ記号挿入
 マクロ実行
 実行
-fEdit起動
+java
 目次
 チュートリアル
 -
+紹介

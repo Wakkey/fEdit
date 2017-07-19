@@ -30,6 +30,7 @@ type
     MenuItem12: TMenuItem;
     MenuItem13: TMenuItem;
     MenuItem14: TMenuItem;
+    MenuItem15: TMenuItem;
     MenuItem17: TMenuItem;
     MenuItem18: TMenuItem;
     MenuItem19: TMenuItem;
@@ -274,8 +275,8 @@ var
 implementation
 
 uses function_unit, unit_edit, colordlg, repraceMacro, macrow, filetype_form,
-  HtmlEdit, TableBuilder, JSONFormEdit, Jsonparse, versiondialog, tmp_clr,
-  FlorwChart;
+  HtmlEdit, TableBuilder, MySQL, JSONFormEdit, Jsonparse, versiondialog,
+  tmp_clr, FlorwChart;
 
 {$R *.lfm}
 
@@ -1002,8 +1003,15 @@ begin
 end;
 
 procedure Tmainform.MenuItem15Click(Sender: TObject);
+var
+  sqlform: TForm1;
 begin
+  functionunit.newwindow();
+  sqlform := TForm1.Create(owner);
 
+  sqlform.Show;
+  sqlform.Caption := sqlform.Caption + '[' + IntToStr(mainform.PageControl1.PageIndex) + ']';
+  functionunit.editlist.Items[mainform.PageControl1.PageIndex].PageControl1.PageIndex := 2;
 end;
 
 procedure Tmainform.MenuItem16Click(Sender: TObject);

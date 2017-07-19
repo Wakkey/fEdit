@@ -1,0 +1,71 @@
+sqlite,NULL,NULL
+sqlite,INTEGER,文字列
+sqlite,REAL,0.01
+sqlite,TEXT,文字列
+sqlite,STRING,文字列
+sqlite,DATE,日付
+sqlite,TIME,時間
+sqlite,BLOB,バイナリデータ
+mysql,NULL,NULL
+mysql,TINYINT,-128~127
+mysql,SMALLINT,-32768~32767
+mysql,MIDIUMINT,-8388608~8388607
+mysql,INT,-2147483648~2147483647
+mysql,BIGINT,-9223372036854775808~9223372036854775807
+mysql,FLAOT,浮動小数点
+mysql,DOUBLE,浮動小数点
+mysql,DATE,YYYY-MM-DD
+mysql,DATETIME,YYYY-MM-DD HH:MM:SS
+mysql,TIMESTAMP,YYYY-MM-DD HH:MM:SS
+mysql,TIME,HH:MM:SS
+mysql,YEAR,YYYY
+mysql,CHAR(255),固定長文字列255文字
+mysql,VARCHAR(65535),可変長文字列65535BYTE
+mysql,BINARY(255),固定長バイナリバイト文字列
+mysql,VARBINARY(65535),可変長バイナリバイト文字列
+mysql,TINYBLOB,最長255バイト
+mysql,BLOB(65535),最長35535バイト
+mysql,MEDIUMBLOB,最長16777215バイト
+mysql,LONGBLOB,最長4Gバイト
+mysql,TINYTEXT,最長255バイト
+mysql,TEXT(65535),最長65535バイト
+mysql,LONGTEXT,最長4Ｇバイト
+mysql,ENUM,'ENUM('value1','value2','value3')'
+mysql,SET,'SET('value1','value2','value3')'
+postgresql,smallint,-32768~+32767
+postgresql,integer,-2147483648~+2147483647
+postgresql,bigint,-9223372036854775808~+9223372036854775807
+postgresql,decimal,小数点前までは131072桁、小数点以降は16383桁
+postgresql,numeric,小数点前までは131072桁、小数点以降は16383桁
+postgresql,real,6桁精度
+postgresql,double,15桁精度
+postgresql,precision,15桁精度
+postgresql,smallserial,狭範囲自動整数 1~32767
+postgresql,serial,自動増分整数 1~2147483647
+postgresql,bigserial,広範囲自動増分整数 1~9223372036854775807
+postgresql,money,貨幣金額 -92233720368547758.08 ~ +92233720368547758.07
+postgresql,character,上限付き可変長文字型
+postgresql,varying(n),上限付き可変長文字型
+postgresql,varchar(n),上限付き可変長文字型
+postgresql,character(n),空白で埋められた固定長文字型
+postgresql,char(n),空白で埋められた固定長文字型
+postgresql,text,制限なし可変長文字型
+postgresql,bytea,可変長のバイナリ列
+postgresql,TIMESTAMP,日付と時刻両方
+postgresql,date,日付
+postgresql,time,時刻
+postgresql,interval,時間間隔
+postgresql,boolean,真偽値
+postgresql,point,'(x,y)'
+postgresql,line,'{A,B,C}'
+postgresql,lseg,'((x1,y1),(x2,y2))'
+postgresql,box,'((x1,y1),(x2,y2))'
+postgresql,path,'((x1,y1),...)'
+postgresql,polygon,'((x1,y1),...)'
+postgresql,circle,'<(x,y),r>（中心と半径）'
+postgresql,cidr,IPv4、およびIPv6
+postgresql,inet,IPv4もしくはIPv6ホスト及びネットワーク
+postgresql,macaddr,MACアドレス
+postgresql,json,テキストのJSONデータ
+postgresql,jsonb,バイナリ JSON データ
+postgresql,xml,XMLデータ

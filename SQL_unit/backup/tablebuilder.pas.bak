@@ -6,7 +6,7 @@ interface
 
 uses
   LCLIntf, LCLType, LMessages, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
-  StdCtrls, ExtCtrls, Buttons, ComCtrls,sqlpropedit, sqldb, db, sqlite3conn;
+  StdCtrls, ExtCtrls, Buttons, ComCtrls,sqlpropedit, sqldb, db, sqlite3conn, Types;
 
 type
 
@@ -14,7 +14,10 @@ type
 
   TForm2 = class(TForm)
     BitBtn1: TBitBtn;
+    ComboBox1: TComboBox;
     Edit1: TEdit;
+    Label1: TLabel;
+    Label2: TLabel;
     Panel1: TPanel;
     GroupBox1: TGroupBox;
     Label3: TLabel;
@@ -44,7 +47,12 @@ type
     procedure Button3Click(Sender: TObject);
     procedure Button4Click(Sender: TObject);
     procedure Button6Click(Sender: TObject);
+    procedure ComboBox1Change(Sender: TObject);
     procedure ComboBox3Click(Sender: TObject);
+    procedure ComboBox3DrawItem(Control: TWinControl; Index: Integer;
+      ARect: TRect; State: TOwnerDrawState);
+    procedure ComboBox3MouseMove(Sender: TObject; Shift: TShiftState; X,
+      Y: Integer);
     procedure Edit1Change(Sender: TObject);
     procedure Edit1Click(Sender: TObject);
     procedure Edit2Change(Sender: TObject);
@@ -59,6 +67,7 @@ type
   private
     { Private 宣言 }
     sw1:boolean;
+    sqldrv,drvfile,sqlname,sql_datataype,sql_help:TStringList;
   public
     { Public 宣言 }
     sql,sql_title:string;
@@ -230,9 +239,37 @@ begin
   //Edit1.Enabled := true; ComboBox1.Enabled := true; edit4.Enabled := true;
 end;
 
+procedure TForm2.ComboBox1Change(Sender: TObject);
+var
+  i,i2:integer;
+  s:string;
+begin
+  i2 := combobox1.ItemIndex;
+  s := combobox1.Items[i2];
+  combobox3.Items.Clear;
+  for i := 0 to sqlname.Count -1 do begin
+    if s = sqlname[i] then begin
+      combobox3.Items.Add( sql_datataype[i] );
+    end;
+  end;
+end;
+
 procedure TForm2.ComboBox3Click(Sender: TObject);
 begin
   Button6.Enabled := true;
+end;
+
+procedure TForm2.ComboBox3DrawItem(Control: TWinControl; Index: Integer;
+  ARect: TRect; State: TOwnerDrawState);
+begin
+
+end;
+
+procedure TForm2.ComboBox3MouseMove(Sender: TObject; Shift: TShiftState; X,
+  Y: Integer);
+
+begin
+
 end;
 
 procedure TForm2.Edit1Change(Sender: TObject);
@@ -264,20 +301,76 @@ begin
 end;
 
 procedure TForm2.ComboBox3Change(Sender: TObject);
+var
+  i:integer;
 begin
+  if -1 < combobox3.ItemIndex then begin
+    i := sql_datataype.IndexOf( combobox3.Items[combobox3.ItemIndex] );
+    label2.Caption := sql_help[i];
+  end;
   Button6.Enabled := true;
 end;
 
 procedure TForm2.FormCloseQuery(Sender: TObject; var CanClose: boolean);
 begin
-
+  drvfile.Free;
+  sqldrv.Free;
 end;
 
 procedure TForm2.FormCreate(Sender: TObject);
 var
+  st,st2:TStringList;
   i:integer;
 begin
-    for i := 0 to 3 do begin
+  try
+    st := TStringList.Create;
+    st2 := TStringList.Create;
+    st2.Clear;
+    //SQLType.Items.Clear;
+    sqldrv := TStringList.Create;
+    sqldrv.Clear;
+    drvfile := TStringList.Create;
+    drvfile.Clear;
+    st.LoadFromFile(ExtractFilePath(ParamStr(0))+'ini\drvlist.csv');
+    for i := 0 to st.Count -1 do begin;
+      st2.CommaText := st[i];
+      drvfile.Add(st2[0]);
+      sqldrv.Add(st2[1]);
+      //SQLType.Items.Add(st2[2]);
+    end;
+    st.free;
+    st2.Free;
+  except
+
+  end;
+
+  try
+    st := TStringList.Create;
+    st2 := TStringList.Create;
+    st2.Clear;
+    sqlname := TStringList.Create;
+    sqlname.Clear;
+    sql_datataype := TStringList.Create;
+    sql_datataype.Clear;
+    sql_help := TStringList.Create;
+    sql_help.Clear;
+    st.LoadFromFile(ExtractFilePath(ParamStr(0))+'ini\sqllist.csv');
+    for i := 0 to st.Count -1 do begin;
+      st2.CommaText := st[i];
+      sqlname.Add(st2[0]);
+      sql_datataype.Add(st2[1]);
+      sql_help.Add(st2[2]);
+      if -1 = combobox1.Items.IndexOf(st2[0]) then begin
+        combobox1.Items.Add(st2[0]);
+      end;
+    end;
+    st.free;
+    st2.Free;
+  except
+
+  end;
+
+  for i := 0 to 3 do begin
     sql_word[i] := TStringList.Create;
     sql_word[i].clear;
   end;

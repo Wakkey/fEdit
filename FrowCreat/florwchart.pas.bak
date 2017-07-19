@@ -137,6 +137,7 @@ type
     procedure ComboBox4Change(Sender: TObject);
     procedure Memo2DblClick(Sender: TObject);
     procedure MenuItem1Click(Sender: TObject);
+    procedure Panel3Click(Sender: TObject);
     procedure Panel5Click(Sender: TObject);
     procedure Panel8Click(Sender: TObject);
     procedure TrackBar1Change(Sender: TObject);
@@ -2368,6 +2369,11 @@ var
       end;
 end;
 
+procedure TFCFM.Panel3Click(Sender: TObject);
+begin
+
+end;
+
 procedure TFCFM.Panel5Click(Sender: TObject);
 begin
 
@@ -3057,8 +3063,8 @@ begin
          i1 := editNo_tmp;
          // showmessage(FCFM.comp[i].Name + char(13)+ inttostr(i));
 
-            FCFM.ComboBox6.ItemIndex:= i1;
-
+            ComboBox6.ItemIndex:= i1;
+            ComboBox6.Items[i1];
             //showmessage(inttostr(i1));
             ary_TFC_Comp[i1].TLB.Caption:= ary_TFC_Comp[i1].TMem.Lines.Text;
             ary_TFC_Comp[i1].TMem.Lines.SaveToFile( FCFM.setprjdir + inttostr(i1) + 'm');

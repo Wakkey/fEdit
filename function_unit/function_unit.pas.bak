@@ -1310,7 +1310,7 @@ var
   s:string;
 begin
   s :=
-  'AllFile|*.*|Text|*.txt|CSV|*.csv|JavaScript|*.js|HTML|*.html;*.htm|Css|*.css|Json|*.json|XML|*.xml|Java|*.java|C|*.c|C++|*.cpp|C hedder|*.h|C++ hedder|*.hpp|Pascal/Delphi|*.pas|PHP|*.php|UnixShell|*.sh|Bat|*.bat|INI|*.ini|Sqlite|*.db3';
+  'AllFile|*.*|Text|*.txt|CSV|*.csv|JavaScript|*.js|HTML|*.html;*.htm|Css|*.css|Json|*.json|XML|*.xml|Java|*.java|C|*.c|C++|*.cpp|C hedder|*.h|C++ hedder|*.hpp|Pascal/Delphi|*.pas|PHP|*.php|UnixShell|*.sh|Bat|*.bat|INI|*.ini';
   datamodule1.OpenDialog1.Filter:= s;
   datamodule1.SaveDialog1.Filter:= s;
   macro_form.OpenDialog1.Filter:= s;
@@ -1450,7 +1450,7 @@ begin
       end;
     end;
   end;
-  if (st.count = 1) and (st[1] <> null) then begin
+  if (st.count = 2) and (st[1] <> null) then begin
       functionunit.fileopen( st[1] );
   end;
      inc(i);//err10
@@ -6470,7 +6470,7 @@ var
         '.ini':mainform.Menu_INIClick(mainform.Menu_INI);
         '.java':mainform.Menu_JavaClick(mainform.Menu_Java);
         '.sh':mainform.MenuI_UnixShellClick(mainform.MenuI_UnixShell);
-        '.db3':begin
+        {'.db3':begin
             s2 := '';
             for i3 := 1 to length(s1) -4 do begin;
                 s2 := s2 + s1[i3];
@@ -6479,12 +6479,12 @@ var
             functionunit.editlist.Items[i].SynEdit1.Lines.Text:= 'SELECT * FROM '+S2;
             functionunit.editlist.Items[i].PageControl1.ActivePageIndex:=2;
             functionunit.editlist.Items[i].Panel1.Visible:=TRUE;
-         end;
+         end;}
       end;
     finally
 
 
-      if s <> '.db3' then begin
+      begin
       try
       //showmessage(DataModule1.OpenDialog1.Files[i1]);
       //showmessage(functionunit.editlist.Items[i].filename_path);
@@ -6578,7 +6578,7 @@ begin
       i := Tabs;
 
       with functionunit.editlist.Items[i] do begin
-        if (not nameing_complate) and (not save_complate) then begin
+        if (not nameing_complate) {and (not save_complate)} then begin
           saveas(i);
           exit;
         end;
@@ -6637,9 +6637,9 @@ begin
   finally
 
   end;
-  if functionunit.editlist.Items[i].save_complate then
-    exit;
-  end;
+  //if functionunit.editlist.Items[i].save_complate then
+  //  exit;
+  //end;
        ext := '';
       {$IFDEF Linux}
         ext := functionunit.editlist.Items[i].SaveDialog1.DefaultExt;

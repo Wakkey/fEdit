@@ -1,7 +1,7 @@
 object mainform: Tmainform
-  Left = 473
+  Left = 497
   Height = 309
-  Top = 362
+  Top = 501
   Width = 577
   Caption = 'mainform'
   ClientHeight = 289
@@ -507,6 +507,10 @@ object mainform: Tmainform
       object MenuItem8: TMenuItem
         Caption = 'SQLTable Builder'
         OnClick = MenuItem8Click
+      end
+      object MenuItem15: TMenuItem
+        Caption = 'SQL Open'
+        OnClick = MenuItem15Click
       end
       object MenuItem10: TMenuItem
         Caption = 'JSONFormEdit'

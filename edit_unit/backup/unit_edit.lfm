@@ -1,7 +1,7 @@
 object editform: Teditform
-  Left = 635
+  Left = 260
   Height = 310
-  Top = 211
+  Top = 208
   Width = 524
   Caption = 'editform'
   ClientHeight = 310
@@ -20,10 +20,10 @@ object editform: Teditform
     Height = 310
     Top = 0
     Width = 524
-    ActivePage = TabSheet3
+    ActivePage = TabSheet1
     Align = alClient
     PopupMenu = PopupMenu1
-    TabIndex = 2
+    TabIndex = 0
     TabOrder = 0
     OnChange = PageControl1Change
     OnChanging = PageControl1Changing
@@ -551,7 +551,7 @@ object editform: Teditform
       end
     end
     object TabSheet3: TTabSheet
-      Caption = 'ViewMode'
+      Caption = 'DataBase'
       ClientHeight = 282
       ClientWidth = 516
       object TreeView1: TTreeView
@@ -575,39 +575,21 @@ object editform: Teditform
         TabOrder = 1
         object Panel2: TPanel
           Left = 1
-          Height = 104
+          Height = 48
           Top = 1
           Width = 514
           Align = alTop
-          ClientHeight = 104
+          ClientHeight = 48
           ClientWidth = 514
           TabOrder = 0
           object Button1: TButton
-            Left = 416
+            Left = 16
             Height = 25
             Top = 8
             Width = 75
-            Caption = 'SQLite接続'
+            Caption = 'SQL接続'
             OnClick = Button1Click
             TabOrder = 0
-          end
-          object Button2: TButton
-            Left = 416
-            Height = 25
-            Top = 40
-            Width = 75
-            Caption = 'DataBase接続'
-            OnClick = Button2Click
-            TabOrder = 1
-          end
-          object Button3: TButton
-            Left = 416
-            Height = 25
-            Top = 72
-            Width = 75
-            Caption = 'Table接続'
-            OnClick = Button3Click
-            TabOrder = 2
           end
           object Label6: TLabel
             Left = 18
@@ -622,41 +604,29 @@ object editform: Teditform
             Height = 23
             Top = 103
             Width = 152
-            TabOrder = 3
+            TabOrder = 1
             Text = '3306'
           end
         end
-        object DBGrid1: TDBGrid
+        object StringGrid1: TStringGrid
           Left = 1
-          Height = 176
-          Top = 105
+          Height = 232
+          Top = 49
           Width = 514
           Align = alClient
-          Color = clWindow
-          Columns = <>
-          DataSource = DataSource1
           TabOrder = 1
         end
       end
     end
   end
-  object SQLite3Connection1: TSQLite3Connection
-    Connected = False
-    LoginPrompt = False
-    KeepConnection = False
-    Transaction = SQLTransaction1
-    Options = []
-    left = 155
-    top = 101
-  end
   object SQLTransaction1: TSQLTransaction
     Active = False
-    Database = SQLite3Connection1
     Options = []
-    left = 208
-    top = 129
+    left = 64
+    top = 102
   end
   object DataSource1: TDataSource
+    DataSet = SQLQuery1
     left = 97
     top = 101
   end
@@ -673,8 +643,8 @@ object editform: Teditform
   end
   object PopupMenu1: TPopupMenu
     OnClose = PopupMenu1Close
-    left = 204
-    top = 156
+    left = 216
+    top = 160
     object MenuItem22: TMenuItem
       Caption = '元に戻す'
     end
@@ -715,14 +685,16 @@ object editform: Teditform
   end
   object SQLQuery1: TSQLQuery
     FieldDefs = <>
+    Transaction = SQLTransaction1
     Options = []
     Params = <>
+    DataSource = DataSource1
     left = 128
     top = 101
   end
   object MemDataset1: TMemDataset
     FieldDefs = <>
-    left = 187
+    left = 160
     top = 102
   end
 end

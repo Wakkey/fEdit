@@ -137,6 +137,7 @@ type
     procedure ComboBox4Change(Sender: TObject);
     procedure Memo2DblClick(Sender: TObject);
     procedure MenuItem1Click(Sender: TObject);
+    procedure Panel3Click(Sender: TObject);
     procedure Panel5Click(Sender: TObject);
     procedure Panel8Click(Sender: TObject);
     procedure TrackBar1Change(Sender: TObject);
@@ -2366,6 +2367,11 @@ var
         listbox1.Update;
       except
       end;
+end;
+
+procedure TFCFM.Panel3Click(Sender: TObject);
+begin
+
 end;
 
 procedure TFCFM.Panel5Click(Sender: TObject);

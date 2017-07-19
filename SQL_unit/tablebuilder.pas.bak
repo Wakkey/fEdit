@@ -6,15 +6,35 @@ interface
 
 uses
   LCLIntf, LCLType, LMessages, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
-  StdCtrls, ExtCtrls, Buttons, ComCtrls,sqlpropedit, sqldb, db, sqlite3conn;
+  StdCtrls, ExtCtrls, Buttons, ComCtrls,sqlpropedit, sqldb, db, sqlite3conn, Types
+  {$IFDEF Windows}
+    ,windows ,shellapi
+  {$ENDIF}
+
+  ;
 
 type
 
   { TForm2 }
 
   TForm2 = class(TForm)
+    Bevel5: TBevel;
     BitBtn1: TBitBtn;
+    ComboBox1: TComboBox;
     Edit1: TEdit;
+    Edit4: TEdit;
+    Edit5: TEdit;
+    Edit6: TEdit;
+    Edit7: TEdit;
+    Edit8: TEdit;
+    Label1: TLabel;
+    Label10: TLabel;
+    Label11: TLabel;
+    Label12: TLabel;
+    Label13: TLabel;
+    Label2: TLabel;
+    Label4: TLabel;
+    Label8: TLabel;
     Panel1: TPanel;
     GroupBox1: TGroupBox;
     Label3: TLabel;
@@ -44,7 +64,12 @@ type
     procedure Button3Click(Sender: TObject);
     procedure Button4Click(Sender: TObject);
     procedure Button6Click(Sender: TObject);
+    procedure ComboBox1Change(Sender: TObject);
     procedure ComboBox3Click(Sender: TObject);
+    procedure ComboBox3DrawItem(Control: TWinControl; Index: Integer;
+      ARect: TRect; State: TOwnerDrawState);
+    procedure ComboBox3MouseMove(Sender: TObject; Shift: TShiftState; X,
+      Y: Integer);
     procedure Edit1Change(Sender: TObject);
     procedure Edit1Click(Sender: TObject);
     procedure Edit2Change(Sender: TObject);
@@ -59,6 +84,7 @@ type
   private
     { Private 宣言 }
     sw1:boolean;
+    sqldrv,drvfile,sqlname,sqltype,sql_datataype,sql_help,portNo:TStringList;
   public
     { Public 宣言 }
     sql,sql_title:string;
@@ -176,46 +202,10 @@ begin
   end;
   sw1 := false;
 
-  if ComboBox3.Text = 'NULL' then begin
-    detakata := 'NULL';
-    sql_word[2].Add('NULL');
-    memo1.Lines.Text := memo1.Lines.Text + edit3.Text + ' ' + detakata;
-  end;
-  if ComboBox3.Text = 'INTEGER' then begin
-    detakata := 'INTEGER';
-     sql_word[2].Add('1');
-    memo1.Lines.Text := memo1.Lines.Text + edit3.Text + ' ' + detakata;
-  end;
-  if ComboBox3.Text = 'REAL' then begin
-    detakata := 'REAL';
-     sql_word[2].Add('0.01');
-    memo1.Lines.Text := memo1.Lines.Text + edit3.Text + ' ' + detakata;
-  end;
-  if ComboBox3.Text = 'TEXT' then begin
-    detakata := 'TEXT';
-     sql_word[2].Add('文字列');
-    memo1.Lines.Text := memo1.Lines.Text + edit3.Text + ' ' + detakata;
-  end;
-  if ComboBox3.Text = 'STRING' then begin
-    detakata := 'STRING';
-     sql_word[2].Add('文字列');
-    memo1.Lines.Text := memo1.Lines.Text + edit3.Text + ' ' + detakata;
-  end;
-  if ComboBox3.Text = 'DATE' then begin
-    detakata := 'DATE';
-     sql_word[2].Add('日付');
-    memo1.Lines.Text := memo1.Lines.Text + edit3.Text + ' ' + detakata;
-  end;
-  if ComboBox3.Text = 'TIME' then begin
-    detakata := 'TIME';
-     sql_word[2].Add('時間');
-    memo1.Lines.Text := memo1.Lines.Text + edit3.Text + ' ' + detakata;
-  end;
-  if ComboBox3.Text = 'BLOB' then begin
-    detakata := 'BLOB';
-     sql_word[2].Add('バイナリデータ');
-    memo1.Lines.Text := memo1.Lines.Text + edit3.Text + ' ' + detakata;
-  end;
+  detakata := combobox3.Items[combobox3.ItemIndex];
+  sql_word[2].Add(Label2.Caption);
+  memo1.Lines.Text := memo1.Lines.Text + edit3.Text + ' ' + detakata;
+
 
   ComboBox2.Items.Add(edit3.Text);
 
@@ -230,9 +220,46 @@ begin
   //Edit1.Enabled := true; ComboBox1.Enabled := true; edit4.Enabled := true;
 end;
 
+procedure TForm2.ComboBox1Change(Sender: TObject);
+var
+  i,i2:integer;
+  s:string;
+begin
+  i2 := combobox1.ItemIndex;
+  s := combobox1.Items[i2];
+  combobox3.Items.Clear;
+  for i := 0 to sqlname.Count -1 do begin
+    if s = sqlname[i] then begin
+      combobox3.Items.Add( sql_datataype[i] );
+    end;
+  end;
+  showmessage(PortNo.Text);
+  i2 :=  SQLType.IndexOf(s);
+  if i2 > -1 then begin
+    if PortNo[i2] = 'non' then begin
+      edit4.Text := '';
+      exit;
+    end;
+    edit4.Text := PortNo[i2];
+  end;
+end;
+
 procedure TForm2.ComboBox3Click(Sender: TObject);
 begin
   Button6.Enabled := true;
+end;
+
+procedure TForm2.ComboBox3DrawItem(Control: TWinControl; Index: Integer;
+  ARect: TRect; State: TOwnerDrawState);
+begin
+
+end;
+
+procedure TForm2.ComboBox3MouseMove(Sender: TObject; Shift: TShiftState; X,
+  Y: Integer);
+
+begin
+
 end;
 
 procedure TForm2.Edit1Change(Sender: TObject);
@@ -264,20 +291,80 @@ begin
 end;
 
 procedure TForm2.ComboBox3Change(Sender: TObject);
+var
+  i:integer;
 begin
+  if -1 < combobox3.ItemIndex then begin
+    i := sql_datataype.IndexOf( combobox3.Items[combobox3.ItemIndex] );
+    label2.Caption := sql_help[i];
+  end;
   Button6.Enabled := true;
 end;
 
 procedure TForm2.FormCloseQuery(Sender: TObject; var CanClose: boolean);
 begin
-
+  drvfile.Free;
+  sqldrv.Free;
 end;
 
 procedure TForm2.FormCreate(Sender: TObject);
 var
+  st,st2:TStringList;
   i:integer;
 begin
-    for i := 0 to 3 do begin
+  try
+    st := TStringList.Create;
+    st2 := TStringList.Create;
+    st2.Clear;
+    SQLType := TStringList.Create;
+    sqltype.Clear;
+    sqldrv := TStringList.Create;
+    sqldrv.Clear;
+    drvfile := TStringList.Create;
+    drvfile.Clear;
+    portNo := TStringList.Create;
+    portNo.clear;
+    st.LoadFromFile(ExtractFilePath(ParamStr(0))+'ini\drvlist.csv');
+    for i := 0 to st.Count -1 do begin;
+      st2.CommaText := st[i];
+      drvfile.Add(st2[0]);
+      sqldrv.Add(st2[1]);
+      SQLType.Add(st2[2]);
+      portNo.Add(st2[3]);
+    end;
+    st.free;
+    st2.Free;
+  except
+
+  end;
+
+  try
+    st := TStringList.Create;
+    st2 := TStringList.Create;
+    st2.Clear;
+    sqlname := TStringList.Create;
+    sqlname.Clear;
+    sql_datataype := TStringList.Create;
+    sql_datataype.Clear;
+    sql_help := TStringList.Create;
+    sql_help.Clear;
+    st.LoadFromFile(ExtractFilePath(ParamStr(0))+'ini\sqllist.csv');
+    for i := 0 to st.Count -1 do begin;
+      st2.CommaText := st[i];
+      sqlname.Add(st2[0]);
+      sql_datataype.Add(st2[1]);
+      sql_help.Add(st2[2]);
+      if -1 = combobox1.Items.IndexOf(st2[0]) then begin
+        combobox1.Items.Add(st2[0]);
+      end;
+    end;
+    st.free;
+    st2.Free;
+  except
+
+  end;
+
+  for i := 0 to 3 do begin
     sql_word[i] := TStringList.Create;
     sql_word[i].clear;
   end;
@@ -299,9 +386,103 @@ procedure TForm2.Button5Click(Sender: TObject);
 var
     //database: TSqliteDatabase;
   newFile : Boolean;
+  st,st2:Tstringlist;
+  i,i1:integer;
+  sql_set,hosts,ports,user,pass,dbname:string;
+  function set_code(s1,s2:TstringList;f,r:string):boolean;
+  var
+    k:integer;
+  begin
+    for k := 0 to s1.Count -1 do begin
+      s1[k] := StringReplace(s1[k], f, r, [ rfReplaceAll ]);
+    end;
+    s2.Text:= s1.Text;
+  end;
 begin
-  sql := Memo1.Lines.Text;
-  SQLite3Connection1.DatabaseName := edit2.Text + '.db3';
+  //sql := Memo1.Lines.Text;
+  st:= TStringList.Create;
+  st2:= TStringList.Create;
+  st.Clear;
+  st2.Clear;
+
+  try
+    st.LoadFromFile( ExtractFilePath( ParamStr( 0 ) ) + 'Script_lib\create_table_base.java' );
+  except
+
+  end;
+
+  sql_set := '""'+char(13);
+  for i1 := 0 to Memo1.Lines.Count -1 do begin
+    sql_set := sql_set + '+"' + Memo1.Lines[i1] + '"' + char(13);
+  end;
+  st2.Text:= st.Text;
+
+  if edit4.Text <> '' then begin
+    ports := ':'+Edit4.Text+'/';
+  end else begin
+    ports := ' ';
+  end;
+
+  if edit5.Text <> '' then begin
+    user := ',"'+Edit5.Text+'"';
+  end else begin
+    user := ' ';
+  end;
+
+  if edit6.Text <> '' then begin
+    pass := ',"'+Edit6.Text+'"';
+  end else begin
+    pass := ' ';
+  end;
+
+  if edit8.Text <> '' then begin
+    dbname := Edit8.Text;
+  end else begin
+    dbname := '';
+  end;
+
+  i := sqltype.IndexOf(combobox1.Items[combobox1.ItemIndex]);
+  set_code(st,st2,'sql_driver', sqldrv[i]);
+  set_code(st,st2,'sql_type',sqltype[i]);
+  set_code(st,st2,':protsNo/',ports);
+  set_code(st,st2,'//hosts',edit7.Text);
+  set_code(st,st2,'db_name',dbname);
+  set_code(st,st2,',"root"',user);
+  set_code(st,st2,',"password"',pass);
+  set_code(st,st2,'select_sql',sql_set);
+
+  try
+    st.SaveToFile(ExtractFilePath(ParamStr(0))+'Script_lib\create_table.java');
+    st.LoadFromFile(ExtractFilePath(ParamStr(0))+'Script_lib\sqlset.bat');
+    st2.Text := st.Text;
+    set_code(st,st2,'sql1', 'create_table');
+    set_code(st,st2,'driver', drvfile[i]);
+    st.SaveToFile(ExtractFilePath(ParamStr(0))+'Script_lib\sqlset1.bat');
+  except
+
+  end;
+  //st.Free;
+  //st2.Free;
+
+  {$IFDEF Windows}
+    ShellExecute(Handle, 'OPEN', pchar('.\Script_lib\sqlset1.bat'),'','', SW_SHOW);
+  {$ENDIF}
+  {$IFDEF LINUX}
+
+  {$ENDIF}
+  {$IFDEF Darwin}
+
+  {$ENDIF}
+    if sql_set = '' then begin
+        showmessage('no SQL code not Run!');
+        exit;
+    end;
+
+    st.Free;
+    st2.Free;
+
+
+  {SQLite3Connection1.DatabaseName := edit2.Text + '.db3';
   memo1.Lines.Clear;
   edit3.Text := ''; ComboBox3.Text := '';
   combobox2.Items.Clear;
@@ -339,7 +520,7 @@ begin
    sql := Memo1.Lines.Text;
   memo1.Lines.Clear;
   edit3.Text := ''; ComboBox3.Text := '';
-  combobox2.Items.Clear;
+  combobox2.Items.Clear;}
     {database := TSqliteDatabase.Create( sql_title+'.db3');
       try
         try

@@ -6,8 +6,9 @@ interface
 
 uses
   Classes, SysUtils, FileUtil, SynEdit, Forms, Controls, Graphics, Dialogs,
-  Menus, ComCtrls, StdCtrls, ExtCtrls, EditBtn, FileCtrl, DBGrids, sqlite3conn,
-  sqldb, db, memds;
+  Menus, ComCtrls, StdCtrls, ExtCtrls, EditBtn, FileCtrl, DBGrids, Grids,
+  sqldb, base64,
+  pqconnection, oracleconnection, mssqlconn, odbcconn, db, memds;
 
 type
 
@@ -16,10 +17,7 @@ type
   Teditform = class(TForm)
     ApplicationProperties1: TApplicationProperties;
     Button1: TButton;
-    Button2: TButton;
-    Button3: TButton;
     DataSource1: TDataSource;
-    DBGrid1: TDBGrid;
     Edit1: TEdit;
     Label6: TLabel;
     MemDataset1: TMemDataset;
@@ -39,9 +37,9 @@ type
     Panel2: TPanel;
     PopupMenu1: TPopupMenu;
     SaveDialog1: TSaveDialog;
-    SQLite3Connection1: TSQLite3Connection;
     SQLQuery1: TSQLQuery;
     SQLTransaction1: TSQLTransaction;
+    StringGrid1: TStringGrid;
     SynEdit1: TSynEdit;
     TabSheet1: TTabSheet;
     TabSheet2: TTabSheet;
@@ -95,7 +93,7 @@ var
 
 implementation
 
-uses function_unit, main, comp, repraceMacro, filetype_form;
+uses function_unit, main, comp, repraceMacro, filetype_form, MySQL;
 
 {$R *.lfm}
 
@@ -214,36 +212,23 @@ begin
 end;
 
 procedure Teditform.Button1Click(Sender: TObject);
+var
+  sqlform: TForm1;
 begin
-  {SQLite3Connection1.DatabaseName := filename_path;
-  SQLite3Connection1.Close; // Ensure the connection is closed when we start
-  try
-    try
-      SQLite3Connection1.Open;
-      SQLTransaction1.Active := true;
-      synedit1.Lines.Text := 'select * from ' +
-      extractfileName(filename_path);
-      sqlquery1.SQL.Text:= synedit1.Lines.Text;
-      sqlquery1.Open;
-    except
-    end;
-  except
-    ShowMessage('Unable to check if database file exists');
-  end;}
+  sqlform := TForm1.Create(owner);
+
+  sqlform.Show;
+  sqlform.Caption := sqlform.Caption + '[' + IntToStr(tabNo) + ']';
 end;
 
 procedure Teditform.Button2Click(Sender: TObject);
 begin
-  SynEdit1.Lines.Text:= 'SELECT * FROM ' + sql;
-  sqlset := 'SELECT * FROM ';
-  Button1Click(sender);
+
 end;
 
 procedure Teditform.Button3Click(Sender: TObject);
 begin
-  SynEdit1.Lines.Text:= 'SELECT * FROM ' + sql;
-  sqlset := 'SELECT * FROM ';
-  Button1Click(sender);
+
 end;
 
 procedure Teditform.FileListBox1Click(Sender: TObject);

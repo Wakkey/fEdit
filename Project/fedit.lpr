@@ -7,8 +7,8 @@ uses
   cthreads,
   {$ENDIF}{$ENDIF}
   Interfaces, // this includes the LCL widgetset
-  Forms, printer4lazarus, memdslaz, main, unit_edit, function_unit, comp,
-  colordlg, tool_window, find_unit, macrow, repraceMacro, filetype_form,
+  Forms, printer4lazarus, memdslaz, main, unit_edit, function_unit,
+  comp, colordlg, tool_window, find_unit, macrow, repraceMacro, filetype_form,
   HtmlEdit, htmlpropedit, sqlpropedit, TableBuilder, JSONFormdialog, Jsonparse,
   versiondialog, tmp_clr, florwchart
   { you can add units after this };
