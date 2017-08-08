@@ -6,7 +6,7 @@ interface
 
 uses
   Classes, SysUtils, FileUtil, Forms, Controls, Graphics, Dialogs, Menus,
-  ExtCtrls, ComCtrls, comp, db, sqldb;
+  ExtCtrls, ComCtrls, comp, db, sqldb, memds;
 
 type
 
@@ -956,26 +956,28 @@ var
   st:TStringlist;
   i:integer;
   dir,msg :string;
+  MemDataset1:TMemDataset;
 begin
+      MemDataset1 := TMemDataset.Create(owner);
       st := TStringlist.Create;
       st.Text:= functionunit.editlist.Items[mainform.PageControl1.PageIndex].SynEdit1.Lines.Text;
       functionunit.newwindow();
-      functionunit.editlist.Items[mainform.PageControl1.PageCount-2].MemDataset1.FieldDefs.Add('dir',ftString,255);
-      functionunit.editlist.Items[mainform.PageControl1.PageCount-2].MemDataset1.CreateTable;
-      functionunit.editlist.Items[mainform.PageControl1.PageCount-2].MemDataset1.Open;
+      MemDataset1.FieldDefs.Add('dir',ftString,255);
+      MemDataset1.CreateTable;
+      MemDataset1.Open;
 
       for i := 0 to st.Count -1 do begin
-        functionunit.editlist.Items[mainform.PageControl1.PageCount-2].MemDataset1.Append;
-        functionunit.editlist.Items[mainform.PageControl1.PageCount-2].MemDataset1.FieldByName('dir').Value:=st[i];
-        functionunit.editlist.Items[mainform.PageControl1.PageCount-2].MemDataset1.Post;
+        MemDataset1.Append;
+        MemDataset1.FieldByName('dir').Value:=st[i];
+        MemDataset1.Post;
       end;
       ForceDirectories( ExtractFilePath( ParamStr( 0 ) ) + dir );
-      //functionunit.editlist.Items[mainform.PageControl1.PageCount-2].MemDataset1.SaveToFile( ExtractFilePath( ParamStr( 0 ) ) + dir + 'temp.dir' );
-      //functionunit.editlist.Items[mainform.PageControl1.PageCount-2].MemDataset1.FileName := ExtractFilePath( ParamStr( 0 ) ) + dir + 'temp.dir';
+      //MemDataset1.SaveToFile( ExtractFilePath( ParamStr( 0 ) ) + dir + 'temp.dir' );
+      //MemDataset1.FileName := ExtractFilePath( ParamStr( 0 ) ) + dir + 'temp.dir';
        //functionunit.editlist.Items[mainform.PageControl1.PageCount-2].SQLQuery1.SQL.Text := 'select * from temp;';
       //functionunit.editlist.Items[mainform.PageControl1.PageCount-2].SQLite3Connection1.DatabaseName := ExtractFilePath( ParamStr( 0 ) ) + dir + 'temp.db3';
 
-      functionunit.editlist.Items[mainform.PageControl1.PageCount-2].MemDataset1.Active:=true;
+      MemDataset1.Active:=true;
       //functionunit.editlist.Items[mainform.PageControl1.PageCount-2].SQLQuery1.SQL.Text := 'select * from temp.db3;';
       //functionunit.editlist.Items[mainform.PageControl1.PageCount-2].SQLQuery1.Active:=true;
       //functionunit.editlist.Items[mainform.PageControl1.PageCount-2].SQLQuery1.Active:=true;
@@ -984,21 +986,22 @@ begin
 
       //functionunit.editlist.Items[mainform.PageControl1.PageCount-2].PageControl1.PageIndex:= 2;
       msg := inputbox('検索語句','','');
-      //functionunit.editlist.Items[mainform.PageControl1.PageCount-2].MemDataset1.Locate('dir',msg,[]);
+      //MemDataset1.Locate('dir',msg,[]);
 
-      functionunit.editlist.Items[mainform.PageControl1.PageCount-2].MemDataset1.First;
-      while not functionunit.editlist.Items[mainform.PageControl1.PageCount-2].MemDataset1.EOF do begin
-        if 0 < ansipos(msg,' ' + functionunit.editlist.Items[mainform.PageControl1.PageCount-2].MemDataset1.FieldByName('dir').AsString) then begin
+      MemDataset1.First;
+      while not MemDataset1.EOF do begin
+        if 0 < ansipos(msg,' ' + MemDataset1.FieldByName('dir').AsString) then begin
         functionunit.editlist.Items[mainform.PageControl1.PageCount-2].SynEdit1.Lines.Add(
-        functionunit.editlist.Items[mainform.PageControl1.PageCount-2].MemDataset1.FieldByName('dir').AsString
+        MemDataset1.FieldByName('dir').AsString
         );
        end;
-        functionunit.editlist.Items[mainform.PageControl1.PageCount-2].MemDataset1.Next;
+        MemDataset1.Next;
       end;
 
-      functionunit.editlist.Items[mainform.PageControl1.PageCount-2].MemDataset1.SaveToFile(ExtractFilePath( ParamStr( 0 ) ) + dir + 'temp.dir');
-      //functionunit.editlist.Items[mainform.PageControl1.PageCount-2].MemDataset1.FileName := ;
-      functionunit.editlist.Items[mainform.PageControl1.PageCount-2].MemDataset1.Active:=false;
+      MemDataset1.SaveToFile(ExtractFilePath( ParamStr( 0 ) ) + dir + 'temp.dir');
+      //MemDataset1.FileName := ;
+      MemDataset1.Active:=false;
+      MemDataset1.Free;
       st.Free;
 end;
 

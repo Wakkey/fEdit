@@ -6,8 +6,9 @@ interface
 
 uses
   Classes, SysUtils, FileUtil, Forms, Controls, Graphics, Dialogs, unit_edit,
-  ComCtrls, StdCtrls, Menus, ExtDlgs, Process, fpjson, jsonparser, Masks, FileCtrl, Types
-  {$IFDEF Windows}, shellAPI, WIndows {$ENDIF};
+  ComCtrls, StdCtrls, Menus, ExtDlgs, Process, fpjson, jsonparser, Masks,
+  SynEdit, FileCtrl, Types
+  {$IFDEF Windows}, shellAPI, memds, WIndows {$ENDIF};
 
 type
   TeditList = class(TList)
@@ -121,6 +122,12 @@ type
     ptoolbar:array[0..100] of TToolbar;
     Edit_arry:array[0..40] of TEdit;
     true_boot:boolean;
+    CodeMemDB:TMemDataset;
+    st_ary1,st_ary2,st_ary3:array[0..2]of TStringList;
+    stwordtype:TStringList;
+    i_sw,i_sw2:integer;
+    wordlist:string;
+    code_supportList_sw:boolean;
     function load(dir, setfile,setname2:widestring):boolean;
     function save(dir,setfile,setname1:widestring):boolean;
     function loadmenulist:boolean;
@@ -224,6 +231,7 @@ type
     function winload(i:integer;s:string):boolean;
     function winsave(i:integer;s:widestring;memo:TStringList):boolean;
     function get_window(h:handle):boolean;
+    function activeWindow(h:handle):boolean;
     {$ENDIF}
     {$IFDEF Linux}
     function linuxload(i:integer;s:string):boolean;
@@ -295,6 +303,18 @@ type
     function Set_Edit(No:integer;SetEdit:string;ParentComp:TWinControl):TEdit;
     function Set_Coomp(HtmlParts:string;EditParts:TStringList;comp:TWinControl):boolean;
 
+    function bunkatu(st,st2:TStringList):boolean;
+    function bunkatu2(st:string;st2:TStringList):boolean;
+    function bunkatu3(st,st1,st2:TStringList):boolean;
+    function bunkatu4(st:string;st2:TStringList):boolean;
+    function bunkatu5(st,st2:TStringList):boolean;
+    function popupwin(c:char;edt:TsynEdit):boolean;
+    function findcodeset(key:string):boolean;
+    function get_code_list(sorce:TStringList):boolean;
+    function get_code:boolean;
+    function get_code2:boolean;
+    function save_codeList(path:string):boolean;
+
     {sqlBuilder}
     function openSQLBuilder(i:integer):boolean;
 
@@ -318,7 +338,7 @@ var
 implementation
 
 uses main, tool_window, colordlg, comp, macrow, find_unit, filetype_form,
-  TableBuilder, sqlpropedit, Jsonparse;
+  TableBuilder, sqlpropedit, Jsonparse, supportcodeinput;
 
 {$R *.lfm}
 
@@ -1310,7 +1330,7 @@ var
   s:string;
 begin
   s :=
-  'AllFile|*.*|Text|*.txt|CSV|*.csv|JavaScript|*.js|HTML|*.html;*.htm|Css|*.css|Json|*.json|XML|*.xml|Java|*.java|C|*.c|C++|*.cpp|C hedder|*.h|C++ hedder|*.hpp|Pascal/Delphi|*.pas|PHP|*.php|UnixShell|*.sh|Bat|*.bat|INI|*.ini|Sqlite|*.db3';
+  'AllFile|*.*|Text|*.txt|CSV|*.csv|JavaScript|*.js|HTML|*.html;*.htm|Css|*.css|Json|*.json|XML|*.xml|Java|*.java|C|*.c|C++|*.cpp|C hedder|*.h|C++ hedder|*.hpp|Pascal/Delphi|*.pas|PHP|*.php|UnixShell|*.sh|Bat|*.bat|INI|*.ini';
   datamodule1.OpenDialog1.Filter:= s;
   datamodule1.SaveDialog1.Filter:= s;
   macro_form.OpenDialog1.Filter:= s;
@@ -1319,7 +1339,8 @@ end;
 function Tfunctionunit.boot():boolean;
 var
   i,i1,i2:integer;
-  s,st:TStringlist;
+  s,st,st1,st2:TStringlist;
+  tmp:string;
 begin
   mainform.tabdbclick:=0;
   i := 0;
@@ -1332,7 +1353,7 @@ begin
     setdialog;
     //functionunit.Filename:= '';
     functionunit.version:= '';
-    functionunit.versionSet('0.51');
+    functionunit.versionSet('0.52');
 
     inc(i);//err1
     functionunit.create_StringList();
@@ -1403,6 +1424,63 @@ begin
      {for i1 := 1 to ParamCount do begin
        functionunit.fileopen(ansitoutf8(Paramstr(i1)));
      end;}
+
+  st1 := TStringList.Create;
+  st2 := TStringList.Create;
+  for i1 := 0 to 2 do begin
+    st_ary1[i1] := TStringList.Create;
+    st_ary1[i1].Clear;
+    st_ary2[i1] := TStringList.Create;
+    st_ary2[i1].Clear;
+    st_ary3[i1] := TStringList.Create;
+    st_ary3[i1].Clear;
+    stwordtype:=TStringlist.Create;
+    stwordtype.Clear;
+    i_sw := 0;
+    i_sw2:=1;
+  end;
+      {$IFDEF Windows}
+         tmp := 'temp\';
+      {$ENDIF}
+      {$IFDEF LINUX}
+         tmp := 'temp/';
+      {$ENDIF}
+      {$IFDEF Darwin}
+         tmp := 'temp/';
+      {$ENDIF}
+  try
+  st1.LoadFromFile(extractfilepath(paramstr(0)) + tmp + 'func_List.csv');
+  for i1 := 0 to st1.Count -1 do begin
+    st2.CommaText := st1[i1];
+    st_ary1[0].Add(st2[0]);
+    st_ary1[1].Add(st2[1]);
+  end;
+  except
+
+  end;
+  try
+  st1.LoadFromFile(extractfilepath(paramstr(0)) +  tmp + 'hensu_List.csv');
+  for i := 0 to st1.Count -1 do begin
+    st2.CommaText := st1[i];
+    st_ary2[0].Add(st2[0]);
+    st_ary2[1].Add(st2[1]);
+  end;
+  except
+
+  end;
+  try
+  st1.LoadFromFile(extractfilepath(paramstr(0)) +  tmp + 'List.csv');
+  for i := 0 to st1.Count -1 do begin
+    st2.CommaText := st1[i];
+    st_ary3[0].Add(st2[0]);
+    st_ary3[1].Add(st2[1]);
+  end;
+  except
+
+  end;
+
+
+
   functionunit.true_boot := true;
   st:= TStringlist.Create;
   st.Clear;
@@ -1414,10 +1492,10 @@ begin
          functionunit.FileFindDir(ansitoutf8(ParamStr(i)),st);
       {$ENDIF}
       {$IFDEF LINUX}
-         functionunit.EnumFileFromDir((ParamStr(i)),st);
+         functionunit.FileFindDir((ParamStr(i)),st);
       {$ENDIF}
       {$IFDEF Darwin}
-         functionunit.EnumFileFromDir((ParamStr(i)),st);
+         functionunit.FileFindDir((ParamStr(i)),st);
       {$ENDIF}
   end;
   if st.Count > 0 then begin
@@ -1449,6 +1527,9 @@ begin
         end;
       end;
     end;
+  end;
+  if (st.count = 2) and (st[1] <> null) then begin
+      functionunit.fileopen( st[1] );
   end;
      inc(i);//err10
   except
@@ -6327,11 +6408,119 @@ begin
   functionunit.lng_mnu[0].Checked:= true;
 end;
 
-function Tfunctionunit.memoload(i:integer;s:string):boolean;
+function Tfunctionunit.get_code_list(sorce:TStringList):boolean;
 var
   c1,c2:pchar;
   sw:boolean;
+  i1,i2,i3:integer;
+  sta,stb,st,st0,st1,st2,st3,st4,st5,st6:TStringList;
 begin
+  st := TStringList.Create;
+  st.Clear;
+  sta := TStringList.Create;
+  sta.Clear;
+  stb := TStringList.Create;
+  stb.Clear;
+  st0 := TStringList.Create;
+  st0.Clear;
+  st1 := TStringList.Create;
+  st1.Clear;
+  st2 := TStringList.Create;
+  st2.Clear;
+  st3 := TStringList.Create;
+  st3.Clear;
+  st4 := TStringList.Create;
+  st4.Clear;
+  st5 := TStringList.Create;
+  st5.Clear;
+  st6 := TStringList.Create;
+  st6.Clear;
+  {try
+    st.LoadFromFile( ExtractFilePath( ParamStr( 0 ) ) + 'temp\List.csv' );
+  except
+
+  end;
+  //st3.LoadFromFile( ExtractFilePath( ParamStr( 0 ) ) + 'temp\List.csv' );
+  try
+    st4.LoadFromFile( ExtractFilePath( ParamStr( 0 ) ) + 'temp\func_List.csv' );
+  except
+
+  end;
+  try
+    st5.LoadFromFile( ExtractFilePath( ParamStr( 0 ) ) + 'temp\hensu_List.csv' );
+  except
+
+  end; }
+
+  sta.Text := sorce.Text;
+  st1.Text:= sorce.Text;
+  //showmessage(sorce.Text);
+
+  bunkatu(sta,stb);
+  sta.Clear;
+  for i3 := 0 to stb.Count -1 do begin;
+    sta.Clear;
+    bunkatu2(stb[i3],sta);
+    for i1 := 0 to sta.Count -1 do begin
+      if -1 = st6.IndexOf(sta[i1]) then begin
+         st6.Add(sta[i1]);
+         st.CommaText := sta[i1];
+         st_ary3[0].Add(st[0]);
+         st_ary3[1].Add(st[1]);
+      end;
+    end;
+  end;
+  //st.SaveToFile( ExtractFilePath( ParamStr( 0 ) ) + 'temp\List.csv' );
+
+
+  st2.Clear;
+  st6.Clear;
+  //st1.LoadFromFile(s);
+  bunkatu3(st1,st2,st3);
+  st0.Clear;
+  for i3 := 0 to st2.Count -1 do begin;
+    st0.Clear;
+    bunkatu4(st2[i3],st0);
+    for i1 := 0 to st0.Count -1 do begin
+      if -1 = st6.IndexOf(st0[i1]) then begin
+         st6.Add(st0[i1]);
+         st.CommaText := st0[i1];
+         st_ary1[0].Add(st[0]);
+         st_ary1[1].Add(st[1]);
+      end;
+    end;
+  end;
+
+  bunkatu5(st3 ,st5);
+  //showmessage(st5.Text);
+  st6.Clear;
+  for i1 := 0 to st5.Count -1 do begin
+      if -1 = st6.IndexOf(st5[i1]) then begin
+        //showmessage(st5[i1]);
+         st6.Add(st5[i1]);
+         st.CommaText := st5[i1];
+         st_ary2[0].Add(st[0]);
+         st_ary2[1].Add(st[1]);
+      end;
+  end;
+
+  //st4.SaveToFile( ExtractFilePath( ParamStr( 0 ) ) + 'temp\func_List.csv' );
+  //st5.SaveToFile( ExtractFilePath( ParamStr( 0 ) ) + 'temp\hensu_List.csv' );
+  sta.Free;
+  stb.Free;
+  st.free;
+  st0.Free;
+  st1.Free;
+  st2.Free;
+  st3.Free;
+  st4.Free;
+  st5.Free;
+  st6.Free;
+end;
+
+function Tfunctionunit.memoload(i:integer;s:string):boolean;
+begin
+
         {$IFDEF Windows}
             functionunit.winload(i,s);
         {$ENDIF}
@@ -6343,7 +6532,6 @@ begin
            //CopyFile(s,s1);
            functionunit.macload(i,s);
         {$ENDIF}
-
 end;
 
 function Tfunctionunit.memosave(i:integer;s:widestring;memo:TStringList):boolean;
@@ -6378,21 +6566,24 @@ begin
          TempFIle_Clear1('Backupfile\','.ba');
          TempFIle_Clear2('Backupfile\','temp3.txt');
          functionunit.save('Backupfile\','temp3.txt','.ba');
-         functionunit.TempFIle_Clear3('tmp\','test.*');
+         functionunit.TempFIle_Clear3('temp\','test.*');
+         functionunit.save_codeList('temp\');
     {$ENDIF}
     {$IFDEF LINUX}
          functionunit.iniwrite('ini/');
          TempFIle_Clear1('Backupfile/','.ba');
          TempFIle_Clear2('Backupfile/','temp3.txt');
          functionunit.save('Backupfile/','temp3.txt','.ba');
-         functionunit.TempFIle_Clear3('tmp/','test.*');
+         functionunit.TempFIle_Clear3('temp/','test.*');
+         functionunit.save_codeList('temp/');
     {$ENDIF}
     {$IFDEF Darwin}
          functionunit.iniwrite('ini/');
          TempFIle_Clear1('Backupfile/','.ba');
          TempFIle_Clear2('Backupfile/','temp3.txt');
          functionunit.save('Backupfile/','temp3.txt','.ba');
-         functionunit.TempFIle_Clear3('tmp/','test.*');
+         functionunit.TempFIle_Clear3('temp/','test.*');
+         functionunit.save_codeList('temp/');
     {$ENDIF}
     inc(i);
     functionunit.addnew_tab(false);
@@ -6402,6 +6593,42 @@ begin
     showmessage('終了に失敗しました。'+chr(13)+'エラーコード '+inttostr(i));
   end;
   exitAPP := true;
+end;
+
+function Tfunctionunit.save_codeList(path:string):boolean;
+var
+ i:integer;
+ st:TStringList;
+begin
+  st := TStringList.create;
+  st.clear;
+  for i := 0 to st_ary1[0].count -1 do begin
+    st.add( st_ary1[0][i] + ',"' +  st_ary1[1][i] + '"' );
+  end;
+  try
+    st.savetofile(ExtractFilePath(ParamStr(0))+path + 'func_List.csv');
+  except
+
+  end;
+  st.clear;
+  for i := 0 to st_ary2[0].count -1 do begin
+    st.add( st_ary2[0][i] + ',' +  st_ary2[1][i] );
+  end;
+  try
+    st.savetofile(ExtractFilePath(ParamStr(0))+path + 'hensu_List.csv');
+  except
+
+  end;
+  st.clear;
+  for i := 0 to st_ary3[0].count -1 do begin
+    st.add( st_ary3[0][i] + ',' +  st_ary3[1][i] );
+  end;
+  try
+    st.savetofile(ExtractFilePath(ParamStr(0))+path + 'List.csv');
+  except
+
+  end;
+
 end;
 
 function Tfunctionunit.TitleSet(fname:string):boolean;
@@ -6467,7 +6694,7 @@ var
         '.ini':mainform.Menu_INIClick(mainform.Menu_INI);
         '.java':mainform.Menu_JavaClick(mainform.Menu_Java);
         '.sh':mainform.MenuI_UnixShellClick(mainform.MenuI_UnixShell);
-        '.db3':begin
+        {'.db3':begin
             s2 := '';
             for i3 := 1 to length(s1) -4 do begin;
                 s2 := s2 + s1[i3];
@@ -6476,12 +6703,12 @@ var
             functionunit.editlist.Items[i].SynEdit1.Lines.Text:= 'SELECT * FROM '+S2;
             functionunit.editlist.Items[i].PageControl1.ActivePageIndex:=2;
             functionunit.editlist.Items[i].Panel1.Visible:=TRUE;
-         end;
+         end;}
       end;
     finally
 
 
-      if s <> '.db3' then begin
+      begin
       try
       //showmessage(DataModule1.OpenDialog1.Files[i1]);
       //showmessage(functionunit.editlist.Items[i].filename_path);
@@ -6575,7 +6802,7 @@ begin
       i := Tabs;
 
       with functionunit.editlist.Items[i] do begin
-        if (not nameing_complate) and (not save_complate) then begin
+        if (not nameing_complate) {and (not save_complate)} then begin
           saveas(i);
           exit;
         end;
@@ -6634,8 +6861,8 @@ begin
   finally
 
   end;
-  if functionunit.editlist.Items[i].save_complate then
-    exit;
+  //if functionunit.editlist.Items[i].save_complate then
+  //  exit;
   end;
        ext := '';
       {$IFDEF Linux}
@@ -6795,6 +7022,7 @@ function Tfunctionunit.winload(i:integer;s:string):boolean;
       st2.LoadFromFile(extractfilepath(paramstr(0))+'tmp.txt');
       st2.Delete(0);
       //load_text(st3,st2);
+      get_code_list(st2);
       functionunit.editlist.Items[i].Edit.Text := ((st2.Text));
       //st.Free;
       //st2.Free;
@@ -6838,6 +7066,7 @@ function Tfunctionunit.winload(i:integer;s:string):boolean;
        load_stream(ExtractFilePath( ParamStr( 0 ) ) + 'tmp.txt' ,st);
        //st2.Text:= string(pst);
        //st.LoadFromFile(extractfilepath(paramstr(0))+'tmp.txt');
+       get_code_list(st);
       functionunit.editlist.Items[i].Edit.Text := ((st.Text));
       st2.Free;
       st.Free;
@@ -6856,6 +7085,7 @@ function Tfunctionunit.winload(i:integer;s:string):boolean;
        st := TStringList.Create;
        st.Clear;
        load_stream(s,st);
+       get_code_list(st);
        functionunit.editlist.Items[i].Edit.Text := st.Text;
        st.Free;
        encode_charset := true;
@@ -6967,6 +7197,11 @@ end;
 function Tfunctionunit.get_window(h:handle):boolean;
 begin
   BringWindowtotop(h);
+end;
+
+function Tfunctionunit.activeWindow(h:handle):boolean;
+begin
+  setActiveWindow(h);
 end;
 
 {$ENDIF}
@@ -7724,6 +7959,7 @@ begin
   //getText := TStringList.Create;
   //getText.Clear;
   s.Text:=settext.Text;
+
   i := -1;
   i1 := 0;
   for i1 := 0 to s.Count -1 do begin;
@@ -8433,6 +8669,482 @@ begin
   st5.Free;
 end;
 
+
+
+{
+function Tfunctionunit.bunkatu(st,st2:TStringList):boolean;
+var
+  i:integer;
+  st3:TStringList;
+  s:string;
+begin
+  st3 := TStringList.Create;
+  st3.Clear;
+  s:= ';:=''"!$%&+-*`@~^\|/><?()[]{},  ';
+  //st.Text := StringReplace(st.Text, ',', char(13), [rfReplaceAll]);
+  for i := 0 to length(s) -1 do begin
+    st.Text := StringReplace(st.Text, s[i] , char(13), [rfReplaceAll]);
+  end;
+  for i := 0 to st.Count -1 do begin
+    if 0 < ansipos('.',' ' + st[i]) then begin
+      if -1 = st3.IndexOf(st[i]) then begin
+        st3.Add(st[i]);
+      end;
+    end;
+  end;
+  st2.text := st3.Text;
+  st3.Free;
+end;
+
+function Tfunctionunit.bunkatu2(st:string;st2:TStringList):boolean;
+var
+  i,i1:integer;
+  st3:TStringList;
+  s:string;
+begin
+  st3 := TStringList.Create;
+  st3.Clear;
+  s:= '.';
+  //st.Text := StringReplace(st.Text, ',', char(13), [rfReplaceAll]);
+  //for i := 0 to length(s) -1 do begin
+    st3.Text := StringReplace(st, s , char(13), [rfReplaceAll]);
+  //end;
+  i1 := 0;
+  for i := 0 to st3.Count -1 do begin
+    if st3[i] <> '' then begin
+      if i1 = 0 then begin
+        if st3.Count -1 > i then
+        if st3[i+1] <> '' then begin
+          st2.Add(st3[i]+',');
+          inc(i1);
+        end;
+      end else begin
+        st2[st2.Count -1] := st2[st2.Count -1] + st3[i];
+        i1 := 0;
+      end;
+    end;
+  end;
+  st3.Free;
+end;
+}
+
+function Tfunctionunit.bunkatu(st,st2:TStringList):boolean;
+var
+  i:integer;
+  st3:TStringList;
+  s:string;
+begin
+  st3 := TStringList.Create;
+  st3.Clear;
+  s:= ';:=''"!$%&+-*`@~^\|/><?()[]{},  ';
+  //st.Text := StringReplace(st.Text, ',', char(13), [rfReplaceAll]);
+  for i := 0 to length(s) -1 do begin
+    st.Text := StringReplace(st.Text, s[i] , char(13), [rfReplaceAll]);
+  end;
+  for i := 0 to st.Count -1 do begin
+    if 0 < ansipos('.',' ' + st[i]) then begin
+      if -1 = st3.IndexOf(st[i]) then begin
+        st3.Add(st[i]);
+      end;
+    end;
+  end;
+  st2.text := st3.Text;
+  st3.Free;
+end;
+
+function Tfunctionunit.bunkatu2(st:string;st2:TStringList):boolean;
+var
+  i,i1:integer;
+  st3:TStringList;
+  s:string;
+begin
+  st3 := TStringList.Create;
+  st3.Clear;
+  s:= '.';
+  //st.Text := StringReplace(st.Text, ',', char(13), [rfReplaceAll]);
+  //for i := 0 to length(s) -1 do begin
+    st3.Text := StringReplace(st, s , char(13), [rfReplaceAll]);
+  //end;
+  i1 := 0;
+  for i := 0 to st3.Count -1 do begin
+    if st3[i] <> '' then begin
+      if i1 = 0 then begin
+        if st3.Count -1 > i then
+        if st3[i+1] <> '' then begin
+          st2.Add(st3[i]+',');
+          inc(i1);
+        end;
+      end else begin
+        st2[st2.Count -1] := st2[st2.Count -1] + st3[i];
+        i1 := 0;
+      end;
+    end;
+  end;
+  st3.Free;
+end;
+
+function Tfunctionunit.bunkatu3(st,st1,st2:TStringList):boolean;
+var
+  i,i1:integer;
+  st3,st4:TStringList;
+  s,s1:string;
+begin
+  st3 := TStringList.Create;
+  st3.Clear;
+  st4 := TStringList.Create;
+  st4.Clear;
+  s:= '''"!$%&+-*`@~^\|/><?{}';
+  //s1:='  ';
+  //st.Text := StringReplace(st.Text, ',', char(13), [rfReplaceAll]);
+  for i := 0 to length(s) -1 do begin
+    st.Text := StringReplace(st.Text, s[i] , char(13), [rfReplaceAll]);
+  end;
+  for i := 0 to st.Count -1 do begin
+    st[i] := Trim(st[i]); //:= StringReplace(st.Text, s1[i] , '', [rfReplaceAll]);
+  end;
+  for i := 0 to st.Count -1 do begin
+    if ((0 < ansipos(':',' ' + st[i])) and (0 = ansipos('=',' ' + st[i]))) and
+      ( (0 < ansipos('function',' ' + st[i])) or (0 < ansipos('procedure',' ' + st[i])) ) then begin
+      if not (St[i][1] in ['0'..'9']) then begin
+        if -1 = st3.IndexOf(st[i]) then begin
+           st3.Add(st[i]);
+        end;
+      end;
+    end else if ( (0 = ansipos('function',' ' + st[i])) or (0 = ansipos('procedure',' ' + st[i]))  or (0 = ansipos('property',' ' + st[i])) ) then begin
+        if (0 < ansipos(':', ' ' +st[i])) then begin
+          if (0 = ansipos('=', ' ' +st[i])) then begin
+            if not (St[i][1] in [':']) then begin
+              if not (St[i][1] in ['0'..'9']) then begin
+                if -1 = st4.IndexOf(st[i]) then begin
+                  st4.Add(st[i]);
+                end;
+              end;
+            end;
+          end;
+        end;
+    end;
+  end;
+  st1.text := st3.Text;
+  st3.Free;
+  st2.Text := st4.Text;
+  st4.Free;
+end;
+
+
+function Tfunctionunit.bunkatu4(st:string;st2:TStringList):boolean;
+var
+  i,i1:integer;
+  st3,st4:TStringList;
+  s,s1:string;
+begin
+  st3 := TStringList.Create;
+  st3.Clear;
+  st3.Text := st;
+  st4 := TStringList.Create;
+  st4.Clear;
+  s:= '  (';
+  //st.Text := StringReplace(st.Text, ',', char(13), [rfReplaceAll]);
+  for i := 0 to length(s) do begin
+    st3.Text := ( StringReplace(st3.Text, s[i] , char(13), [rfReplaceAll]) );
+  end;
+  s:= ')[],.:;';
+  for i := 0 to st3.Count -1 do begin
+    for i1 := 0 to length(s) do begin
+      st3[i] := StringReplace(st3[i], s[i1] , '\', [rfReplaceAll]);
+    end;
+    if 0 = ansipos('\',' '+st3[i]) then begin
+      st4.Add(st3[i]);// StringReplace(st, s[i] , char(13), [rfReplaceAll]);
+    end;
+  end;
+
+  st3.Clear;
+  for i := 0 to st4.Count -1 do begin
+    st4[i] := StringReplace(st4[i], 'function' , '\', [rfReplaceAll]);
+    st4[i] := StringReplace(st4[i], 'procedure' , '\', [rfReplaceAll]);
+    st4[i] := StringReplace(st4[i], 'var' , '\', [rfReplaceAll]);
+    st4[i] := StringReplace(st4[i], 'const' , '\', [rfReplaceAll]);
+    if ( (0 = ansipos('\',' ' + st4[i])) ) then begin
+      st3.Add( st4[i] + ',' +'"'+ st+'"');
+    end;
+  end;
+
+  st2.Text := st3.Text;
+  st3.Free;
+  st4.Free;
+end;
+
+
+function Tfunctionunit.bunkatu5(st,st2:TStringList):boolean;
+var
+  i,i1:integer;
+  st3,st4:TStringList;
+  s:string;
+begin
+  st3 := TStringList.Create;
+  st3.Clear;
+  st4 := TStringList.Create;
+  st4.Clear;
+  s:= ';';
+  st.Text := StringReplace(st.Text, s , '', [rfReplaceAll]);
+  s := ':';
+  st.Text := StringReplace(st.Text, s , char(13) + ':' , [rfReplaceAll]);
+
+  i := st.Count -1;
+  while i > 0 do begin
+    if 0 < ansipos(':',' ' + st[i]) then begin
+       s := StringReplace(st[i], ':' , ',' , [rfReplaceAll]);
+      if 0 = ansipos(',',st[i-1]) then begin
+        st3.Add(st[i-1] + s );
+      end else begin
+        st4.Text := StringReplace(st[i-1], ',' , char(13) , [rfReplaceAll]);
+        for i1 := 0 to st4.Count -1 do begin
+          if s <> '' then begin
+            if -1 = st3.IndexOf( st4[i1] + s ) then begin
+              st3.Add( st4[i1] + s );
+            end;
+          end;
+        end;
+      end;
+    end;
+    dec(i)
+  end;
+  for i := 0 to st3.Count -1 do begin
+    //showmessage(st3[i]);
+    if -1 = st2.IndexOf(st3[i]) then
+      st2.Add(st3[i]);
+  end;
+  st3.Free;
+end;
+
+
+function Tfunctionunit.get_code:boolean;
+var
+  i,i1,i2,pos1:integer;
+  st,st1,st2:TStringList;
+  s:string;
+begin
+  st := TStringList.Create;
+  st.Clear;
+  st1 := TStringList.Create;
+  st1.Clear;
+  st2 := TStringList.Create;
+  st2.Clear;
+  //mainform.Caption := wordlist;
+  if not code_supportList_sw then begin
+    i1 := 0;
+    i2 := 1;
+  end else begin
+    i1 := 1;
+    i2 := 0;
+  end;
+
+  for i := 0 to st_ary3[i1].Count -1 do begin
+    if  code_auto_support.code_type.Count  > 0 then begin
+      if 0 < ansipos(wordlist, ' ' + st_ary3[i1][i]) then begin
+        if code_auto_support.select_code_type = st_ary3[i2][i] then begin
+          if -1 = st.IndexOf(st_ary3[i1][i]) then begin
+            st.Add(st_ary3[i1][i]);
+          end;
+        end;
+      end;
+    end else begin
+      if 0 < ansipos(wordlist, ' ' + st_ary3[i1][i]) then begin
+        if -1 = st.IndexOf(st_ary3[i1][i]) then begin
+          st.Add(st_ary3[i1][i]);
+        end;
+      end;
+    end;
+  end;
+  code_auto_support.ListBox1.Items.Text := st.Text;
+  st.Free;
+end;
+
+function Tfunctionunit.get_code2:boolean;
+var
+  i,i1,i2,pos1:integer;
+  st,st1,st2:TStringList;
+  s:string;
+begin
+  st := TStringList.Create;
+  st.Clear;
+  st1 := TStringList.Create;
+  st1.Clear;
+  st2 := TStringList.Create;
+  st2.Clear;
+
+  for i := 0 to st_ary2[0].Count -1 do begin
+    if 0 < ansipos(wordlist, ' ' + st_ary2[0][i]) then
+      if -1 = st1.IndexOf(st_ary2[1][i]) then begin
+        st.Add(st_ary2[0][i]);
+        st1.Add(st_ary2[1][i]);
+      end;
+  end;
+  for i := 0 to st.Count -1 do begin
+    for i1 := 0 to st_ary3[0].Count -1 do begin
+      if st[i] = st_ary3[0][i1] then begin
+        if -1 = st2.IndexOf(st_ary3[1][i1]) then begin
+          st2.Add(st_ary3[1][i1]);
+        end;
+      end;
+    end;
+  end;
+  code_auto_support.ListBox1.Items.Text := st2.Text;
+  //code_auto_support.code_type.Text := st.Text;
+
+  wordlist := '';
+
+  st.Free;
+  st1.Free;
+  st2.Free;
+end;
+
+function Tfunctionunit.popupwin(c:char;edt:TsynEdit):boolean;
+var
+  aPos:TPoint;
+  indexs,indexs2,i,i1,i2,i3:integer;
+  st:TStringList;
+  s:string;
+begin
+  GetCaretPos(aPos);
+  aPos.Y := aPos.Y + Abs(edt.Font.Height);
+  aPos := edt.ClientToScreen(aPos);
+
+  code_auto_support.SetBounds(aPos.X,aPos.Y + ( edt.LineHeight )
+  ,code_auto_support.Width,code_auto_support.Height);
+
+ { if functionunit.editlist.Items[mainform.PageControl1.PageIndex].temp_codeset.Count = 0 then begin
+    //code_auto_support.ListBox1.Items.Text:=functionunit.editlist.Items[mainform.PageControl1.PageIndex].code_suport.Text;
+  end else begin
+    //code_auto_support.ListBox1.Items.Text:= functionunit.editlist.Items[mainform.PageControl1.PageIndex].temp_codeset.Text;
+    functionunit.editlist.Items[mainform.PageControl1.PageIndex].code_suport.Text :=
+     functionunit.editlist.Items[mainform.PageControl1.PageIndex].temp_codeset.Text;
+    code_auto_support.ListBox1.Items.Text:= functionunit.editlist.Items[mainform.PageControl1.PageIndex].temp_codeset.Text;
+  end;}
+  if (not code_auto_support.Visible) and (code_auto_support.ListBox1.Items.Count > 1) then begin
+      code_auto_support.Visible:= true;
+
+  end else if (c <> ' ') or ((word(c) > 65) and (word(c) < 102)) then begin
+     functionunit.editlist.Items[mainform.PageControl1.PageIndex].SynEdit1.SetFocus;
+     //functionunit.get_window(mainform.Handle);
+     //wordlist := wordlist + LowerCase(c);
+    //get_code(c);
+    //if code_auto_support.ListBox1.Items.Count > 0 then begin
+    //end;
+
+    //code_auto_support.code_supoert_string:=code_auto_support.code_supoert_string + c;
+    st:=TStringlist.Create;
+    //if functionunit.editlist.Items[mainform.PageControl1.PageIndex].temp_codeset.Count = 0 then begin
+      //functionunit.editlist.Items[mainform.PageControl1.PageIndex].temp_codeset.Text := code_auto_support.ListBox1.Items.Text;
+
+   // end;
+    //i2 := functionunit.editlist.Items[mainform.PageControl1.PageIndex].temp_codeset.Count-1;
+    //st.Text:=code_auto_support.ListBox1.Items.Text;
+
+    //functionunit.findcodeset(code_auto_support.code_supoert_string);
+    {for i := 0 to st.Count-1 do begin
+      s := st[i];
+      //showmessage(inttostr(length(s)));
+      if length(s) > 0 then begin
+        //showmessage((s[length(s)-1]));
+      indexs := ansipos(code_auto_support.code_supoert_string,st[i]);
+      if (indexs > 0 ) or (code_auto_support.code_supoert_string[indexs] = st[i]) or
+        (0 < ansipos(code_auto_support.code_supoert_string,s[length(s)-1])) then begin
+        try
+          if functionunit.editlist.Items[mainform.PageControl1.PageIndex].temp_codeset.IndexOf(st[i]) = -1 then begin
+            functionunit.editlist.Items[mainform.PageControl1.PageIndex].temp_codeset.Add(st[i]);
+          end;
+        except
+
+        end;
+      end else begin
+        {try
+          for i3 := 0 to functionunit.editlist.Items[mainform.PageControl1.PageIndex].temp_codeset.Count-1 do begin;
+            indexs2 := ansipos(functionunit.editlist.Items[mainform.PageControl1.PageIndex].temp_codeset[i3],code_auto_support.code_supoert_string);
+            if (indexs2 = 0) or
+              (functionunit.editlist.Items[mainform.PageControl1.PageIndex].temp_codeset[i3] <> code_auto_support.code_supoert_string) then begin
+                //functionunit.editlist.Items[mainform.PageControl1.PageIndex].temp_codeset.Delete(i3);
+            end;
+          end;
+        except
+          //showmessage(inttostr(functionunit.editlist.Items[mainform.PageControl1.PageIndex].temp_codeset.Count) );
+          //showmessage(inttostr(i3) );
+        end;}
+      end;
+      end;
+      //dec(i2);
+    end;}
+    //showmessage(st.Text);
+    {if functionunit.editlist.Items[mainform.PageControl1.PageIndex].temp_codeset.Count <= 0 then begin
+       code_auto_support.Visible:= not true;
+    end; }
+    //code_auto_support.ListBox1.Items.Text := functionunit.editlist.Items[mainform.PageControl1.PageIndex].temp_codeset.Text;
+    st.Free;
+  end else begin
+    code_auto_support.Visible:= not true;
+    code_auto_support.code_supoert_string := '';
+    wordlist := '';
+    functionunit.editlist.Items[mainform.PageControl1.PageIndex].temp_codeset.Text:= '';
+  end;
+end;
+
+function TFunctionunit.findcodeset(key:string):boolean;
+var
+  i,i1,i2,i3,i4,i5,i6:integer;
+  s,s1,s2,s3:string;
+begin
+   if length(key) > 0 then
+     if key[length(key)] = char(40) then
+       exit;
+    //s := ExtractFilePath(Paramstr(0)) + 'codelist.txt';
+    //functionunit.findcode.LoadFromFile((s));
+    //補完リスト読み込み
+    i := 0;
+    i4 := functionunit.editlist.Items[mainform.PageControl1.PageIndex].temp_codeset.Count -1;
+    i5 := 0;
+    for i2 := 0 to i4 -1 do begin
+      s1 := functionunit.editlist.Items[mainform.PageControl1.PageIndex].temp_codeset[i2 + i5];
+      if length(s1) < length(code_auto_support.code_supoert_string) then begin
+        functionunit.editlist.Items[mainform.PageControl1.PageIndex].temp_codeset.Delete(i2 + i5);
+        i4 := i4 -1;
+        dec(i5);
+      end;
+    end;
+    functionunit.editlist.Items[mainform.PageControl1.PageIndex].temp_codeset.Text :=
+    StringReplace(functionunit.editlist.Items[mainform.PageControl1.PageIndex].temp_codeset.Text,' ',chr(0),[rfReplaceAll]);
+    i5 := 0;
+    i4 := functionunit.editlist.Items[mainform.PageControl1.PageIndex].temp_codeset.Count;
+    for i2 := 0 to i4 -1 do begin
+      s1 := functionunit.editlist.Items[mainform.PageControl1.PageIndex].temp_codeset[i2 +i5];
+      if s1 <> '' then begin
+           if code_auto_support.code_supoert_string <> '' then begin
+              s2 := ''; s3 := '';
+                s2 := '';
+                for i6 := 0 to length(key)  do begin
+                  s2 := s2 + functionunit.editlist.Items[mainform.PageControl1.PageIndex].temp_codeset[i2+i5][i6];
+                end;
+                if 0 = ansipos(upcase(key),upcase(s2)) then begin
+
+                      if i2 + i5 >= 0 then begin
+                      functionunit.editlist.Items[mainform.PageControl1.PageIndex].temp_codeset.Delete(i2 + i5);
+                      i4 := i4 -1;
+                      dec(i5);
+                    end else begin
+                      //showmessage('aa');
+                      //findcodeset := false;
+                    end;
+                  end else begin
+                  end;
+            end else begin end;
+      end;
+    end;
+    functionunit.editlist.Items[mainform.PageControl1.PageIndex].temp_codeset.Text :=
+      StringReplace(functionunit.editlist.Items[mainform.PageControl1.PageIndex].temp_codeset.Text,' ',chr(0),[rfReplaceAll]);
+
+    code_auto_support.ListBox1.Items := functionunit.editlist.Items[mainform.PageControl1.PageIndex].temp_codeset;
+
+
+
+end;
 
 
 

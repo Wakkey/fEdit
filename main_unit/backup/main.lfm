@@ -1,7 +1,7 @@
 object mainform: Tmainform
-  Left = 473
+  Left = 497
   Height = 309
-  Top = 362
+  Top = 501
   Width = 577
   Caption = 'mainform'
   ClientHeight = 289
@@ -508,6 +508,10 @@ object mainform: Tmainform
         Caption = 'SQLTable Builder'
         OnClick = MenuItem8Click
       end
+      object MenuItem15: TMenuItem
+        Caption = 'SQL Open'
+        OnClick = MenuItem15Click
+      end
       object MenuItem10: TMenuItem
         Caption = 'JSONFormEdit'
         OnClick = MenuItem10Click
@@ -524,6 +528,10 @@ object mainform: Tmainform
         Caption = '高速文書抽出'
         OnClick = MenuItem13Click
       end
+      object MenuItem95: TMenuItem
+        Caption = 'フローチャート作成'
+        OnClick = MenuItem95Click
+      end
       object MenuItem4: TMenuItem
         Caption = 'マクロ言語指定'
       end
@@ -538,9 +546,6 @@ object mainform: Tmainform
       object Menu_MacroRun: TMenuItem
         Caption = '実行'
         OnClick = Menu_MacroRunClick
-      end
-      object MenuItem95: TMenuItem
-        Caption = '-'
       end
     end
     object Menu_Custom: TMenuItem

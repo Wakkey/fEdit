@@ -1,24 +1,26 @@
 object code_auto_support: Tcode_auto_support
-  Left = 682
+  Left = 696
   Height = 240
-  Top = 171
+  Top = 167
   Width = 320
   BorderStyle = bsNone
   Caption = 'コード補助補完'
   ClientHeight = 240
   ClientWidth = 320
   FormStyle = fsStayOnTop
+  OnActivate = FormActivate
   OnClose = FormClose
   OnContextPopup = FormContextPopup
   OnCreate = FormCreate
   OnShow = FormShow
-  LCLVersion = '1.6.0.4'
+  LCLVersion = '1.6.4.0'
   object ListBox1: TListBox
     Left = 0
     Height = 240
     Top = 0
     Width = 320
     Align = alClient
+    ClickOnSelChange = False
     ItemHeight = 0
     OnClick = ListBox1Click
     OnDblClick = ListBox1DblClick

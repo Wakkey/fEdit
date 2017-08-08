@@ -1,11 +1,11 @@
 object Form2: TForm2
-  Left = 473
-  Height = 251
-  Top = 165
+  Left = 538
+  Height = 335
+  Top = 448
   Width = 689
   BorderStyle = bsDialog
   Caption = 'SQL Lite Table Maker　Ver１.00'
-  ClientHeight = 251
+  ClientHeight = 335
   ClientWidth = 689
   Color = clBtnFace
   Font.CharSet = SHIFTJIS_CHARSET
@@ -20,12 +20,12 @@ object Form2: TForm2
   LCLVersion = '1.6.4.0'
   object Panel1: TPanel
     Left = 0
-    Height = 251
+    Height = 335
     Top = 0
     Width = 689
     Align = alClient
     BevelOuter = bvLowered
-    ClientHeight = 251
+    ClientHeight = 335
     ClientWidth = 689
     TabOrder = 0
     OnClick = Panel1Click
@@ -38,12 +38,12 @@ object Form2: TForm2
       ParentColor = False
     end
     object GroupBox1: TGroupBox
-      Left = 14
-      Height = 240
+      Left = 16
+      Height = 328
       Top = 0
       Width = 441
       Caption = 'テーブル作成'
-      ClientHeight = 223
+      ClientHeight = 311
       ClientWidth = 437
       TabOrder = 0
       object Label3: TLabel
@@ -63,7 +63,7 @@ object Form2: TForm2
         ParentColor = False
       end
       object Bevel1: TBevel
-        Left = 6
+        Left = 8
         Height = 131
         Top = 3
         Width = 417
@@ -75,9 +75,9 @@ object Form2: TForm2
         Width = 417
       end
       object Bevel4: TBevel
-        Left = 6
+        Left = 8
         Height = 34
-        Top = 176
+        Top = 264
         Width = 417
       end
       object Label6: TLabel
@@ -136,7 +136,7 @@ object Form2: TForm2
       object Button5: TButton
         Left = 336
         Height = 17
-        Top = 184
+        Top = 272
         Width = 75
         Caption = '完了'
         Enabled = False
@@ -209,7 +209,7 @@ object Form2: TForm2
       object BitBtn1: TBitBtn
         Left = 240
         Height = 17
-        Top = 184
+        Top = 272
         Width = 83
         Cancel = True
         DefaultCaption = True
@@ -221,7 +221,7 @@ object Form2: TForm2
       object Edit1: TEdit
         Left = 49
         Height = 20
-        Top = 182
+        Top = 270
         Width = 80
         OnChange = Edit1Change
         OnClick = Edit1Click
@@ -243,6 +243,7 @@ object Form2: TForm2
         Width = 124
         ItemHeight = 12
         OnChange = ComboBox1Change
+        Style = csDropDownList
         TabOrder = 12
       end
       object Label2: TLabel
@@ -253,10 +254,99 @@ object Form2: TForm2
         Caption = 'Label2'
         ParentColor = False
       end
+      object Bevel5: TBevel
+        Left = 8
+        Height = 79
+        Top = 176
+        Width = 417
+      end
+      object Label4: TLabel
+        Left = 24
+        Height = 12
+        Top = 187
+        Width = 37
+        Caption = 'PortNo:'
+        ParentColor = False
+      end
+      object Edit4: TEdit
+        Left = 65
+        Height = 20
+        Top = 184
+        Width = 56
+        TabOrder = 13
+      end
+      object Label8: TLabel
+        Left = 131
+        Height = 12
+        Top = 187
+        Width = 55
+        Caption = 'UserName:'
+        ParentColor = False
+      end
+      object Edit5: TEdit
+        Left = 192
+        Height = 20
+        Top = 184
+        Width = 80
+        TabOrder = 14
+      end
+      object Label10: TLabel
+        Left = 280
+        Height = 12
+        Top = 187
+        Width = 51
+        Caption = 'Password:'
+        ParentColor = False
+      end
+      object Edit6: TEdit
+        Left = 336
+        Height = 20
+        Top = 184
+        Width = 80
+        TabOrder = 15
+      end
+      object Edit7: TEdit
+        Left = 64
+        Height = 20
+        Top = 206
+        Width = 80
+        TabOrder = 16
+      end
+      object Label11: TLabel
+        Left = 26
+        Height = 12
+        Top = 208
+        Width = 32
+        Caption = 'Hosts:'
+        ParentColor = False
+      end
+      object Label12: TLabel
+        Left = 152
+        Height = 12
+        Top = 208
+        Width = 271
+        Caption = '※Sqliteの場合はファイル名。それ以外はURLアドレス'
+        ParentColor = False
+      end
+      object Label13: TLabel
+        Left = 24
+        Height = 12
+        Top = 232
+        Width = 45
+        Caption = 'DBname:'
+        ParentColor = False
+      end
+      object Edit8: TEdit
+        Left = 72
+        Height = 20
+        Top = 232
+        Width = 80
+        TabOrder = 17
+      end
     end
     object Memo1: TMemo
       Left = 464
-      Height = 208
+      Height = 296
       Top = 32
       Width = 217
       ScrollBars = ssVertical

@@ -1,0 +1,44 @@
+object code_auto_support: Tcode_auto_support
+  Left = 696
+  Height = 240
+  Top = 167
+  Width = 320
+  BorderStyle = bsNone
+  Caption = 'コード補助補完'
+  ClientHeight = 240
+  ClientWidth = 320
+  FormStyle = fsStayOnTop
+  OnClose = FormClose
+  OnContextPopup = FormContextPopup
+  OnCreate = FormCreate
+  OnShow = FormShow
+  LCLVersion = '1.6.4.0'
+  object ListBox1: TListBox
+    Left = 0
+    Height = 240
+    Top = 0
+    Width = 320
+    Align = alClient
+    ItemHeight = 0
+    OnClick = ListBox1Click
+    OnDblClick = ListBox1DblClick
+    OnKeyPress = ListBox1KeyPress
+    OnKeyDown = ListBox1KeyDown
+    OnKeyUp = ListBox1KeyUp
+    OnSelectionChange = ListBox1SelectionChange
+    PopupMenu = PopupMenu1
+    Sorted = True
+    Style = lbOwnerDrawFixed
+    TabOrder = 0
+  end
+  object PopupMenu1: TPopupMenu
+    left = 45
+    top = 64
+    object MenuItem1: TMenuItem
+      Caption = 'ESC'
+      ShortCut = 27
+      ShortCutKey2 = 27
+      OnClick = MenuItem1Click
+    end
+  end
+end

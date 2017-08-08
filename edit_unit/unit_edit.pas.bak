@@ -20,7 +20,7 @@ type
     DataSource1: TDataSource;
     Edit1: TEdit;
     Label6: TLabel;
-    MemDataset1: TMemDataset;
+    MemDataset: TMemDataset;
     Memo1: TMemo;
     MenuItem22: TMenuItem;
     MenuItem23: TMenuItem;
@@ -72,6 +72,10 @@ type
     procedure SaveDialog1SelectionChange(Sender: TObject);
     procedure SaveDialog1TypeChange(Sender: TObject);
     procedure SynEdit1Change(Sender: TObject);
+    procedure SynEdit1KeyDown(Sender: TObject; var Key: Word; Shift: TShiftState
+      );
+    procedure SynEdit1MouseDown(Sender: TObject; Button: TMouseButton;
+      Shift: TShiftState; X, Y: Integer);
   private
     { private declarations }
     edit_y,edit_x,sel:integer;
@@ -84,7 +88,7 @@ type
     nameing_complate,save_complate:boolean;
     Edit:TStringList;
     editCaretY,editCaretX:integer;
-    Json_write:TStringList;
+    Json_write,temp_codeset,code_suport:TStringList;
     tabNo:integer;
   end;
 
@@ -93,7 +97,8 @@ var
 
 implementation
 
-uses function_unit, main, comp, repraceMacro, filetype_form, MySQL;
+uses function_unit, main, comp, repraceMacro, filetype_form, MySQL,
+  supportcodeinput;
 
 {$R *.lfm}
 
@@ -108,7 +113,10 @@ begin
   Json_write := TstringList.Create;
   Json_write.clear;
   PageControl1.PageIndex:= 0;
-
+  temp_codeset := TstringList.Create;
+  temp_codeset.Clear;
+  code_suport := TstringList.Create;
+  temp_codeset.Clear;
 end;
 
 procedure Teditform.FormDockDrop(Sender: TObject; Source: TDragDockObject; X,
@@ -323,6 +331,44 @@ end;
 procedure Teditform.SynEdit1Change(Sender: TObject);
 begin
   save_complate := false;
+end;
+
+procedure Teditform.SynEdit1KeyDown(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
+var
+  c:char;
+  w:word;
+begin
+  c := char(key);
+  editCaretY := synEdit1.BlockBegin.y;
+  editCaretX := synEdit1.BlockBegin.x;
+  if (c = char(32)) or (c = char(13)) or (c = char(8)) or (c = char(46)) or  ((c >= char(37)) and (c <= char(40))) then begin
+    functionunit.wordlist:='';
+    if code_auto_support.ListBox1.ItemIndex <> -1 then begin
+      code_auto_support.select_code_type:= code_auto_support.ListBox1.Items[code_auto_support.ListBox1.ItemIndex];
+      code_auto_support.code_type.Clear;
+    end;
+    code_auto_support.Visible:= not true;
+    exit;
+  end else begin
+    w := 190;
+    if key = w then begin
+      functionunit.get_code2;
+    end else begin
+      functionunit.wordlist := functionunit.wordlist + LowerCase(char(key));
+      functionunit.get_code;
+    end;
+    functionunit.popupwin(char(key),synedit1);
+  end;
+
+
+end;
+
+procedure Teditform.SynEdit1MouseDown(Sender: TObject; Button: TMouseButton;
+  Shift: TShiftState; X, Y: Integer);
+begin
+  editCaretY := synEdit1.BlockBegin.y;
+  editCaretX := synEdit1.BlockBegin.x;
 end;
 
 end.

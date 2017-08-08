@@ -956,7 +956,9 @@ var
   st:TStringlist;
   i:integer;
   dir,msg :string;
+  MemDataset1:TMemDataset;
 begin
+      MemDataset1 := functionunit.editlist.Items[mainform.PageControl1.PageIndex].TMemDataset.
       st := TStringlist.Create;
       st.Text:= functionunit.editlist.Items[mainform.PageControl1.PageIndex].SynEdit1.Lines.Text;
       functionunit.newwindow();
@@ -1011,7 +1013,7 @@ begin
 
   sqlform.Show;
   sqlform.Caption := sqlform.Caption + '[' + IntToStr(mainform.PageControl1.PageIndex) + ']';
-  functionunit.editlist.Items[mainform.PageControl1.PageIndex].PageControl1.PageIndex := 2;;
+  functionunit.editlist.Items[mainform.PageControl1.PageIndex].PageControl1.PageIndex := 2;
 end;
 
 procedure Tmainform.MenuItem16Click(Sender: TObject);

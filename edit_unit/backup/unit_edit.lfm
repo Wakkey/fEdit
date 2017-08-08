@@ -1,11 +1,11 @@
 object editform: Teditform
-  Left = 260
+  Left = 259
   Height = 310
   Top = 208
-  Width = 524
+  Width = 525
   Caption = 'editform'
   ClientHeight = 310
-  ClientWidth = 524
+  ClientWidth = 525
   FormStyle = fsStayOnTop
   OnClose = FormClose
   OnCloseQuery = FormCloseQuery
@@ -19,7 +19,7 @@ object editform: Teditform
     Left = 0
     Height = 310
     Top = 0
-    Width = 524
+    Width = 525
     ActivePage = TabSheet1
     Align = alClient
     PopupMenu = PopupMenu1
@@ -30,12 +30,12 @@ object editform: Teditform
     object TabSheet1: TTabSheet
       Caption = 'CodeEditMode'
       ClientHeight = 282
-      ClientWidth = 516
+      ClientWidth = 517
       inline SynEdit1: TSynEdit
         Left = 0
         Height = 282
         Top = 0
-        Width = 516
+        Width = 517
         Align = alClient
         Font.Height = -13
         Font.Name = 'Courier New'
@@ -45,6 +45,8 @@ object editform: Teditform
         ParentFont = False
         PopupMenu = PopupMenu1
         TabOrder = 0
+        OnKeyDown = SynEdit1KeyDown
+        OnMouseDown = SynEdit1MouseDown
         Gutter.Width = 57
         Gutter.MouseActions = <>
         RightGutter.Width = 0
@@ -692,9 +694,9 @@ object editform: Teditform
     left = 128
     top = 101
   end
-  object MemDataset1: TMemDataset
+  object MemDataset: TMemDataset
     FieldDefs = <>
     left = 160
-    top = 102
+    top = 101
   end
 end

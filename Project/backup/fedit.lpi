@@ -47,7 +47,7 @@
         <PackageName Value="LCL"/>
       </Item6>
     </RequiredPackages>
-    <Units Count="23">
+    <Units Count="24">
       <Unit0>
         <Filename Value="fedit.lpr"/>
         <IsPartOfProject Value="True"/>
@@ -209,6 +209,13 @@
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="MySQL"/>
       </Unit22>
+      <Unit23>
+        <Filename Value="../code_suport/supportcodeinput.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="code_auto_support"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+      </Unit23>
     </Units>
   </ProjectOptions>
   <CompilerOptions>
@@ -218,7 +225,7 @@
     </Target>
     <SearchPaths>
       <IncludeFiles Value="$(ProjOutDir)"/>
-      <OtherUnitFiles Value="../comp_unit;../edit_unit;../find_unit;../SQL_unit;../function_unit;../html_unit;../JSON_unit;../macro_unit;../main_unit;../other_unit;../verjon_unit;../option_unit;../FrowCreat"/>
+      <OtherUnitFiles Value="../comp_unit;../edit_unit;../find_unit;../SQL_unit;../function_unit;../html_unit;../JSON_unit;../macro_unit;../main_unit;../other_unit;../verjon_unit;../option_unit;../FrowCreat;../code_suport"/>
       <UnitOutputDirectory Value="lib/$(TargetCPU)-$(TargetOS)"/>
     </SearchPaths>
     <Linking>

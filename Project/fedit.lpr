@@ -10,7 +10,7 @@ uses
   Forms, printer4lazarus, memdslaz, main, unit_edit, function_unit,
   comp, colordlg, tool_window, find_unit, macrow, repraceMacro, filetype_form,
   HtmlEdit, htmlpropedit, sqlpropedit, TableBuilder, JSONFormdialog, Jsonparse,
-  versiondialog, tmp_clr, florwchart
+  versiondialog, tmp_clr, florwchart, supportcodeinput
   { you can add units after this };
 
 {$R *.res}
@@ -19,6 +19,7 @@ begin
   RequireDerivedFormResource:=True;
   Application.Initialize;
   Application.CreateForm(Tmainform, mainform);
+  Application.CreateForm(Tcode_auto_support,supportcodeinput.code_auto_support);
   Application.CreateForm(Tfunctionunit, functionunit);
   Application.CreateForm(TDataModule1, DataModule1);
   Application.CreateForm(TToolWindow, ToolWindow);
@@ -35,6 +36,7 @@ begin
   Application.CreateForm(TtmpClr, tmpClr);
   Application.CreateForm(THTMLMenu, HTMLMenu);
   Application.CreateForm(TFCFM, FCFM);
+
   Application.Run;
 end.
 

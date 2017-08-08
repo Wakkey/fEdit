@@ -16,6 +16,7 @@ type
     ListBox1: TListBox;
     MenuItem1: TMenuItem;
     PopupMenu1: TPopupMenu;
+    procedure FormActivate(Sender: TObject);
     procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
     procedure FormContextPopup(Sender: TObject; MousePos: TPoint;
       var Handled: Boolean);
@@ -32,9 +33,11 @@ type
   private
     { private declarations }
     shift_sw :boolean;
+    shiftKey:word;
   public
     { public declarations }
-    code_supoert_string:string;
+    code_type:TStringList;
+    select_code_type,code_supoert_string:string;
   end;
 
 var
@@ -57,13 +60,15 @@ end;
 procedure Tcode_auto_support.FormCreate(Sender: TObject);
 begin
   //function_unit.codelist_load;
+  code_type := TStringList.Create;
+  code_type.Clear;
 end;
 
 procedure Tcode_auto_support.FormShow(Sender: TObject);
 begin
   //function_unit.selstartset:= 0;
   try
-    listbox1.Items.Text := functionunit.editlist.Items[mainform.PageControl1.PageIndex].code_suport.Text;
+    //listbox1.Items.Text := functionunit.editlist.Items[mainform.PageControl1.PageIndex].code_suport.Text;
     //function_unit.findcode.Text:= function_unit.backupcodelist.Text;
     //function_unit.backupcodelist.Text:= listbox1.Items.Text;
   except
@@ -89,12 +94,12 @@ end;
 procedure Tcode_auto_support.ListBox1KeyDown(Sender: TObject; var Key: Word;
   Shift: TShiftState);
 var
-  s:string;
-  i:integer;
+  s,s1,s2,s3,s4,s5:string;
+  i,i1:integer;
 begin
   if listbox1.ItemIndex = 0 then begin
-    if char(38) = char(key) then
-      //windows.SetActiveWindow(MainForm.Handle);
+    if (char(38) = char(key)) and (Listbox1.ItemIndex =0) then
+      functionunit.get_window(mainform.Handle);
   end;
 
     if
@@ -104,14 +109,74 @@ begin
       (word(chr(40)) = key) or
       (word(chr(13))= key)
     then begin
-      if (word(chr(38)) < key) or
-         (word(chr(40)) > key)
+      if (word(chr(37)) < key) or
+         (word(chr(40)) >= key)
       then begin
-        if listbox1.ItemIndex = -1 then
-          if (word(chr(13))= key) then
-            code_auto_support.Visible := false;
+
       end;
+
+        if listbox1.ItemIndex > -1 then begin
+          if (word(chr(13))= key) then begin
+            functionunit.get_window(mainform.Handle);
+       //functionunit.wordlist:=functionunit.wordlist+LowerCase(char(key));
+       s := '';
+       s1 := '';
+       s2 := '';
+       s3 := '';
+       i := functionunit.editlist.Items[mainform.PageControl1.PageIndex].SynEdit1.CaretY -1;
+       s := functionunit.editlist.Items[mainform.PageControl1.PageIndex].SynEdit1.Lines[i];
+       //s := s + ' ';
+       s1 := listbox1.Items[listbox1.ItemIndex];
+
+       for i1 := 1 to functionunit.editlist.Items[mainform.PageControl1.PageIndex].SynEdit1.CaretX - functionunit.wordlist.Length -1 do begin
+        s2 := s2 + s[i1];
+       end;
+       for i1 := functionunit.editlist.Items[mainform.PageControl1.PageIndex].SynEdit1.CaretX to s.Length do begin
+        s3 := s3 + s[i1];
+       end;
+       functionunit.editlist.Items[mainform.PageControl1.PageIndex].SynEdit1.Lines[i] := s2 + s1 + s3;
+       functionunit.editlist.Items[mainform.PageControl1.PageIndex].SynEdit1.CaretX:=
+       functionunit.editlist.Items[mainform.PageControl1.PageIndex].SynEdit1.CaretX + s1.Length - functionunit.wordlist.Length;
+
+          end;
+      end;
+
+
     end else begin
+
+
+
+     if ((key >= 65) and (key <= 102)) then begin
+       functionunit.get_window(mainform.Handle);
+       //functionunit.wordlist:=functionunit.wordlist+LowerCase(char(key));
+       s := '';
+       s1 := '';
+       i := functionunit.editlist.Items[mainform.PageControl1.PageIndex].SynEdit1.CaretY -1;
+       s := functionunit.editlist.Items[mainform.PageControl1.PageIndex].SynEdit1.Lines[i];
+       s := s + ' ';
+       s1 := char(key);
+       if shiftKey = 16 then begin
+         s[functionunit.editlist.Items[mainform.PageControl1.PageIndex].SynEdit1.CaretX] := s1[1];
+         shiftKey := 0;
+         functionunit.wordlist:=functionunit.wordlist+(char(s1[1]));
+       end else begin
+         s[functionunit.editlist.Items[mainform.PageControl1.PageIndex].SynEdit1.CaretX] := LowerCase(s1[1]);
+         functionunit.wordlist:=functionunit.wordlist+LowerCase(char(s1[1]));
+       end;
+       functionunit.editlist.Items[mainform.PageControl1.PageIndex].SynEdit1.Lines[i] := s;
+       functionunit.editlist.Items[mainform.PageControl1.PageIndex].SynEdit1.CaretX:=
+       functionunit.editlist.Items[mainform.PageControl1.PageIndex].SynEdit1.CaretX +1;
+       if listbox1.Items.Count < 1 then begin
+         close;
+       end;
+     end else begin
+       s := '';
+       s1 := '';
+       shiftKey := key;
+     end;
+
+
+
      { if not function_unit.findcodeset(mainform.keycount) then
               exit
             else begin
@@ -205,6 +270,16 @@ begin
     }
   except
 
+  end;
+end;
+
+procedure Tcode_auto_support.FormActivate(Sender: TObject);
+begin
+  ActiveControl := ListBox1;
+  if (listbox1.ItemIndex = -1) and (listbox1.Items.Count > 0) then begin
+      listbox1.ItemIndex:= 0;
+  end else begin
+    //listbox1.Items[listbox1.ItemIndex];
   end;
 end;
 

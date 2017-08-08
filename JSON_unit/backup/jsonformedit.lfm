@@ -1,7 +1,7 @@
 object JSONEditForm: TJSONEditForm
-  Left = 351
+  Left = 569
   Height = 490
-  Top = 358
+  Top = 341
   Width = 782
   Caption = 'JSONSchemaEdit'
   ClientHeight = 490
@@ -43,6 +43,7 @@ object JSONEditForm: TJSONEditForm
         ClientHeight = 486
         ClientWidth = 778
         TabOrder = 0
+        OnClick = Panel7Click
         object GroupBox5: TGroupBox
           Left = 1
           Height = 484

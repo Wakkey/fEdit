@@ -1,7 +1,7 @@
 object mainform: Tmainform
   Left = 497
   Height = 309
-  Top = 501
+  Top = 427
   Width = 577
   Caption = 'mainform'
   ClientHeight = 289
