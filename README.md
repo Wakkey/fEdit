@@ -17,6 +17,8 @@ fEdit.exe：WindowsVista以上
 fEdit.app：MacOS
 fEdit：Linux(Ubuntu 64Bit)
 
+※Projectフォルダに実行ファイルがあります。
+
 
 UTF-8/UTF-16/Ansi対応のスクリプト/テキスト編集用エディターです。
 
