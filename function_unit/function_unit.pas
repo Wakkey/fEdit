@@ -1570,7 +1570,13 @@ begin
   //editlist.Items[tabs].Memo1.Font.Size:= font_size;
 
   mainform.PageControl1.Pages[tabs].Caption:= editlist.Items[tabs].Caption;
-  //editlist.Items[tabs].char_sets:= 'UTF8';
+  if mainform.Menu_Ansi.Checked = true then begin
+    editlist.Items[tabs].char_sets:= 'ANSI';
+  end else if mainform.Menu_UTF8.Checked = true then begin
+    editlist.Items[tabs].char_sets:= 'UTF8';
+  end else if mainform.Menu_Utf16.Checked = true then begin
+    editlist.Items[tabs].char_sets:= 'UTF16';
+  end;
   editlist.Items[tabs].dock_sw:= false;
   //editlist.Items[tabs].Visible:= true;
   functionunit.TitleSet(
@@ -7200,6 +7206,7 @@ function Tfunctionunit.winsave(i:integer;s:widestring;memo:TStringList):boolean;
 
 
       encode_charset := true;
+
     end else if functionunit.editlist.Items[i].char_sets = 'UTF8' then begin
       memo.Text:= memo.Text;
       encode_charset := true;
@@ -7209,7 +7216,9 @@ function Tfunctionunit.winsave(i:integer;s:widestring;memo:TStringList):boolean;
 
       end;
     end;
+    //showmessage(functionunit.editlist.Items[i].char_sets);
   end;
+
 begin
     encode_charset(i,memo);
 end;
