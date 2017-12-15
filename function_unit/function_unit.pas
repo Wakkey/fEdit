@@ -216,6 +216,8 @@ type
     function synchang(i:integer):boolean;
     function memoload(i:integer;s:string):boolean;
     function memosave(i:integer;s:widestring;memo:TStringList):boolean;
+    function All_save():boolean;
+    function All_saveAs():boolean;
     function exitAPP():boolean;
     function TitleSet(fname:string):boolean;
     function fileopen(FileNames: String):boolean;
@@ -6516,6 +6518,24 @@ begin
   st4.Free;
   st5.Free;
   st6.Free;
+end;
+
+function TFunctionunit.All_save():boolean;
+var
+  i:integer;
+begin
+  for i := 0 to mainform.PageControl1.PageCount -1 do begin;
+    functionunit.filesave(i);
+  end;
+end;
+
+function TFunctionunit.All_saveAs():boolean;
+var
+  i:integer;
+begin
+  for i := 0 to mainform.PageControl1.PageCount -1 do begin;
+    functionunit.saveas(i);
+  end;
 end;
 
 function Tfunctionunit.memoload(i:integer;s:string):boolean;

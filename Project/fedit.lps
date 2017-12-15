@@ -19,8 +19,8 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <EditorIndex Value="16"/>
-        <TopLine Value="865"/>
-        <CursorPos X="3" Y="867"/>
+        <TopLine Value="647"/>
+        <CursorPos Y="657"/>
         <UsageCount Value="202"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
@@ -32,8 +32,8 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <EditorIndex Value="2"/>
-        <TopLine Value="328"/>
-        <CursorPos X="5" Y="394"/>
+        <TopLine Value="336"/>
+        <CursorPos X="5" Y="348"/>
         <UsageCount Value="202"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
@@ -44,9 +44,10 @@
         <ComponentName Value="functionunit"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
+        <IsVisibleTab Value="True"/>
         <EditorIndex Value="6"/>
-        <TopLine Value="9009"/>
-        <CursorPos X="8" Y="9027"/>
+        <TopLine Value="5621"/>
+        <CursorPos X="33" Y="5646"/>
         <UsageCount Value="202"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
@@ -142,7 +143,7 @@
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="HtmlEdit"/>
         <EditorIndex Value="5"/>
-        <TopLine Value="130"/>
+        <TopLine Value="96"/>
         <CursorPos Y="144"/>
         <UsageCount Value="200"/>
         <Loaded Value="True"/>
@@ -300,7 +301,6 @@
         <ComponentName Value="code_auto_support"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <IsVisibleTab Value="True"/>
         <EditorIndex Value="1"/>
         <TopLine Value="116"/>
         <CursorPos X="18" Y="140"/>
@@ -314,130 +314,155 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="538"/>
         <CursorPos Y="557"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="9"/>
       </Unit24>
     </Units>
     <JumpHistory Count="30" HistoryIndex="29">
       <Position1>
-        <Filename Value="../edit_unit/unit_edit.pas"/>
-        <Caret Line="384" Column="19" TopLine="361"/>
+        <Filename Value="../function_unit/function_unit.pas"/>
+        <Caret Line="217" Column="22" TopLine="186"/>
       </Position1>
       <Position2>
-        <Filename Value="../edit_unit/unit_edit.pas"/>
-        <Caret Line="342" Column="7" TopLine="330"/>
+        <Filename Value="../function_unit/function_unit.pas"/>
+        <Caret Line="403" Column="34" TopLine="355"/>
       </Position2>
       <Position3>
-        <Filename Value="../edit_unit/unit_edit.pas"/>
-        <Caret Line="371" Column="93" TopLine="359"/>
+        <Filename Value="../function_unit/function_unit.pas"/>
+        <Caret Line="6530" TopLine="6497"/>
       </Position3>
       <Position4>
-        <Filename Value="../edit_unit/unit_edit.pas"/>
-        <Caret Line="375" Column="24" TopLine="359"/>
+        <Filename Value="../main_unit/main.pas"/>
+        <Caret Line="384" Column="22" TopLine="375"/>
       </Position4>
       <Position5>
-        <Filename Value="../edit_unit/unit_edit.pas"/>
-        <Caret Line="383" Column="8" TopLine="368"/>
+        <Filename Value="../main_unit/main.pas"/>
+        <Caret Line="795" Column="3" TopLine="793"/>
       </Position5>
       <Position6>
-        <Filename Value="../edit_unit/unit_edit.pas"/>
-        <Caret Line="360" TopLine="341"/>
+        <Filename Value="../main_unit/main.pas"/>
+        <Caret Line="790" Column="25" TopLine="788"/>
       </Position6>
       <Position7>
-        <Filename Value="../code_suport/supportcodeinput.pas"/>
-        <Caret Line="102" Column="7" TopLine="97"/>
+        <Filename Value="../function_unit/function_unit.pas"/>
+        <Caret Line="219" Column="22" TopLine="191"/>
       </Position7>
       <Position8>
-        <Filename Value="../code_suport/supportcodeinput.pas"/>
-        <Caret Line="129" Column="93" TopLine="106"/>
+        <Filename Value="../main_unit/main.pas"/>
+        <Caret Line="655" Column="3" TopLine="635"/>
       </Position8>
       <Position9>
-        <Filename Value="../code_suport/supportcodeinput.pas"/>
-        <Caret Line="125" Column="17" TopLine="109"/>
+        <Filename Value="../main_unit/main.pas"/>
+        <Caret Line="384" Column="22" TopLine="379"/>
       </Position9>
       <Position10>
-        <Filename Value="../code_suport/supportcodeinput.pas"/>
-        <Caret Line="140" Column="8" TopLine="115"/>
+        <Filename Value="../main_unit/main.pas"/>
+        <Caret Line="655" Column="3" TopLine="653"/>
       </Position10>
       <Position11>
-        <Filename Value="../code_suport/supportcodeinput.pas"/>
-        <Caret Line="129" TopLine="115"/>
+        <Filename Value="../function_unit/function_unit.pas"/>
+        <Caret Line="215" Column="29" TopLine="189"/>
       </Position11>
       <Position12>
-        <Filename Value="../code_suport/supportcodeinput.pas"/>
-        <Caret Line="137" TopLine="115"/>
+        <Filename Value="../main_unit/main.pas"/>
+        <Caret Line="655" Column="3" TopLine="653"/>
       </Position12>
       <Position13>
-        <Filename Value="../code_suport/supportcodeinput.pas"/>
-        <Caret Line="134" TopLine="115"/>
+        <Filename Value="../function_unit/function_unit.pas"/>
+        <Caret Line="216" Column="22" TopLine="190"/>
       </Position13>
       <Position14>
-        <Filename Value="../code_suport/supportcodeinput.pas"/>
-        <Caret Line="140" Column="13" TopLine="122"/>
+        <Filename Value="../function_unit/function_unit.pas"/>
+        <Caret Line="199" Column="17" TopLine="182"/>
       </Position14>
       <Position15>
-        <Filename Value="../code_suport/supportcodeinput.pas"/>
-        <Caret Line="129" TopLine="122"/>
+        <Filename Value="../function_unit/function_unit.pas"/>
+        <Caret Line="435" Column="56" TopLine="400"/>
       </Position15>
       <Position16>
-        <Filename Value="../code_suport/supportcodeinput.pas"/>
-        <Caret Line="131" TopLine="122"/>
+        <Filename Value="../function_unit/function_unit.pas"/>
+        <Caret Line="1335" Column="80" TopLine="1287"/>
       </Position16>
       <Position17>
-        <Filename Value="../code_suport/supportcodeinput.pas"/>
-        <Caret Line="134" TopLine="122"/>
+        <Filename Value="../main_unit/main.pas"/>
+        <Caret Line="655" Column="3" TopLine="653"/>
       </Position17>
       <Position18>
-        <Filename Value="../code_suport/supportcodeinput.pas"/>
-        <Caret Line="137" TopLine="122"/>
+        <Filename Value="../function_unit/function_unit.pas"/>
+        <Caret Line="216" Column="22" TopLine="190"/>
       </Position18>
       <Position19>
-        <Filename Value="../code_suport/supportcodeinput.pas"/>
-        <Caret Line="149" TopLine="122"/>
+        <Filename Value="../main_unit/main.pas"/>
+        <Caret Line="655" TopLine="647"/>
       </Position19>
       <Position20>
-        <Filename Value="../code_suport/supportcodeinput.pas"/>
-        <Caret Line="131" TopLine="122"/>
+        <Filename Value="../main_unit/main.pas"/>
+        <Caret Line="656" TopLine="647"/>
       </Position20>
       <Position21>
-        <Filename Value="../code_suport/supportcodeinput.pas"/>
-        <Caret Line="134" TopLine="122"/>
+        <Filename Value="../main_unit/main.pas"/>
+        <Caret Line="657" TopLine="647"/>
       </Position21>
       <Position22>
-        <Filename Value="../code_suport/supportcodeinput.pas"/>
-        <Caret Line="135" Column="24" TopLine="91"/>
+        <Filename Value="../function_unit/function_unit.pas"/>
+        <Caret Line="216" Column="22" TopLine="190"/>
       </Position22>
       <Position23>
-        <Filename Value="../code_suport/supportcodeinput.pas"/>
-        <Caret Line="149" TopLine="131"/>
+        <Filename Value="../function_unit/function_unit.pas"/>
+        <Caret Line="5653" TopLine="5634"/>
       </Position23>
       <Position24>
-        <Filename Value="../code_suport/supportcodeinput.pas"/>
-        <Caret Line="129" TopLine="111"/>
+        <Filename Value="../main_unit/main.pas"/>
+        <Caret Line="655" TopLine="647"/>
       </Position24>
       <Position25>
-        <Filename Value="../code_suport/supportcodeinput.pas"/>
-        <Caret Line="131" TopLine="111"/>
+        <Filename Value="../main_unit/main.pas"/>
+        <Caret Line="656" TopLine="647"/>
       </Position25>
       <Position26>
-        <Filename Value="../code_suport/supportcodeinput.pas"/>
-        <Caret Line="134" TopLine="111"/>
+        <Filename Value="../main_unit/main.pas"/>
+        <Caret Line="657" TopLine="647"/>
       </Position26>
       <Position27>
-        <Filename Value="../code_suport/supportcodeinput.pas"/>
-        <Caret Line="137" TopLine="111"/>
+        <Filename Value="../function_unit/function_unit.pas"/>
+        <Caret Line="5649" TopLine="5634"/>
       </Position27>
       <Position28>
-        <Filename Value="../code_suport/supportcodeinput.pas"/>
-        <Caret Line="138" TopLine="111"/>
+        <Filename Value="../function_unit/function_unit.pas"/>
+        <Caret Line="5684" TopLine="5643"/>
       </Position28>
       <Position29>
-        <Filename Value="../code_suport/supportcodeinput.pas"/>
-        <Caret Line="139" TopLine="111"/>
+        <Filename Value="../function_unit/function_unit.pas"/>
+        <Caret Line="5679" TopLine="5643"/>
       </Position29>
       <Position30>
-        <Filename Value="../code_suport/supportcodeinput.pas"/>
-        <Caret Line="131" Column="130" TopLine="111"/>
+        <Filename Value="../function_unit/function_unit.pas"/>
+        <Caret Line="5680" TopLine="5643"/>
       </Position30>
     </JumpHistory>
   </ProjectSession>
+  <Debugging>
+    <BreakPoints Count="3">
+      <Item1>
+        <Kind Value="bpkSource"/>
+        <WatchScope Value="wpsLocal"/>
+        <WatchKind Value="wpkWrite"/>
+        <Source Value="../main_unit/main.pas"/>
+        <Line Value="656"/>
+      </Item1>
+      <Item2>
+        <Kind Value="bpkSource"/>
+        <WatchScope Value="wpsLocal"/>
+        <WatchKind Value="wpkWrite"/>
+        <Source Value="../main_unit/main.pas"/>
+        <Line Value="657"/>
+      </Item2>
+      <Item3>
+        <Kind Value="bpkSource"/>
+        <WatchScope Value="wpsLocal"/>
+        <WatchKind Value="wpkWrite"/>
+        <Source Value="../main_unit/main.pas"/>
+        <Line Value="655"/>
+      </Item3>
+    </BreakPoints>
+  </Debugging>
 </CONFIG>

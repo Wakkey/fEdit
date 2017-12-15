@@ -196,6 +196,7 @@ type
     procedure MenuI_UnixShellClick(Sender: TObject);
     procedure MenuWindowTopClick(Sender: TObject);
     procedure Menu_AllCloseClick(Sender: TObject);
+    procedure Menu_AllSaveAsClick(Sender: TObject);
     procedure Menu_All_SaveClick(Sender: TObject);
     procedure Menu_AnsiClick(Sender: TObject);
     procedure Menu_BATClick(Sender: TObject);
@@ -784,9 +785,14 @@ begin
   functionunit.deleteAll_edittab();
 end;
 
+procedure Tmainform.Menu_AllSaveAsClick(Sender: TObject);
+begin
+  functionunit.allsaveAs();
+end;
+
 procedure Tmainform.Menu_All_SaveClick(Sender: TObject);
 begin
-
+  functionunit.allsave();
 end;
 
 procedure Tmainform.Menu_AnsiClick(Sender: TObject);

@@ -1,7 +1,7 @@
 object mainform: Tmainform
   Left = 497
   Height = 309
-  Top = 501
+  Top = 427
   Width = 577
   Caption = 'mainform'
   ClientHeight = 289
@@ -78,6 +78,7 @@ object mainform: Tmainform
       end
       object Menu_AllSaveAs: TMenuItem
         Caption = '全て名前を付けて保存'
+        OnClick = Menu_AllSaveAsClick
       end
       object MenuItem91: TMenuItem
         Caption = '-'

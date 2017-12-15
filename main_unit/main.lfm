@@ -78,6 +78,7 @@ object mainform: Tmainform
       end
       object Menu_AllSaveAs: TMenuItem
         Caption = '全て名前を付けて保存'
+        OnClick = Menu_AllSaveAsClick
       end
       object MenuItem91: TMenuItem
         Caption = '-'

@@ -1,6 +1,10 @@
 count
-1
+2
 Backup_0
-UTF8
+ANSI
 newfile0
 newfile0
+Backup_1
+
+SynEdit_R.dpk
+C:\Users\yuhi\Desktop\ふつーのメモ帳\SynEdit-master\Packages\101B\SynEdit_R.dpk

@@ -345,7 +345,10 @@ begin
   c := char(key);
   editCaretY := synEdit1.BlockBegin.y;
   editCaretX := synEdit1.BlockBegin.x;
-  if (c = char(32)) or (c = char(13)) or (c = char(8)) or (c = char(46)) or  ((c >= char(37)) and (c < char(40))) then begin
+  //showmessage(inttostr(key));
+  if (c = char(40)) or (c = char(27)) then
+    exit;
+  if (c = char(32)) or (c = char(13)) or (c = char(8)) or (c = char(46)) or  ((c >= char(37)) and (c <= char(39))) then begin
     functionunit.wordlist:='';
     if code_auto_support.ListBox1.ItemIndex <> -1 then begin
       code_auto_support.select_code_type:= code_auto_support.ListBox1.Items[code_auto_support.ListBox1.ItemIndex];

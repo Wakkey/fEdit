@@ -216,6 +216,8 @@ type
     function synchang(i:integer):boolean;
     function memoload(i:integer;s:string):boolean;
     function memosave(i:integer;s:widestring;memo:TStringList):boolean;
+    function All_save():boolean;
+    function All_saveAs():boolean;
     function exitAPP():boolean;
     function TitleSet(fname:string):boolean;
     function fileopen(FileNames: String):boolean;
@@ -5642,7 +5644,7 @@ begin
       functionunit.editlist.Items[i1].edittype:= 'cpp';
     end;
 
-    1: begin
+    22: begin
       if not mainform.Menu_MultWindow.Checked then begin
         DataModule1.SynMultiSyn1.DefaultHighlighter := DataModule1.SynCssSyn1;
       end else begin
@@ -6516,6 +6518,24 @@ begin
   st4.Free;
   st5.Free;
   st6.Free;
+end;
+
+function TFunctionunit.All_save():boolean;
+var
+  i:integer;
+begin
+  for i := 0 to mainform.PageControl1.PageCount -1 do begin;
+    functionunit.filesave(i);
+  end;
+end;
+
+function TFunctionunit.All_saveAs():boolean;
+var
+  i:integer;
+begin
+  for i := 0 to mainform.PageControl1.PageCount -1 do begin;
+    functionunit.saveas(i);
+  end;
 end;
 
 function Tfunctionunit.memoload(i:integer;s:string):boolean;
@@ -9024,7 +9044,7 @@ begin
       code_auto_support.Visible:= true;
 
   end else if (c <> ' ') or ((word(c) > 65) and (word(c) < 102)) then begin
-     functionunit.editlist.Items[mainform.PageControl1.PageIndex].SynEdit1.SetFocus;
+     //functionunit.editlist.Items[mainform.PageControl1.PageIndex].SynEdit1.SetFocus;
      //functionunit.get_window(mainform.Handle);
      //wordlist := wordlist + LowerCase(c);
     //get_code(c);

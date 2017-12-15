@@ -196,6 +196,7 @@ type
     procedure MenuI_UnixShellClick(Sender: TObject);
     procedure MenuWindowTopClick(Sender: TObject);
     procedure Menu_AllCloseClick(Sender: TObject);
+    procedure Menu_AllSaveAsClick(Sender: TObject);
     procedure Menu_All_SaveClick(Sender: TObject);
     procedure Menu_AnsiClick(Sender: TObject);
     procedure Menu_BATClick(Sender: TObject);
@@ -651,7 +652,7 @@ end;
 
 procedure Tmainform.Menu_CssClick(Sender: TObject);
 begin
-  functionunit.synHL_No := 1;
+  functionunit.synHL_No := 22;
   functionunit.heighligthcheck(functionunit.synhl_No,true);
   functionunit.synchang(functionunit.synhl_No);
 end;
@@ -784,9 +785,14 @@ begin
   functionunit.deleteAll_edittab();
 end;
 
+procedure Tmainform.Menu_AllSaveAsClick(Sender: TObject);
+begin
+  functionunit.allsaveAs();
+end;
+
 procedure Tmainform.Menu_All_SaveClick(Sender: TObject);
 begin
-
+  functionunit.allsave();
 end;
 
 procedure Tmainform.Menu_AnsiClick(Sender: TObject);
