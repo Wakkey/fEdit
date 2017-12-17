@@ -1,6 +1,0 @@
-count
-1
-Backup_0
-ANSI
-newfile0
-newfile0
