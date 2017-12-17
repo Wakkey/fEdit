@@ -6832,8 +6832,8 @@ begin
           saveas(i);
           exit;
         end;
-        if save_complate then
-          exit;
+        //if save_complate then
+          //exit;
         if PageControl1.ActivePage =  TabSheet1 then begin
           edit.Text := SynEdit1.Lines.Text;
         end else if PageControl1.ActivePage = TabSheet2 then begin

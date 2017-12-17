@@ -2884,12 +2884,13 @@ begin
         end;
         i1 := FCFM.ComboBox6.Items.IndexOf( m.Lines[1] );
         if -1 < i1 then begin
-
+          FCFM.MeisiPIc.Canvas.Brush.Color:=clwhite;
           if 0 < ansipos('青矢印',' ' + m.Lines[0]) then begin
             FCFM.MeisiPIc.Canvas.Pen.Color:= clblue;
           end else if 0 < ansipos('赤矢印',' ' + m.Lines[0]) then begin
             FCFM.MeisiPIc.Canvas.Pen.Color:= clred;
           end;
+
           FCFM.MeisiPIc.Canvas.Pen.Width:= 4;
           FCFM.MeisiPIc.Canvas.MoveTo(FCFM.ary_TFC_Comp[i1].Left + (FCFM.ary_TFC_Comp[i1].Width div 2),
                                        (FCFM.ary_TFC_Comp[i1].Top + (FCFM.ary_TFC_Comp[i1].Height div 2)));

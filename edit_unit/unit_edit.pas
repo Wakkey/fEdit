@@ -72,6 +72,7 @@ type
     procedure SaveDialog1SelectionChange(Sender: TObject);
     procedure SaveDialog1TypeChange(Sender: TObject);
     procedure SynEdit1Change(Sender: TObject);
+    procedure SynEdit1Click(Sender: TObject);
     procedure SynEdit1KeyDown(Sender: TObject; var Key: Word; Shift: TShiftState
       );
     procedure SynEdit1MouseDown(Sender: TObject; Button: TMouseButton;
@@ -334,6 +335,11 @@ begin
   save_complate := false;
 end;
 
+procedure Teditform.SynEdit1Click(Sender: TObject);
+begin
+  code_auto_support.Close();
+end;
+
 procedure Teditform.SynEdit1KeyDown(Sender: TObject; var Key: Word;
   Shift: TShiftState);
 var
@@ -346,8 +352,10 @@ begin
   editCaretY := synEdit1.BlockBegin.y;
   editCaretX := synEdit1.BlockBegin.x;
   //showmessage(inttostr(key));
-  if (c = char(40)) or (c = char(27)) then
+  if (c = char(40)) or (c = char(27)) then begin
+    code_auto_support.Close();
     exit;
+  end;
   if (c = char(32)) or (c = char(13)) or (c = char(8)) or (c = char(46)) or  ((c >= char(37)) and (c <= char(39))) then begin
     functionunit.wordlist:='';
     if code_auto_support.ListBox1.ItemIndex <> -1 then begin

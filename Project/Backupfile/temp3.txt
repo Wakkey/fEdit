@@ -1,6 +1,6 @@
 count
 1
 Backup_0
-UTF8
+ANSI
 newfile0
 newfile0

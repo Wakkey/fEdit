@@ -7216,7 +7216,7 @@ function Tfunctionunit.winsave(i:integer;s:widestring;memo:TStringList):boolean;
 
       end;
     end;
-    showmessage(functionunit.editlist.Items[i].char_sets);
+    //showmessage(functionunit.editlist.Items[i].char_sets);
   end;
 
 begin

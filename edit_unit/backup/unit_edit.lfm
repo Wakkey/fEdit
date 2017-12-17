@@ -45,6 +45,7 @@ object editform: Teditform
         ParentFont = False
         PopupMenu = PopupMenu1
         TabOrder = 0
+        OnClick = SynEdit1Click
         OnKeyDown = SynEdit1KeyDown
         OnMouseDown = SynEdit1MouseDown
         Gutter.Width = 57
