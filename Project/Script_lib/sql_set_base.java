@@ -9,7 +9,7 @@ public class sql_set {
   public static void main(String[] args){
    try {
        Class.forName("sql_driver");
-       Connection conn = DriverManager.getConnection("jdbc:sql_type://hosts:protsNo/","root","password");
+       Connection conn = DriverManager.getConnection("jdbc:sql_type://hostsprotsNo","root","password");
        Statement st = conn.createStatement();
        ResultSet rs =
        st.executeQuery("select_sql");
@@ -46,9 +46,9 @@ public class sql_set {
            conn.close();
            System.exit(0);
    } catch (ClassNotFoundException e) {
-       System.out.println("ドライバを読み込めませんでした "+ e);
+       System.out.println("not reading driver"+ e);
    } catch (SQLException e) {
-       System.out.println("データベース接続エラー"+ e);
+       System.out.println("database conect error"+ e);
    }
   }
 }

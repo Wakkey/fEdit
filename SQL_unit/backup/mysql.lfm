@@ -1,7 +1,7 @@
 object Form1: TForm1
-  Left = 728
+  Left = 884
   Height = 172
-  Top = 297
+  Top = 263
   Width = 366
   BorderStyle = bsSingle
   Caption = 'SQL接続設定'
@@ -72,7 +72,8 @@ object Form1: TForm1
       Top = 71
       Width = 100
       ItemHeight = 15
-      OnChange = ComboBox2Change
+      OnChange = Button3Click
+      Style = csDropDownList
       TabOrder = 3
     end
     object ComboBox1: TComboBox
@@ -81,6 +82,8 @@ object Form1: TForm1
       Top = 24
       Width = 100
       ItemHeight = 15
+      OnChange = Button2Click
+      Style = csDropDownList
       TabOrder = 4
     end
     object Button1: TButton
@@ -140,14 +143,13 @@ object Form1: TForm1
       Top = 103
       Width = 152
       TabOrder = 8
-      Text = '3306'
     end
     object Button4: TButton
-      Left = 281
+      Left = 280
       Height = 25
       Top = 112
       Width = 75
-      Caption = 'Create SQL'
+      Caption = 'Run SQL'
       OnClick = Button4Click
       TabOrder = 9
     end
@@ -168,7 +170,15 @@ object Form1: TForm1
         'oracle'
         'db2'
       )
+      OnChange = SQLTypeChange
+      OnClick = SQLTypeClick
+      OnSelect = SQLTypeClick
+      Style = csDropDownList
       TabOrder = 10
     end
+  end
+  object OpenDialog1: TOpenDialog
+    left = 48
+    top = 42
   end
 end

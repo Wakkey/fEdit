@@ -30,6 +30,7 @@ type
     ComboBox2: TComboBox;
     Edit1: TEdit;
     Label6: TLabel;
+    OpenDialog1: TOpenDialog;
     SQLType: TComboBox;
     host1: TEdit;
     Label4: TLabel;
@@ -48,6 +49,7 @@ type
     procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
     procedure FormCreate(Sender: TObject);
     procedure SQLTypeChange(Sender: TObject);
+    procedure SQLTypeClick(Sender: TObject);
   private
     { private declarations }
     sqlset1,sqlset2:string;
@@ -58,6 +60,12 @@ type
 
 var
   Form1: TForm1;
+  {$IFDEF Windows}
+     function load_text(st:pchar):pchar; stdcall; external 'utf.dll';
+     function save_text(st:pchar):pchar; stdcall; external 'utf.dll';
+     function encod_unicode(s:pchar):integer; stdcall; external 'utf.dll';
+     function decoed_unicode(s:pchar):integer; stdcall; external 'utf.dll';
+  {$ENDIF}
 
 implementation
 
@@ -66,21 +74,54 @@ uses main, unit_edit, function_unit;
 {$R *.lfm}
 
 { TForm1 }
+function encode_ansi(s:string;memo:TStringList):boolean;
+var
+    st:TStringList;
+    s1:ansistring;
+    i1:integer;
+begin
+    st := TStringList.Create;
+    st.Text:= memo.Text;
+    memo.Clear;
+    //save_text(memo,st);
+       for i1 := 0 to st.Count -1 do begin
+         memo.Add(string(save_text(pchar(st[i1]))));
+       end;
+    try
+        memo.SaveToFile(((s)));
+    finally
+
+    end;
+    encode_ansi := true;
+end;
+function set_code(s1,s2:TstringList;f,r:string):boolean;
+var
+    k:integer;
+begin
+    for k := 0 to s1.Count -1 do begin
+      s1[k] := StringReplace(s1[k], f, utf8toansi(r), [ rfReplaceAll ]);
+      //showmessage(s1[k]);
+    end;
+    s2.Text:= s1.Text;
+end;
+function save_java_SQLcode(s:string;str:TStringlist):boolean;
+begin
+        {$IFDEF Windows}
+        encode_ansi(s,str);
+        {$ENDIF}
+        {$IFDEF LINUX}
+           functionunit.linuxsave(i,s);
+        {$ENDIF}
+        {$IFDEF Darwin}
+           functionunit.macsave(i,s);
+        {$ENDIF}
+end;
 
 procedure TForm1.Button1Click(Sender: TObject);
 var
   i:integer;
   st,st2:TStringList;
-  set_sql,fileName:string;
-  function set_code(s1,s2:TstringList;f,r:string):boolean;
-  var
-    k:integer;
-  begin
-    for k := 0 to s1.Count -1 do begin
-      s1[k] := StringReplace(s1[k], f, r, [ rfReplaceAll ]);
-    end;
-    s2.Text:= s1.Text;
-  end;
+  fileName:string;
 begin
   st:= TStringList.Create;
   st2:= TStringList.Create;
@@ -91,8 +132,11 @@ begin
 
   set_code(st,st2,'sql_driver', sqldrv[sqltype.ItemIndex]);
   set_code(st,st2,'sql_type',sqltype.Items[sqltype.ItemIndex]);
-  set_code(st,st2,':protsNo/',':'+Edit1.Text+'/');
-  set_code(st,st2,'//hosts',host1.Text);
+  if edit1.Text <> '' then
+    edit1.text := ':'+Edit1.Text+'/';
+  set_code(st,st2,'protsNo',Edit1.Text);
+
+  set_code(st,st2,'//hosts',StringReplace(host1.Text, '\', '/', [ rfReplaceAll ]));
   //set_code(st,st2,'db_name',combobox1.Items[combobox1.ItemIndex]);
   set_code(st,st2,'root',user1.Text);
   set_code(st,st2,'password',pass1.Text);
@@ -109,11 +153,12 @@ begin
 
 
   try
-    st.SaveToFile(ExtractFilePath(ParamStr(0))+'Script_lib\sql_set.java');
+
+    save_java_SQLcode(ExtractFilePath(ParamStr(0))+'Script_lib\sql_set.java',st);
     st.LoadFromFile(ExtractFilePath(ParamStr(0))+'Script_lib\sqlset.bat');
     set_code(st,st2,'sql1', 'sql_set');
     set_code(st,st2,'driver', drvfile[sqltype.ItemIndex]);
-    st.SaveToFile(ExtractFilePath(ParamStr(0))+'Script_lib\sqlset1.bat');
+    save_java_SQLcode(ExtractFilePath(ParamStr(0))+'Script_lib\sqlset1.bat',st);
   except
 
   end;
@@ -131,7 +176,7 @@ begin
   {$ENDIF}
   finally
     try
-      fileName := ExtractFilePath(ParamStr(0))+'Script_lib\list.txt';
+        fileName := ExtractFilePath(ParamStr(0))+'Script_lib\list.txt';
       while not FileExists(fileName) do begin
         sleep(100);
       end;
@@ -667,6 +712,15 @@ begin
       exit;
     end;
     edit1.Text := PortNo[i2];
+  end;
+end;
+
+procedure TForm1.SQLTypeClick(Sender: TObject);
+begin
+  if SQLType.Text = 'sqlite' then begin
+    if not OpenDialog1.Execute then
+      exit;
+    host1.Text:= OpenDialog1.FileName;
   end;
 end;
 

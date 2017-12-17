@@ -171,8 +171,14 @@ object Form1: TForm1
         'db2'
       )
       OnChange = SQLTypeChange
+      OnClick = SQLTypeClick
+      OnSelect = SQLTypeClick
       Style = csDropDownList
       TabOrder = 10
     end
+  end
+  object OpenDialog1: TOpenDialog
+    left = 48
+    top = 42
   end
 end

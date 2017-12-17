@@ -30,6 +30,7 @@ type
     ComboBox2: TComboBox;
     Edit1: TEdit;
     Label6: TLabel;
+    OpenDialog1: TOpenDialog;
     SQLType: TComboBox;
     host1: TEdit;
     Label4: TLabel;
@@ -47,16 +48,24 @@ type
     procedure ComboBox2Change(Sender: TObject);
     procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
     procedure FormCreate(Sender: TObject);
+    procedure SQLTypeChange(Sender: TObject);
+    procedure SQLTypeClick(Sender: TObject);
   private
     { private declarations }
     sqlset1,sqlset2:string;
-    sqldrv,drvfile:TStringList;
+    sqldrv,drvfile,portNo:TStringList;
   public
     { public declarations }
   end;
 
 var
   Form1: TForm1;
+  {$IFDEF Windows}
+     function load_text(st:pchar):pchar; stdcall; external 'utf.dll';
+     function save_text(st:pchar):pchar; stdcall; external 'utf.dll';
+     function encod_unicode(s:pchar):integer; stdcall; external 'utf.dll';
+     function decoed_unicode(s:pchar):integer; stdcall; external 'utf.dll';
+  {$ENDIF}
 
 implementation
 
@@ -70,15 +79,48 @@ procedure TForm1.Button1Click(Sender: TObject);
 var
   i:integer;
   st,st2:TStringList;
-  set_sql,fileName:string;
+  fileName:string;
+  function encode_ansi(s:string;memo:TStringList):boolean;
+  var
+    st:TStringList;
+    s1:ansistring;
+    i1:integer;
+  begin
+    st := TStringList.Create;
+    st.Text:= memo.Text;
+    memo.Clear;
+    //save_text(memo,st);
+       for i1 := 0 to st.Count -1 do begin
+         memo.Add(string(save_text(pchar(st[i1]))));
+       end;
+    try
+        memo.SaveToFile(((s)));
+    finally
+
+    end;
+    encode_ansi := true;
+  end;
   function set_code(s1,s2:TstringList;f,r:string):boolean;
   var
     k:integer;
   begin
     for k := 0 to s1.Count -1 do begin
-      s1[k] := StringReplace(s1[k], f, r, [ rfReplaceAll ]);
+      s1[k] := StringReplace(s1[k], f, utf8toansi(r), [ rfReplaceAll ]);
+      //showmessage(s1[k]);
     end;
     s2.Text:= s1.Text;
+  end;
+  function save_java_SQLcode(s:string;str:TStringlist):boolean;
+  begin
+        {$IFDEF Windows}
+        encode_ansi(s,str);
+        {$ENDIF}
+        {$IFDEF LINUX}
+           functionunit.linuxsave(i,s);
+        {$ENDIF}
+        {$IFDEF Darwin}
+           functionunit.macsave(i,s);
+        {$ENDIF}
   end;
 begin
   st:= TStringList.Create;
@@ -90,8 +132,11 @@ begin
 
   set_code(st,st2,'sql_driver', sqldrv[sqltype.ItemIndex]);
   set_code(st,st2,'sql_type',sqltype.Items[sqltype.ItemIndex]);
-  set_code(st,st2,':protsNo/',':'+Edit1.Text+'/');
-  set_code(st,st2,'//hosts',host1.Text);
+  if edit1.Text <> '' then
+    edit1.text := ':'+Edit1.Text+'/';
+  set_code(st,st2,'protsNo',Edit1.Text);
+
+  set_code(st,st2,'//hosts',StringReplace(host1.Text, '\', '/', [ rfReplaceAll ]));
   //set_code(st,st2,'db_name',combobox1.Items[combobox1.ItemIndex]);
   set_code(st,st2,'root',user1.Text);
   set_code(st,st2,'password',pass1.Text);
@@ -108,11 +153,12 @@ begin
 
 
   try
-    st.SaveToFile(ExtractFilePath(ParamStr(0))+'Script_lib\sql_set.java');
+
+    save_java_SQLcode(ExtractFilePath(ParamStr(0))+'Script_lib\sql_set.java',st);
     st.LoadFromFile(ExtractFilePath(ParamStr(0))+'Script_lib\sqlset.bat');
     set_code(st,st2,'sql1', 'sql_set');
     set_code(st,st2,'driver', drvfile[sqltype.ItemIndex]);
-    st.SaveToFile(ExtractFilePath(ParamStr(0))+'Script_lib\sqlset1.bat');
+    save_java_SQLcode(ExtractFilePath(ParamStr(0))+'Script_lib\sqlset1.bat',st);
   except
 
   end;
@@ -130,14 +176,16 @@ begin
   {$ENDIF}
   finally
     try
-      fileName := ExtractFilePath(ParamStr(0))+'Script_lib\list.txt';
+       fileName := ExtractFilePath(ParamStr(0))+'Script_lib\list.txt';
       while not FileExists(fileName) do begin
         sleep(100);
       end;
       st.LoadFromFile(ExtractFilePath(ParamStr(0))+'Script_lib\list.txt');
       combobox1.Items.Text := st.Text;
       st.Free;
-      SysUtils.DeleteFile(fileName);
+      while FileExists(fileName) do begin
+        SysUtils.DeleteFile(fileName);
+      end;
     except
 
     end;
@@ -341,7 +389,9 @@ begin
       st.LoadFromFile(ExtractFilePath(ParamStr(0))+'Script_lib\list2.txt');
       combobox2.Items.Text := st.Text;
       st.Free;
-      SysUtils.DeleteFile(fileName);
+      while FileExists(fileName) do begin
+        SysUtils.DeleteFile(fileName);
+      end;
     except
 
     end;
@@ -387,6 +437,119 @@ begin
 end;
 
 procedure TForm1.Button3Click(Sender: TObject);
+var
+  i,i1,k:integer;
+  st,st2:TStringList;
+  filename,sql_set:string;
+  function set_code(s1,s2:TstringList;f,r:string):boolean;
+  var
+    k:integer;
+  begin
+    for k := 0 to s1.Count -1 do begin
+      s1[k] := StringReplace(s1[k], f, r, [ rfReplaceAll ]);
+    end;
+    s2.Text:= s1.Text;
+  end;
+begin
+  i := mainform.PageControl1.PageIndex;
+  functionunit.editlist.Items[i].PageControl1.PageIndex:=2;
+  sql_set := '"select * from ' + combobox2.Items[combobox2.ItemIndex] + '"'+char(13);
+  {for i1 := 0 to functionunit.editlist.Items[i].SynEdit1.Lines.Count do begin
+    sql_set := sql_set + '+"' + functionunit.editlist.Items[i].SynEdit1.Lines[i1] + '"' + char(13);
+  end;}
+
+  st:= TStringList.Create;
+  st2:= TStringList.Create;
+  st.Clear;
+  st2.Clear;
+  st.LoadFromFile(ExtractFilePath(ParamStr(0))+'Script_lib\sql_con_base.java');
+  st2.Text:= st.Text;
+
+  set_code(st,st2,'sql_driver', sqldrv[sqltype.ItemIndex]);
+  set_code(st,st2,'sql_type',sqltype.Items[sqltype.ItemIndex]);
+  set_code(st,st2,':protsNo/',':'+Edit1.Text+'/');
+  set_code(st,st2,'//hosts',host1.Text);
+  set_code(st,st2,'db_name',combobox1.Items[combobox1.ItemIndex]);
+  set_code(st,st2,'root',user1.Text);
+  set_code(st,st2,'password',pass1.Text);
+  set_code(st,st2,'select_sql',sql_set);
+
+  //st.text := StringReplace(st.text, 'sql_driver', set_sql, [ rfReplaceAll ]);
+  //st.text := StringReplace(st.text, 'sql_type',sqltype.Items[sqltype.ItemIndex] , [ rfReplaceAll ]);
+  //st.text := StringReplace(st.text, 'hosts',host1.Text , [ rfReplaceAll ]);
+  //st.text := StringReplace(st.text, 'ports',Edit1.Text , [ rfReplaceAll ]);
+  //st.text := StringReplace(st.text, 'db_name',combobox1.Items[combobox1.ItemIndex] , [ rfReplaceAll ]);
+  //st.text := StringReplace(st.text, 'root',user1.Text , [ rfReplaceAll ]);
+  //st.text := StringReplace(st.text, 'password',pass1.Text , [ rfReplaceAll ]);
+  //st.text := StringReplace(st.text, 'select_sql','show databases' , [ rfReplaceAll ]);
+
+
+  try
+    st.SaveToFile(ExtractFilePath(ParamStr(0))+'Script_lib\sql_con.java');
+    st.LoadFromFile(ExtractFilePath(ParamStr(0))+'Script_lib\sqlset.bat');
+    set_code(st,st2,'sql1', 'sql_con');
+    set_code(st,st2,'driver', drvfile[sqltype.ItemIndex]);
+    st.SaveToFile(ExtractFilePath(ParamStr(0))+'Script_lib\sqlset1.bat');
+  except
+
+  end;
+  //st.Free;
+  //st2.Free;
+
+  {$IFDEF Windows}
+    ShellExecute(Handle, 'OPEN', pchar('.\Script_lib\sqlset1.bat'),'','', SW_SHOW);
+  {$ENDIF}
+  {$IFDEF LINUX}
+
+  {$ENDIF}
+  {$IFDEF Darwin}
+
+  {$ENDIF}
+    if sql_set = '' then begin
+        showmessage('no SQL code not Run!');
+        exit;
+    end;
+    try
+      fileName := ExtractFilePath(ParamStr(0))+'Script_lib\database.csv';
+      while (not FileExists(fileName)) do begin
+        sleep(100);
+      end;
+
+      st.LoadFromFile(filename);
+      st2.CommaText:= st[0];
+      functionunit.editlist.Items[i].StringGrid1.ColCount := st2.Count;
+      functionunit.editlist.Items[i].StringGrid1.RowCount:=1;
+      for i1 := 0 to st.Count -1 do begin
+        for k := 0 to st2.Count -2 do begin
+          functionunit.editlist.Items[i].StringGrid1.Cells[k+1,i1] := st2[k];
+        end;
+        st2.Clear;
+        st2.CommaText:= st[i1+1];
+        functionunit.editlist.Items[i].StringGrid1.RowCount:=
+        functionunit.editlist.Items[i].StringGrid1.RowCount + 1;
+      end;
+      k := functionunit.editlist.Items[i].StringGrid1.RowCount;
+      dec(k);
+      functionunit.editlist.Items[i].StringGrid1.RowCount := k;
+              //combobox2.Items.Text := st.Text;
+
+    except
+
+    end;
+    while FileExists(fileName) do begin
+        SysUtils.DeleteFile(fileName);
+    end;
+
+    st.Free;
+    st2.Free;
+
+  //function_unit.editlist.Items[i].SQLType.Text:= sqltype.Text;
+  //functionunit.editlist.Items[i].SQLQuery1.Close;
+  //functionunit.editlist.Items[i].SQLQuery1.SQL.Text := functionunit.editlist.Items[i].SynEdit1.Lines.Text;
+  //functionunit.editlist.Items[i].SQLQuery1.Open;
+end;
+
+procedure TForm1.Button4Click(Sender: TObject);
 var
   i,i1,k:integer;
   st,st2:TStringList;
@@ -489,28 +652,11 @@ begin
     SysUtils.DeleteFile(fileName);
     st.Free;
     st2.Free;
-
-  //function_unit.editlist.Items[i].SQLType.Text:= sqltype.Text;
-  //functionunit.editlist.Items[i].SQLQuery1.Close;
-  //functionunit.editlist.Items[i].SQLQuery1.SQL.Text := functionunit.editlist.Items[i].SynEdit1.Lines.Text;
-  //functionunit.editlist.Items[i].SQLQuery1.Open;
-end;
-
-procedure TForm1.Button4Click(Sender: TObject);
-var
-  i:integer;
-  st,st2:TStringList;
-  set_sql:string;
-begin
-  i := mainform.PageControl1.PageIndex;
-   functionunit.editlist.Items[i].PageControl1.PageIndex:=0;
-   functionunit.editlist.Items[i].SynEdit1.Lines.Text := 'select * from ' + combobox2.Items[combobox2.ItemIndex];
 end;
 
 procedure TForm1.ComboBox2Change(Sender: TObject);
 begin
-  sqlset2 := ' ' + ComboBox2.Text;
-  //form1.SynEdit1.Lines.Text := sqlset1 + sqlset2;
+
 end;
 
 procedure TForm1.FormClose(Sender: TObject; var CloseAction: TCloseAction);
@@ -534,17 +680,47 @@ begin
     sqldrv.Clear;
     drvfile := TStringList.Create;
     drvfile.Clear;
+    portNo := TStringList.Create;
+    portNo.clear;
+
     st.LoadFromFile(ExtractFilePath(ParamStr(0))+'ini\drvlist.csv');
     for i := 0 to st.Count -1 do begin;
       st2.CommaText := st[i];
       drvfile.Add(st2[0]);
       sqldrv.Add(st2[1]);
       SQLType.Items.Add(st2[2]);
+      portNo.Add(st2[3]);
     end;
     st.free;
     st2.Free;
   except
 
+  end;
+end;
+
+procedure TForm1.SQLTypeChange(Sender: TObject);
+var
+  i,i2:integer;
+  s:string;
+begin
+  i2 := SQLType.ItemIndex;
+  //s := SQLType.Items[i2];
+  //i2 :=  SQLType.items.IndexOf(s);
+  if i2 > -1 then begin
+    if PortNo[i2] = 'non' then begin
+      edit1.Text := '';
+      exit;
+    end;
+    edit1.Text := PortNo[i2];
+  end;
+end;
+
+procedure TForm1.SQLTypeClick(Sender: TObject);
+begin
+  if SQLType.Text = 'sqlite' then begin
+    if not OpenDialog1.Execute then
+      exit;
+    host1.Text:= OpenDialog1.FileName;
   end;
 end;
 

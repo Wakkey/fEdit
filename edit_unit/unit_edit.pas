@@ -80,7 +80,7 @@ type
   private
     { private declarations }
     edit_y,edit_x,sel:integer;
-    shiftKey:word;
+    shiftKey,shortcut:word;
   public
     { public declarations }
     dock_sw,dockmode:boolean;
@@ -351,11 +351,18 @@ begin
   c := char(key);
   editCaretY := synEdit1.BlockBegin.y;
   editCaretX := synEdit1.BlockBegin.x;
-  //showmessage(inttostr(key));
-  if (c = char(40)) or (c = char(27)) then begin
+  if (shortcut >= 16) and (shortcut = 18) then begin
+    shortcut := 0;
+    exit;
+  end;
+
+  shortcut := key;
+  if (c = char(40)) or (c = char(27)) or ((c > char(1)) and (c < char(64))) or ((c > char(105)) and (c < char(200))) then begin
     code_auto_support.Close();
     exit;
   end;
+  ;
+
   if (c = char(32)) or (c = char(13)) or (c = char(8)) or (c = char(46)) or  ((c >= char(37)) and (c <= char(39))) then begin
     functionunit.wordlist:='';
     if code_auto_support.ListBox1.ItemIndex <> -1 then begin

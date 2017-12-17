@@ -1,7 +1,7 @@
 object editform: Teditform
-  Left = 259
+  Left = 279
   Height = 310
-  Top = 208
+  Top = 261
   Width = 525
   Caption = 'editform'
   ClientHeight = 310
@@ -556,12 +556,12 @@ object editform: Teditform
     object TabSheet3: TTabSheet
       Caption = 'DataBase'
       ClientHeight = 282
-      ClientWidth = 516
+      ClientWidth = 517
       object TreeView1: TTreeView
         Left = 0
         Height = 282
         Top = 0
-        Width = 516
+        Width = 517
         Align = alClient
         DefaultItemHeight = 18
         TabOrder = 0
@@ -570,20 +570,20 @@ object editform: Teditform
         Left = 0
         Height = 282
         Top = 0
-        Width = 516
+        Width = 517
         Align = alClient
         Caption = 'Panel1'
         ClientHeight = 282
-        ClientWidth = 516
+        ClientWidth = 517
         TabOrder = 1
         object Panel2: TPanel
           Left = 1
           Height = 48
           Top = 1
-          Width = 514
+          Width = 515
           Align = alTop
           ClientHeight = 48
-          ClientWidth = 514
+          ClientWidth = 515
           TabOrder = 0
           object Button1: TButton
             Left = 16
@@ -615,7 +615,7 @@ object editform: Teditform
           Left = 1
           Height = 232
           Top = 49
-          Width = 514
+          Width = 515
           Align = alClient
           TabOrder = 1
         end
