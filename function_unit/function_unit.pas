@@ -7094,6 +7094,7 @@ function Tfunctionunit.winload(i:integer;s:string):boolean;
        //st.LoadFromFile(extractfilepath(paramstr(0))+'tmp.txt');
        get_code_list(st);
       functionunit.editlist.Items[i].Edit.Text := ((st.Text));
+      deletefile(pchar(extractfilepath(paramstr(0))+'tmp.txt'));
       st2.Free;
       st.Free;
       {s := st[0];

@@ -33,8 +33,8 @@
         <ResourceBaseClass Value="Form"/>
         <IsVisibleTab Value="True"/>
         <EditorIndex Value="2"/>
-        <TopLine Value="336"/>
-        <CursorPos X="38" Y="354"/>
+        <TopLine Value="350"/>
+        <CursorPos X="3" Y="364"/>
         <UsageCount Value="202"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
@@ -327,128 +327,128 @@
     <JumpHistory Count="30" HistoryIndex="29">
       <Position1>
         <Filename Value="../function_unit/function_unit.pas"/>
-        <Caret Line="336" Column="24" TopLine="308"/>
+        <Caret Line="7152" Column="16" TopLine="7104"/>
       </Position1>
       <Position2>
-        <Filename Value="../function_unit/function_unit.pas"/>
-        <Caret Line="7152" Column="16" TopLine="7104"/>
+        <Filename Value="../SQL_unit/mysql.pas"/>
+        <Caret Line="89" Column="26" TopLine="70"/>
       </Position2>
       <Position3>
         <Filename Value="../SQL_unit/mysql.pas"/>
-        <Caret Line="89" Column="26" TopLine="70"/>
+        <Caret Line="104" TopLine="61"/>
       </Position3>
       <Position4>
         <Filename Value="../SQL_unit/mysql.pas"/>
-        <Caret Line="104" TopLine="61"/>
+        <Caret Line="79" Column="118" TopLine="61"/>
       </Position4>
       <Position5>
         <Filename Value="../SQL_unit/mysql.pas"/>
-        <Caret Line="79" Column="118" TopLine="61"/>
+        <Caret Line="89" Column="9" TopLine="55"/>
       </Position5>
       <Position6>
         <Filename Value="../SQL_unit/mysql.pas"/>
-        <Caret Line="89" Column="9" TopLine="55"/>
+        <Caret Line="103" TopLine="55"/>
       </Position6>
       <Position7>
-        <Filename Value="../SQL_unit/mysql.pas"/>
-        <Caret Line="103" TopLine="55"/>
+        <Filename Value="../main_unit/main.pas"/>
+        <Caret Line="383" Column="3" TopLine="379"/>
       </Position7>
       <Position8>
         <Filename Value="../main_unit/main.pas"/>
-        <Caret Line="383" Column="3" TopLine="379"/>
+        <Caret Line="391" Column="3" TopLine="387"/>
       </Position8>
       <Position9>
-        <Filename Value="../main_unit/main.pas"/>
-        <Caret Line="391" Column="3" TopLine="387"/>
+        <Filename Value="../function_unit/function_unit.pas"/>
+        <Caret Line="225" Column="22" TopLine="199"/>
       </Position9>
       <Position10>
         <Filename Value="../function_unit/function_unit.pas"/>
-        <Caret Line="225" Column="22" TopLine="199"/>
+        <Caret Line="6534" Column="26" TopLine="6486"/>
       </Position10>
       <Position11>
         <Filename Value="../function_unit/function_unit.pas"/>
-        <Caret Line="6534" Column="26" TopLine="6486"/>
+        <Caret Line="6821" Column="32" TopLine="6815"/>
       </Position11>
       <Position12>
         <Filename Value="../function_unit/function_unit.pas"/>
-        <Caret Line="6821" Column="32" TopLine="6815"/>
+        <Caret Line="218" Column="22" TopLine="192"/>
       </Position12>
       <Position13>
         <Filename Value="../function_unit/function_unit.pas"/>
-        <Caret Line="218" Column="22" TopLine="192"/>
+        <Caret Line="507" Column="33" TopLine="459"/>
       </Position13>
       <Position14>
         <Filename Value="../function_unit/function_unit.pas"/>
-        <Caret Line="507" Column="33" TopLine="459"/>
+        <Caret Line="6563" Column="32" TopLine="6536"/>
       </Position14>
       <Position15>
         <Filename Value="../function_unit/function_unit.pas"/>
-        <Caret Line="6563" Column="32" TopLine="6536"/>
+        <Caret Line="234" Column="21" TopLine="208"/>
       </Position15>
       <Position16>
         <Filename Value="../function_unit/function_unit.pas"/>
-        <Caret Line="234" Column="21" TopLine="208"/>
+        <Caret Line="6571" Column="34" TopLine="6562"/>
       </Position16>
       <Position17>
         <Filename Value="../function_unit/function_unit.pas"/>
-        <Caret Line="6571" Column="34" TopLine="6562"/>
+        <Caret Line="6836" Column="13" TopLine="6818"/>
       </Position17>
       <Position18>
         <Filename Value="../function_unit/function_unit.pas"/>
-        <Caret Line="6836" Column="13" TopLine="6818"/>
+        <Caret Line="7134" Column="31" TopLine="7086"/>
       </Position18>
       <Position19>
         <Filename Value="../function_unit/function_unit.pas"/>
-        <Caret Line="7134" Column="31" TopLine="7086"/>
+        <Caret Line="234" Column="21" TopLine="208"/>
       </Position19>
       <Position20>
-        <Filename Value="../function_unit/function_unit.pas"/>
-        <Caret Line="234" Column="21" TopLine="208"/>
+        <Filename Value="../SQL_unit/mysql.pas"/>
+        <Caret Line="164" Column="79" TopLine="135"/>
       </Position20>
       <Position21>
         <Filename Value="../SQL_unit/mysql.pas"/>
-        <Caret Line="164" Column="79" TopLine="135"/>
+        <Caret Line="87" Column="16" TopLine="61"/>
       </Position21>
       <Position22>
         <Filename Value="../SQL_unit/mysql.pas"/>
-        <Caret Line="87" Column="16" TopLine="61"/>
+        <Caret Line="101" Column="16" TopLine="73"/>
       </Position22>
       <Position23>
         <Filename Value="../SQL_unit/mysql.pas"/>
-        <Caret Line="101" Column="16" TopLine="73"/>
+        <Caret Line="118" Column="16" TopLine="91"/>
       </Position23>
       <Position24>
         <Filename Value="../SQL_unit/mysql.pas"/>
-        <Caret Line="118" Column="16" TopLine="91"/>
+        <Caret Line="181" TopLine="144"/>
       </Position24>
       <Position25>
         <Filename Value="../SQL_unit/mysql.pas"/>
-        <Caret Line="181" TopLine="144"/>
+        <Caret Line="179" Column="2" TopLine="174"/>
       </Position25>
       <Position26>
         <Filename Value="../SQL_unit/mysql.pas"/>
-        <Caret Line="179" Column="2" TopLine="174"/>
+        <Caret Line="335" Column="3" TopLine="333"/>
       </Position26>
       <Position27>
-        <Filename Value="../SQL_unit/mysql.pas"/>
-        <Caret Line="335" Column="3" TopLine="333"/>
+        <Filename Value="../edit_unit/unit_edit.pas"/>
+        <Caret Line="292" TopLine="274"/>
       </Position27>
       <Position28>
         <Filename Value="../edit_unit/unit_edit.pas"/>
-        <Caret Line="292" TopLine="274"/>
+        <Caret Line="83" Column="22" TopLine="145"/>
       </Position28>
       <Position29>
         <Filename Value="../edit_unit/unit_edit.pas"/>
-        <Caret Line="83" Column="22" TopLine="145"/>
+        <Caret Line="356" Column="10" TopLine="354"/>
       </Position29>
       <Position30>
         <Filename Value="../edit_unit/unit_edit.pas"/>
-        <Caret Line="356" Column="10" TopLine="354"/>
+        <Caret Line="354" Column="37" TopLine="350"/>
       </Position30>
     </JumpHistory>
   </ProjectSession>
   <Debugging>
-    <BreakPoints Count="4">
+    <BreakPoints Count="2">
       <Item1>
         <Kind Value="bpkSource"/>
         <WatchScope Value="wpsLocal"/>
@@ -463,20 +463,6 @@
         <Source Value="../SQL_unit/mysql.pas"/>
         <Line Value="181"/>
       </Item2>
-      <Item3>
-        <Kind Value="bpkSource"/>
-        <WatchScope Value="wpsLocal"/>
-        <WatchKind Value="wpkWrite"/>
-        <Source Value="../edit_unit/unit_edit.pas"/>
-        <Line Value="355"/>
-      </Item3>
-      <Item4>
-        <Kind Value="bpkSource"/>
-        <WatchScope Value="wpsLocal"/>
-        <WatchKind Value="wpkWrite"/>
-        <Source Value="../edit_unit/unit_edit.pas"/>
-        <Line Value="356"/>
-      </Item4>
     </BreakPoints>
   </Debugging>
 </CONFIG>
