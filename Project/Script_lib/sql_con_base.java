@@ -26,9 +26,9 @@ public class sql_con {
           FileWriter filewriter = new FileWriter(file);
 
           for (int i = 1; i <= MetaData.getColumnCount(); i++){
-              System.out.println( MetaData.getColumnName(i) );
-              System.out.println( MetaData.getColumnType(i) );
-              filewriter.write( MetaData.getColumnName(i) + "," );
+              //System.out.println( MetaData.getColumnName(i) );
+              //System.out.println( MetaData.getColumnType(i) );
+              filewriter.write( "'" + MetaData.getColumnName(i) + "'," );
           };
           filewriter.write( "\n" );
 
@@ -44,7 +44,7 @@ public class sql_con {
                } else {
                  result = getdata;
                }
-               filewriter.write( result+"," );
+               filewriter.write( "'" + result + "'," );
            }
            filewriter.write( "\n" );
          }

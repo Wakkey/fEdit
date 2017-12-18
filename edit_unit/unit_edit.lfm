@@ -541,12 +541,12 @@ object editform: Teditform
     object TabSheet2: TTabSheet
       Caption = 'MemoMode'
       ClientHeight = 282
-      ClientWidth = 516
+      ClientWidth = 517
       object Memo1: TMemo
         Left = 0
         Height = 282
         Top = 0
-        Width = 516
+        Width = 517
         Align = alClient
         ScrollBars = ssVertical
         TabOrder = 0
@@ -617,6 +617,7 @@ object editform: Teditform
           Top = 49
           Width = 515
           Align = alClient
+          Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRangeSelect, goRowSizing, goColSizing, goEditing, goTabs, goSmoothScroll, goFixedColSizing]
           TabOrder = 1
         end
       end

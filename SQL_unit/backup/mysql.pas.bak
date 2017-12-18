@@ -60,6 +60,9 @@ type
 
 var
   Form1: TForm1;
+const
+  timer = 9000;
+  sleep_time = 1000;
   {$IFDEF Windows}
      function load_text(st:pchar):pchar; stdcall; external 'utf.dll';
      function save_text(st:pchar):pchar; stdcall; external 'utf.dll';
@@ -74,6 +77,36 @@ uses main, unit_edit, function_unit;
 {$R *.lfm}
 
 { TForm1 }
+
+function get_sql_text(str,names:string):string;
+var
+  s,s2,s3:string;
+  i:integer;
+begin
+  s2 := StringReplace(str, char(13), ','+char(13), [ rfReplaceAll ]);
+  s3 := '';
+  for i := 1 to length(s2) -3 do begin
+    s3 := s3 + s2[i];
+  end;
+  s := 'SELECT ' + char(13)
+  + s3 +' '+char(13)
+  + 'FROM ' + names +';'+ char(13);
+  get_sql_text := s;
+end;
+
+function commertext(str:string):string;
+var
+  i:integer;
+  s,s2:string;
+begin
+  s := StringReplace(str, ''',''', char(13), [ rfReplaceAll ]);
+  s2 := '';
+  for i := 2 to length(s) -2 do begin
+    s2 := s2 + s[i]
+  end;
+  //showmessage(str+'__'+s2);
+  commertext := s2 + char(13);
+end;
 function encode_ansi(s:string;memo:TStringList):boolean;
 var
     st:TStringList;
@@ -119,7 +152,7 @@ end;
 
 procedure TForm1.Button1Click(Sender: TObject);
 var
-  i:integer;
+  i,count:integer;
   st,st2:TStringList;
   fileName:string;
 begin
@@ -174,12 +207,21 @@ begin
   {$IFDEF Darwin}
 
   {$ENDIF}
-  finally
-    try
+   except
+   end;
+
         fileName := ExtractFilePath(ParamStr(0))+'Script_lib\list.txt';
+        count:=0;
       while not FileExists(fileName) do begin
-        sleep(100);
+        if count > timer then begin
+          showmessage('データベースに接続できませんでした');
+          exit;
+        end;
+        inc(count);
+        sleep(sleep_time);
       end;
+      st.Delimiter := ',';
+      st.StrictDelimiter := True;
       {$IFDEF Windows}
        load_text(pchar(filename));
        st.LoadFromFile(ExtractFilePath( ParamStr( 0 ) ) + 'tmp.txt');
@@ -201,10 +243,8 @@ begin
         DeleteFile(pchar(ExtractFilePath( ParamStr( 0 ) ) + 'tmp.txt'));
         {$ENDIF}
       end;
-    except
 
-    end;
-  end;
+
 
   i := mainform.PageControl1.PageIndex;
   //function_unit.editlist.Items[i].SQLType.Text:= sqltype.Text;
@@ -329,12 +369,14 @@ begin
     end;}
 
     end;
+
+
   end;
 end;
 
 procedure TForm1.Button2Click(Sender: TObject);
 var
-  i:integer;
+  i,count:integer;
   st,st2:TStringList;
   filename,s,s2:string;
   function set_code(s1,s2:TstringList;f,r:string):boolean;
@@ -409,12 +451,22 @@ begin
   {$IFDEF Darwin}
 
   {$ENDIF}
-  finally
+  except
+
+  end;
     try
        fileName := ExtractFilePath(ParamStr(0))+'Script_lib\list2.txt';
-      while not FileExists(fileName) do begin
-        sleep(100);
+       count:=0;
+       while not FileExists(fileName) do begin
+        if count > timer then begin
+          showmessage('データベースに接続できませんでした');
+          exit;
+        end;
+        inc(count);
+        sleep(sleep_time);
       end;
+       st.Delimiter := ',';
+       st.StrictDelimiter := True;
       {$IFDEF Windows}
        load_text(pchar(filename));
        st.LoadFromFile(ExtractFilePath( ParamStr( 0 ) ) + 'tmp.txt');
@@ -439,7 +491,7 @@ begin
     except
 
     end;
-  end;
+
   i := mainform.PageControl1.PageIndex;
   //functionunit.editlist.Items[i].SQLType.Text:= sqltype.Text;
   with functionunit.editlist.Items[i] do begin
@@ -482,7 +534,7 @@ end;
 
 procedure TForm1.Button3Click(Sender: TObject);
 var
-  i,i1,k:integer;
+  i,i1,k,count:integer;
   st,st2:TStringList;
   s,s2,s3,filename,sql_set:string;
 begin
@@ -571,11 +623,17 @@ begin
     end;
     try
       fileName := ExtractFilePath(ParamStr(0))+'Script_lib\database.csv';
-      while (not FileExists(fileName)) do begin
-        sleep(100);
+      count:=0;
+      while not FileExists(fileName) do begin
+        if count > timer then begin
+          showmessage('データベースに接続できませんでした');
+          exit;
+        end;
+        inc(count);
+        sleep(sleep_time);
       end;
-
-
+       st2.Delimiter := ',';
+       st2.StrictDelimiter := True;
       {$IFDEF Windows}
        load_text(pchar(filename));
        st.LoadFromFile(ExtractFilePath( ParamStr( 0 ) ) + 'tmp.txt');
@@ -586,15 +644,21 @@ begin
       {$IFDEF Darwin}
        st.LoadFromFile(filename);
       {$ENDIF}
-      st2.CommaText:= st[0];
-      functionunit.editlist.Items[i].StringGrid1.ColCount := st2.Count;
+      //st2.CommaText:= st[0];
+      st2.text := ( commertext(st[0]) );
+      s3 := get_sql_text( st2.text , sql_set );
+      //showmessage(functionunit.editlist.Items[i].SynEdit1.Lines.Text);
+      functionunit.editlist.Items[i].StringGrid1.ColCount := st2.Count+1;
       functionunit.editlist.Items[i].StringGrid1.RowCount:=1;
       for i1 := 0 to st.Count -1 do begin
-        for k := 0 to st2.Count -2 do begin
+        st2.text := ( commertext(st[i1]) );
+        for k := 0 to st2.Count -1 do begin
           functionunit.editlist.Items[i].StringGrid1.Cells[k+1,i1] := st2[k];
+          //showmessage(st2.text);
         end;
         st2.Clear;
-        st2.CommaText:= st[i1+1];
+        //st2.CommaText:= st[i1+1];
+
         functionunit.editlist.Items[i].StringGrid1.RowCount:=
         functionunit.editlist.Items[i].StringGrid1.RowCount + 1;
       end;
@@ -615,10 +679,10 @@ begin
         DeleteFile(pchar(ExtractFilePath( ParamStr( 0 ) ) + 'tmp.txt'));
         {$ENDIF}
     end;
-
+    functionunit.editlist.Items[i].Edit.Text := s3;
     st.Free;
     st2.Free;
-
+    //showmessage(functionunit.editlist.Items[i].SynEdit1.Lines.Text);
   //function_unit.editlist.Items[i].SQLType.Text:= sqltype.Text;
   //functionunit.editlist.Items[i].SQLQuery1.Close;
   //functionunit.editlist.Items[i].SQLQuery1.SQL.Text := functionunit.editlist.Items[i].SynEdit1.Lines.Text;
@@ -627,7 +691,7 @@ end;
 
 procedure TForm1.Button4Click(Sender: TObject);
 var
-  i,i1,k:integer;
+  i,i1,k,count:integer;
   st,st2:TStringList;
   filename,sql_set,s2:string;
 begin
@@ -698,10 +762,17 @@ begin
     end;
     try
       fileName := ExtractFilePath(ParamStr(0))+'Script_lib\database.csv';
-      while (not FileExists(fileName)) do begin
-        sleep(100);
+      count:=0;
+      while not FileExists(fileName) do begin
+        if count > timer then begin
+          showmessage('データベースに接続できませんでした');
+          exit;
+        end;
+        inc(count);
+        sleep(sleep_time);
       end;
-
+      st.Delimiter := ',';
+      st.StrictDelimiter := True;
       {$IFDEF Windows}
        load_text(pchar(filename));
        st.LoadFromFile(ExtractFilePath( ParamStr( 0 ) ) + 'tmp.txt');
@@ -712,15 +783,21 @@ begin
       {$IFDEF Darwin}
        st.LoadFromFile(filename);
       {$ENDIF}
-      st2.CommaText:= st[0];
-      functionunit.editlist.Items[i].StringGrid1.ColCount := st2.Count;
+      //st2.CommaText:= st[0];
+      st2.text := ( commertext(st[0]) );
+      functionunit.editlist.Items[i].Edit.Text := get_sql_text( st2.text , sql_set );
+      //showmessage(functionunit.editlist.Items[i].SynEdit1.Lines.Text);
+      functionunit.editlist.Items[i].StringGrid1.ColCount := st2.Count+1;
       functionunit.editlist.Items[i].StringGrid1.RowCount:=1;
       for i1 := 0 to st.Count -1 do begin
-        for k := 0 to st2.Count -2 do begin
+        st2.text := ( commertext(st[i1]) );
+        for k := 0 to st2.Count -1 do begin
           functionunit.editlist.Items[i].StringGrid1.Cells[k+1,i1] := st2[k];
+          //showmessage(st2.text);
         end;
         st2.Clear;
-        st2.CommaText:= st[i1+1];
+        //st2.CommaText:= st[i1+1];
+
         functionunit.editlist.Items[i].StringGrid1.RowCount:=
         functionunit.editlist.Items[i].StringGrid1.RowCount + 1;
       end;
@@ -812,7 +889,7 @@ begin
     host1.Text:= OpenDialog1.FileName;
     Button3Click(sender);
   end;
-  Menu_SQLClick(Sender);
+  mainform.Menu_SQLClick(Sender);
 end;
 
 end.

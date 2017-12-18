@@ -3,7 +3,7 @@
   <ProjectSession>
     <Version Value="10"/>
     <BuildModes Active="Default"/>
-    <Units Count="27">
+    <Units Count="28">
       <Unit0>
         <Filename Value="fedit.lpr"/>
         <IsPartOfProject Value="True"/>
@@ -32,8 +32,8 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <EditorIndex Value="2"/>
-        <TopLine Value="350"/>
-        <CursorPos X="3" Y="364"/>
+        <TopLine Value="232"/>
+        <CursorPos X="29" Y="277"/>
         <UsageCount Value="202"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
@@ -57,7 +57,7 @@
         <ComponentName Value="ToolWindow"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <EditorIndex Value="24"/>
+        <EditorIndex Value="25"/>
         <CursorPos Y="36"/>
         <UsageCount Value="211"/>
         <Loaded Value="True"/>
@@ -116,7 +116,7 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="repraceMacro"/>
-        <EditorIndex Value="22"/>
+        <EditorIndex Value="23"/>
         <TopLine Value="112"/>
         <CursorPos X="7" Y="74"/>
         <UsageCount Value="201"/>
@@ -129,7 +129,7 @@
         <ComponentName Value="openfiletypeform"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <EditorIndex Value="21"/>
+        <EditorIndex Value="22"/>
         <UsageCount Value="209"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
@@ -165,7 +165,7 @@
         <Filename Value="../SQL_unit/sqlpropedit.pas"/>
         <IsPartOfProject Value="True"/>
         <HasResources Value="True"/>
-        <EditorIndex Value="23"/>
+        <EditorIndex Value="24"/>
         <TopLine Value="123"/>
         <CursorPos X="10" Y="43"/>
         <UsageCount Value="200"/>
@@ -233,7 +233,7 @@
         <ComponentName Value="vershon_form"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <EditorIndex Value="20"/>
+        <EditorIndex Value="21"/>
         <TopLine Value="56"/>
         <CursorPos X="19" Y="71"/>
         <UsageCount Value="210"/>
@@ -246,7 +246,7 @@
         <ComponentName Value="tmpClr"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <EditorIndex Value="19"/>
+        <EditorIndex Value="20"/>
         <TopLine Value="19"/>
         <CursorPos X="42" Y="103"/>
         <UsageCount Value="398"/>
@@ -289,8 +289,8 @@
         <UnitName Value="MySQL"/>
         <IsVisibleTab Value="True"/>
         <EditorIndex Value="17"/>
-        <TopLine Value="790"/>
-        <CursorPos X="25" Y="815"/>
+        <TopLine Value="781"/>
+        <CursorPos X="22" Y="808"/>
         <UsageCount Value="220"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
@@ -314,144 +314,153 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="538"/>
         <CursorPos Y="557"/>
-        <UsageCount Value="7"/>
+        <UsageCount Value="5"/>
       </Unit24>
       <Unit25>
         <Filename Value="../../../../../lazarus/fpc/3.0.2/source/rtl/objpas/classes/classesh.inc"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="665"/>
         <CursorPos X="15" Y="690"/>
-        <UsageCount Value="8"/>
+        <UsageCount Value="6"/>
       </Unit25>
       <Unit26>
         <Filename Value="../../../../../lazarus/lcl/interfaces/win32/win32listsl.inc"/>
-        <EditorIndex Value="18"/>
+        <EditorIndex Value="19"/>
         <TopLine Value="130"/>
         <CursorPos Y="158"/>
-        <UsageCount Value="12"/>
+        <UsageCount Value="20"/>
         <Loaded Value="True"/>
       </Unit26>
+      <Unit27>
+        <Filename Value="../../../../../lazarus/lcl/grids.pas"/>
+        <UnitName Value="Grids"/>
+        <EditorIndex Value="18"/>
+        <TopLine Value="9273"/>
+        <CursorPos Y="9287"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit27>
     </Units>
     <JumpHistory Count="30" HistoryIndex="29">
       <Position1>
         <Filename Value="../SQL_unit/mysql.pas"/>
-        <Caret Line="491" TopLine="474"/>
+        <Caret Line="605" Column="28" TopLine="599"/>
       </Position1>
       <Position2>
         <Filename Value="../SQL_unit/mysql.pas"/>
-        <Caret Line="493" Column="31" TopLine="474"/>
+        <Caret Line="81" Column="20" TopLine="78"/>
       </Position2>
       <Position3>
-        <Filename Value="../function_unit/function_unit.pas"/>
-        <Caret Line="7086" Column="47" TopLine="7083"/>
+        <Filename Value="../SQL_unit/mysql.pas"/>
+        <Caret Line="142" Column="3" TopLine="205"/>
       </Position3>
       <Position4>
-        <Filename Value="../function_unit/function_unit.pas"/>
-        <Caret Line="7088" Column="34" TopLine="7080"/>
+        <Filename Value="../SQL_unit/mysql.pas"/>
+        <Caret Line="86" Column="25" TopLine="71"/>
       </Position4>
       <Position5>
         <Filename Value="../SQL_unit/mysql.pas"/>
-        <Caret Line="583" Column="74" TopLine="550"/>
+        <Caret Line="647" Column="52" TopLine="624"/>
       </Position5>
       <Position6>
         <Filename Value="../SQL_unit/mysql.pas"/>
-        <Caret Line="410" Column="76" TopLine="378"/>
+        <Caret Line="776" Column="31" TopLine="765"/>
       </Position6>
       <Position7>
         <Filename Value="../SQL_unit/mysql.pas"/>
-        <Caret Line="189" Column="80" TopLine="163"/>
+        <Caret Line="91" Column="28" TopLine="79"/>
       </Position7>
       <Position8>
-        <Filename Value="../SQL_unit/mysql.pas"/>
-        <Caret Line="413" Column="80" TopLine="397"/>
+        <Filename Value="../edit_unit/unit_edit.pas"/>
+        <Caret Line="122" Column="17" TopLine="111"/>
       </Position8>
       <Position9>
         <Filename Value="../SQL_unit/mysql.pas"/>
-        <Caret Line="560" Column="35" TopLine="531"/>
+        <Caret Line="91" Column="5" TopLine="77"/>
       </Position9>
       <Position10>
         <Filename Value="../SQL_unit/mysql.pas"/>
-        <Caret Line="407" Column="29" TopLine="382"/>
+        <Caret Line="81" Column="22" TopLine="73"/>
       </Position10>
       <Position11>
         <Filename Value="../SQL_unit/mysql.pas"/>
-        <Caret Line="183" Column="75" TopLine="163"/>
+        <Caret Line="650" Column="42" TopLine="633"/>
       </Position11>
       <Position12>
         <Filename Value="../SQL_unit/mysql.pas"/>
-        <Caret Line="416" Column="15" TopLine="382"/>
+        <Caret Line="81" Column="10" TopLine="66"/>
       </Position12>
       <Position13>
         <Filename Value="../SQL_unit/mysql.pas"/>
-        <Caret Line="202" Column="17" TopLine="187"/>
+        <Caret Line="77" Column="71" TopLine="67"/>
       </Position13>
       <Position14>
         <Filename Value="../SQL_unit/mysql.pas"/>
-        <Caret Line="437" Column="17" TopLine="399"/>
+        <Caret Line="533" Column="3" TopLine="629"/>
       </Position14>
       <Position15>
         <Filename Value="../SQL_unit/mysql.pas"/>
-        <Caret Line="616" Column="17" TopLine="577"/>
+        <Caret Line="687" Column="3" TopLine="759"/>
       </Position15>
       <Position16>
         <Filename Value="../SQL_unit/mysql.pas"/>
-        <Caret Line="800" Column="26" TopLine="749"/>
+        <Caret Line="88" Column="21" TopLine="72"/>
       </Position16>
       <Position17>
         <Filename Value="../SQL_unit/mysql.pas"/>
-        <Caret Line="643" Column="3" TopLine="661"/>
+        <Caret Line="643" Column="7" TopLine="626"/>
       </Position17>
       <Position18>
         <Filename Value="../SQL_unit/mysql.pas"/>
-        <Caret Line="552" Column="81" TopLine="514"/>
+        <Caret Line="693" Column="85" TopLine="683"/>
       </Position18>
       <Position19>
         <Filename Value="../SQL_unit/mysql.pas"/>
-        <Caret Line="677" TopLine="671"/>
+        <Caret Line="677" Column="69" TopLine="671"/>
       </Position19>
       <Position20>
         <Filename Value="../SQL_unit/mysql.pas"/>
-        <Caret Line="588" Column="15" TopLine="556"/>
+        <Caret Line="860" Column="3" TopLine="846"/>
       </Position20>
       <Position21>
         <Filename Value="../SQL_unit/mysql.pas"/>
-        <Caret Line="716" Column="15" TopLine="671"/>
+        <Caret Line="874" Column="3" TopLine="841"/>
       </Position21>
       <Position22>
-        <Filename Value="../SQL_unit/mysql.pas"/>
-        <Caret Line="616" Column="18" TopLine="580"/>
+        <Filename Value="../edit_unit/unit_edit.pas"/>
+        <Caret Line="296" Column="59" TopLine="312"/>
       </Position22>
       <Position23>
         <Filename Value="../SQL_unit/mysql.pas"/>
-        <Caret Line="737" Column="9" TopLine="704"/>
+        <Caret Line="677" Column="7" TopLine="668"/>
       </Position23>
       <Position24>
         <Filename Value="../SQL_unit/mysql.pas"/>
-        <Caret Line="507" TopLine="483"/>
+        <Caret Line="87" Column="29" TopLine="60"/>
       </Position24>
       <Position25>
         <Filename Value="../SQL_unit/mysql.pas"/>
-        <Caret Line="632" Column="27" TopLine="628"/>
+        <Caret Line="108" Column="17" TopLine="242"/>
       </Position25>
       <Position26>
         <Filename Value="../SQL_unit/mysql.pas"/>
-        <Caret Line="489" Column="3" TopLine="483"/>
+        <Caret Line="656" Column="33" TopLine="641"/>
       </Position26>
       <Position27>
         <Filename Value="../SQL_unit/mysql.pas"/>
-        <Caret Line="662" Column="3" TopLine="650"/>
+        <Caret Line="104" Column="29" TopLine="88"/>
       </Position27>
       <Position28>
         <Filename Value="../SQL_unit/mysql.pas"/>
-        <Caret Line="655" Column="33" TopLine="622"/>
+        <Caret Line="654" Column="44" TopLine="641"/>
       </Position28>
       <Position29>
-        <Filename Value="../main_unit/main.pas"/>
-        <Caret Line="330" Column="3" TopLine="328"/>
+        <Filename Value="../SQL_unit/mysql.pas"/>
+        <Caret Line="88" Column="30" TopLine="79"/>
       </Position29>
       <Position30>
         <Filename Value="../SQL_unit/mysql.pas"/>
-        <Caret Line="638" Column="99" TopLine="622"/>
+        <Caret Line="669" Column="22" TopLine="636"/>
       </Position30>
     </JumpHistory>
   </ProjectSession>

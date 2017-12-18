@@ -119,6 +119,7 @@ begin
   temp_codeset.Clear;
   code_suport := TstringList.Create;
   temp_codeset.Clear;
+  shortcut := 0;
 end;
 
 procedure Teditform.FormDockDrop(Sender: TObject; Source: TDragDockObject; X,
@@ -351,7 +352,7 @@ begin
   c := char(key);
   editCaretY := synEdit1.BlockBegin.y;
   editCaretX := synEdit1.BlockBegin.x;
-  if (shortcut >= 16) and (shortcut <= 18) then begin
+  if (shortcut >= 16) and (shortcut = 18) then begin
     shortcut := 0;
     exit;
   end;
@@ -361,7 +362,7 @@ begin
     code_auto_support.Close();
     exit;
   end;
-  showmessage(inttostr(key));
+
 
   if (c = char(32)) or (c = char(13)) or (c = char(8)) or (c = char(46)) or  ((c >= char(37)) and (c <= char(39))) then begin
     functionunit.wordlist:='';

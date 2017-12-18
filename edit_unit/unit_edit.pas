@@ -119,6 +119,7 @@ begin
   temp_codeset.Clear;
   code_suport := TstringList.Create;
   temp_codeset.Clear;
+  shortcut := 0;
 end;
 
 procedure Teditform.FormDockDrop(Sender: TObject; Source: TDragDockObject; X,
@@ -361,7 +362,7 @@ begin
     code_auto_support.Close();
     exit;
   end;
-  ;
+
 
   if (c = char(32)) or (c = char(13)) or (c = char(8)) or (c = char(46)) or  ((c >= char(37)) and (c <= char(39))) then begin
     functionunit.wordlist:='';
