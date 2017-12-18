@@ -9,10 +9,10 @@ public class sql_con {
   public static void main(String[] args){
    try {
        Class.forName("sql_driver");
-       Connection conn = DriverManager.getConnection("jdbc:sql_type://hosts:protsNo/db_name","root","password");
+       Connection conn = DriverManager.getConnection("jdbc:sql_type://hostsprotsNodb_name","root","password");
        Statement st = conn.createStatement();
        ResultSet rs =
-       st.executeQuery( select_sql );
+       st.executeQuery( "select_sql" );
        ResultSetMetaData MetaData = rs.getMetaData();
 
 
