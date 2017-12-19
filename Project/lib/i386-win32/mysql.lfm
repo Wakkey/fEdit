@@ -1,7 +1,7 @@
 object Form1: TForm1
-  Left = 763
+  Left = 802
   Height = 171
-  Top = 232
+  Top = 301
   Width = 366
   BorderStyle = bsSingle
   Caption = 'SQL接続設定'

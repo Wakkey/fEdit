@@ -61,7 +61,7 @@ type
 var
   Form1: TForm1;
 const
-  timer = 5000;
+  timer = 500;
   sleep_time = 100;
   {$IFDEF Windows}
      function load_text(st:pchar):pchar; stdcall; external 'utf.dll';
@@ -154,7 +154,7 @@ procedure TForm1.Button1Click(Sender: TObject);
 var
   i,count:integer;
   st,st2:TStringList;
-  fileName:string;
+  fileName,s:string;
 begin
   st:= TStringList.Create;
   st2:= TStringList.Create;
@@ -166,10 +166,10 @@ begin
   set_code(st,st2,'sql_driver', sqldrv[sqltype.ItemIndex]);
   set_code(st,st2,'sql_type',sqltype.Items[sqltype.ItemIndex]);
   if edit1.Text <> '' then
-    edit1.text := ':'+Edit1.Text+'/';
-  set_code(st,st2,'protsNo',Edit1.Text);
+    s := ':'+Edit1.Text+'/';
+  set_code(st,st2,'protsNo',s);
 
-  set_code(st,st2,'//hosts',StringReplace(host1.Text, '\', '/', [ rfReplaceAll ]));
+  set_code(st,st2,'hosts',StringReplace(host1.Text, '\', '/', [ rfReplaceAll ]));
   //set_code(st,st2,'db_name',combobox1.Items[combobox1.ItemIndex]);
   set_code(st,st2,'root',user1.Text);
   set_code(st,st2,'password',pass1.Text);
@@ -400,10 +400,10 @@ begin
   set_code(st,st2,'sql_driver', sqldrv[sqltype.ItemIndex]);
   set_code(st,st2,'sql_type',sqltype.Items[sqltype.ItemIndex]);
   if edit1.Text <> '' then
-    edit1.text := ':'+Edit1.Text+'/';
-  set_code(st,st2,'protsNo',Edit1.Text);
-  set_code(st,st2,'//hosts',StringReplace(host1.Text, '\', '/', [ rfReplaceAll ]));
-  set_code(st,st2,'//hosts',host1.Text);
+    s := ':'+Edit1.Text+'/';
+  set_code(st,st2,'protsNo',s);
+  set_code(st,st2,'hosts',StringReplace(host1.Text, '\', '/', [ rfReplaceAll ]));
+  //set_code(st,st2,'//hosts',host1.Text);
   if combobox1.ItemIndex <> -1 then begin
     s2 := '/' + combobox1.Items[combobox1.ItemIndex];
   end else begin
@@ -557,10 +557,13 @@ begin
   set_code(st,st2,'sql_driver', sqldrv[sqltype.ItemIndex]);
   set_code(st,st2,'sql_type',sqltype.Items[sqltype.ItemIndex]);
   if edit1.Text <> '' then
-    edit1.text := ':'+Edit1.Text+'/';
-  set_code(st,st2,'protsNo',Edit1.Text);
-  set_code(st,st2,'//hosts',StringReplace(host1.Text, '\', '/', [ rfReplaceAll ]));
-  set_code(st,st2,'//hosts',host1.Text);
+    s := ':'+Edit1.Text+'/';
+  set_code(st,st2,'protsNo',s);
+  if SQLType.Text = 'sqlite' then begin
+    set_code(st,st2,'//hosts',StringReplace(host1.Text, '\', '/', [ rfReplaceAll ]));
+  end else begin
+    set_code(st,st2,'hosts',host1.Text);
+  end;
   if combobox1.ItemIndex <> -1 then begin
     s2 := '/' + combobox1.Items[combobox1.ItemIndex];
   end else begin
@@ -693,7 +696,7 @@ procedure TForm1.Button4Click(Sender: TObject);
 var
   i,i1,k,count:integer;
   st,st2:TStringList;
-  filename,sql_set,s2:string;
+  filename,sql_set,s,s2:string;
 begin
   i := mainform.PageControl1.PageIndex;
   functionunit.editlist.Items[i].PageControl1.PageIndex:=2;
@@ -712,10 +715,13 @@ begin
   set_code(st,st2,'sql_driver', sqldrv[sqltype.ItemIndex]);
   set_code(st,st2,'sql_type',sqltype.Items[sqltype.ItemIndex]);
   if edit1.Text <> '' then
-    edit1.text := ':'+Edit1.Text+'/';
-  set_code(st,st2,'protsNo',Edit1.Text);
-  set_code(st,st2,'//hosts',StringReplace(host1.Text, '\', '/', [ rfReplaceAll ]));
-  set_code(st,st2,'//hosts',host1.Text);
+    s := ':'+Edit1.Text+'/';
+  set_code(st,st2,'protsNo',s);
+  if SQLType.Text = 'sqlite' then begin
+    set_code(st,st2,'//hosts',StringReplace(host1.Text, '\', '/', [ rfReplaceAll ]));
+  end else begin
+    set_code(st,st2,'hosts',host1.Text);
+  end;
   if combobox1.ItemIndex <> -1 then begin
     s2 := '/' + combobox1.Items[combobox1.ItemIndex];
   end else begin
